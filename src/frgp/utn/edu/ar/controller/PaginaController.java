@@ -15,6 +15,14 @@ public class PaginaController {
 		MV.setViewName("Listado_Articulos");
 		return MV;
 	}
+	@RequestMapping("redireccionar_listado_clientes.html")
+	public ModelAndView eventoRedireccionarPag3()
+	{
+		ModelAndView MV = new ModelAndView();
+
+		MV.setViewName("Listado_Clientes");
+		return MV;
+	}
 
 	@RequestMapping("redireccionar_Home.html")
 	public ModelAndView eventoRedireccionarPag1()
