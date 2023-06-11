@@ -6,9 +6,9 @@
 </head>
 
 <body>
-<jsp:include page="common/Navigator.jspf"></jsp:include>
+<jsp:include page="common/NavigatorCommon.jspf"></jsp:include>
 <div class="container-fluid">
-  <form  id="myForm" method="get">
+  <form  id="myForm" method="post">
     <div class="cuadro_uno justify-content-center">
       <div class="d-flex col col-12 mh-2 justify-content-center p-2">
         <div class="row w-auto justify-content-center">
@@ -16,21 +16,12 @@
         </div>
       </div>
       <div class="d-flex col col-12 mh-2 justify-content-center p-2">
-        <div class="row w-25 justify-content-center">
-          <input type="submit" class="btn btn-primary" value="Listado Articulos" name="btnRedirigir" formaction="redireccionar_listado_art.html">
-        </div>
-      </div>
-      <div class="d-flex col col-12 mh-2 justify-content-center p-2">
-        <div class="row w-25 justify-content-center">
- 			<input type="submit" class="btn btn-primary" value="Listado Clientes" name="btnRedirigir" formaction="redireccionar_listado_clientes.html">
-        </div>
-      </div>
-    </div>
-  </form>
+			<input type="submit" class="btn btn-primary mr-1" value="Login Administrador" name="btnRedirigir" formaction="admin.html">
+			<input type="submit" class="btn btn-primary mr-1" value="Login Vendedor" name="btnRedirigir" formaction="vendedor.html">
+			<input type="submit" class="btn btn-primary mr-1" value="Login Contador" name="btnRedirigir" formaction="contador.html">
+	  </div> 
+    </div>    
+  </form>   
 </div>
-
-
-
-
 </body>
 </html>

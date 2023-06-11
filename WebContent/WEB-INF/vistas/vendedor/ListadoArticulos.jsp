@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<jsp:include page="common/Header.jspf"></jsp:include>
+<jsp:include page="../common/Header.jspf"></jsp:include>
 
 <script type="text/javascript">
 $(document).ready( function () {
@@ -12,7 +12,7 @@ $(document).ready( function () {
 </head>
 
 <body>
-<jsp:include page="common/Navigator.jspf"></jsp:include>
+<jsp:include page="../common/NavigatorVendedor.jspf"></jsp:include>
 <div class="container-fluid">
 	<form action="redireccionar_Home.html" method="get">
 	<div class="cuadro_uno justify-content-center">

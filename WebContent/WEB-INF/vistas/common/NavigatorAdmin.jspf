@@ -1,0 +1,13 @@
+<div class="container-fluid w-100">
+  <div class="d-flex flex-wrap align-items-left justify-content-left justify-content-md-between py-3 mb-4 border-bottom">
+
+   	<ul class="nav col-md-5 mb-2 justify-content-left mb-md-0">
+     	<li><a href="admin.html" class="nav-link px-2 link-secondary">ADMINISTRADOR</a></li>
+     	<li><a href="alta-usuario.html" class="nav-link px-2 link-dark">Alta de Usuarios</a></li>
+     	<li><a href="listar-usuarios.html" class="nav-link px-2 link-dark">Listado de Usuarios</a></li>
+   	</ul> 
+   	<form action="Logout" method="post">
+		<input type="submit" class="btn btn-outline-danger me-2" value="CERRAR SESION" name="btnRedirigir" formaction="home.html">
+	</form>
+  </div>
+</div>

@@ -3,7 +3,7 @@
   <display-name>TPINT_GRUPO_2_LAB5</display-name>
   
   <welcome-file-list>
-    <welcome-file>redireccionar_Home.html</welcome-file>
+    <welcome-file>home.html</welcome-file>
   </welcome-file-list>
 
 	<servlet>

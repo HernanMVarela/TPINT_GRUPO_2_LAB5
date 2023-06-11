@@ -1,0 +1,15 @@
+<div class="container-fluid w-100">
+  <div class="d-flex flex-wrap align-items-left justify-content-left justify-content-md-between py-3 mb-4 border-bottom">
+
+   	<ul class="nav col-md-5 mb-2 justify-content-left mb-md-0">
+     	<li><a href="vendedor.html" class="nav-link px-2 link-secondary">VENDEDOR</a></li>
+     	<li><a href="articulos.html" class="nav-link px-2 link-dark">Articulos</a></li>
+     	<li><a href="clientes.html" class="nav-link px-2 link-dark">Clientes</a></li>
+     	<li><a href="stock.html" class="nav-link px-2 link-dark">Stock</a></li>
+     	<li><a href="gestion-ventas.html" class="nav-link px-2 link-dark">Gestion Ventas</a></li>
+   	</ul>
+   	<form action="Logout" method="post">
+		<input type="submit" class="btn btn-outline-danger me-2" value="CERRAR SESION" name="btnRedirigir" formaction="home.html">
+	</form>
+  </div>
+</div>

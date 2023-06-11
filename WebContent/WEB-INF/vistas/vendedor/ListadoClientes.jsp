@@ -2,12 +2,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<jsp:include page="common/Header.jspf"></jsp:include>
+<jsp:include page="../common/Header.jspf"></jsp:include>
 
 </head>
 
 <body>
-<jsp:include page="common/Navigator.jspf"></jsp:include>
+<jsp:include page="../common/NavigatorVendedor.jspf"></jsp:include>
 
 <div class="container-fluid">
 	<form action="redireccionar_Home.html" method="get">
@@ -15,12 +15,6 @@
 		<div class="d-flex col col-12 mh-2 justify-content-center p-2">
 		 	<div class="row w-auto justify-content-center">
 				<h2>Listado de Clientes</h2>
-			</div>
-		</div>
-	
-		<div class="d-flex col col-12 mh-2 justify-content-center p-2">
-	 		<div class="row w-25 justify-content-center">
-				<input type="submit" class="btn btn-success" value="Home" name="btnRedirigir">
 			</div>
 		</div>
 	</div>
