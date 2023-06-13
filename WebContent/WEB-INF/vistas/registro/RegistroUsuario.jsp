@@ -5,6 +5,11 @@
     <head>
         <jsp:include page="../common/Header.jspf"></jsp:include>
     </head>
+    
+    <div class="container-fluid w-100">
+	  <div class="d-flex flex-wrap align-items-left justify-content-left justify-content-md-between py-3 mb-4 border-bottom">	
+	  </div>
+	</div>
 
     <body>
         <div class="container-fluid">

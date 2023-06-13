@@ -77,7 +77,7 @@ public class PaginaController {
 	{
 		ModelAndView MV = new ModelAndView();
 
-		MV.setViewName("vendedor/ListadoArticulos");
+		MV.setViewName("vendedor/Articulos");
 		return MV;
 	}
 	
@@ -86,7 +86,7 @@ public class PaginaController {
 	{
 		ModelAndView MV = new ModelAndView();
 
-		MV.setViewName("vendedor/ListadoClientes");
+		MV.setViewName("vendedor/Clientes");
 		return MV;
 	}
 	
@@ -99,12 +99,12 @@ public class PaginaController {
 		return MV;
 	}	
 	
-	@RequestMapping("gestion-ventas.html")
+	@RequestMapping("ventas.html")
 	public ModelAndView eventoRedireccionarGestionVentas()
 	{
 		ModelAndView MV = new ModelAndView();
 
-		MV.setViewName("vendedor/GestionVentas");
+		MV.setViewName("vendedor/Ventas");
 		return MV;
 	}
 	

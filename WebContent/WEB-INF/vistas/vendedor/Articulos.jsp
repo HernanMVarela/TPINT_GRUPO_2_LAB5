@@ -4,47 +4,47 @@
 <head>
 <jsp:include page="../common/Header.jspf"></jsp:include>
 
+<script type="text/javascript">
+$(document).ready( function () {
+    $('#tabla_articulos').DataTable();
+} );
+</script>
 </head>
 
+<body>
 <jsp:include page="../common/NavigatorVendedor.jspf"></jsp:include>
 <div class="container-fluid">
 	<form action="redireccionar_Home.html" method="get">
 	<div class="cuadro_uno justify-content-center">
 	  <div class="d-flex col col-12 mh-2 justify-content-center p-2">
 	 	<div class="row w-auto justify-content-center">
-			<h1>Listado de Clientes</h1>
+			<h1>Listado de artículos</h1>
 		</div>
 	  </div>
 
 	  <div class="row mx-2 d-flex flex-wrap align-middle justify-content-evenly">
 		  	<div class="col-md-auto table-responsive w-100">
-		  		<table id="tabla_clientes" border=2 class="table align-middle table-info table-hover th-lg">
+		  		<table id="tabla_articulos" border=2 class="table align-middle table-info table-hover th-lg">
 		  		<thead>
 					<tr class="table-secondary">
-						<th width="10%"> DNI </th>
-						<th width="15%"> Nombre </th>
-						<th width="15%"> Apellido </th>
-						<th width="5%"> Sexo </th>
-						<th width="5%"> Fecha de Nacimiento </th>
-						<th width="10%"> Dirección </th>
-						<th width="10%"> Localidad </th>
-						<th width="10%"> Correo </th>
-						<th width="10%"> Telefono </th>
-						<th width="10%"> Seleccionar </th>
+						<th width="15%"> Articulo </th>
+						<th width="15%"> Marca </th>
+						<th width="10%"> Tipo </th> 
+						<th width="10%"> Precio de venta </th> 
+						<th width="30%"> Descripcion </th> 
+						<th width="15%"> Estado </th>
+						<th width="5%"> Seleccionar </th>
 					</tr>
 				</thead>
 				<tbody>
 					<%for (int x=0; x<20; x++){%>
 						<tr <% if(x%3==0){%> class="table-danger" <%}else{ %> class="table-primary"<%} %> >
-						<td> <%= (x+382676334) %></td>
-						<td> <%= "N_Cliente_" + x %></td> 
-						<td> <%= "A_Cliente_" + x %></td> 
-						<td> <%= "X" %></td>
-						<td> <%= x + "/" + x + "/" + x %></td>
-						<td> <%= "Dir_Cliente_" + x%> </td>
-						<td> <%= "Loc_Cliente_" + x%> </td>
-						<td> <%= "Cor_Cliente_" + x%> </td>
-						<td> <%= "Tel_Cliente_" + x%> </td>
+						<td> <%= "Articulo " + (x+1) %></td>
+						<td> <%= "Marca " + (x+10) %></td> 
+						<td> <%= "Tipo " + x*3 %></td> 
+						<td> <%= "$" + x*1000 %></td>
+						<td> <%= "Este es el articulo " + (x+1) %></td>
+						<td> <%= x%3!=0 ? "Activo":"Inactivo"%> </td>
 						<td align="center"> <input type="radio" name="radSelect" value=""></td>
 					<%}%>  					
 				</tbody>
@@ -65,5 +65,7 @@
 	</div>
 	</form>
 </div>
+
+
 </body>
 </html>

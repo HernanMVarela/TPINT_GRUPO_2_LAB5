@@ -28,23 +28,21 @@
 										<div class="row w-auto justify-content-center">
 											<img src="${pageContext.request.contextPath}/assets/login.png" class="img-responsive p-3" style="width: 30%;">
 
-											<input class="form-control" placeholder="Ingrese usuario">
-											<br>
-											<br>
+											<input class="form-control mt-2" placeholder="Ingrese usuario">
+									
 
-											<input class="form-control" type="password"	placeholder="Ingrese contraseña">
-											<br>
-											<br>
-											<input type="submit" class="btn btn-primary mr-1" value="INGRESAR" name="btnRedirigir" formaction="">
+											<input class="form-control mt-2" type="password"	placeholder="Ingrese contraseña">
+									
+											<input type="submit" class="btn btn-primary mt-2" value="INGRESAR" name="btnRedirigir" formaction="">
 										</div>
 
 									</div>
 
 									<hr>
 									<div class="d-flex col col-12 mh-2 justify-content-center p-2">
-										<input type="submit" class="btn btn-danger mr-1" value="Inicio Rapido Administrador" name="btnRedirigir" formaction="admin.html">
-										<input type="submit" class="btn btn-warning mr-1" value="Inicio Rapido Vendedor" name="btnRedirigir" formaction="vendedor.html">
-										<input type="submit" class="btn btn-info mr-1" value="Inicio Rapido Contador" name="btnRedirigir" formaction="contador.html">
+										<input type="submit" class="btn btn-danger m-1" value="Inicio Rapido Administrador" name="btnRedirigir" formaction="admin.html">
+										<input type="submit" class="btn btn-warning m-1" value="Inicio Rapido Vendedor" name="btnRedirigir" formaction="vendedor.html">
+										<input type="submit" class="btn btn-info m-1" value="Inicio Rapido Contador" name="btnRedirigir" formaction="contador.html">
 									</div>
 								</div>
 							</div>
