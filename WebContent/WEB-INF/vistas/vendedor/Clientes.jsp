@@ -20,7 +20,7 @@ $(document).ready( function () {
 		<form action="clientes.html" method="post">
 			<div class="d-flex  align-content-center bd-highlight mb-3">
 				<div class="me-auto p-2 bd-highlight align-self-center">
-					<h1 >Listado de Clientes</h1>
+					<h1 >CLIENTES</h1>
 				</div>
 				<div class="p-2 bd-highlight align-self-center">
 					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addClientModal">
@@ -32,8 +32,8 @@ $(document).ready( function () {
 		  <div class="row mx-2 d-flex flex-wrap align-middle justify-content-evenly">
 			  	<div class="col-md-auto table-responsive w-100">
 			  		<table id="tabla_clientes" class="table table-hover text-center">
-			  		<thead >
-						<tr >
+			  		<thead>
+						<tr>
 							<th class="text-center" scope="col"> DNI </th>
 							<th class="text-center" scope="col"> Nombre </th>
 							<th class="text-center" scope="col"> Apellido </th>
