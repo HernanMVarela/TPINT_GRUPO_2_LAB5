@@ -107,4 +107,13 @@ public class PaginaController {
 		MV.setViewName("vendedor/GestionVentas");
 		return MV;
 	}
+	
+	@RequestMapping("registro-usuario.html")
+	public ModelAndView eventoRedireccionarRegistroUsuario()
+	{
+		ModelAndView MV = new ModelAndView();
+		
+		MV.setViewName("registro/RegistroUsuario");
+		return MV;
+	}
 }

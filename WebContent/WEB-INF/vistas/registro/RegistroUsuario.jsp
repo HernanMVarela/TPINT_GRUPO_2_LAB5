@@ -7,7 +7,6 @@
     </head>
 
     <body>
-        <jsp:include page="../common/NavigatorAdmin.jspf"></jsp:include>
         <div class="container-fluid">
             <form id="altaForm" method="post">
                 <div class="container">
@@ -15,7 +14,7 @@
                         <div class="container-fluid py-1">
                             <div>
                                 <br>
-                                <h1 style="text-align: center;">REGISTRO DE NUEVOS USUARIOS</h1>
+                                <h1 style="text-align: center;">CREACION DE USUARIO</h1>
                                 <hr>
                                 <div class="row align-items-md-stretch">
 
@@ -63,7 +62,6 @@
 
                                         <label style="float: left">Seleccione rol</label>
                                         <select class="form-select">
-                                            <option value="administrador">ADMINISTRADOR</option>
                                             <option value="vendedor">VENDEDOR</option>
                                             <option value="contador">CONTADOR</option>
                                         </select>
@@ -77,11 +75,15 @@
                                     </div>
 
                                     <div class="col-md-6" style="text-align: center;">
-                                        <img src="${pageContext.request.contextPath}/assets/userLogo.png"
-                                            class="img-responsive" style="width: 80%;">
+                                        <img src="${pageContext.request.contextPath}/assets/register.png" class="img-responsive p-3" style="width: 50%;">
+                                        <h1>¡Oye!</h1>
+                                        <p>
+                                            ¿Ya tienes una cuenta? Haz click en el botón de abajo para iniciar sesión.
+                                        </p>
+                                        <input type="submit" class="btn btn-success mr-1" value="INICIAR SESION"
+                                            name="btnRedirigir" formaction="home.html">
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
