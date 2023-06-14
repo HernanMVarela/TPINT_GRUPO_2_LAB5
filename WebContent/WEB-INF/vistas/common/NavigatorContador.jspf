@@ -3,11 +3,11 @@
 
     	<ul class="nav col-md-5 mb-2 justify-content-left mb-md-0">
      	<li><a href="contador.html" class="nav-link px-2 link-secondary">CONTADOR</a></li>
-      	<li><a href="consulta-ventas.html" class="nav-link px-2 link-dark">Consulta Ventas</a></li>      	
+         	
    	</ul>
    	
 	<form action="Logout.html" method="post">
-		<input type="submit" class="btn btn-outline-danger me-2" value="CERRAR SESION" name="btnRedirigir" formaction="home.html">
+		<input type="submit" class="btn btn-outline-danger me-2" value="CERRAR SESION" name="btnRedirigir" formaction="Logout.html">
 	</form>
   </div>
 </div>

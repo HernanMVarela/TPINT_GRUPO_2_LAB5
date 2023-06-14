@@ -17,7 +17,7 @@ $(document).ready( function () {
 </head>
     
 <body>
-<%@ include file="../common/NavigatorAdmin.jspf" %>
+<%@ include file="../common/NavigatorVendedor.jspf" %>
 
 <div class="container-fluid">
 	<div class="p-5 bg-light text-dark border rounded-3" style="width: 100%">
