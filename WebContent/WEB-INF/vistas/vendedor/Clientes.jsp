@@ -6,14 +6,18 @@
 
 </head>
 
-<jsp:include page="../common/NavigatorVendedor.jspf"></jsp:include>
+
 
 <script type="text/javascript">
 $(document).ready( function () {
     $('#tabla_clientes').DataTable();
 } );
 </script>
+<%@ include file="../common/Header.jspf" %>
 </head>
+    
+<body>
+<%@ include file="../common/NavigatorAdmin.jspf" %>
 
 <div class="container-fluid">
 	<div class="p-5 bg-light text-dark border rounded-3" style="width: 100%">

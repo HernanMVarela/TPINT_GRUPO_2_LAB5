@@ -3,11 +3,11 @@
 	<html>
 
 	<head>
-		<jsp:include page="../common/Header.jspf"></jsp:include>
-	</head>
+<%@ include file="../common/Header.jspf" %>
+</head>
 
-	<body>
-		<jsp:include page="../common/NavigatorAdmin.jspf"></jsp:include>
+<body>
+<%@ include file="../common/NavigatorVendedor.jspf" %>
 		<div class="container-fluid">
 			<form id="myForm" method="get">
 				<div class="cuadro_uno justify-content-center">

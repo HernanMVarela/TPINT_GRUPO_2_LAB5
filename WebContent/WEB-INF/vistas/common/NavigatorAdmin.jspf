@@ -6,7 +6,7 @@
      	<li><a href="alta-usuario.html" class="nav-link px-2 link-dark">Alta de Usuarios</a></li>
      	<li><a href="listar-usuarios.html" class="nav-link px-2 link-dark">Listado de Usuarios</a></li>
    	</ul> 
-   	<form action="Logout" method="post">
+   	<form action="Logout.html" method="post">
 		<input type="submit" class="btn btn-outline-danger me-2" value="CERRAR SESION" name="btnRedirigir" formaction="home.html">
 	</form>
   </div>

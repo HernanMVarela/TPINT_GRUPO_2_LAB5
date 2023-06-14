@@ -8,7 +8,7 @@
      	<li><a href="stock.html" class="nav-link px-2 link-dark">Stock</a></li>
      	<li><a href="ventas.html" class="nav-link px-2 link-dark">Ventas</a></li>
    	</ul>
-   	<form action="Logout" method="post">
+   	<form action="Logout.html" method="post">
 		<input type="submit" class="btn btn-outline-danger me-2" value="CERRAR SESION" name="btnRedirigir" formaction="home.html">
 	</form>
   </div>

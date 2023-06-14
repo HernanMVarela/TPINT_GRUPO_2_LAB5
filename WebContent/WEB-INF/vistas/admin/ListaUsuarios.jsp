@@ -2,11 +2,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<jsp:include page="../common/Header.jspf"></jsp:include>
+<%@ include file="../common/Header.jspf" %>
 </head>
 
 <body>
-<jsp:include page="../common/NavigatorAdmin.jspf"></jsp:include>
+<%@ include file="../common/NavigatorVendedor.jspf" %>
 <div class="container-fluid">
   <form  id="myForm" method="get">
     <div class="cuadro_uno justify-content-center">

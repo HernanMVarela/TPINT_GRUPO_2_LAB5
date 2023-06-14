@@ -7,16 +7,23 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
 
-<context:component-scan base-package="frgp.utn.edu.ar"></context:component-scan>
-
+<context:component-scan base-package="frgp.utn.edu.ar.controllers">
+</context:component-scan>
 <mvc:annotation-driven />
 
+<!-- Si solo esta la carpeta controller: <context:component-scan base-package="frgp.utn.edu.ar.controllers"></context:component-scan> -->
+
 <bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">
-	<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
+	<property name="viewClass" value="org.springframework.web.servlet.view.JstlView">
+	</property>
 	<property name="prefix" value="WEB-INF/vistas/"></property>
 	<property name="suffix" value=".jsp"></property>
 </bean>
 
+<!-- Prefix: Spring busca en esta ruta donde vas a estar las vistas -->
+<!-- Suffix:Solamente las paginas que tengan la extension JSP solo esas seran devueltas como vistas para el susuario -->
+
+<!--  Defino en donde van a estar los controladores -->
 
 </beans>
 

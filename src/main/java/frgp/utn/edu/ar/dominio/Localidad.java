@@ -1,4 +1,4 @@
-package frgp.utn.edu.ar.entidades;
+package frgp.utn.edu.ar.dominio;
 
 import java.io.Serializable;
 

@@ -1,14 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
-	<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-	<html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<%@ include file="common/Header.jspf" %>
+</head>
 
-	<head>
-		<jsp:include page="common/Header.jspf"></jsp:include>
-	</head>
-
-	<body>
-		<jsp:include page="common/NavigatorCommon.jspf"></jsp:include>
-		<div class="container-fluid">
+<body>
+<%@ include file="common/NavigatorCommon.jspf" %>
+	<div class="container-fluid">
 			<form id="homeForm" method="post">
 				<div class="container">
 					<div class="p-2 mb-2 bg-light border rounded-3" style="width: 100%">
