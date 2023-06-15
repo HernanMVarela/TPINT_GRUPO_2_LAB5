@@ -13,7 +13,8 @@
 
 <div class="container-fluid">
   <form  id="myForm" method="get">
-    <div class="cuadro_uno justify-content-center">
+        <div class="p-5 bg-light border rounded-3" style="width: 100%">
+  
       <div class="d-flex col col-12 mh-2 justify-content-center p-2">
         <div class="row w-auto justify-content-center">
           <h1>Consulta Ventas</h1>
@@ -68,7 +69,9 @@
 					<div>
 					<h3>Ganancia total obtenida en rango de fechas:</h3></div>
         </div>
-      </div>      
+        </div>
+        </div>
+        </form>
 </div>
 
 

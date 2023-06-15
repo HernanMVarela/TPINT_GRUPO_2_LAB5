@@ -28,7 +28,6 @@ function abrirModificarModal(nombre, marca, descripcion, tipo, precio_compra) {
 <%@ include file="../common/NavigatorVendedor.jspf" %>
 <div class="container-fluid">
 	<form action="articulos.html" method="post">
-	<div class="cuadro_uno justify-content-center">
       <div class="p-5 bg-light border rounded-3" style="width: 100%">
 		<div class="d-flex  align-content-center bd-highlight mb-3">
 			<div class="me-auto p-2 bd-highlight align-self-center">
@@ -53,6 +52,7 @@ function abrirModificarModal(nombre, marca, descripcion, tipo, precio_compra) {
 							<th class="text-center" scope="col"> Descripcion </th> 
 							<th class="text-center" scope="col"> Estado </th>
 							<th></th>
+							<th></th>							
 						</tr>
 					</thead>
 					<tbody>
@@ -90,7 +90,6 @@ function abrirModificarModal(nombre, marca, descripcion, tipo, precio_compra) {
 			  	</div> 
 		  	</div>
 	  	</div>
-  	</div>		
 	</form>
 </div>
 

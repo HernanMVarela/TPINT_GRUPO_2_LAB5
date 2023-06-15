@@ -16,7 +16,7 @@ import frgp.utn.edu.ar.dominio.Tipo_Articulo;
 import frgp.utn.edu.ar.servicio.ArticuloServicio;
 
 @Controller
-public class ArticuloController {
+public class VendedorController {
 
 	@Autowired
 	public  ArticuloServicio service;
@@ -27,62 +27,7 @@ public class ArticuloController {
 				.getRequiredWebApplicationContext(config.getServletContext());
 		
 		this.service = (ArticuloServicio) ctx.getBean("serviceBean");
-	}
-	
-	// "/common/header"
-    @RequestMapping("/common/header.html")
-    public String showHeader() {
-
-        return "common/Header.jspf";
-    }
-	
-    // "cssStyles/StyleSheet"
-    @RequestMapping("/cssStyles/StyleSheet.html")
-	public String getStyleSheet() {
- 
-        return "cssStyles/StyleSheet.Css";
-    }
-    
-	//NAVBARS
-    @RequestMapping("/common/NavigatorCommon.jspf")
-    public String getNavigatorCommon() {
-   
-        return "common/NavigatorCommon";
-    }
-	
-    @RequestMapping("/common/NavigatorVendedor.jspf")
-    public String getNavigatorVendedor() {
-   
-        return "common/NavigatorVendedor";
-    }
-    
-    @RequestMapping("/common/NavigatorContador.hyml")
-    public String getNavigatorContador() {
-   
-        return "common/NavigatorContador.jspf";
-    }
-        
-    @RequestMapping("/common/NavigatorAdmin.jspf")
-    public String getNavigatorAdmin() {
-   
-        return "common/NavigatorAdmin";
-    }
-	
-	//Inicio - Login / Home | "IrLogin.html"
-	@RequestMapping("IrLogin.html")
-	public ModelAndView redireccion(){
-		ModelAndView MV = new ModelAndView();
-		MV.setViewName("Home"); 
-		return MV;
-	}
-	
-	// Logout | "Logout.html"
-    @RequestMapping("Logout.html")
-    public ModelAndView getLogout() {
-    	ModelAndView MV = new ModelAndView();
-		MV.setViewName("Home"); 
-		return MV;
-    }
+	}	
 	
 	//HOME VENDEDOR | vendedor.html"
 	@RequestMapping("vendedor.html")
@@ -139,6 +84,7 @@ public class ArticuloController {
 		return MV;
 		
 	}
+	
 	// MODIFICAR ARTICULO | "/modificar_articulo.html"
 	@RequestMapping(value ="/modificar_articulo.html" , method= { RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView modificarArticulo(String nombre, String marca, String tipo, String precio_compra, String descripcion){
@@ -208,56 +154,6 @@ public class ArticuloController {
 		return MV;	
 	}
 	*/
-	
-	// HOME ADMIN | "admin.html"
-	@RequestMapping("admin.html")
-	public ModelAndView eventoRedireccionarHomeAdmin()
-	{
-		ModelAndView MV = new ModelAndView();
-		
-		MV.setViewName("admin/HomeAdmin");
-		return MV;
-	}
-	
-	// ALTA USER | "alta-usuario.html"
-	@RequestMapping("alta-usuario.html")
-	public ModelAndView eventoRedireccionarAltaUsuario()
-	{
-		ModelAndView MV = new ModelAndView();
-		
-		MV.setViewName("admin/AltaUsuario");
-		return MV;
-	}
-	
-	// LISTA USERS | "listar-usuarios.html"
-	@RequestMapping("listar-usuarios.html")
-	public ModelAndView eventoRedireccionarListarUsuarios()
-	{
-		ModelAndView MV = new ModelAndView();
-		
-		MV.setViewName("admin/ListaUsuarios");
-		return MV;
-	}
-	
-	// HOME CONTADOR | "contador.html"
-	@RequestMapping("contador.html")
-	public ModelAndView eventoRedireccionarHomeContador()
-	{
-		ModelAndView MV = new ModelAndView();
-		
-		MV.setViewName("contador/HomeContador");
-		return MV;
-	}
-	
-	// CONSULTA VENTAS | "consulta-ventas.html"
-	@RequestMapping("consulta-ventas.html")
-	public ModelAndView eventoRedireccionarConsultaVentas()
-	{
-		ModelAndView MV = new ModelAndView();
-		
-		MV.setViewName("contador/ConsultaVentas");
-		return MV;
-	}
 	
 	// Clientes | "consulta-ventas.html"
 	@RequestMapping("listado_clientes.html")
