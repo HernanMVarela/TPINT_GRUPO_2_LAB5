@@ -139,6 +139,41 @@ public class ArticuloController {
 		return MV;
 		
 	}
+	// MODIFICAR ARTICULO | "/modificar_articulo.html"
+	@RequestMapping(value ="/modificar_articulo.html" , method= { RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView modificarArticulo(String nombre, String marca, String tipo, String precio_compra, String descripcion){
+		ModelAndView MV = new ModelAndView();
+		
+		Articulo x = new Articulo();
+		x.setNombre(nombre);
+		x.setPrecio_compra(Float.parseFloat(precio_compra));
+		x.setMarca(new Marca(marca));
+		x.setTipo(new Tipo_Articulo(tipo));
+		x.setDescripcion(descripcion);
+		x.setEstado(true);
+		
+		String Message="";
+		
+		try{
+			
+			service.actualizarArticulo(x);
+			System.out.println("Articulo Actualizado");
+		}
+		catch(Exception e)
+		{
+			System.out.println("Articulo no Actualizado");
+		}
+		finally
+		{
+		
+		}
+	
+		MV.addObject("Mensaje", Message);
+		MV.addObject("listaArticulos",this.service.obtenerArticulos());
+		MV.setViewName("vendedor/Articulos"); 
+		return MV;
+		
+	}
 	
 	// ELIMINAR ARTICULO | "/eliminarArticulo.html"
 	@RequestMapping(value ="/eliminarArticulo.html" , method= { RequestMethod.GET, RequestMethod.POST})
