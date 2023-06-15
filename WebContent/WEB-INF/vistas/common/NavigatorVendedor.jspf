@@ -3,7 +3,7 @@
 
    	<ul class="nav col-md-5 mb-2 justify-content-left mb-md-0">
      	<li><a href="vendedor.html" class="nav-link px-2 link-secondary">VENDEDOR</a></li>
-     	<li><a href="listado_clientes.html" class="nav-link px-2 link-dark">Clientes</a></li>
+     	<li><a href="clientes.html" class="nav-link px-2 link-dark">Clientes</a></li>
      	<li><a href="articulos.html" class="nav-link px-2 link-dark">Articulos</a></li>
      	<li><a href="stock.html" class="nav-link px-2 link-dark">Stock</a></li>
      	<li><a href="ventas.html" class="nav-link px-2 link-dark">Ventas</a></li>

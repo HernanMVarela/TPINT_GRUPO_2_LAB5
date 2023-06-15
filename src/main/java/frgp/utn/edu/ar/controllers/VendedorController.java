@@ -50,7 +50,7 @@ public class VendedorController {
 	}
 	
 	// ALTA DE NUEVO ARTICULO | "/altaArticulo.html"
-	@RequestMapping(value ="/altaArticulo.html" , method= { RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value ="/alta_articulo.html" , method= { RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView validarArticulo(String nombre, String marca, String tipo, String precio_compra, String descripcion){
 		ModelAndView MV = new ModelAndView();
 		
@@ -121,42 +121,44 @@ public class VendedorController {
 		
 	}
 	
-	// ELIMINAR ARTICULO | "/eliminarArticulo.html"
-	@RequestMapping(value ="/eliminarArticulo.html" , method= { RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView eliminarArticulo(String nombre){
-		ModelAndView MV = new ModelAndView();
-		service.eliminarArticulo(nombre);
-		MV.addObject("listaArticulos",this.service.obtenerArticulos());
-		MV.setViewName("vendedor/HomeVendedor");
-		MV.addObject("Mensaje", "Articulo eliminado");
-		return MV;
-	}
-	
-	// ELIMINAR ARTICULO | "/delete-articulos-{nombre}" 
-	@RequestMapping(value = { "/delete-articulos-{nombre}" }, method = RequestMethod.GET)
-    public ModelAndView deleteArticulo(@PathVariable String nombre) {
-		service.eliminarArticulo(nombre);
-		ModelAndView MV = new ModelAndView();
-		MV.setViewName("vendedor/HomeVendedor");
+	// ELIMINAR ARTICULO (BAJA LOGICA) | "/eliminar_articulo.html"
+		@RequestMapping(value ="/eliminar_articulo.html" , method= { RequestMethod.GET, RequestMethod.POST})
+		public ModelAndView eliminarArticulo(String nombre, String marca, String tipo, String precio_compra, String descripcion){
+			ModelAndView MV = new ModelAndView();
+			
+			Articulo x = new Articulo();
+			x.setNombre(nombre);
+			x.setPrecio_compra(Float.parseFloat(precio_compra));
+			x.setMarca(new Marca(marca));
+			x.setTipo(new Tipo_Articulo(tipo));
+			x.setDescripcion(descripcion);
+			x.setEstado(false);
+			
+			String Message="";
+			
+			try{
+				
+				service.actualizarArticulo(x);
+				System.out.println("Articulo eliminado");
+			}
+			catch(Exception e)
+			{
+				System.out.println("Articulo no eliminado");
+			}
+			finally
+			{
+			
+			}
 		
-		//Actualiza los usuarios
-		MV.addObject("listaArticulos",this.service.obtenerArticulos());
-		MV.setViewName("vendedor/HomeVendedor");
-		return MV;
-    }
+			MV.addObject("Mensaje", Message);
+			MV.addObject("listaArticulos",this.service.obtenerArticulos());
+			MV.setViewName("vendedor/Articulos"); 
+			return MV;
+			
+		}
 	
-	/*
-	@RequestMapping(value ="/recargaGrillaArticulos.html" , method= { RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView recargarArticulo(){
-		ModelAndView MV = new ModelAndView();
-		MV.addObject("listaArticulos",this.service.obtenerArticulos());
-		MV.setViewName("Articulos"); 
-		return MV;	
-	}
-	*/
-	
-	// Clientes | "consulta-ventas.html"
-	@RequestMapping("listado_clientes.html")
+	// Clientes | "clientes.html"
+	@RequestMapping("clientes.html")
 	public ModelAndView eventoRedireccionarClientes()
 	{
 		ModelAndView MV = new ModelAndView();
@@ -165,6 +167,23 @@ public class VendedorController {
 		return MV;
 	}
 	
+	// Clientes | "stock.html"
+	@RequestMapping("stock.html")
+	public ModelAndView eventoRedireccionarStock()
+	{
+		ModelAndView MV = new ModelAndView();
+		
+		MV.setViewName("vendedor/Stock");
+		return MV;
+	}
 	
-	
+	// Clientes | "ventas.html"
+	@RequestMapping("ventas.html")
+	public ModelAndView eventoRedireccionarVentas()
+	{
+		ModelAndView MV = new ModelAndView();
+		
+		MV.setViewName("vendedor/Ventas");
+		return MV;
+	}	
 }
