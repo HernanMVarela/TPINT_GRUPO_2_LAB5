@@ -71,9 +71,7 @@
 								</div>
 
 								<div class="col-md-6" style="text-align: center;">
-									<img
-										src="${pageContext.request.contextPath}/assets/register.png"
-										class="img-responsive p-3" style="width: 50%;">
+									<img class="img-responsive p-3" style="width: 50%;" src="<c:url value="/assets/register.png"/>"/>
 									<h1>¡Oye!</h1>
 									<p>¿Ya tienes una cuenta? Haz click en el botón de abajo
 										para iniciar sesión.</p>

@@ -16,8 +16,8 @@ public class Marca implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@Column(name="ID_MARCA")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="ID_MARCA")	
 	private int ID;
 	
 	@Column(name="NOMBRE", nullable = false)

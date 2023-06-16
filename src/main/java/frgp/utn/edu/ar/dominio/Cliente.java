@@ -3,21 +3,43 @@ package frgp.utn.edu.ar.dominio;
 import java.io.Serializable;
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "CLIENTES")
 public class Cliente implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@Column(name="DNI")
 	private long DNI;
+	
+	@Column(name="NOMBRE", nullable = false)
 	private String nombre;
+	@Column(name="APELLIDO", nullable = false)
 	private String apellido;
+	@Column(name="SEXO", nullable = false)
 	private String sexo;
+	@Column(name="FECHA_NACIMIENTO", nullable = false)
 	private Date fecha_nac;
+	@Column(name="DIRECCION", nullable = false)
 	private String direccion;
+	@ManyToOne(cascade= {CascadeType.ALL})
+	@JoinColumn(name="ID_LOCALIDAD", nullable = false)
 	private Localidad localidad;
+	@Column(name="CORREO", nullable = false)
 	private String correo;
+	@Column(name="TELEFONO", nullable = false)
 	private String telefono;
 
-	Cliente(){}
+	public Cliente(){}
 
 	@Override
 	public String toString() {
