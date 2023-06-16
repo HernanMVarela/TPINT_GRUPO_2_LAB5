@@ -1,5 +1,5 @@
 <div class="h-100 p-5 bg-light border rounded-3">
-	<img src="${pageContext.request.contextPath}/assets/login.png" class="img-thumbnail img-fluid"  style="width: 50%;">
+	<img class="img-thumbnail img-fluid" style="width: 50%;" src="<c:url value="/assets/login.png"/>"/>
 	<hr>
 	<label>APELLIDO:</label>
 	<br>

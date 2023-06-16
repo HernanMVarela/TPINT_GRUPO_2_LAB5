@@ -1,30 +1,63 @@
 package frgp.utn.edu.ar.dominio;
 
+import java.io.Serializable;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
 @Entity
-@Table(name = "Usuario")
+@Table(name = "USUARIOS")
+public class Usuario implements Serializable {
 
-public class Usuario {
-
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="ID")
 	private int id;
 	
+	@Column(name="USERNAME", nullable = true)
 	private String nombreU;
+	
+	@Column(name="PASSWORD", nullable = true)
 	private String passU;
 	
-	public Usuario()
-	{
-		
+	@ManyToOne(cascade= {CascadeType.ALL})
+	@JoinColumn(name="DNI",nullable = false)
+	private Persona persona;
+	
+	@ManyToOne(cascade= {CascadeType.ALL})
+	@JoinColumn(name="ID_TIPOUSER",nullable = false)
+	private Tipo_Usuario tipo;
+	
+	public Usuario() {}
+	
+	public Usuario(String user, String pass, Persona persona, Tipo_Usuario tipo) {
+		this.nombreU=user;
+		this.passU=pass;
+		this.persona=persona;
+		this.tipo=tipo;
+	}
+
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", nombreU=" + nombreU + ", passU=" + passU + ", persona=" + persona + ", tipo="
+				+ tipo + "]";
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getNombreU() {
@@ -43,24 +76,21 @@ public class Usuario {
 		this.passU = passU;
 	}
 
-	public int getId() {
-		return id;
+	public Persona getPersona() {
+		return persona;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setPersona(Persona persona) {
+		this.persona = persona;
 	}
 
-	public Usuario(int id, String nombreU, String passU) {
-		super();
-		this.id = id;
-		this.nombreU = nombreU;
-		this.passU = passU;
+	public Tipo_Usuario getTipo() {
+		return tipo;
 	}
 
-	
+	public void setTipo(Tipo_Usuario tipo) {
+		this.tipo = tipo;
+	}
 
-
-	
 	
 }

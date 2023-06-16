@@ -10,44 +10,38 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="PROVINCIAS")
-public class Provincia implements Serializable {
+@Table(name = "ESTADOS_CLIENTE")
+public class Estado_Cli implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@Column(name="ID_ESTADOCLI")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="ID_PROVINCIA")	
 	private int ID;
-	
 	@Column(name="NOMBRE", nullable = false)
 	private String nombre;
 	
-	public Provincia(){}
-	public Provincia(String nombre)
+	public Estado_Cli() {}
+	public Estado_Cli(String nombre)
 	{
-		this.nombre = nombre;
+		this.nombre=nombre;
 	}
-
 	@Override
 	public String toString() {
-		return "Provincia [ID=" + ID + ", nombre=" + nombre + "]";
+		return "Estado_Cli [ID=" + ID + ", nombre=" + nombre + "]";
 	}
-
 	public int getID() {
 		return ID;
 	}
-
 	public void setID(int iD) {
 		ID = iD;
 	}
-
 	public String getNombre() {
 		return nombre;
 	}
-
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
+
 }

@@ -52,12 +52,12 @@ public class VendedorController {
 	// ALTA DE NUEVO ARTICULO | "/altaArticulo.html"
 	@SuppressWarnings("finally")
 	@RequestMapping(value ="/alta_articulo.html" , method= { RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView validarArticulo(String nombre, String marca, String tipo, String precio_compra, String descripcion){
+	public ModelAndView validarArticulo(String nombre, String marca, String tipo, String precio_venta, String descripcion){
 		ModelAndView MV = new ModelAndView();
 		
 		Articulo x = new Articulo();
 		x.setNombre(nombre);
-		x.setPrecio_compra(Float.parseFloat(precio_compra));
+		x.setPrecio_venta(Float.parseFloat(precio_venta));
 		x.setMarca(new Marca(marca));
 		x.setTipo(new Tipo_Articulo(tipo));
 		x.setDescripcion(descripcion);
@@ -86,12 +86,12 @@ public class VendedorController {
 	// MODIFICAR ARTICULO | "/modificar_articulo.html"
 	@SuppressWarnings("finally")
 	@RequestMapping(value ="/modificar_articulo.html" , method= { RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView modificarArticulo(String nombre, String marca, String tipo, String precio_compra, String descripcion){
+	public ModelAndView modificarArticulo(String nombre, String marca, String tipo, String precio_venta, String descripcion){
 		ModelAndView MV = new ModelAndView();
 		
 		Articulo x = new Articulo();
 		x.setNombre(nombre);
-		x.setPrecio_compra(Float.parseFloat(precio_compra));
+		x.setPrecio_venta(Float.parseFloat(precio_venta));
 		x.setMarca(new Marca(marca));
 		x.setTipo(new Tipo_Articulo(tipo));
 		x.setDescripcion(descripcion);
@@ -119,12 +119,12 @@ public class VendedorController {
 	// ELIMINAR ARTICULO | "/eliminar_articulo.html"
 	@SuppressWarnings("finally")
 	@RequestMapping(value ="/eliminar_articulo.html" , method= { RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView eliminarArticulo(String nombreEliminar, String marcaEliminar, String tipoEliminar, String precio_compraEliminar, String descripcionEliminar){
+	public ModelAndView eliminarArticulo(String nombreEliminar, String marcaEliminar, String tipoEliminar, String precio_ventaEliminar, String descripcionEliminar){
 		ModelAndView MV = new ModelAndView();
 		
 		Articulo x = new Articulo();
 		x.setNombre(nombreEliminar);
-		x.setPrecio_compra(Float.parseFloat(precio_compraEliminar));
+		x.setPrecio_venta(Float.parseFloat(precio_ventaEliminar));
 		x.setMarca(new Marca(marcaEliminar));
 		x.setTipo(new Tipo_Articulo(tipoEliminar));
 		x.setDescripcion(descripcionEliminar);

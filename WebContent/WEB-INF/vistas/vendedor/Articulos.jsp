@@ -13,23 +13,23 @@
               $('#tabla_articulos').DataTable();
             });
 
-            function abrirModificarModal(nombre, marca, descripcion, tipo, precio_compra) {
+            function abrirModificarModal(nombre, marca, descripcion, tipo, precio_venta) {
 
               $('#nombre').val(nombre);
               $('#marca').val(marca);
               $('#descripcion').val(descripcion);
               $('#tipo').val(tipo);
-              $('#precio_compra').val(precio_compra);
+              $('#precio_venta').val(precio_venta);
 
             }
 
-            function abrirEliminarModal(nombre, marca, descripcion, tipo, precio_compra) {
+            function abrirEliminarModal(nombre, marca, descripcion, tipo, precio_venta) {
 
               $('#nombreEliminar').val(nombre);
               $('#marcaEliminar').val(marca);
               $('#descripcionEliminar').val(descripcion);
               $('#tipoEliminar').val(tipo);
-              $('#precio_compraEliminar').val(precio_compra);
+              $('#precio_ventaEliminar').val(precio_venta);
             }
 
           </script>
@@ -71,7 +71,7 @@
                             <td>${item.nombre} </td>
                             <td>${item.marca.nombre}</td>
                             <td>${item.tipo.nombre}</td>
-                            <td>${item.precio_compra}</td>
+                            <td>${item.precio_venta}</td>
                             <td>${item.descripcion}</td>
                             <td>
                               <button type="button" class="btn btn-success" data-bs-toggle="modal"
@@ -80,7 +80,7 @@
                                                              '${item.marca.nombre}',
                                                              '${item.descripcion}',
                                                              '${item.tipo.nombre}',
-                                                             '${item.precio_compra}',
+                                                             '${item.precio_venta}',
                                                              '${item.estado}')">
                                 MODIFICAR
                               </button>
@@ -91,7 +91,7 @@
                                                                                               '${item.marca.nombre}',
                                                                                               '${item.descripcion}',
                                                                                               '${item.tipo.nombre}',
-                                                                                              '${item.precio_compra}',
+                                                                                              '${item.precio_venta}',
                                                                                               '${item.estado}')">
                                 ELIMINAR
                               </button>
@@ -146,7 +146,7 @@
 	                        <label>PRECIO:</label>
 	                      </div>
 	                      <div class="col-md-8">                     
-	                        <input id="precio_compraEliminar" type="number" name="precio_compraEliminar" class="form-control mt-1" readonly>
+	                        <input id="precio_ventaEliminar" type="number" name="precio_ventaEliminar" class="form-control mt-1" readonly>
 	                      </div>
                       </div>                            
                   </div>                   
@@ -195,8 +195,8 @@
                         <input id="tipo" name="tipo" class="form-control">
                       </div>
                       <div class="form-group col-md-6">
-                        <label style="float: left">Precio de compra</label>
-                        <input id="precio_compra" type="number" name="precio_compra" class="form-control">
+                        <label style="float: left">Precio de venta</label>
+                        <input id="precio_venta" type="number" name="precio_venta" class="form-control">
                       </div>
                     </div>
 
@@ -246,8 +246,8 @@
                         <input name="tipo" class="form-control" placeholder="Ingrese tipo">
                       </div>
                       <div class="form-group col-md-6">
-                        <label style="float: left">Precio de compra</label>
-                        <input type="number" name="precio_compra" class="form-control"
+                        <label style="float: left">Precio de venta</label>
+                        <input type="number" name="precio_venta" class="form-control"
                           placeholder="Ingrese precio de compra">
                       </div>
                     </div>
