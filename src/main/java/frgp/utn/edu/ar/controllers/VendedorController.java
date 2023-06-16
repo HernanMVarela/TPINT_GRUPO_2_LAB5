@@ -50,6 +50,7 @@ public class VendedorController {
 	}
 	
 	// ALTA DE NUEVO ARTICULO | "/altaArticulo.html"
+	@SuppressWarnings("finally")
 	@RequestMapping(value ="/alta_articulo.html" , method= { RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView validarArticulo(String nombre, String marca, String tipo, String precio_compra, String descripcion){
 		ModelAndView MV = new ModelAndView();
@@ -75,17 +76,15 @@ public class VendedorController {
 		}
 		finally
 		{
-		
-		}
-	
-		MV.addObject("Mensaje", Message);
-		MV.addObject("listaArticulos",this.service.obtenerArticulos());
-		MV.setViewName("vendedor/Articulos"); 
-		return MV;
-		
+			MV.addObject("Mensaje", Message);
+			MV.addObject("listaArticulos",this.service.obtenerArticulos());
+			MV.setViewName("vendedor/Articulos"); 
+			return MV;
+		}		
 	}
 	
 	// MODIFICAR ARTICULO | "/modificar_articulo.html"
+	@SuppressWarnings("finally")
 	@RequestMapping(value ="/modificar_articulo.html" , method= { RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView modificarArticulo(String nombre, String marca, String tipo, String precio_compra, String descripcion){
 		ModelAndView MV = new ModelAndView();
@@ -101,7 +100,6 @@ public class VendedorController {
 		String Message="";
 		
 		try{
-			
 			service.actualizarArticulo(x);
 			System.out.println("Articulo Actualizado");
 		}
@@ -111,51 +109,51 @@ public class VendedorController {
 		}
 		finally
 		{
-		
-		}
-	
-		MV.addObject("Mensaje", Message);
-		MV.addObject("listaArticulos",this.service.obtenerArticulos());
-		MV.setViewName("vendedor/Articulos"); 
-		return MV;
-		
-	}
-	
-	// ELIMINAR ARTICULO (BAJA LOGICA) | "/eliminar_articulo.html"
-		@RequestMapping(value ="/eliminar_articulo.html" , method= { RequestMethod.GET, RequestMethod.POST})
-		public ModelAndView eliminarArticulo(String nombre, String marca, String tipo, String precio_compra, String descripcion){
-			ModelAndView MV = new ModelAndView();
-			
-			Articulo x = new Articulo();
-			x.setNombre(nombre);
-			x.setPrecio_compra(Float.parseFloat(precio_compra));
-			x.setMarca(new Marca(marca));
-			x.setTipo(new Tipo_Articulo(tipo));
-			x.setDescripcion(descripcion);
-			x.setEstado(false);
-			
-			String Message="";
-			
-			try{
-				
-				service.actualizarArticulo(x);
-				System.out.println("Articulo eliminado");
-			}
-			catch(Exception e)
-			{
-				System.out.println("Articulo no eliminado");
-			}
-			finally
-			{
-			
-			}
-		
 			MV.addObject("Mensaje", Message);
 			MV.addObject("listaArticulos",this.service.obtenerArticulos());
 			MV.setViewName("vendedor/Articulos"); 
 			return MV;
-			
+		}		
+	}
+	
+	// ELIMINAR ARTICULO (BAJA LOGICA) | "/eliminar_articulo.html"
+	@SuppressWarnings("finally")
+	@RequestMapping(value ="/eliminar_articulo.html" , method= { RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView eliminarArticulo(String nombre, String marca, String tipo, String precio_compra, String descripcion){
+		ModelAndView MV = new ModelAndView();
+		
+		System.out.println(nombre);
+		System.out.println(marca);
+		System.out.println(tipo);
+		System.out.println(precio_compra);
+		System.out.println(descripcion);
+
+		Articulo x = new Articulo();
+		x.setNombre(nombre);
+		x.setPrecio_compra(Float.parseFloat(precio_compra));
+		x.setMarca(new Marca(marca));
+		x.setTipo(new Tipo_Articulo(tipo));
+		x.setDescripcion(descripcion);
+		x.setEstado(false);
+		
+		String Message="";
+		
+		try{
+			service.actualizarArticulo(x);
+			System.out.println("Articulo Eliminado");
 		}
+		catch(Exception e)
+		{
+			System.out.println("Articulo no eliminado");
+		}
+		finally
+		{
+			MV.addObject("Mensaje", Message);
+			MV.addObject("listaArticulos",this.service.obtenerArticulos());
+			MV.setViewName("vendedor/Articulos"); 
+			return MV;
+		}		
+	}
 	
 	// Clientes | "clientes.html"
 	@RequestMapping("clientes.html")

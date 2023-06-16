@@ -122,31 +122,31 @@
                         <label>NOMBRE:</label>
                       </div>
                       <div class="col-md-8">
-                        <input id="nombreEliminar" class="form-control mt-1" disabled>
+                        <input id="nombreEliminar" class="form-control mt-1" readonly>
                       </div>
                       <div class="col-md-4">  
                         <label>MARCA:</label>
                       </div>
                       <div class="col-md-8">
-                        <input id="marcaEliminar" class="form-control mt-1" disabled>
+                        <input id="marcaEliminar" class="form-control mt-1" readonly>
                       </div>
                       <div class="col-md-4">
                         <label>DESCRIPCION:</label>
                       </div>
                       <div class="col-md-8">
-                        <input id="descripcionEliminar" class="form-control mt-1" disabled>
+                        <input id="descripcionEliminar" class="form-control mt-1" readonly>
                       </div>
                       <div class="col-md-4">
                         <label>TIPO:</label>
                       </div>
                       <div class="col-md-8">
-                        <input id="tipoEliminar" class="form-control mt-1" disabled>
+                        <input id="tipoEliminar" class="form-control mt-1" readonly>
                       </div>
                       <div class="col-md-4">
                         <label>PRECIO:</label>
                       </div>
                       <div class="col-md-8">                     
-                        <input id="precio_compraEliminar" class="form-control mt-1" disabled>
+                        <input id="precio_compraEliminar" class="form-control mt-1" readonly>
                       </div>
                     </div>
                     <br>
@@ -174,11 +174,11 @@
                     <div class="row align-items-md-stretch">
                       <div class="form-group col-md-6">
                         <label style="float: left">Nombre</label>
-                        <input id="nombre" name="nombre" class="form-control" placeholder="Ingrese nombre" disabled>
+                        <input id="nombre" name="nombre" class="form-control" readonly>
                       </div>
                       <div class="form-group col-md-6">
                         <label style="float: left">Marca</label>
-                        <input id="marca" name="marca" class="form-control" placeholder="Ingrese marca">
+                        <input id="marca" name="marca" class="form-control">
                       </div>
                     </div>
 
@@ -186,19 +186,18 @@
                       <div class="form-group col-md-12">
                         <label style="float: left">Descripcion</label>
                         <textarea id="descripcion" name="descripcion" class="form-control" id="textAreaExample1"
-                          rows="4" placeholder="Ingrese descripcion"></textarea>
+                          rows="4"></textarea>
                       </div>
                     </div>
 
                     <div class="row align-items-md-stretch mt-1">
                       <div class="form-group col-md-6">
                         <label style="float: left">Tipo</label>
-                        <input id="tipo" name="tipo" class="form-control" placeholder="Ingrese tipo">
+                        <input id="tipo" name="tipo" class="form-control">
                       </div>
                       <div class="form-group col-md-6">
                         <label style="float: left">Precio de compra</label>
-                        <input id="precio_compra" type="number" name="precio_compra" class="form-control"
-                          placeholder="Ingrese precio de compra">
+                        <input id="precio_compra" type="number" name="precio_compra" class="form-control">
                       </div>
                     </div>
 
