@@ -4,49 +4,56 @@
 <html>
 <head>
 <%@ include file="../common/Header.jspf"%>
+<%@ include file="../common/NavigatorContador.jspf"%>
+
+<script type="text/javascript">
+            $(document).ready(function () {
+              $('#tabla_ventas').DataTable();
+            });
+</script>
+
 </head>
 
 <body>
-	<%@ include file="../common/NavigatorContador.jspf"%>
-	
-	
+ <div class="container-fluid">
+            <form action="articulos.html" method="post">
+              <div class="p-5 bg-light border rounded-3" style="width: 100%">
+                <div class="d-flex  align-content-center bd-highlight mb-3">
+                  <div class="me-auto p-2 bd-highlight align-self-center">
+                    <h1>VENTAS</h1>
+                  </div>
+                  <div class="p-2 bd-highlight align-self-center">
+                  	<div class="d-flex align-items-center">
+	                  	<div style="width:200px;padding-right:20px;" >
+			         		 <label style="float: left">Fecha de inicio</label>
+		        		     <input class="form-control" type="date" name="date">
+						</div>
+			          
+						<div style="width:200px;">
+							<label style="float: left">Fecha de fin</label>
+							<input class="form-control" type="date" name="date">
+						</div>
+						
+	                    <button type="button" class="btn btn-primary m-2">
+	                      CALCULAR
+	                    </button>
+                    </div>                    
+                  </div>
+                </div>
 
-<div class="container-fluid">
-  <form  id="myForm" method="get">
-        <div class="p-5 bg-light border rounded-3" style="width: 100%">
-  
-      <div class="d-flex col col-12 mh-2 justify-content-center p-2">
-        <div class="row w-auto justify-content-center">
-          <h1>Consulta Ventas</h1>
-          <div >
-          <div  style="display:flex;">
-          
-			<div style="width:200px;padding-right:20px;" >
-         		 <label style="float: left">Fecha de inicio</label>
-        		     <input class="form-control" type="date" name="date">
-			</div>
-          
-			<div style="width:200px;">
-				<label style="float: left">Fecha de fin</label>
-					<input class="form-control" type="date" name="date">
-			</div>
-
-          </div>
-          
-          <table id="tabla_clientes" class="table table-hover text-center">
-			  		<thead>
-						<tr>
-						    <th class="text-center" scope="col"> Fecha </th>
+                <div class="row mx-2 d-flex flex-wrap align-middle justify-content-evenly">
+                  <div class="col-md-auto table-responsive w-100">
+                    <table id="tabla_ventas" class="table table-hover text-center">
+                      <thead>
+                        <tr>
+                         <th class="text-center" scope="col"> Fecha </th>
 						    <th class="text-center" scope="col"> N° venta </th>
 							<th class="text-center" scope="col"> ID Cliente </th>
 							<th class="text-center" scope="col"> Ganancia </th>
-							
-							<th ></th>
-							<th></th>						
-						</tr>
-					</thead>
-					<tbody>
-						<%for (int x=0; x<5; x++){%>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <%for (int x=0; x<5; x++){%>
 							<tr>
 								<td>
 									<%="13/06/2023" %>
@@ -60,21 +67,14 @@
 								<td>
 									<%= "$200" + x %>
 								</td>							
-								
 							</tr>
-						<%}%>  					
-					</tbody>
-					</table></div>
-					
-					<div>
-					<h3>Ganancia total obtenida en rango de fechas:</h3></div>
-        </div>
-        </div>
-        </div>
-        </form>
-</div>
-
-
-
+						<%}%>  	
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
 </body>
 </html>

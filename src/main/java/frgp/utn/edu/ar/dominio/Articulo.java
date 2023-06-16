@@ -31,8 +31,8 @@ public class Articulo implements Serializable {
 	@JoinColumn(name="ID_TIPOART",nullable = false)
 	private Tipo_Articulo tipo;
 	
-	@Column(name="PRECIO_VENTA", nullable = true)
-	private float precio_venta;
+	@Column(name="PRECIO_COMPRA", nullable = true)
+	private float precio_compra;
 	
 	private Boolean estado;
 	
@@ -41,7 +41,7 @@ public class Articulo implements Serializable {
 	@Override
 	public String toString() {
 		return "Articulo [nombre=" + nombre + ", descripcion=" + descripcion + ", marca=" + marca + ", tipo=" + tipo
-				+ ", precio_compra=" + precio_venta + "]";
+				+ ", precio_compra=" + precio_compra + "]";
 	}
 	
 	public Boolean getEstado() {
@@ -72,14 +72,6 @@ public class Articulo implements Serializable {
 		return marca;
 	}
 
-	public float getPrecio_venta() {
-		return precio_venta;
-	}
-
-	public void setPrecio_venta(float precio_venta) {
-		this.precio_venta = precio_venta;
-	}
-
 	public void setMarca(Marca marca) {
 		this.marca = marca;
 	}
@@ -93,11 +85,12 @@ public class Articulo implements Serializable {
 	}
 
 	public float getPrecio_compra() {
-		return precio_venta;
+		return precio_compra;
 	}
 
 	public void setPrecio_compra(float precio_compra) {
-		this.precio_venta = precio_compra;
+		this.precio_compra = precio_compra;
 	}
+	
 	
 }

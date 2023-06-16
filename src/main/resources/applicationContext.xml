@@ -54,14 +54,6 @@
 				<value>frgp.utn.edu.ar.dominio.Articulo</value>
 				<value>frgp.utn.edu.ar.dominio.Marca</value>
 				<value>frgp.utn.edu.ar.dominio.Tipo_Articulo</value>
-				<value>frgp.utn.edu.ar.dominio.Cliente</value>
-				<value>frgp.utn.edu.ar.dominio.Localidad</value>
-				<value>frgp.utn.edu.ar.dominio.Provincia</value>
-				<value>frgp.utn.edu.ar.dominio.Usuario</value>
-				<value>frgp.utn.edu.ar.dominio.Tipo_Usuario</value>
-				<value>frgp.utn.edu.ar.dominio.Detalle_venta</value>
-				<value>frgp.utn.edu.ar.dominio.Venta</value>
-				<value>frgp.utn.edu.ar.dominio.Stock</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

@@ -2,12 +2,13 @@
     <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
     <html>
 
-   <head>
-	<%@ include file="../common/Header.jspf"%>
-</head>
+    <head>
+		<%@ include file="../common/Header.jspf" %>
+		<%@ include file="../common/NavigatorAdmin.jspf" %>		
+    </head>
 
-<body>
-	<%@ include file="../common/NavigatorContador.jspf"%>
+    <body>
+        <jsp:include page="../common/NavigatorAdmin.jspf"></jsp:include>
         <div class="container-fluid">
             <form id="altaForm" method="post">
                 <div class="container">
@@ -15,7 +16,7 @@
                         <div class="container-fluid py-1">
                             <div>
                                 <br>
-                                <h1 style="text-align: center;">REGISTRO DE NUEVOS USUARIOS</h1>
+                                <h1 style="text-align: center;">CREACION DE NUEVO USUARIO</h1>
                                 <hr>
                                 <div class="row align-items-md-stretch">
 
@@ -77,8 +78,8 @@
                                     </div>
 
                                     <div class="col-md-6" style="text-align: center;">
-                                    	<img class="img-responsive p-3" style="width: 80%;" src="<c:url value="/assets/userLogo.png"/>"/>
-
+                                        <img src="${pageContext.request.contextPath}/assets/userLogo.png"
+                                            class="img-responsive" style="width: 80%;">
                                     </div>
                                 </div>
 

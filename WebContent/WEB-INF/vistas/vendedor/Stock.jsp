@@ -5,7 +5,7 @@
       <html>
       <head>
         <%@ include file="../common/Header.jspf" %>
-        
+        <%@ include file="../common/NavigatorVendedor.jspf" %>
         <script type="text/javascript">
             $(document).ready(function () {
               $('#tabla_stock').DataTable();
@@ -13,9 +13,8 @@
         </script>
       </head>
 <body>
-<%@ include file="../common/NavigatorVendedor.jspf" %>
           <div class="container-fluid">
-            <form action="articulos.html" method="post">
+            <form action="stock.html" method="post">
               <div class="p-5 bg-light border rounded-3" style="width: 100%">
                 <div class="d-flex  align-content-center bd-highlight mb-3">
                   <div class="me-auto p-2 bd-highlight align-self-center">

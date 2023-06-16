@@ -1,0 +1,11 @@
+<div class="h-100 p-5 bg-light border rounded-3">
+	<img src="${pageContext.request.contextPath}/assets/login.png" class="img-thumbnail img-fluid"  style="width: 50%;">
+	<hr>
+	<label>APELLIDO:</label>
+	<br>
+	<label>NOMBRE:</label> 
+	<br>	       		       		
+	<label>USUARIO:</label>
+	<br>	       		       		
+	<label>ROL:</label>
+</div>    

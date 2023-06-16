@@ -3,34 +3,28 @@
 <html>
 <head>
 <%@ include file="../common/Header.jspf" %>
+<%@ include file="../common/NavigatorVendedor.jspf" %>
 </head>
 
 <body>
-<%@ include file="../common/NavigatorVendedor.jspf" %>
 <div class="container-fluid">
-  
-    <div class="cuadro_uno justify-content-center">
-      <div class="d-flex col col-12 mh-2 justify-content-center p-2">
-        <div class="row w-auto justify-content-center">
-          <h1>Portal Vendedor</h1>
+
+	<div class="row align-items-md-stretch">
+
+        <div class="col-md-3 ">
+       		<%@ include file="../common/UserData.jspf" %>        
         </div>
-      </div>
-      
-      <div class="d-flex col col-12 mh-2 justify-content-center p-2">
-        <div class="row w-25 justify-content-center">
-        	<form  id="articulos.html" method="get">
-          		<input type="submit" class="btn btn-primary" value="Listado Articulos" name="btnRedirigir" formaction="articulos.html">
+        
+        <div class="col-md-9 ">
+            <div class="h-100 p-5 bg-light border rounded-3">
+        	<form  id="home-vendedor.html" method="post">
+        		<input type="submit" class="btn btn-primary" value="CLIENTES" name="btnRedirigir" formaction="clientes.html">
+          		<input type="submit" class="btn btn-primary" value="ARTICULO" name="btnRedirigir" formaction="articulos.html">
+        		<input type="submit" class="btn btn-primary" value="STOCK" name="btnRedirigir" formaction="stock.html">
+        		<input type="submit" class="btn btn-primary" value="VENTAS" name="btnRedirigir" formaction="ventas.html">          	
           	</form>
         </div>
-      </div>
-      <div class="d-flex col col-12 mh-2 justify-content-center p-2">
-        <div class="row w-25 justify-content-center">
-        	<form  id="listado_clientes.html" method="get">
- 				<input type="submit" class="btn btn-primary" value="Listado Clientes" name="btnRedirigir" formaction="listado_clientes.html">
- 			</form>
-        </div>
-      </div>      
-	</div>
+    </div>
 	
 </div>
 

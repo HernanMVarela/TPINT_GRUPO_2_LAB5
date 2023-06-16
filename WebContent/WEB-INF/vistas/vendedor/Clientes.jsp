@@ -2,22 +2,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<jsp:include page="../common/Header.jspf"></jsp:include>
-
-</head>
-
-
+<%@ include file="../common/Header.jspf" %>
+<%@ include file="../common/NavigatorVendedor.jspf" %>
 
 <script type="text/javascript">
 $(document).ready( function () {
     $('#tabla_clientes').DataTable();
 } );
 </script>
-<%@ include file="../common/Header.jspf" %>
-</head>
-    
+</head>    
 <body>
-<%@ include file="../common/NavigatorVendedor.jspf" %>
 
 <div class="container-fluid">
 	<div class="p-5 bg-light text-dark border rounded-3" style="width: 100%">

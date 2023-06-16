@@ -4,10 +4,10 @@
 <html>
 <head>
 <%@ include file="../common/Header.jspf"%>
-</head>
+<%@ include file="../common/NavigatorEmpty.jspf"%>
 
+</head>
 <body>
-	<%@ include file="../common/NavigatorVendedor.jspf"%>
 	<div class="container-fluid">
 		<form id="altaForm" method="post">
 			<div class="container">
@@ -15,7 +15,7 @@
 					<div class="container-fluid py-1">
 						<div>
 							<br>
-							<h1 style="text-align: center;">CREACION DE USUARIO</h1>
+							<h1 style="text-align: center;">REGISTRO DE USUARIO</h1>
 							<hr>
 							<div class="row align-items-md-stretch">
 
@@ -71,7 +71,9 @@
 								</div>
 
 								<div class="col-md-6" style="text-align: center;">
-									<img class="img-responsive p-3" style="width: 50%;" src="<c:url value="/assets/register.png"/>"/>
+									<img
+										src="${pageContext.request.contextPath}/assets/register.png"
+										class="img-responsive p-3" style="width: 50%;">
 									<h1>¡Oye!</h1>
 									<p>¿Ya tienes una cuenta? Haz click en el botón de abajo
 										para iniciar sesión.</p>

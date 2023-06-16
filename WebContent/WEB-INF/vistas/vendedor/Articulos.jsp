@@ -6,6 +6,7 @@
 
       <head>
         <%@ include file="../common/Header.jspf" %>
+        <%@ include file="../common/NavigatorVendedor.jspf" %>
 
           <script type="text/javascript">
             $(document).ready(function () {
@@ -35,7 +36,6 @@
       </head>
 
       <body>
-        <%@ include file="../common/NavigatorVendedor.jspf" %>
           <div class="container-fluid">
             <form action="articulos.html" method="post">
               <div class="p-5 bg-light border rounded-3" style="width: 100%">
@@ -113,7 +113,7 @@
               <div class="modal-content">
                 <form action="eliminar_articulo.html" method="post">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">MODIFICAR ARTICULO</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">¿DESEA ELIMINAR EL SIGUIENTE ARTICULO?</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">                  

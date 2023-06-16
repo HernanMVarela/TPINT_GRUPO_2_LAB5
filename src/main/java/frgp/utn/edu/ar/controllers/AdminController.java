@@ -38,13 +38,13 @@ public class AdminController {
 		return MV;
 	}
 	
-	// LISTA USERS | "listar-usuarios.html"
-	@RequestMapping("listar-usuarios.html")
+	// LISTA USERS | "reportes.html"
+	@RequestMapping("reportes.html")
 	public ModelAndView eventoRedireccionarListarUsuarios()
 	{
 		ModelAndView MV = new ModelAndView();
 		
-		MV.setViewName("admin/ListaUsuarios");
+		MV.setViewName("admin/Reportes");
 		return MV;
 	}
 }

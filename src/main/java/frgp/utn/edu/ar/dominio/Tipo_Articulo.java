@@ -16,8 +16,8 @@ public class Tipo_Articulo implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="ID_TIPOSART")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int ID;
 	
 	@Column(name="NOMBRE", nullable = false)
