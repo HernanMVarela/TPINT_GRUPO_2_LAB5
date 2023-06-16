@@ -116,24 +116,18 @@ public class VendedorController {
 		}		
 	}
 	
-	// ELIMINAR ARTICULO (BAJA LOGICA) | "/eliminar_articulo.html"
+	// ELIMINAR ARTICULO | "/eliminar_articulo.html"
 	@SuppressWarnings("finally")
 	@RequestMapping(value ="/eliminar_articulo.html" , method= { RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView eliminarArticulo(String nombre, String marca, String tipo, String precio_compra, String descripcion){
+	public ModelAndView eliminarArticulo(String nombreEliminar, String marcaEliminar, String tipoEliminar, String precio_compraEliminar, String descripcionEliminar){
 		ModelAndView MV = new ModelAndView();
 		
-		System.out.println(nombre);
-		System.out.println(marca);
-		System.out.println(tipo);
-		System.out.println(precio_compra);
-		System.out.println(descripcion);
-
 		Articulo x = new Articulo();
-		x.setNombre(nombre);
-		x.setPrecio_compra(Float.parseFloat(precio_compra));
-		x.setMarca(new Marca(marca));
-		x.setTipo(new Tipo_Articulo(tipo));
-		x.setDescripcion(descripcion);
+		x.setNombre(nombreEliminar);
+		x.setPrecio_compra(Float.parseFloat(precio_compraEliminar));
+		x.setMarca(new Marca(marcaEliminar));
+		x.setTipo(new Tipo_Articulo(tipoEliminar));
+		x.setDescripcion(descripcionEliminar);
 		x.setEstado(false);
 		
 		String Message="";

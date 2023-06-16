@@ -33,10 +33,8 @@
 							<th class="text-center" scope="col"> Tipo </th> 
 							<th class="text-center" scope="col"> Precio de venta </th> 
 							<th class="text-center" scope="col"> Descripcion </th>
-							<th class="text-center" scope="col"> Cantidad </th>
-							<th></th>  
-							<th ></th>
-							<th></th>
+							<th class="text-center" scope="col"> Stock </th>
+							<th></th> 
 						</tr>
 					</thead>
 					<tbody>
@@ -83,20 +81,27 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-       <div class="row align-items-md-stretch mt-1">
-           <div class="form-group col-md-9">
-               <label style="float: left">Articulo</label>
-               <select class="form-select">
-		           <option value="A">Tipo A</option>
-		           <option value="B">Tipo B</option>
-		           <option value="C">Tipo C</option>
+       <div class="row align-items-md-stretch">
+           <div class="form-group col-md-6">
+             <label style="float: left">ARTICULO</label>
+             <input id="nombre" name="nombre" class="form-control" readonly>
            </div>
-           <div class="form-group col-md-3">
-               <label style="float: left">Cantidad</label>
-               <input class="form-control" type="integer" name="cantidad">
+           <div class="form-group col-md-6">
+             <label style="float: left">Fecha de Ingreso</label>
+               <input class="form-control" type="date" name="date">
            </div>
-       </div>
-       <hr>
+         </div>        
+
+         <div class="row align-items-md-stretch mt-1">
+           <div class="form-group col-md-6">
+             <label style="float: left">Precio de compra</label>
+             <input id="precio_compra" type="number" name="precio_compra" class="form-control">
+           </div>
+           <div class="form-group col-md-6">
+             <label style="float: left">Cantidad</label>
+             <input id="cantidad" name="cantidad" type="number" class="form-control">
+           </div>
+         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">CANCELAR</button>

@@ -60,20 +60,19 @@
                           <th class="text-center" scope="col"> Tipo </th>
                           <th class="text-center" scope="col"> Precio de venta </th>
                           <th class="text-center" scope="col"> Descripcion </th>
-                          <th class="text-center" scope="col"> Estado </th>
                           <th></th>
                           <th></th>
                         </tr>
                       </thead>
                       <tbody>
                         <c:forEach items="${listaArticulos}" var="item">
+                          <c:if test="${item.estado eq true}">                        
                           <tr>
                             <td>${item.nombre} </td>
                             <td>${item.marca.nombre}</td>
                             <td>${item.tipo.nombre}</td>
                             <td>${item.precio_compra}</td>
                             <td>${item.descripcion}</td>
-                            <td>${item.estado}</td>
                             <td>
                               <button type="button" class="btn btn-success" data-bs-toggle="modal"
                                 data-bs-target="#modifyItemModal" 
@@ -88,15 +87,16 @@
                             </td>
                             <td>
                               <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                data-bs-target="#deleteItemModal"  onclick="abrirEliminarModal('${item.nombre}',
-                                                                                                '${item.marca.nombre}',
-                                                                                                '${item.descripcion}',
-                                                                                                '${item.tipo.nombre}',
-                                                                                                '${item.precio_compra}',
-                                                                                                '${item.estado}')">
+                                data-bs-target="#deleteItemModal" onclick="abrirEliminarModal('${item.nombre}',
+                                                                                              '${item.marca.nombre}',
+                                                                                              '${item.descripcion}',
+                                                                                              '${item.tipo.nombre}',
+                                                                                              '${item.precio_compra}',
+                                                                                              '${item.estado}')">
                                 ELIMINAR
                               </button>
                             </td>
+                          </c:if>
                         </c:forEach>
                       </tbody>
                     </table>
@@ -109,51 +109,50 @@
           <!-- Modal ELIMINAR ARTICULO -->
           <div class="modal fade" id="deleteItemModal" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <form action="eliminar_articulo.html" method="post">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">¿DESEA ELIMINAR EL SIGUIENTE ARTICULO?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">MODIFICAR ARTICULO</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
-                  <div class="modal-body">
-                    <div class="row d-flex align-items-center">
-                      <div class="col-md-4">
-                        <label>NOMBRE:</label>
-                      </div>
-                      <div class="col-md-8">
-                        <input id="nombreEliminar" class="form-control mt-1" readonly>
-                      </div>
-                      <div class="col-md-4">  
-                        <label>MARCA:</label>
-                      </div>
-                      <div class="col-md-8">
-                        <input id="marcaEliminar" class="form-control mt-1" readonly>
-                      </div>
-                      <div class="col-md-4">
-                        <label>DESCRIPCION:</label>
-                      </div>
-                      <div class="col-md-8">
-                        <input id="descripcionEliminar" class="form-control mt-1" readonly>
-                      </div>
-                      <div class="col-md-4">
-                        <label>TIPO:</label>
-                      </div>
-                      <div class="col-md-8">
-                        <input id="tipoEliminar" class="form-control mt-1" readonly>
-                      </div>
-                      <div class="col-md-4">
-                        <label>PRECIO:</label>
-                      </div>
-                      <div class="col-md-8">                     
-                        <input id="precio_compraEliminar" class="form-control mt-1" readonly>
-                      </div>
-                    </div>
-                    <br>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">CANCELAR</button>
-                   	  <input type="submit" class="btn btn-primary" name="btnAceptar" value="Aceptar">
-                    </div>
+                  <div class="modal-body">                  
+                  	 <div class="row d-flex align-items-center">
+	                      <div class="col-md-4">
+	                        <label>NOMBRE:</label>
+	                      </div>
+	                      <div class="col-md-8">
+	                        <input id="nombreEliminar" name="nombreEliminar" class="form-control mt-1" readonly>
+	                      </div>
+	                      <div class="col-md-4">  
+	                        <label>MARCA:</label>
+	                      </div>
+	                      <div class="col-md-8">
+	                        <input id="marcaEliminar" name="marcaEliminar" class="form-control mt-1" readonly>
+	                      </div>
+	                      <div class="col-md-4">
+	                        <label>DESCRIPCION:</label>
+	                      </div>
+	                      <div class="col-md-8">
+	                        <input id="descripcionEliminar" name="descripcionEliminar" class="form-control mt-1" id="textAreaExample1" readonly>
+	                      </div>
+	                      <div class="col-md-4">
+	                        <label>TIPO:</label>
+	                      </div>
+	                      <div class="col-md-8">
+	                        <input id="tipoEliminar" name="tipoEliminar" class="form-control mt-1" readonly>
+	                      </div>
+	                      <div class="col-md-4">
+	                        <label>PRECIO:</label>
+	                      </div>
+	                      <div class="col-md-8">                     
+	                        <input id="precio_compraEliminar" type="number" name="precio_compraEliminar" class="form-control mt-1" readonly>
+	                      </div>
+                      </div>                            
+                  </div>                   
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">CANCELAR</button>
+                    <input type="submit" class="btn btn-primary" name="btnAceptar" value="Aceptar">
                   </div>
                 </form>
               </div>
