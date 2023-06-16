@@ -8,15 +8,13 @@
 
 <body>
 <div class="container-fluid">
-
 	<div class="row align-items-md-stretch">
-
         <div class="col-md-3 ">
        		<%@ include file="../common/UserData.jspf" %>        
         </div>
         
         <div class="col-md-9 ">
-            <div class="h-100 p-5 bg-light border rounded-3">
+           <div class="h-100 p-5 bg-light border rounded-3">
         	<form  id="home-vendedor.html" method="post">
         		<input type="submit" class="btn btn-primary" value="CLIENTES" name="btnRedirigir" formaction="clientes.html">
           		<input type="submit" class="btn btn-primary" value="ARTICULO" name="btnRedirigir" formaction="articulos.html">
@@ -24,8 +22,7 @@
         		<input type="submit" class="btn btn-primary" value="VENTAS" name="btnRedirigir" formaction="ventas.html">          	
           	</form>
         </div>
-    </div>
-	
+    </div>	
 </div>
 
 </body>

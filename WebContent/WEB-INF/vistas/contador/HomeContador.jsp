@@ -16,7 +16,14 @@
 
 <body>
  <div class="container-fluid">
-            <form action="articulos.html" method="post">
+ 
+ <div class="row align-items-md-stretch">
+        <div class="col-md-3 ">
+       		<%@ include file="../common/UserData.jspf" %>        
+        </div>
+        
+        <div class="col-md-9 ">
+        	<form action="ventas.html" method="post">
               <div class="p-5 bg-light border rounded-3" style="width: 100%">
                 <div class="d-flex  align-content-center bd-highlight mb-3">
                   <div class="me-auto p-2 bd-highlight align-self-center">
@@ -37,7 +44,8 @@
 	                    <button type="button" class="btn btn-primary m-2">
 	                      CALCULAR
 	                    </button>
-                    </div>                    
+                    </div> 
+                    <h4 class="m-1">GANANCIAS DEL PERIODO: $$$$</h4>                   
                   </div>
                 </div>
 
@@ -71,10 +79,14 @@
 						<%}%>  	
                       </tbody>
                     </table>
+                    
                   </div>
                 </div>
               </div>
             </form>
-          </div>
+    </div>
+   </div>
+ </div>
+            
 </body>
 </html>
