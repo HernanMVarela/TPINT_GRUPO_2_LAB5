@@ -7,20 +7,23 @@ import frgp.utn.edu.ar.dominio.Articulo;
 
 public interface ArticuloDao {
 
-	//Alta de persona
-	public void insertarArticulo(Articulo nuevo);
+	//Alta de un articulo
+	public boolean insertarArticulo(Articulo nuevo);
 
-	//Obtiene una persona por dni
+	//Obtiene una articulo por nombre
 	public Articulo obtenerArticuloPorNombre(String nombre);
+	
+	//Verifica si existe el articulo
+	public boolean existeArticulo(String nombre);
 
-	//Obtiene todas las presonas
+	//Obtiene todos los articulo
 	public ArrayList<Articulo> obtenerArticulos();
 
-	//Elimina una presona a aprtir del dni
+	//Elimina un articulo a aprtir del nombre
 	public void eliminarArticulo(String nombre);
 
-	//Actualiza los datos de una persona
-	public void actualizarArticulo(Articulo modificar);
+	//Actualiza los datos de unaarticulo
+	public boolean actualizarArticulo(Articulo modificar);
 	
 
 }

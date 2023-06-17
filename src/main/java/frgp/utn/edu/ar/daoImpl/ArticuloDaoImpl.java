@@ -21,15 +21,25 @@ public class ArticuloDaoImpl implements ArticuloDao {
 
 	@Override
 	@Transactional(propagation=Propagation.REQUIRED)
-	public void insertarArticulo(Articulo nuevo) {
-		this.hibernateTemplate.save(nuevo);
-		
+	public boolean insertarArticulo(Articulo nuevo) {
+		try {
+			this.hibernateTemplate.save(nuevo);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	@Override
 	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
 	public Articulo obtenerArticuloPorNombre(String nombre) {
 		return this.hibernateTemplate.get(Articulo.class, nombre);
+	}
+	
+	@Override
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
+	public boolean existeArticulo(String nombre) {
+		return this.hibernateTemplate.get(Articulo.class, nombre) != null;
 	}
 
 	@Override
@@ -49,8 +59,13 @@ public class ArticuloDaoImpl implements ArticuloDao {
 
 	@Override
 	@Transactional(propagation=Propagation.REQUIRED)
-	public void actualizarArticulo(Articulo modificar) {
-		this.hibernateTemplate.update(modificar);
+	public boolean actualizarArticulo(Articulo modificar) {
+		try {
+			this.hibernateTemplate.update(modificar);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 

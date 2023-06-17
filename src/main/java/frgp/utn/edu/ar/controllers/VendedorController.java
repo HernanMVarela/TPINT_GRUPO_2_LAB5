@@ -67,12 +67,19 @@ public class VendedorController {
 		
 		try{
 			
-			service.insertarArticulo(x);
-			System.out.println("Articulo agregado");
+			if(service.insertarArticulo(x)) 
+			{
+				System.out.println("Articulo agregado");
+				Message = "Articulo agregado";
+			} else {
+				System.out.println("Articulo no agregado");
+				Message = "Articulo no agregado";
+			}
 		}
 		catch(Exception e)
 		{
-			System.out.println("Articulo no agregado");
+			/// REEMPLAZAR POR DIRECCIONAMIENTO A PAGINA DE ERROR
+			System.out.println(e.toString());
 		}
 		finally
 		{

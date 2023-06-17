@@ -26,9 +26,16 @@ public class ArticuloServicioImpl implements ArticuloServicio{
 	}
 
 	@Override
-	public void insertarArticulo(Articulo nuevo) {
-		 dataAccess.insertarArticulo(nuevo);
-		
+	public boolean insertarArticulo(Articulo nuevo) {
+		if(!dataAccess.existeArticulo(nuevo.getNombre())) {
+			return dataAccess.insertarArticulo(nuevo);
+		}else {
+			Articulo existente = dataAccess.obtenerArticuloPorNombre(nuevo.getNombre());
+			if(!existente.getEstado()) {
+				return dataAccess.actualizarArticulo(nuevo);
+			}
+		}
+		return false;	
 	}
 
 	@Override
@@ -38,9 +45,8 @@ public class ArticuloServicioImpl implements ArticuloServicio{
 	}
 
 	@Override
-	public void actualizarArticulo(Articulo modificar) {
-		dataAccess.actualizarArticulo(modificar);
-		
+	public boolean actualizarArticulo(Articulo modificar) {
+		return dataAccess.actualizarArticulo(modificar);
 	}
 
 }

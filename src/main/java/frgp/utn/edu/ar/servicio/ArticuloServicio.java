@@ -6,14 +6,14 @@ import frgp.utn.edu.ar.dominio.Articulo;
 
 public interface ArticuloServicio {
 
-	ArrayList<Articulo> obtenerArticulos();
+	public ArrayList<Articulo> obtenerArticulos();
 
-	Articulo obtenerUnRegistro(String nombre);
+	public Articulo obtenerUnRegistro(String nombre);
 
-	void insertarArticulo(Articulo nuevo);
+	public boolean insertarArticulo(Articulo nuevo);
 
-    void eliminarArticulo(String nombre) ;
+	public void eliminarArticulo(String nombre) ;
 
-	void actualizarArticulo(Articulo modificar);
+	public boolean actualizarArticulo(Articulo modificar);
 	
 }
