@@ -28,7 +28,12 @@ public class Tipo_Articulo implements Serializable {
 	{
 		this.nombre = nombre;
 	}
-
+	
+	@Override
+	public String toString() {
+		return ID + " - " + nombre;
+	}
+	
 	public int getID() {
 		return ID;
 	}

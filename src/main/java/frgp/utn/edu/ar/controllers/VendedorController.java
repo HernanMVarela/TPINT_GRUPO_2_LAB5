@@ -14,19 +14,27 @@ import frgp.utn.edu.ar.dominio.Articulo;
 import frgp.utn.edu.ar.dominio.Marca;
 import frgp.utn.edu.ar.dominio.Tipo_Articulo;
 import frgp.utn.edu.ar.servicio.ArticuloServicio;
+import frgp.utn.edu.ar.servicio.MarcaServicio;
+import frgp.utn.edu.ar.servicio.TipoArticuloServicio;
 
 @Controller
 public class VendedorController {
 
 	@Autowired
-	public  ArticuloServicio service;
+	public  ArticuloServicio serviceArticulo;
+	@Autowired
+	public  TipoArticuloServicio serviceTipoArticulo;
+	@Autowired
+	public  MarcaServicio serviceMarca;
 	
-	// NO TOCAR - Servlet
+	// NO TOCAR - Servlets
 	public void init(ServletConfig config) {
 		ApplicationContext ctx = WebApplicationContextUtils
 				.getRequiredWebApplicationContext(config.getServletContext());
 		
-		this.service = (ArticuloServicio) ctx.getBean("serviceBean");
+		this.serviceArticulo = (ArticuloServicio) ctx.getBean("ArticuloServiceBean");
+		this.serviceTipoArticulo = (TipoArticuloServicio) ctx.getBean("TipoArticuloServiceBean");
+		this.serviceMarca = (MarcaServicio) ctx.getBean("MarcaServiceBean");
 	}	
 	
 	//HOME VENDEDOR | vendedor.html"
@@ -44,116 +52,108 @@ public class VendedorController {
 	public ModelAndView eventoRedireccionarArticulos()
 	{
 		ModelAndView MV = new ModelAndView();
-		MV.addObject("listaArticulos",this.service.obtenerArticulos());
+		MV = cargadorDeListas(MV);
 		MV.setViewName("vendedor/Articulos");
 		return MV;
 	}
 	
 	// ALTA DE NUEVO ARTICULO | "/altaArticulo.html"
-	@SuppressWarnings("finally")
 	@RequestMapping(value ="/alta_articulo.html" , method= { RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView validarArticulo(String nombre, String marca, String tipo, String precio_venta, String descripcion){
+	public ModelAndView validarArticulo(String nombre, int marca, int tipo, String precio_venta, String descripcion){
 		ModelAndView MV = new ModelAndView();
 		
 		Articulo x = new Articulo();
 		x.setNombre(nombre);
 		x.setPrecio_venta(Float.parseFloat(precio_venta));
-		x.setMarca(new Marca(marca));
-		x.setTipo(new Tipo_Articulo(tipo));
+		x.setMarca(serviceMarca.obtenerUnRegistro(marca));
+		x.setTipo(serviceTipoArticulo.obtenerUnRegistro(tipo));
 		x.setDescripcion(descripcion);
 		x.setEstado(true);
-		
-		String Message="";
-		
+
+		String Message = "";
 		try{
+			Message = asignarMensaje(serviceArticulo.insertarArticulo(x));
 			
-			if(service.insertarArticulo(x)) 
-			{
-				System.out.println("Articulo agregado");
-				Message = "Articulo agregado";
-			} else {
-				System.out.println("Articulo no agregado");
-				Message = "Articulo no agregado";
-			}
+			MV.addObject("Mensaje", Message);
+			MV = cargadorDeListas(MV);
+			MV.setViewName("vendedor/Articulos"); 
+			return MV;
 		}
 		catch(Exception e)
 		{
 			/// REEMPLAZAR POR DIRECCIONAMIENTO A PAGINA DE ERROR
+			Message = e.toString();
 			System.out.println(e.toString());
-		}
-		finally
-		{
 			MV.addObject("Mensaje", Message);
-			MV.addObject("listaArticulos",this.service.obtenerArticulos());
-			MV.setViewName("vendedor/Articulos"); 
+			MV.setViewName("Error"); 
 			return MV;
-		}		
+		}
+
 	}
 	
 	// MODIFICAR ARTICULO | "/modificar_articulo.html"
-	@SuppressWarnings("finally")
 	@RequestMapping(value ="/modificar_articulo.html" , method= { RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView modificarArticulo(String nombre, String marca, String tipo, String precio_venta, String descripcion){
+	public ModelAndView modificarArticulo(String nombre, int marca, int tipo, String precio_venta, String descripcion){
 		ModelAndView MV = new ModelAndView();
 		
 		Articulo x = new Articulo();
 		x.setNombre(nombre);
 		x.setPrecio_venta(Float.parseFloat(precio_venta));
-		x.setMarca(new Marca(marca));
-		x.setTipo(new Tipo_Articulo(tipo));
+		x.setMarca(serviceMarca.obtenerUnRegistro(marca));
+		x.setTipo(serviceTipoArticulo.obtenerUnRegistro(tipo));
 		x.setDescripcion(descripcion);
 		x.setEstado(true);
 		
 		String Message="";
 		
 		try{
-			service.actualizarArticulo(x);
-			System.out.println("Articulo Actualizado");
+			Message = asignarMensaje(serviceArticulo.actualizarArticulo(x));
+			MV.addObject("Mensaje", Message);
+			MV = cargadorDeListas(MV);
+			MV.setViewName("vendedor/Articulos"); 
+			return MV;
 		}
 		catch(Exception e)
 		{
-			System.out.println("Articulo no Actualizado");
-		}
-		finally
-		{
+			Message = e.toString();
+			System.out.println(e.toString());
 			MV.addObject("Mensaje", Message);
-			MV.addObject("listaArticulos",this.service.obtenerArticulos());
-			MV.setViewName("vendedor/Articulos"); 
+			MV.setViewName("Error"); 
 			return MV;
-		}		
+		}	
 	}
 	
 	// ELIMINAR ARTICULO | "/eliminar_articulo.html"
-	@SuppressWarnings("finally")
 	@RequestMapping(value ="/eliminar_articulo.html" , method= { RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView eliminarArticulo(String nombreEliminar, String marcaEliminar, String tipoEliminar, String precio_ventaEliminar, String descripcionEliminar){
+	public ModelAndView eliminarArticulo(String nombreEliminar, int marcaEliminar, int tipoEliminar, String precio_ventaEliminar, String descripcionEliminar){
 		ModelAndView MV = new ModelAndView();
 		
 		Articulo x = new Articulo();
 		x.setNombre(nombreEliminar);
 		x.setPrecio_venta(Float.parseFloat(precio_ventaEliminar));
-		x.setMarca(new Marca(marcaEliminar));
-		x.setTipo(new Tipo_Articulo(tipoEliminar));
+		x.setMarca(serviceMarca.obtenerUnRegistro(marcaEliminar));
+		x.setTipo(serviceTipoArticulo.obtenerUnRegistro(tipoEliminar));
 		x.setDescripcion(descripcionEliminar);
 		x.setEstado(false);
 		
 		String Message="";
 		
 		try{
-			service.actualizarArticulo(x);
-			System.out.println("Articulo Eliminado");
+			
+			Message = asignarMensaje(serviceArticulo.actualizarArticulo(x));
+			MV.addObject("Mensaje", Message);
+			MV = cargadorDeListas(MV);
+			MV.setViewName("vendedor/Articulos"); 
+			return MV;
 		}
 		catch(Exception e)
 		{
-			System.out.println("Articulo no eliminado");
-		}
-		finally
-		{
+			Message = e.toString();
+			System.out.println(e.toString());
 			MV.addObject("Mensaje", Message);
-			MV.addObject("listaArticulos",this.service.obtenerArticulos());
-			MV.setViewName("vendedor/Articulos"); 
+			MV.setViewName("Error"); 
 			return MV;
-		}		
+		}	
 	}
 	
 	// Clientes | "clientes.html"
@@ -185,4 +185,55 @@ public class VendedorController {
 		MV.setViewName("vendedor/Ventas");
 		return MV;
 	}	
+	
+	
+	/// METODOS COMUNES
+	private String asignarMensaje(String error) {
+		if (error.equals("AGREGADO")) {
+			System.out.println("Articulo agregado");
+			return "Articulo agregado";
+		}
+		if (error.equals("MODIFICADO")) {
+			System.out.println("El articulo fue modificado");
+			return "El articulo fue modificado";
+		}
+		if (error.equals("NO MODIFICADO")) {
+			System.out.println("El articulo no fue modificado");
+			return "El articulo no fue modificado";
+		}
+		if (error.equals("ACTIVADO")) {
+			System.out.println("Articulo re-activado");
+			return "Articulo re-activado";
+		}
+		if (error.equals("NO AGREGADO")) {
+			System.out.println("Articulo no agregado");
+			return "Articulo no agregado";
+		}
+		if (error.equals("ELIMINADO")) {
+			System.out.println("Articulo eliminado");
+			return "Articulo eliminado";
+		}
+		if (error.equals("NO ELIMINADO")) {
+			System.out.println("Articulo no fue eliminado");
+			return "Articulo no fue eliminado";
+		}
+		if (error.equals("EXISTE")) {
+			System.out.println("El articulo ya existe");
+			return "El articulo ya existe";
+		}
+		if (error.equals("ERROR")) {
+			System.out.println("REDIRECCIONAR A ERROR");
+			return "REDIRECCIONAR A ERROR";
+		}
+		return "ERROR";
+	}
+	
+	private ModelAndView cargadorDeListas(ModelAndView MV) 
+	{
+		MV.addObject("listaArticulos",this.serviceArticulo.obtenerArticulos());
+		MV.addObject("listaTipoArticulos",this.serviceTipoArticulo.obtenerTiposDeArticulo());
+		MV.addObject("listaMarcas",this.serviceMarca.obtenerMarcas());
+		return MV;
+	}
+	
 }

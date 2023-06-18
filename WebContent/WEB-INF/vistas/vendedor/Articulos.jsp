@@ -69,17 +69,17 @@
                           <c:if test="${item.estado eq true}">                        
                           <tr>
                             <td>${item.nombre} </td>
-                            <td>${item.marca.nombre}</td>
-                            <td>${item.tipo.nombre}</td>
+                            <td>${item.marca}</td>
+                            <td>${item.tipo}</td>
                             <td>${item.precio_venta}</td>
                             <td>${item.descripcion}</td>
                             <td>
                               <button type="button" class="btn btn-success" data-bs-toggle="modal"
                                 data-bs-target="#modifyItemModal" 
                                 onclick="abrirModificarModal('${item.nombre}',
-                                                             '${item.marca.nombre}',
+                                                             '${item.marca}',
                                                              '${item.descripcion}',
-                                                             '${item.tipo.nombre}',
+                                                             '${item.tipo}',
                                                              '${item.precio_venta}',
                                                              '${item.estado}')">
                                 MODIFICAR
@@ -88,9 +88,9 @@
                             <td>
                               <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                 data-bs-target="#deleteItemModal" onclick="abrirEliminarModal('${item.nombre}',
-                                                                                              '${item.marca.nombre}',
+                                                                                              '${item.marca}',
                                                                                               '${item.descripcion}',
-                                                                                              '${item.tipo.nombre}',
+                                                                                              '${item.tipo}',
                                                                                               '${item.precio_venta}',
                                                                                               '${item.estado}')">
                                 ELIMINAR
@@ -133,7 +133,12 @@
 	                        <label>MARCA:</label>
 	                      </div>
 	                      <div class="col-md-8">
-	                        <input id="marcaEliminar" name="marcaEliminar" class="form-control mt-1" readonly>
+		                      <select class="form-select" name="marcaEliminar">
+							    <c:forEach items="${listaMarcas}" var="Marca">
+							        <option id="${Marca.ID}" value="${Marca.ID}">${Marca.nombre}</option>
+							    </c:forEach>
+							  </select>
+	                          <input id="marcaEliminar" name="marcaEliminar" class="form-control mt-1" readonly>
 	                      </div>
 	                      <div class="col-md-4">
 	                        <label>DESCRIPCION:</label>
@@ -145,7 +150,11 @@
 	                        <label>TIPO:</label>
 	                      </div>
 	                      <div class="col-md-8">
-	                        <input id="tipoEliminar" name="tipoEliminar" class="form-control mt-1" readonly>
+	                      <select class="form-select" name="tipoEliminar">
+						    <c:forEach items="${listaTipoArticulos}" var="TipoArticulos">
+						        <option id="${TipoArticulos.ID}" value="${TipoArticulos.ID}">${TipoArticulos.nombre}</option>
+						    </c:forEach>
+						  </select>
 	                      </div>
 	                      <div class="col-md-4">
 	                        <label>PRECIO:</label>
@@ -182,7 +191,11 @@
                       </div>
                       <div class="form-group col-md-6">
                         <label style="float: left">Marca</label>
-                        <input id="marca" name="marca" class="form-control">
+                        <select class="form-select" name="marca">
+						    <c:forEach items="${listaMarcas}" var="Marca">
+						        <option id="${Marca.ID}" value="${Marca.ID}">${Marca.nombre}</option>
+						    </c:forEach>
+						  </select>
                       </div>
                     </div>
 
@@ -197,7 +210,11 @@
                     <div class="row align-items-md-stretch mt-1">
                       <div class="form-group col-md-6">
                         <label style="float: left">Tipo</label>
-                        <input id="tipo" name="tipo" class="form-control">
+                         <select class="form-select" name="tipo">
+						    <c:forEach items="${listaTipoArticulos}" var="TipoArticulos">
+						        <option id="${TipoArticulos.ID}" value="${TipoArticulos.ID}">${TipoArticulos.nombre}</option>
+						    </c:forEach>
+						</select>
                       </div>
                       <div class="form-group col-md-6">
                         <label style="float: left">Precio de venta</label>
@@ -233,7 +250,11 @@
                       </div>
                       <div class="form-group col-md-6">
                         <label style="float: left">Marca</label>
-                        <input name="marca" class="form-control" placeholder="Ingrese marca">
+                        <select class="form-select" name="marca">
+						    <c:forEach items="${listaMarcas}" var="Marca">
+						        <option id="${Marca.ID}" value="${Marca.ID}">${Marca.nombre}</option>
+						    </c:forEach>
+						  </select>
                       </div>
                     </div>
 
@@ -248,7 +269,11 @@
                     <div class="row align-items-md-stretch mt-1">
                       <div class="form-group col-md-6">
                         <label style="float: left">Tipo</label>
-                        <input name="tipo" class="form-control" placeholder="Ingrese tipo">
+                        <select class="form-select" name="tipo">
+						    <c:forEach items="${listaTipoArticulos}" var="TipoArticulos">
+						        <option id="${TipoArticulos.ID}" value="${TipoArticulos.ID}">${TipoArticulos.nombre}</option>
+						    </c:forEach>
+						</select>
                       </div>
                       <div class="form-group col-md-6">
                         <label style="float: left">Precio de venta</label>

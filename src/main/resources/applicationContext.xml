@@ -21,15 +21,32 @@
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	
 	
-
 	<!-- CREO EL SERVICIO PARA Articulo -->
-	<bean id="serviceBean" class="frgp.utn.edu.ar.servicioImpl.ArticuloServicioImpl">
-		<property name="dataAccess" ref="dataAccessBean"></property>
+	<bean id="ArticuloServiceBean" class="frgp.utn.edu.ar.servicioImpl.ArticuloServicioImpl">
+		<property name="dataAccess" ref="ArticuloDABean"></property>
+	</bean>
+	<!-- EL SERVICIO NECESITA EL DAO  -->
+	<bean id="ArticuloDABean" class="frgp.utn.edu.ar.daoImpl.ArticuloDaoImpl" 
+		scope="singleton"> 
+		<property name="sessionFactory" ref="sessionFactoryBean"></property> 
 	</bean>
 	
-
+	<!-- CREO EL SERVICIO PARA Tipo_Articulo -->
+	<bean id="TipoArticuloServiceBean" class="frgp.utn.edu.ar.servicioImpl.TipoArticuloServicioImpl">
+		<property name="dataAccess" ref="TipoArticuloDABean"></property>
+	</bean>
 	<!-- EL SERVICIO NECESITA EL DAO  -->
-	<bean id="dataAccessBean" class="frgp.utn.edu.ar.daoImpl.ArticuloDaoImpl" 
+	<bean id="TipoArticuloDABean" class="frgp.utn.edu.ar.daoImpl.TipoArticuloDaoImpl" 
+		scope="singleton"> 
+		<property name="sessionFactory" ref="sessionFactoryBean"></property> 
+	</bean>
+	
+	<!-- CREO EL SERVICIO PARA MARCA -->
+	<bean id="MarcaServiceBean" class="frgp.utn.edu.ar.servicioImpl.MarcaServicioImpl">
+		<property name="dataAccess" ref="MarcaDABean"></property>
+	</bean>
+	<!-- EL SERVICIO NECESITA EL DAO  -->
+	<bean id="MarcaDABean" class="frgp.utn.edu.ar.daoImpl.MarcaDaoImpl" 
 		scope="singleton"> 
 		<property name="sessionFactory" ref="sessionFactoryBean"></property> 
 	</bean>
@@ -77,8 +94,5 @@
 			</props>
 		</property>
 	</bean>
-	
-
-	
 	
 </beans>

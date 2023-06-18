@@ -29,6 +29,11 @@ public class Marca implements Serializable {
 		this.nombre=nombre;
 	}
 	
+	@Override
+	public String toString() {
+		return ID + " - " + nombre;
+	}
+	
 	public int getID() {
 		return ID;
 	}

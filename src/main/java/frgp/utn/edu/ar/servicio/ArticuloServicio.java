@@ -10,10 +10,10 @@ public interface ArticuloServicio {
 
 	public Articulo obtenerUnRegistro(String nombre);
 
-	public boolean insertarArticulo(Articulo nuevo);
+	public String insertarArticulo(Articulo nuevo);
 
 	public void eliminarArticulo(String nombre) ;
 
-	public boolean actualizarArticulo(Articulo modificar);
+	public String actualizarArticulo(Articulo modificar);
 	
 }
