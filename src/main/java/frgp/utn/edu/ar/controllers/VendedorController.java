@@ -1,5 +1,7 @@
 package frgp.utn.edu.ar.controllers;
 
+import java.sql.Date;
+
 import javax.servlet.ServletConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -12,9 +14,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import frgp.utn.edu.ar.dominio.Articulo;
 import frgp.utn.edu.ar.dominio.Marca;
+import frgp.utn.edu.ar.dominio.Stock;
 import frgp.utn.edu.ar.dominio.Tipo_Articulo;
 import frgp.utn.edu.ar.servicio.ArticuloServicio;
 import frgp.utn.edu.ar.servicio.MarcaServicio;
+import frgp.utn.edu.ar.servicio.StockServicio;
 import frgp.utn.edu.ar.servicio.TipoArticuloServicio;
 
 @Controller
@@ -26,6 +30,8 @@ public class VendedorController {
 	public  TipoArticuloServicio serviceTipoArticulo;
 	@Autowired
 	public  MarcaServicio serviceMarca;
+	@Autowired
+	public  StockServicio serviceStock;
 	
 	// NO TOCAR - Servlets
 	public void init(ServletConfig config) {
@@ -35,6 +41,7 @@ public class VendedorController {
 		this.serviceArticulo = (ArticuloServicio) ctx.getBean("ArticuloServiceBean");
 		this.serviceTipoArticulo = (TipoArticuloServicio) ctx.getBean("TipoArticuloServiceBean");
 		this.serviceMarca = (MarcaServicio) ctx.getBean("MarcaServiceBean");
+		this.serviceStock = (StockServicio) ctx.getBean("StockServiceBean");
 	}	
 	
 	//HOME VENDEDOR | vendedor.html"
@@ -171,10 +178,41 @@ public class VendedorController {
 	public ModelAndView eventoRedireccionarStock()
 	{
 		ModelAndView MV = new ModelAndView();
-		
+		MV = cargadorDeListas(MV);
 		MV.setViewName("vendedor/Stock");
 		return MV;
 	}
+	
+	// Ingreso de Stock | "/ingreso_stock.html"
+		@RequestMapping(value ="/ingreso_stock.html" , method= { RequestMethod.GET, RequestMethod.POST})
+		public ModelAndView validarStock(String art, Date date, String cantidad, String precio_compra){
+			ModelAndView MV = new ModelAndView();
+			
+			Stock x = new Stock();
+			x.setArticulo(serviceArticulo.obtenerUnRegistro(art));
+			x.setCantidad(Integer.parseInt(cantidad));
+			x.setPrecio_compra(Float.parseFloat(precio_compra));
+			x.setFecha(date);
+			
+			String Message = "";
+			try{
+				Message = asignarMensaje(serviceStock.ingresarStock(x));
+				MV.addObject("Mensaje", Message);
+				MV = cargadorDeListas(MV);
+				MV.setViewName("vendedor/Stock"); 
+				return MV;
+			}
+			catch(Exception e)
+			{
+				/// REEMPLAZAR POR DIRECCIONAMIENTO A PAGINA DE ERROR
+				Message = e.toString();
+				System.out.println(e.toString());
+				MV.addObject("Mensaje", Message);
+				MV.setViewName("Error"); 
+				return MV;
+			}
+
+		}
 	
 	// Clientes | "ventas.html"
 	@RequestMapping("ventas.html")
@@ -233,6 +271,7 @@ public class VendedorController {
 		MV.addObject("listaArticulos",this.serviceArticulo.obtenerArticulos());
 		MV.addObject("listaTipoArticulos",this.serviceTipoArticulo.obtenerTiposDeArticulo());
 		MV.addObject("listaMarcas",this.serviceMarca.obtenerMarcas());
+		MV.addObject("listaStock",this.serviceStock.obtenerStock());
 		return MV;
 	}
 	

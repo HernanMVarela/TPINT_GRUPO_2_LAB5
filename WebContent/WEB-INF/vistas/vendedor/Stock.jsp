@@ -25,47 +25,35 @@
                 <div class="row mx-2 d-flex flex-wrap align-middle justify-content-evenly">
                   <div class="col-md-auto table-responsive w-100">
                     <table id="tabla_stock" class="table table-hover text-center">
-			  		<thead>
-						<tr>
-							<th class="text-center" scope="col"> Articulo </th>
-							<th class="text-center" scope="col"> Marca </th>
-							<th class="text-center" scope="col"> Tipo </th> 
-							<th class="text-center" scope="col"> Precio de venta </th> 
-							<th class="text-center" scope="col"> Descripcion </th>
-							<th class="text-center" scope="col"> Stock </th>
-							<th></th> 
-						</tr>
-					</thead>
-					<tbody>
-						<%for (int x=0; x<5; x++){%>
-							<tr>
-							<td>
-								<%= "Articulo " + (x+1) %>
-							</td>
-							<td> 
-								<%= "Marca " + (x+10) %>
-							</td> 
-							<td> 
-								<%= "Tipo " + x*3 %>
-							</td> 
-							<td> 
-								<%= "$" + x*1000 %>
-							</td>
-							<td> 
-								<%= "Este es el articulo " + (x+1) %>
-							</td>						
-							<td> 
-								<%= (x+1) %>
-							</td>
-							<td> 
-								<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addStockModal">
-			                      INGRESAR MERCADERIA
-			                    </button>
-							</td>
-						<%}%>  					
-					   </tbody>
+                      <thead>
+                        <tr>
+                          <th class="text-center" scope="col"> Articulo </th>
+                          <th class="text-center" scope="col"> Marca </th>
+                          <th class="text-center" scope="col"> Tipo </th>
+                          <th class="text-center" scope="col"> Descripcion </th>
+                          <th class="text-center" scope="col"> Cantidad </th>
+                          <th></th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <c:forEach items="${listaArticulos}" var="item">
+                          <c:if test="${item.estado eq true}">                        
+                          <tr>
+                            <td>${item.nombre} </td>
+                            <td>${item.marca}</td>
+                            <td>${item.tipo}</td>
+                            <td>${item.descripcion}</td>
+                            <td></td>
+                            <td></td>
+                          </c:if>
+                        </c:forEach>
+                      </tbody>
                     </table>
                   </div>
+                	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addStockModal">
+                      				Nuevo Ingreso
+                    			</button>
                 </div>
               </div>
             </form>
@@ -75,16 +63,21 @@
 <div class="modal fade" id="addStockModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
+     <form action="ingreso_stock.html" method="post">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">AGREGAR STOCK</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Agregar Stock</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
        <div class="row align-items-md-stretch">
            <div class="form-group col-md-6">
-             <label style="float: left">ARTICULO</label>
-             <input id="nombre" name="nombre" class="form-control" readonly>
-           </div>
+                        <label style="float: left">Articulo</label>
+                        <select class="form-select" name="art">
+						    <c:forEach items="${listaArticulos}" var="Articulo">
+						        <option id="${Articulo.nombre}" value="${Articulo.nombre}">${Articulo.nombre}</option>
+						    </c:forEach>
+						  </select>
+                      </div>
            <div class="form-group col-md-6">
              <label style="float: left">Fecha de Ingreso</label>
                <input class="form-control" type="date" name="date">
@@ -93,7 +86,7 @@
 
          <div class="row align-items-md-stretch mt-1">
            <div class="form-group col-md-6">
-             <label style="float: left">Precio de compra</label>
+             <label style="float: left">Precio de Compra</label>
              <input id="precio_compra" type="number" name="precio_compra" class="form-control">
            </div>
            <div class="form-group col-md-6">
@@ -103,9 +96,10 @@
          </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">CANCELAR</button>
-        <button type="button" class="btn btn-success">CONFIRMAR</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+         <input type="submit" class="btn btn-primary" name="btnAceptar" value="Aceptar">
       </div>
+     </form>
     </div>
   </div>
 </div>      

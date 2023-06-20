@@ -50,6 +50,16 @@
 		scope="singleton"> 
 		<property name="sessionFactory" ref="sessionFactoryBean"></property> 
 	</bean>
+	
+	<!-- CREO EL SERVICIO PARA Stock -->
+	<bean id="StockServiceBean" class="frgp.utn.edu.ar.servicioImpl.StockServicioImpl">
+		<property name="dataAccess" ref="StockDABean"></property>
+	</bean>
+	<!-- EL SERVICIO NECESITA EL StockDAO  -->
+	<bean id="StockDABean" class="frgp.utn.edu.ar.daoImpl.StockDaoImpl" 
+		scope="singleton"> 
+		<property name="sessionFactory" ref="sessionFactoryBean"></property> 
+	</bean>
 
 	<!-- Define un dataSource, en este bean se configura los parametros de la db -->
 	<bean id="dataSourceBean"
