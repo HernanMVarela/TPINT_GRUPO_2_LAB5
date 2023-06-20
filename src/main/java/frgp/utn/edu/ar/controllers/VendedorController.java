@@ -59,7 +59,7 @@ public class VendedorController {
 	public ModelAndView eventoRedireccionarArticulos()
 	{
 		ModelAndView MV = new ModelAndView();
-		MV = cargadorDeListas(MV);
+		MV = cargadorDeListasArticulos(MV);
 		MV.setViewName("vendedor/Articulos");
 		return MV;
 	}
@@ -79,10 +79,10 @@ public class VendedorController {
 
 		String Message = "";
 		try{
-			Message = asignarMensaje(serviceArticulo.insertarArticulo(x));
+			Message = asignarMensajeArticulos(serviceArticulo.insertarArticulo(x));
 			
 			MV.addObject("Mensaje", Message);
-			MV = cargadorDeListas(MV);
+			MV = cargadorDeListasArticulos(MV);
 			MV.setViewName("vendedor/Articulos"); 
 			return MV;
 		}
@@ -114,9 +114,9 @@ public class VendedorController {
 		String Message="";
 		
 		try{
-			Message = asignarMensaje(serviceArticulo.actualizarArticulo(x));
+			Message = asignarMensajeArticulos(serviceArticulo.actualizarArticulo(x));
 			MV.addObject("Mensaje", Message);
-			MV = cargadorDeListas(MV);
+			MV = cargadorDeListasArticulos(MV);
 			MV.setViewName("vendedor/Articulos"); 
 			return MV;
 		}
@@ -147,9 +147,9 @@ public class VendedorController {
 		
 		try{
 			
-			Message = asignarMensaje(serviceArticulo.actualizarArticulo(x));
+			Message = asignarMensajeArticulos(serviceArticulo.actualizarArticulo(x));
 			MV.addObject("Mensaje", Message);
-			MV = cargadorDeListas(MV);
+			MV = cargadorDeListasArticulos(MV);
 			MV.setViewName("vendedor/Articulos"); 
 			return MV;
 		}
@@ -178,7 +178,7 @@ public class VendedorController {
 	public ModelAndView eventoRedireccionarStock()
 	{
 		ModelAndView MV = new ModelAndView();
-		MV = cargadorDeListas(MV);
+		MV = cargadorDeListasStocks(MV);
 		MV.setViewName("vendedor/Stock");
 		return MV;
 	}
@@ -191,14 +191,14 @@ public class VendedorController {
 			Stock x = new Stock();
 			x.setArticulo(serviceArticulo.obtenerUnRegistro(art));
 			x.setCantidad(Integer.parseInt(cantidad));
-			x.setPrecio_compra(Float.parseFloat(precio_compra));
-			x.setFecha(date);
+			x.setPreciocompra(Float.parseFloat(precio_compra));
+			x.setFechaingreso(date);
 			
 			String Message = "";
 			try{
-				Message = asignarMensaje(serviceStock.ingresarStock(x));
+				Message = asignarMensajeStocks(serviceStock.ingresarStock(x));
 				MV.addObject("Mensaje", Message);
-				MV = cargadorDeListas(MV);
+				MV = cargadorDeListasStocks(MV);
 				MV.setViewName("vendedor/Stock"); 
 				return MV;
 			}
@@ -211,7 +211,6 @@ public class VendedorController {
 				MV.setViewName("Error"); 
 				return MV;
 			}
-
 		}
 	
 	// Clientes | "ventas.html"
@@ -224,54 +223,64 @@ public class VendedorController {
 		return MV;
 	}	
 	
-	
 	/// METODOS COMUNES
-	private String asignarMensaje(String error) {
+	private String asignarMensajeArticulos(String error) {
 		if (error.equals("AGREGADO")) {
-			System.out.println("Articulo agregado");
 			return "Articulo agregado";
 		}
 		if (error.equals("MODIFICADO")) {
-			System.out.println("El articulo fue modificado");
 			return "El articulo fue modificado";
 		}
 		if (error.equals("NO MODIFICADO")) {
-			System.out.println("El articulo no fue modificado");
 			return "El articulo no fue modificado";
 		}
 		if (error.equals("ACTIVADO")) {
-			System.out.println("Articulo re-activado");
 			return "Articulo re-activado";
 		}
 		if (error.equals("NO AGREGADO")) {
-			System.out.println("Articulo no agregado");
 			return "Articulo no agregado";
 		}
 		if (error.equals("ELIMINADO")) {
-			System.out.println("Articulo eliminado");
 			return "Articulo eliminado";
 		}
 		if (error.equals("NO ELIMINADO")) {
-			System.out.println("Articulo no fue eliminado");
 			return "Articulo no fue eliminado";
 		}
 		if (error.equals("EXISTE")) {
-			System.out.println("El articulo ya existe");
 			return "El articulo ya existe";
 		}
 		if (error.equals("ERROR")) {
-			System.out.println("REDIRECCIONAR A ERROR");
 			return "REDIRECCIONAR A ERROR";
 		}
 		return "ERROR";
 	}
 	
-	private ModelAndView cargadorDeListas(ModelAndView MV) 
+	private String asignarMensajeStocks(String error) {
+		if (error.equals("AGREGADO")) {
+			return "Stock agregado";
+		}
+		if (error.equals("NO AGREGADO")) {
+			return "Articulo no agregado";
+		}
+		if (error.equals("ERROR")) {
+			return "ERROR";
+		}
+		return "ERROR";
+	}
+	
+	private ModelAndView cargadorDeListasArticulos(ModelAndView MV) 
 	{
 		MV.addObject("listaArticulos",this.serviceArticulo.obtenerArticulos());
 		MV.addObject("listaTipoArticulos",this.serviceTipoArticulo.obtenerTiposDeArticulo());
 		MV.addObject("listaMarcas",this.serviceMarca.obtenerMarcas());
 		MV.addObject("listaStock",this.serviceStock.obtenerStock());
+		return MV;
+	}
+	
+	private ModelAndView cargadorDeListasStocks(ModelAndView MV) 
+	{
+		MV.addObject("listaArticulos",this.serviceArticulo.obtenerArticulos());
+		MV.addObject("listaStocks",this.serviceStock.obtenerStock());
 		return MV;
 	}
 	

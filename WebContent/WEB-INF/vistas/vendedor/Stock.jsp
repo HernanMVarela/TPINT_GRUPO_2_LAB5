@@ -27,25 +27,24 @@
                     <table id="tabla_stock" class="table table-hover text-center">
                       <thead>
                         <tr>
-                          <th class="text-center" scope="col"> Articulo </th>
-                          <th class="text-center" scope="col"> Marca </th>
-                          <th class="text-center" scope="col"> Tipo </th>
-                          <th class="text-center" scope="col"> Descripcion </th>
+                          <th class="text-center" scope="col"> ID </th>
+                          <th class="text-center" scope="col"> Artículo </th>
+                          <th class="text-center" scope="col"> Fecha de ingreso </th>
                           <th class="text-center" scope="col"> Cantidad </th>
+                          <th class="text-center" scope="col"> Precio de compra </th>
                           <th></th>
                           <th></th>
                         </tr>
                       </thead>
                       <tbody>
-                        <c:forEach items="${listaArticulos}" var="item">
-                          <c:if test="${item.estado eq true}">                        
+                        <c:forEach items="${listaStocks}" var="item">
+                          <c:if test="${item.cantidad != 0}">                        
                           <tr>
-                            <td>${item.nombre} </td>
-                            <td>${item.marca}</td>
-                            <td>${item.tipo}</td>
-                            <td>${item.descripcion}</td>
-                            <td></td>
-                            <td></td>
+                            <td>${item.ID} </td>
+                            <td>${item.articulo}</td>
+                            <td>${item.fechaingreso}</td>
+                            <td>${item.cantidad}</td>
+                            <td>${item.preciocompra}</td>
                           </c:if>
                         </c:forEach>
                       </tbody>
@@ -57,6 +56,11 @@
                 </div>
               </div>
             </form>
+            <div class="row align-items-md-stretch">
+             <div class="d-flex justify-content-center" style="text-align: center;">
+                	<h3 class="w-auto">${Mensaje}</h3>	
+             </div>
+             </div>
           </div>
 
 <!-- Modal AGREGAR Stock -->

@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "DETALLES_VENTA")
+@Table(name = "STOCKS")
 public class Stock implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -29,25 +29,25 @@ public class Stock implements Serializable {
 	private Articulo articulo;
 	
 	@Column(name="FECHA_INGRESO", nullable = true)
-	private Date fecha_ingreso;
+	private Date fechaingreso;
 	
 	@Column(name="CANTIDAD", nullable = true)
 	private int cantidad;
 	
 	@Column(name="PRECIO_COMPRA", nullable = true)
-	private float precio_compra;
+	private float preciocompra;
 	
 	public Stock() {}
-	public Stock(Articulo articulo, Date fecha, int cantidad, float precio_compra) {
+	public Stock(Articulo articulo, Date fechaingreso, int cantidad, float preciocompra) {
 		this.articulo=articulo;
-		this.fecha_ingreso=fecha;
+		this.fechaingreso=fechaingreso;
 		this.cantidad=cantidad;
-		this.precio_compra=precio_compra;
+		this.preciocompra=preciocompra;
 	}
 	@Override
 	public String toString() {
-		return "Stock [ID=" + ID + ", articulo=" + articulo + ", fecha=" + fecha_ingreso + ", cantidad=" + cantidad
-				+ ", precio_compra=" + precio_compra + "]";
+		return "Stock [ID=" + ID + ", articulo=" + articulo + ", fecha=" + fechaingreso + ", cantidad=" + cantidad
+				+ ", preciocompra=" + preciocompra + "]";
 	}
 	public int getID() {
 		return ID;
@@ -61,11 +61,11 @@ public class Stock implements Serializable {
 	public void setArticulo(Articulo articulo) {
 		this.articulo = articulo;
 	}
-	public Date getFecha() {
-		return fecha_ingreso;
+	public Date getFechaingreso() {
+		return fechaingreso;
 	}
-	public void setFecha(Date fecha) {
-		this.fecha_ingreso = fecha;
+	public void setFechaingreso(Date fechaingreso) {
+		this.fechaingreso = fechaingreso;
 	}
 	public int getCantidad() {
 		return cantidad;
@@ -73,11 +73,11 @@ public class Stock implements Serializable {
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
-	public float getPrecio_compra() {
-		return precio_compra;
+	public float getPreciocompra() {
+		return preciocompra;
 	}
-	public void setPrecio_compra(float precio_compra) {
-		this.precio_compra = precio_compra;
+	public void setPreciocompra(float preciocompra) {
+		this.preciocompra = preciocompra;
 	}
 
 }

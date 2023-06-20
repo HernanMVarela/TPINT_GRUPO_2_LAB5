@@ -40,8 +40,7 @@ public class Articulo implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Articulo [nombre=" + nombre + ", descripcion=" + descripcion + ", marca=" + marca + ", tipo=" + tipo
-				+ ", precio_ventaa=" + precio_venta + "]";
+		return nombre;
 	}
 	
 	public Boolean getEstado() {
