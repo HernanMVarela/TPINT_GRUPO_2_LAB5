@@ -118,6 +118,7 @@ $(document).ready( function () {
 <div class="modal fade" id="modifyClientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
+    <form action="modificar_cliente.html" method="post">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">MODIFICAR CLIENTE</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -126,11 +127,11 @@ $(document).ready( function () {
        <div class="row align-items-md-stretch">
      	   <div class="form-group col-md-4">
                <label style="float: left">Apellido</label>
-               <input class="form-control" placeholder="Ingrese apellido">
+               <input class="form-control" placeholder="Ingrese apellido" required>
            </div>
            <div class="form-group col-md-4">
                <label style="float: left">Nombre</label>
-               <input class="form-control" placeholder="Ingrese nombre">
+               <input class="form-control" placeholder="Ingrese nombre" required>
            </div>
            <div class="form-group col-md-4">
                <label style="float: left">Sexo</label>
@@ -144,12 +145,12 @@ $(document).ready( function () {
        
        <div class="row align-items-md-stretch mt-1">
            <div class="form-group col-md-9">
-               <label style="float: left">DNI</label>
-               <input class="form-control" type="number" placeholder="Ingrese DNI">
+               <label style="float: left">DNI</label>     
+               <input class="form-control" type="number" placeholder="Ingrese DNI" required min="1" max="99999999" >
            </div>
            <div class="form-group col-md-3">
                <label style="float: left">Fecha de Nacimiento</label>
-               <input class="form-control" type="date" name="date">
+               <input class="form-control" type="date" name="date" required>
            </div>
        </div>
 
@@ -158,11 +159,11 @@ $(document).ready( function () {
         <div class="row align-items-md-stretch">
      	   <div class="form-group col-md-6">
                <label style="float: left">Direccion</label>
-               <input class="form-control" placeholder="Ingrese direccion">
+               <input class="form-control" placeholder="Ingrese direccion" required>
            </div>
            <div class="form-group col-md-6">
                <label style="float: left">Localidad</label>
-               <input class="form-control" placeholder="Ingrese localidad">
+               <input class="form-control" placeholder="Ingrese localidad" required>
            </div>                   
        </div>
        
@@ -171,19 +172,20 @@ $(document).ready( function () {
         <div class="row align-items-md-stretch">
      	   <div class="form-group col-md-6">
                <label style="float: left">Correo Electronico</label>
-               <input class="form-control" placeholder="Ingrese correo electronico">
+               <input class="form-control" type="email" placeholder="Ingrese correo electronico" required>
            </div>
            <div class="form-group col-md-6">
                <label style="float: left">Numero de Telefono</label>
-               <input class="form-control" type="number" placeholder="Ingrese numero de telefono">
+               <input class="form-control" type="number" placeholder="Ingrese numero de telefono" required>
            </div>                   
        </div>
         
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">CANCELAR</button>
-        <button type="button" class="btn btn-success">CONFIRMAR</button>
-      </div>
+		<input type="submit" class="btn btn-primary" name="btnAceptar" value="Aceptar">      
+	  </div>
+    </form>
     </div>
   </div>
 </div>
@@ -192,19 +194,20 @@ $(document).ready( function () {
 <div class="modal fade" id="addClientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
+    <form action="agregar_cliente.html" method="post">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">AGREGAR CLIENTE</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div class="row align-items-md-stretch">
+       <div class="row align-items-md-stretch">
      	   <div class="form-group col-md-4">
                <label style="float: left">Apellido</label>
-               <input class="form-control" placeholder="Ingrese apellido">
+               <input class="form-control" placeholder="Ingrese apellido" required>
            </div>
            <div class="form-group col-md-4">
                <label style="float: left">Nombre</label>
-               <input class="form-control" placeholder="Ingrese nombre">
+               <input class="form-control" placeholder="Ingrese nombre" required>
            </div>
            <div class="form-group col-md-4">
                <label style="float: left">Sexo</label>
@@ -219,11 +222,11 @@ $(document).ready( function () {
        <div class="row align-items-md-stretch mt-1">
            <div class="form-group col-md-9">
                <label style="float: left">DNI</label>
-               <input class="form-control" type="number" placeholder="Ingrese DNI">
+               <input class="form-control" type="number" placeholder="Ingrese DNI" required min="1" max="99999999" >
            </div>
            <div class="form-group col-md-3">
                <label style="float: left">Fecha de Nacimiento</label>
-               <input class="form-control" type="date" name="date">
+               <input class="form-control" type="date" name="date" required>
            </div>
        </div>
 
@@ -232,11 +235,11 @@ $(document).ready( function () {
         <div class="row align-items-md-stretch">
      	   <div class="form-group col-md-6">
                <label style="float: left">Direccion</label>
-               <input class="form-control" placeholder="Ingrese direccion">
+               <input class="form-control" placeholder="Ingrese direccion" required>
            </div>
            <div class="form-group col-md-6">
                <label style="float: left">Localidad</label>
-               <input class="form-control" placeholder="Ingrese localidad">
+               <input class="form-control" placeholder="Ingrese localidad" required>
            </div>                   
        </div>
        
@@ -245,18 +248,20 @@ $(document).ready( function () {
         <div class="row align-items-md-stretch">
      	   <div class="form-group col-md-6">
                <label style="float: left">Correo Electronico</label>
-               <input class="form-control" placeholder="Ingrese correo electronico">
+               <input class="form-control" type="email" placeholder="Ingrese correo electronico" required>
            </div>
            <div class="form-group col-md-6">
                <label style="float: left">Numero de Telefono</label>
-               <input class="form-control" type="number" placeholder="Ingrese numero de telefono">
+               <input class="form-control" type="number" placeholder="Ingrese numero de telefono" required>
            </div>                   
        </div>
+        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">CANCELAR</button>
-        <button type="button" class="btn btn-success">CONFIRMAR</button>
-      </div>
+		<input type="submit" class="btn btn-primary" name="btnAceptar" value="Aceptar">      
+	  </div>
+    </form>
     </div>
   </div>
 </div>

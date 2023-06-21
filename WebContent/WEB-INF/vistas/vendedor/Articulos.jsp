@@ -132,12 +132,7 @@
 	                      <div class="col-md-4">  
 	                        <label>MARCA:</label>
 	                      </div>
-	                      <div class="col-md-8">
-		                      <select class="form-select" name="marcaEliminar">
-							    <c:forEach items="${listaMarcas}" var="Marca">
-							        <option id="${Marca.ID}" value="${Marca.ID}">${Marca.nombre}</option>
-							    </c:forEach>
-							  </select>
+	                      <div class="col-md-8">		                      
 	                          <input id="marcaEliminar" name="marcaEliminar" class="form-control mt-1" readonly>
 	                      </div>
 	                      <div class="col-md-4">
@@ -150,11 +145,7 @@
 	                        <label>TIPO:</label>
 	                      </div>
 	                      <div class="col-md-8">
-	                      <select class="form-select" name="tipoEliminar">
-						    <c:forEach items="${listaTipoArticulos}" var="TipoArticulos">
-						        <option id="${TipoArticulos.ID}" value="${TipoArticulos.ID}">${TipoArticulos.nombre}</option>
-						    </c:forEach>
-						  </select>
+   	                        <input id="tipoEliminar" name="tipoEliminar" class="form-control mt-1" id="textAreaExample1" readonly>
 	                      </div>
 	                      <div class="col-md-4">
 	                        <label>PRECIO:</label>
@@ -203,7 +194,7 @@
                       <div class="form-group col-md-12">
                         <label style="float: left">Descripcion</label>
                         <textarea id="descripcion" name="descripcion" class="form-control" id="textAreaExample1"
-                          rows="4"></textarea>
+                          rows="4" required></textarea>
                       </div>
                     </div>
 
@@ -218,7 +209,7 @@
                       </div>
                       <div class="form-group col-md-6">
                         <label style="float: left">Precio de venta</label>
-                        <input id="precio_venta" type="number" name="precio_venta" class="form-control">
+                        <input id="precio_venta" type="number" name="precio_venta" class="form-control" required min="1">
                       </div>
                     </div>
 
@@ -246,7 +237,7 @@
                     <div class="row align-items-md-stretch">
                       <div class="form-group col-md-6">
                         <label style="float: left">Nombre</label>
-                        <input name="nombre" class="form-control" placeholder="Ingrese nombre">
+                        <input name="nombre" class="form-control" placeholder="Ingrese nombre" required>
                       </div>
                       <div class="form-group col-md-6">
                         <label style="float: left">Marca</label>
@@ -262,7 +253,7 @@
                       <div class="form-group col-md-12">
                         <label style="float: left">Descripcion</label>
                         <textarea name="descripcion" class="form-control" id="textAreaExample1" rows="4"
-                          placeholder="Ingrese descripcion"></textarea>
+                          placeholder="Ingrese descripcion" required></textarea>
                       </div>
                     </div>
 
@@ -278,7 +269,7 @@
                       <div class="form-group col-md-6">
                         <label style="float: left">Precio de venta</label>
                         <input type="number" name="precio_venta" class="form-control"
-                          placeholder="Ingrese precio de compra">
+                          placeholder="Ingrese precio de compra" required min="1">
                       </div>
                     </div>
                   </div>

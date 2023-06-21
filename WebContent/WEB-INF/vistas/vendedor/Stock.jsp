@@ -19,6 +19,11 @@
                 <div class="d-flex  align-content-center bd-highlight mb-3">
                   <div class="me-auto p-2 bd-highlight align-self-center">
                     <h1>STOCK</h1>
+                  </div>
+                  <div class="p-2 bd-highlight align-self-center">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addStockModal">
+           				NUEVO INGRESO
+          			</button>
                   </div>                  
                 </div>
 
@@ -49,10 +54,7 @@
                         </c:forEach>
                       </tbody>
                     </table>
-                  </div>
-                	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addStockModal">
-                      				Nuevo Ingreso
-                    			</button>
+                  </div>                	
                 </div>
               </div>
             </form>
@@ -84,18 +86,18 @@
                       </div>
            <div class="form-group col-md-6">
              <label style="float: left">Fecha de Ingreso</label>
-               <input class="form-control" type="date" name="date">
+               <input class="form-control" type="date" name="date" required>
            </div>
          </div>        
 
          <div class="row align-items-md-stretch mt-1">
            <div class="form-group col-md-6">
              <label style="float: left">Precio de Compra</label>
-             <input id="precio_compra" type="number" name="precio_compra" class="form-control">
+             <input id="precio_compra" type="number" name="precio_compra" class="form-control" required min="1">
            </div>
            <div class="form-group col-md-6">
              <label style="float: left">Cantidad</label>
-             <input id="cantidad" name="cantidad" type="number" class="form-control">
+             <input id="cantidad" name="cantidad" type="number" class="form-control" required min="1">
            </div>
          </div>
       </div>

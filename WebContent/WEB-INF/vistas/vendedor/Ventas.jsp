@@ -80,6 +80,7 @@
         <div class="modal fade" id="addSaleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg">
             <div class="modal-content">
+              <form action="ingreso_venta.html" method="post">            
               <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">AGREGAR VENTA</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -90,15 +91,14 @@
                   <div style="padding-bottom: 20px; display: flex;">
                     <div>
                       <label style="float: left">Fecha</label>
-                      <input class="form-control" type="date" name="date">
+                      <input class="form-control" type="date" name="date" required>
                     </div>
 
                     <div style="float: left; padding-left: 20px;">
                       <label style="float: left">Cliente</label><br />
                       <div style="display: flex; ">
-                        <input style="width: 200px;" class="form-control" placeholder="Ingrese nombre">
-
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Buscar</button>
+                        <input style="width: 200px;" class="form-control" placeholder="Ingrese nombre" required>
+                        <button type="button" class="btn btn-danger m-1" data-bs-dismiss="modal">Buscar</button>
                        </div>
                     </div>
                   </div>
@@ -106,7 +106,7 @@
 
                   <div style="padding-bottom: 20px;" class="form-group col-md-6">
                     <label style="float: left">Monto total</label>
-                    <input id="precio_compra" type="number" name="precio_compra" class="form-control">
+                    <input id="precio_compra" type="number" name="precio_compra" class="form-control" required min="1">
                   </div>
                   <hr />
 
@@ -122,12 +122,12 @@
 
                     <div style="float: left; padding-left: 20px; width: 100px;">
                       <label style="float: left">Cantidad</label>
-                      <input id="" type="number" name="precio_compra" class="form-control">
+                      <input id="" type="number" name="precio_compra" class="form-control" required min="1">
                     </div>
 
                     <div style="float: left; padding-left: 20px;">
-                      <label style="float: left">Cantidad</label>
-                      <input id="" type="number" name="precio_compra" class="form-control">
+                      <label style="float: left">Precio</label>
+                      <input id="" type="number" name="precio_compra" class="form-control" required min="1">
                     </div>
 
                   </div>
@@ -140,8 +140,9 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">CANCELAR</button>
-                <button type="button" class="btn btn-success">CONFIRMAR</button>
+         		<input type="submit" class="btn btn-primary" name="btnAceptar" value="Aceptar">
               </div>
+            </form>
             </div>
           </div>
         </div>
