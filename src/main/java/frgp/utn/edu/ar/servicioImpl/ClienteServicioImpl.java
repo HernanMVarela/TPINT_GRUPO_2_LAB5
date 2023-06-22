@@ -24,13 +24,13 @@ public class ClienteServicioImpl implements ClienteServicio{
 	}
 
 	@Override
-	public Cliente obtenerUnRegistro(String nombre) {
-		return dataAccess.obtenerClientePorNombre(nombre);
+	public Cliente obtenerUnRegistro(long DNI) {
+		return dataAccess.obtenerClientePorDNI(DNI);
 	}
 
 	@Override
 	public String insertarCliente(Cliente nuevo) {
-		if(!dataAccess.existeCliente(nuevo.getNombre())) {
+		if(!dataAccess.existeCliente(nuevo.getDNI())) {
 			if (dataAccess.insertarCliente(nuevo)) {
 				return "AGREGADO";
 			} else {
@@ -42,8 +42,8 @@ public class ClienteServicioImpl implements ClienteServicio{
 	}
 
 	@Override
-	public void eliminarCliente(String nombre) {
-		dataAccess.eliminarCliente(nombre);
+	public void eliminarCliente(long DNI) {
+		dataAccess.eliminarCliente(DNI);
 		
 	}
 

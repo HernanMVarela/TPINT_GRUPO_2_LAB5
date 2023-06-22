@@ -48,6 +48,7 @@ public class VendedorController {
 		this.serviceTipoArticulo = (TipoArticuloServicio) ctx.getBean("TipoArticuloServiceBean");
 		this.serviceMarca = (MarcaServicio) ctx.getBean("MarcaServiceBean");
 		this.serviceStock = (StockServicio) ctx.getBean("StockServiceBean");
+		this.serviceCliente = (ClienteServicio) ctx.getBean("ClienteServiceBean");
 	}	
 	
 	//HOME VENDEDOR | vendedor.html"
@@ -174,12 +175,47 @@ public class VendedorController {
 	public ModelAndView eventoRedireccionarClientes()
 	{
 		ModelAndView MV = new ModelAndView();
-		
+		MV = cargadorDeListasClientes(MV);
 		MV.setViewName("vendedor/Clientes");
 		return MV;
 	}
 	
-	// Clientes | "stock.html"
+	//Ingreso de Cliente | "/agregar_cliente.html"
+	@RequestMapping(value ="/agregar_cliente.html" , method= { RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView validarCliente(String nombre, String apellido, String sexo, String DNI, Date date, String dir, String loc, String cor, String tel){
+		ModelAndView MV = new ModelAndView();
+		
+		Cliente x = new Cliente();
+		x.setDNI(Long.parseLong(DNI));
+		x.setNombre(nombre);
+		x.setApellido(apellido);
+		x.setSexo(sexo);
+		x.setCorreo(cor);
+		x.setDireccion(dir);
+		x.setFecha_nac(date);
+		//x.setLocalidad(loc);
+		x.setTelefono(tel);
+		
+		String Message = "";
+		try{
+			Message = asignarMensajeCliente(serviceCliente.insertarCliente(x));
+			MV.addObject("Mensaje", Message);
+			MV = cargadorDeListasClientes(MV);
+			MV.setViewName("vendedor/Clientes"); 
+			return MV;
+		}
+		catch(Exception e)
+		{
+			/// REEMPLAZAR POR DIRECCIONAMIENTO A PAGINA DE ERROR
+			Message = e.toString();
+			System.out.println(e.toString());
+			MV.addObject("Mensaje", Message);
+			MV.setViewName("Error"); 
+			return MV;
+		}
+	}
+	
+	// Stock | "stock.html"
 	@RequestMapping("stock.html")
 	public ModelAndView eventoRedireccionarStock()
 	{
@@ -187,52 +223,6 @@ public class VendedorController {
 		MV = cargadorDeListasStocks(MV);
 		MV.setViewName("vendedor/Stock");
 		return MV;
-	}
-	
-	
-	// ALTA DE NUEVO ARTICULO | "/altaArticulo.html"
-	@RequestMapping(value ="/agregar_cliente.html" , method= { RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView agregarCliente(String apellido,String nombre, Date date){
-		ModelAndView MV = new ModelAndView();
-		
-		Cliente x = new Cliente();
-		Estado_Cli es =new Estado_Cli();
-		Localidad l =new Localidad("A. GONZALEZ CHAVEZ");
-		x.setApellido("Barzola");
-		x.setCorreo("correo@dsfs.com432");
-		x.setDireccion("Direccion");
-		x.setDNI(222);
-		x.setEstado(es);
-		x.setFecha_nac(date);
-		x.setLocalidad(l);
-		x.setNombre("Santiago");
-		x.setSexo("masculino");
-		x.setTelefono("213123");
-		
-		
-		
-		
-
-		String Message = "";
-		
-		try{
-
-			Message = asignarMensajeCliente(serviceCliente.insertarCliente(x));
-			MV.addObject("Mensaje", Message);
-			MV = cargadorDeListasArticulos(MV);
-			MV.setViewName("vendedor/Articulos"); 
-			return MV;
-		}
-		
-		catch(Exception e)
-		{
-			Message = e.toString();
-			System.out.println(e.toString());
-			MV.addObject("Mensaje", Message);
-			MV.setViewName("Error"); 
-			return MV;
-		}	
-
 	}
 	
 	// Ingreso de Stock | "/ingreso_stock.html"
@@ -312,7 +302,7 @@ public class VendedorController {
 			return "Stock agregado";
 		}
 		if (error.equals("NO AGREGADO")) {
-			return "Articulo no agregado";
+			return "Stock no agregado";
 		}
 		if (error.equals("ERROR")) {
 			return "ERROR";
@@ -321,10 +311,10 @@ public class VendedorController {
 	}
 	private String asignarMensajeCliente(String error) {
 		if (error.equals("AGREGADO")) {
-			return "Stock agregado";
+			return "Cliente Agregado";
 		}
 		if (error.equals("NO AGREGADO")) {
-			return "Articulo no agregado";
+			return "Cliente no agregado";
 		}
 		if (error.equals("ERROR")) {
 			return "ERROR";
@@ -345,6 +335,13 @@ public class VendedorController {
 	{
 		MV.addObject("listaArticulos",this.serviceArticulo.obtenerArticulos());
 		MV.addObject("listaStocks",this.serviceStock.obtenerStock());
+		MV.addObject("listaClientes",this.serviceCliente.obtenerClientes());
+		return MV;
+	}
+	
+	private ModelAndView cargadorDeListasClientes(ModelAndView MV) 
+	{
+		MV.addObject("listaClientes",this.serviceCliente.obtenerClientes());
 		return MV;
 	}
 	

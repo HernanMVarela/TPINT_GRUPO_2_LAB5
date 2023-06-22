@@ -34,14 +34,14 @@ public class ClienteDaoImpl implements ClienteDao {
 
 	@Override
 	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
-	public Cliente obtenerClientePorNombre(String nombre) {
-		return this.hibernateTemplate.get(Cliente.class, nombre);
+	public Cliente obtenerClientePorDNI(long DNI) {
+		return this.hibernateTemplate.get(Cliente.class, DNI);
 	}
 	
 	@Override
 	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
-	public boolean existeCliente(String nombre) {
-		return this.hibernateTemplate.get(Articulo.class, nombre) != null;
+	public boolean existeCliente(long DNI) {
+		return this.hibernateTemplate.get(Articulo.class, DNI) != null;
 	}
 
 	@Override
@@ -53,9 +53,9 @@ public class ClienteDaoImpl implements ClienteDao {
 	
 	@Override
 	@Transactional(propagation=Propagation.REQUIRES_NEW)
-	public void eliminarCliente(String nombre) {
+	public void eliminarCliente(long DNI) {
 		Cliente art = new Cliente();
-		art.setNombre(nombre);
+		art.setDNI(DNI);
 		this.hibernateTemplate.delete(art);
 	}
 

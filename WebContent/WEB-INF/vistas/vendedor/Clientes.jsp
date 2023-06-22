@@ -222,11 +222,11 @@ $(document).ready( function () {
        <div class="row align-items-md-stretch mt-1">
            <div class="form-group col-md-9">
                <label style="float: left">DNI</label>
-               <input class="form-control" type="number" placeholder="Ingrese DNI" required min="1" max="99999999" >
+               <input name="DNI" class="form-control" type="number" placeholder="Ingrese DNI" required min="1" max="99999999" >
            </div>
            <div class="form-group col-md-3">
                <label style="float: left">Fecha de Nacimiento</label>
-               <input class="form-control" type="date" name="date" required>
+               <input name="date" class="form-control" type="date" name="date" required>
            </div>
        </div>
 
@@ -235,11 +235,11 @@ $(document).ready( function () {
         <div class="row align-items-md-stretch">
      	   <div class="form-group col-md-6">
                <label style="float: left">Direccion</label>
-               <input class="form-control" placeholder="Ingrese direccion" required>
+               <input name="dir" class="form-control" placeholder="Ingrese direccion" required>
            </div>
            <div class="form-group col-md-6">
                <label style="float: left">Localidad</label>
-               <input class="form-control" placeholder="Ingrese localidad" required>
+               <input name="loc" class="form-control" placeholder="Ingrese localidad" required>
            </div>                   
        </div>
        
@@ -248,11 +248,11 @@ $(document).ready( function () {
         <div class="row align-items-md-stretch">
      	   <div class="form-group col-md-6">
                <label style="float: left">Correo Electronico</label>
-               <input class="form-control" type="email" placeholder="Ingrese correo electronico" required>
+               <input name="cor" class="form-control" type="email" placeholder="Ingrese correo electronico" required>
            </div>
            <div class="form-group col-md-6">
                <label style="float: left">Numero de Telefono</label>
-               <input class="form-control" type="number" placeholder="Ingrese numero de telefono" required>
+               <input cname="tel" lass="form-control" type="number" placeholder="Ingrese numero de telefono" required>
            </div>                   
        </div>
         
