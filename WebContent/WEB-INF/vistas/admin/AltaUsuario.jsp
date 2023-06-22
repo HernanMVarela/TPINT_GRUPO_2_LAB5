@@ -59,8 +59,9 @@
 	
 										<hr>
 	
-										<label style="float: left">Seleccione rol</label> <select
-											class="form-select">
+										<label style="float: left">Seleccione rol</label>
+										<select class="form-select">
+											<option value="vendedor">ADMINISTRADOR</option>											
 											<option value="vendedor">VENDEDOR</option>
 											<option value="contador">CONTADOR</option>
 										</select>
