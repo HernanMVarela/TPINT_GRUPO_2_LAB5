@@ -8,8 +8,7 @@
 
 <body>
 	<%@ include file="../common/NavigatorVendedor.jspf"%>
-	<div class="container-fluid">
-		<form id="altaForm" method="post">
+	<div class="container-fluid">		
 			<div class="container">
 				<div class="p-2 mb-2 bg-light border rounded-3" style="width: 100%">
 					<div class="container-fluid py-1">
@@ -20,14 +19,15 @@
 							<div class="row align-items-md-stretch">
 
 								<div class="col-md-6">
+							    <form id="altaForm" method="post">
 									<div class="row align-items-md-stretch">
 										<div class="form-group col-md-6">
-											<label style="float: left">Nombre</label> <input
-												class="form-control" placeholder="Ingrese nombre">
+											<label style="float: left">Nombre</label> 
+											<input class="form-control" placeholder="Ingrese nombre" required>
 										</div>
 										<div class="form-group col-md-6">
-											<label style="float: left">Apellido</label> <input
-												class="form-control" placeholder="Ingrese apellido">
+											<label style="float: left">Apellido</label>
+											<input class="form-control" placeholder="Ingrese apellido" required>
 										</div>
 									</div>
 
@@ -35,23 +35,26 @@
 
 									<div class="row align-items-md-stretch">
 										<div class="form-group col-md-9">
-											<label style="float: left">DNI</label> <input
-												class="form-control" type="number" placeholder="Ingrese DNI">
+											<label style="float: left">DNI</label> 
+											<input class="form-control" type="number" placeholder="Ingrese DNI" required min="1" max="99999999" >
 										</div>
 									</div>
 
 									<hr>
 
 									<div class="form-group col-md-8">
-										<label style="float: left">Usuario</label> <input
-											class="form-control" placeholder="Ingrese usuario"> <br>
+										<label style="float: left">Usuario</label> 
+										<input class="form-control" placeholder="Ingrese usuario" required> 
+										
+										<br>
 
-										<label style="float: left">Contraseña</label> <input
-											class="form-control" type="password"
-											placeholder="Ingrese contraseña"> <br> <label
-											style="float: left">Repita la contraseña</label> <input
-											class="form-control" type="password"
-											placeholder="Re-Ingrese su contraseña">
+										<label style="float: left">Contraseña</label>
+										<input class="form-control" type="password" placeholder="Ingrese contraseña" required min="6"> 
+										
+										<br> 
+										
+										<label style="float: left">Repita la contraseña</label> 
+										<input class="form-control" type="password" placeholder="Re-Ingrese su contraseña" required min="6">
 									</div>
 
 									<hr>
@@ -64,20 +67,20 @@
 
 									<hr>
 
-
 									<div class="d-flex justify-content-center">
-										<button class="btn btn-primary mr-1">Registrar</button>
+										<input type="submit" class="btn btn-success mr-1" value="REGISTRARSE" name="btnRedirigir" formaction="home.html">
 									</div>
+							    </form>
 								</div>
 
 								<div class="col-md-6" style="text-align: center;">
+							    <form id="volverForm" method="post">								
 									<img class="img-responsive p-3" style="width: 50%;" src="<c:url value="/assets/register.png"/>"/>
 									<h1>¡Oye!</h1>
 									<p>¿Ya tienes una cuenta? Haz click en el botón de abajo
 										para iniciar sesión.</p>
-									<input type="submit" class="btn btn-success mr-1"
-										value="INICIAR SESION" name="btnRedirigir"
-										formaction="home.html">
+									<input type="submit" class="btn btn-success mr-1" value="INICIAR SESION" name="btnRedirigir" formaction="home.html">
+								</form>
 								</div>
 							</div>
 						</div>
