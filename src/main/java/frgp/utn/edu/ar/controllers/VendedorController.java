@@ -13,10 +13,14 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import frgp.utn.edu.ar.dominio.Articulo;
+import frgp.utn.edu.ar.dominio.Cliente;
+import frgp.utn.edu.ar.dominio.Estado_Cli;
+import frgp.utn.edu.ar.dominio.Localidad;
 import frgp.utn.edu.ar.dominio.Marca;
 import frgp.utn.edu.ar.dominio.Stock;
 import frgp.utn.edu.ar.dominio.Tipo_Articulo;
 import frgp.utn.edu.ar.servicio.ArticuloServicio;
+import frgp.utn.edu.ar.servicio.ClienteServicio;
 import frgp.utn.edu.ar.servicio.MarcaServicio;
 import frgp.utn.edu.ar.servicio.StockServicio;
 import frgp.utn.edu.ar.servicio.TipoArticuloServicio;
@@ -26,6 +30,8 @@ public class VendedorController {
 
 	@Autowired
 	public  ArticuloServicio serviceArticulo;
+	@Autowired
+	public  ClienteServicio serviceCliente;
 	@Autowired
 	public  TipoArticuloServicio serviceTipoArticulo;
 	@Autowired
@@ -183,6 +189,52 @@ public class VendedorController {
 		return MV;
 	}
 	
+	
+	// ALTA DE NUEVO ARTICULO | "/altaArticulo.html"
+	@RequestMapping(value ="/agregar_cliente.html" , method= { RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView agregarCliente(String apellido,String nombre, Date date){
+		ModelAndView MV = new ModelAndView();
+		
+		Cliente x = new Cliente();
+		Estado_Cli es =new Estado_Cli();
+		Localidad l =new Localidad("A. GONZALEZ CHAVEZ");
+		x.setApellido("Barzola");
+		x.setCorreo("correo@dsfs.com432");
+		x.setDireccion("Direccion");
+		x.setDNI(222);
+		x.setEstado(es);
+		x.setFecha_nac(date);
+		x.setLocalidad(l);
+		x.setNombre("Santiago");
+		x.setSexo("masculino");
+		x.setTelefono("213123");
+		
+		
+		
+		
+
+		String Message = "";
+		
+		try{
+
+			Message = asignarMensajeCliente(serviceCliente.insertarCliente(x));
+			MV.addObject("Mensaje", Message);
+			MV = cargadorDeListasArticulos(MV);
+			MV.setViewName("vendedor/Articulos"); 
+			return MV;
+		}
+		
+		catch(Exception e)
+		{
+			Message = e.toString();
+			System.out.println(e.toString());
+			MV.addObject("Mensaje", Message);
+			MV.setViewName("Error"); 
+			return MV;
+		}	
+
+	}
+	
 	// Ingreso de Stock | "/ingreso_stock.html"
 		@RequestMapping(value ="/ingreso_stock.html" , method= { RequestMethod.GET, RequestMethod.POST})
 		public ModelAndView validarStock(String art, Date date, String cantidad, String precio_compra){
@@ -256,6 +308,18 @@ public class VendedorController {
 	}
 	
 	private String asignarMensajeStocks(String error) {
+		if (error.equals("AGREGADO")) {
+			return "Stock agregado";
+		}
+		if (error.equals("NO AGREGADO")) {
+			return "Articulo no agregado";
+		}
+		if (error.equals("ERROR")) {
+			return "ERROR";
+		}
+		return "ERROR";
+	}
+	private String asignarMensajeCliente(String error) {
 		if (error.equals("AGREGADO")) {
 			return "Stock agregado";
 		}

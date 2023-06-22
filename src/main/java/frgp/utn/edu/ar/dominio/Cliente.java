@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "CLIENTES")
-public class Cliente implements Serializable {
+public class Cliente extends Persona implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -24,9 +24,6 @@ public class Cliente implements Serializable {
 	@Column(name="ID")
 	private int ID;
 	
-	@ManyToOne(cascade= {CascadeType.ALL})
-	@JoinColumn(name="DNI",nullable = false)
-	private Persona persona;
 	
 	@ManyToOne(cascade= {CascadeType.ALL})
 	@JoinColumn(name="ID_ESTADOCLI",nullable = false)
@@ -35,24 +32,17 @@ public class Cliente implements Serializable {
 	public Cliente() {}
 	public Cliente(Persona persona, Estado_Cli estado) 
 	{
-		this.persona=persona;
+		
 		this.estado=estado;
 	}
-	@Override
-	public String toString() {
-		return "Cliente [ID=" + ID + ", persona=" + persona + ", estado=" + estado + "]";
-	}
-	public int getID() {
-		return ID;
-	}
+
 	public void setID(int iD) {
 		ID = iD;
 	}
-	public Persona getPersona() {
-		return persona;
-	}
-	public void setPersona(Persona persona) {
-		this.persona = persona;
+
+	@Override
+	public String toString() {
+		return "Cliente [ID=" + ID + ", estado=" + estado + "]";
 	}
 	public Estado_Cli getEstado() {
 		return estado;

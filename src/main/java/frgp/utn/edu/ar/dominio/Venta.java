@@ -34,7 +34,7 @@ public class Venta implements Serializable {
 	private Date fecha;
 	
 	@ManyToOne(cascade= {CascadeType.ALL})
-	@JoinColumn(name="DNI", nullable = false)
+	@JoinColumn(name="ID", nullable = false)
 	private Cliente cliente;
 	
 	public Venta(List<Detalle_venta> detalle, Date fecha, Cliente cliente) {

@@ -9,15 +9,14 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "PERSONAS")
+@MappedSuperclass
 public class Persona implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
-	@Id
 	@Column(name="DNI")
 	private long DNI;
 	

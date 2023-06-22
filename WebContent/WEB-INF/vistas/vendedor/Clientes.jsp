@@ -203,15 +203,15 @@ $(document).ready( function () {
        <div class="row align-items-md-stretch">
      	   <div class="form-group col-md-4">
                <label style="float: left">Apellido</label>
-               <input class="form-control" placeholder="Ingrese apellido" required>
+               <input name="apellido" class="form-control" placeholder="Ingrese apellido" required>
            </div>
            <div class="form-group col-md-4">
                <label style="float: left">Nombre</label>
-               <input class="form-control" placeholder="Ingrese nombre" required>
+               <input name="nombre" class="form-control" placeholder="Ingrese nombre" required>
            </div>
            <div class="form-group col-md-4">
                <label style="float: left">Sexo</label>
-		       <select class="form-select">
+		       <select name="sexo" class="form-select">
 		           <option value="administrador">MASCULINO</option>
 		           <option value="vendedor">FEMENINO</option>
 		           <option value="contador">OTRO</option>

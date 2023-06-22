@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "USUARIOS")
-public class Usuario implements Serializable {
+public class Usuario extends Persona implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -29,10 +29,7 @@ public class Usuario implements Serializable {
 	@Column(name="PASSWORD", nullable = true)
 	private String passU;
 	
-	@ManyToOne(cascade= {CascadeType.ALL})
-	@JoinColumn(name="DNI",nullable = false)
-	private Persona persona;
-	
+
 	@ManyToOne(cascade= {CascadeType.ALL})
 	@JoinColumn(name="ID_TIPOUSER",nullable = false)
 	private Tipo_Usuario tipo;
@@ -42,13 +39,12 @@ public class Usuario implements Serializable {
 	public Usuario(String user, String pass, Persona persona, Tipo_Usuario tipo) {
 		this.nombreU=user;
 		this.passU=pass;
-		this.persona=persona;
 		this.tipo=tipo;
 	}
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nombreU=" + nombreU + ", passU=" + passU + ", persona=" + persona + ", tipo="
+		return "Usuario [id=" + id + ", nombreU=" + nombreU + ", passU=" + passU + ", tipo="
 				+ tipo + "]";
 	}
 
@@ -76,13 +72,7 @@ public class Usuario implements Serializable {
 		this.passU = passU;
 	}
 
-	public Persona getPersona() {
-		return persona;
-	}
 
-	public void setPersona(Persona persona) {
-		this.persona = persona;
-	}
 
 	public Tipo_Usuario getTipo() {
 		return tipo;
