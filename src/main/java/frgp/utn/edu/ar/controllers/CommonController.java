@@ -64,4 +64,12 @@ public class CommonController {
 		MV.setViewName("Home"); 
 		return MV;
     }
+    
+    // Error | "error.html"
+    @RequestMapping("error.html")
+    public ModelAndView error() {
+    	ModelAndView MV = new ModelAndView();
+		MV.setViewName("Error"); 
+		return MV;
+    }
 }

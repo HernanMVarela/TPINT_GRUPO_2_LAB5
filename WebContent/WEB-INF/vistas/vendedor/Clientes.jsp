@@ -194,7 +194,7 @@ $(document).ready( function () {
 <div class="modal fade" id="addClientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-    <form action="agregar_cliente.html" method="post">
+    <form action="alta_cliente.html" method="post">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">AGREGAR CLIENTE</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -252,7 +252,7 @@ $(document).ready( function () {
            </div>
            <div class="form-group col-md-6">
                <label style="float: left">Numero de Telefono</label>
-               <input cname="tel" lass="form-control" type="number" placeholder="Ingrese numero de telefono" required>
+               <input name="tel" class="form-control" type="number" placeholder="Ingrese numero de telefono" required>
            </div>                   
        </div>
         

@@ -180,8 +180,8 @@ public class VendedorController {
 		return MV;
 	}
 	
-	//Ingreso de Cliente | "/agregar_cliente.html"
-	@RequestMapping(value ="/agregar_cliente.html" , method= { RequestMethod.GET, RequestMethod.POST})
+	//Ingreso de Cliente | "/alta_cliente.html"
+	@RequestMapping(value ="/alta_cliente.html" , method= { RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView validarCliente(String nombre, String apellido, String sexo, String DNI, Date date, String dir, String loc, String cor, String tel){
 		ModelAndView MV = new ModelAndView();
 		
@@ -196,6 +196,7 @@ public class VendedorController {
 		//x.setLocalidad(loc);
 		x.setTelefono(tel);
 		
+
 		String Message = "";
 		try{
 			Message = asignarMensajeCliente(serviceCliente.insertarCliente(x));

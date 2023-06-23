@@ -7,7 +7,7 @@
 </head>
 
 <body>
-	<%@ include file="../common/NavigatorVendedor.jspf"%>
+	<%@ include file="../common/NavigatorCommon.jspf"%>
 	<div class="container-fluid">		
 			<div class="container">
 				<div class="p-2 mb-2 bg-light border rounded-3" style="width: 100%">
