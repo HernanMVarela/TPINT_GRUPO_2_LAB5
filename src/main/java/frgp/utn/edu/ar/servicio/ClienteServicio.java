@@ -8,11 +8,11 @@ public interface ClienteServicio {
 	
 	public ArrayList<Cliente> obtenerClientes();
 
-	public Cliente obtenerUnRegistro(long DNI);
+	public Cliente obtenerUnRegistro(int ID);
 
 	public String insertarCliente(Cliente nuevo);
 
-	public void eliminarCliente(long DNI) ;
+	public void eliminarCliente(int ID) ;
 
 	public String actualizarCliente(Cliente modificar);
 

@@ -11,16 +11,16 @@ public interface ClienteDao {
 	public boolean insertarCliente(Cliente nuevo);
 
 	//Obtiene una articulo por nombre
-	public Cliente obtenerClientePorDNI(long DNI);
+	public Cliente obtenerClientePorID(int ID);
 	
 	//Verifica si existe el articulo
-	public boolean existeCliente(long DNI);
+	public boolean existeCliente(int ID);
 
 	//Obtiene todos los articulo
 	public ArrayList<Cliente> obtenerClientes();
 
 	//Elimina un articulo a aprtir del nombre
-	public void eliminarCliente(long DNI);
+	public void eliminarCliente(int ID);
 
 	//Actualiza los datos de unaarticulo
 	public boolean actualizarCliente(Cliente modificar);

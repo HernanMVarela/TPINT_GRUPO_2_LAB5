@@ -31,8 +31,6 @@ public class VendedorController {
 	@Autowired
 	public  ArticuloServicio serviceArticulo;
 	@Autowired
-	public  ClienteServicio serviceCliente;
-	@Autowired
 	public  TipoArticuloServicio serviceTipoArticulo;
 	@Autowired
 	public  MarcaServicio serviceMarca;
@@ -48,8 +46,7 @@ public class VendedorController {
 		this.serviceTipoArticulo = (TipoArticuloServicio) ctx.getBean("TipoArticuloServiceBean");
 		this.serviceMarca = (MarcaServicio) ctx.getBean("MarcaServiceBean");
 		this.serviceStock = (StockServicio) ctx.getBean("StockServiceBean");
-		this.serviceCliente = (ClienteServicio) ctx.getBean("ClienteServiceBean");
-	}	
+	}
 	
 	//HOME VENDEDOR | vendedor.html"
 	@RequestMapping("vendedor.html")
@@ -75,7 +72,7 @@ public class VendedorController {
 	@RequestMapping(value ="/alta_articulo.html" , method= { RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView validarArticulo(String nombre, int marca, int tipo, String precio_venta, String descripcion){
 		ModelAndView MV = new ModelAndView();
-		
+		System.out.println("LLEGA A ALTA ARTICULO");
 		Articulo x = new Articulo();
 		x.setNombre(nombre);
 		x.setPrecio_venta(Float.parseFloat(precio_venta));
@@ -168,52 +165,6 @@ public class VendedorController {
 			MV.setViewName("Error"); 
 			return MV;
 		}	
-	}
-	
-	// Clientes | "clientes.html"
-	@RequestMapping("clientes.html")
-	public ModelAndView eventoRedireccionarClientes()
-	{
-		ModelAndView MV = new ModelAndView();
-		MV = cargadorDeListasClientes(MV);
-		MV.setViewName("vendedor/Clientes");
-		return MV;
-	}
-	
-	//Ingreso de Cliente | "/alta_cliente.html"
-	@RequestMapping(value ="/alta_cliente.html" , method= { RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView validarCliente(String nombre, String apellido, String sexo, String DNI, Date date, String dir, String loc, String cor, String tel){
-		ModelAndView MV = new ModelAndView();
-		
-		Cliente x = new Cliente();
-		x.setDNI(Long.parseLong(DNI));
-		x.setNombre(nombre);
-		x.setApellido(apellido);
-		x.setSexo(sexo);
-		x.setCorreo(cor);
-		x.setDireccion(dir);
-		x.setFecha_nac(date);
-		//x.setLocalidad(loc);
-		x.setTelefono(tel);
-		
-
-		String Message = "";
-		try{
-			Message = asignarMensajeCliente(serviceCliente.insertarCliente(x));
-			MV.addObject("Mensaje", Message);
-			MV = cargadorDeListasClientes(MV);
-			MV.setViewName("vendedor/Clientes"); 
-			return MV;
-		}
-		catch(Exception e)
-		{
-			/// REEMPLAZAR POR DIRECCIONAMIENTO A PAGINA DE ERROR
-			Message = e.toString();
-			System.out.println(e.toString());
-			MV.addObject("Mensaje", Message);
-			MV.setViewName("Error"); 
-			return MV;
-		}
 	}
 	
 	// Stock | "stock.html"
@@ -310,18 +261,6 @@ public class VendedorController {
 		}
 		return "ERROR";
 	}
-	private String asignarMensajeCliente(String error) {
-		if (error.equals("AGREGADO")) {
-			return "Cliente Agregado";
-		}
-		if (error.equals("NO AGREGADO")) {
-			return "Cliente no agregado";
-		}
-		if (error.equals("ERROR")) {
-			return "ERROR";
-		}
-		return "ERROR";
-	}
 	
 	private ModelAndView cargadorDeListasArticulos(ModelAndView MV) 
 	{
@@ -336,13 +275,6 @@ public class VendedorController {
 	{
 		MV.addObject("listaArticulos",this.serviceArticulo.obtenerArticulos());
 		MV.addObject("listaStocks",this.serviceStock.obtenerStock());
-		MV.addObject("listaClientes",this.serviceCliente.obtenerClientes());
-		return MV;
-	}
-	
-	private ModelAndView cargadorDeListasClientes(ModelAndView MV) 
-	{
-		MV.addObject("listaClientes",this.serviceCliente.obtenerClientes());
 		return MV;
 	}
 	

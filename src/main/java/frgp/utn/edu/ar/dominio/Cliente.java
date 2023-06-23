@@ -24,7 +24,6 @@ public class Cliente extends Persona implements Serializable {
 	@Column(name="ID")
 	private int ID;
 	
-	
 	@ManyToOne(cascade= {CascadeType.ALL})
 	@JoinColumn(name="ID_ESTADOCLI",nullable = false)
 	private Estado_Cli estado;
@@ -35,14 +34,15 @@ public class Cliente extends Persona implements Serializable {
 		
 		this.estado=estado;
 	}
-
-	public void setID(int iD) {
-		ID = iD;
-	}
-
 	@Override
 	public String toString() {
 		return "Cliente [ID=" + ID + ", estado=" + estado + "]";
+	}
+	public int getID() {
+		return ID;
+	}
+	public void setID(int iD) {
+		ID = iD;
 	}
 	public Estado_Cli getEstado() {
 		return estado;
@@ -50,5 +50,7 @@ public class Cliente extends Persona implements Serializable {
 	public void setEstado(Estado_Cli estado) {
 		this.estado = estado;
 	}
+
+
 
 }

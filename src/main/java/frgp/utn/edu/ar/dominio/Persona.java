@@ -18,7 +18,7 @@ public class Persona implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name="DNI")
-	private long DNI;
+	private String DNI;
 	
 	@Column(name="NOMBRE", nullable = false)
 	private String nombre;
@@ -47,12 +47,12 @@ public class Persona implements Serializable {
 				+ correo + ", telefono=" + telefono + "]";
 	}
 
-	public long getDNI() {
+	public String getDNI() {
 		return DNI;
 	}
 
-	public void setDNI(long dNI) {
-		DNI = dNI;
+	public void setDNI(String DNI2) {
+		DNI = DNI2;
 	}
 
 	public String getNombre() {

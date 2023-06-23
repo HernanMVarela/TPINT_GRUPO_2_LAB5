@@ -20,12 +20,45 @@
 	<!-- Para que lea los metodos anotados con @Transactional -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	
+	<!-- |||| ENTIDADES |||| -->
+	<bean id="ClienteEstandar" class="frgp.utn.edu.ar.dominio.Cliente">
+	</bean>
+	
 		<!-- CREO EL SERVICIO PARA Cliente -->
 	<bean id="ClienteServiceBean" class="frgp.utn.edu.ar.servicioImpl.ClienteServicioImpl">
 		<property name="dataAccess" ref="ClienteDABean"></property>
 	</bean>
 	<!-- EL SERVICIO NECESITA EL DAO  -->
 	<bean id="ClienteDABean" class="frgp.utn.edu.ar.daoImpl.ClienteDaoImpl" 
+		scope="singleton"> 
+		<property name="sessionFactory" ref="sessionFactoryBean"></property> 
+	</bean>
+		<!--||| CREO EL SERVICIO PARA LOCALIDAD |||-->
+	<bean id="LocalidadServiceBean" class="frgp.utn.edu.ar.servicioImpl.LocalidadServicioImpl">
+		<property name="dataAccess" ref="LocalidadDABean"></property>
+	</bean>
+	<!-- LOCALIDAD DAO  -->
+	<bean id="LocalidadDABean" class="frgp.utn.edu.ar.daoImpl.LocalidadDaoImpl" 
+		scope="singleton"> 
+		<property name="sessionFactory" ref="sessionFactoryBean"></property> 
+	</bean>
+	
+	<!--||| CREO EL SERVICIO PARA PROVINCIA |||-->
+	<bean id="ProvinciaServiceBean" class="frgp.utn.edu.ar.servicioImpl.ProvinciaServicioImpl">
+		<property name="dataAccess" ref="ProvinciaDABean"></property>
+	</bean>
+	<!-- PROVINCIA DAO  -->
+	<bean id="ProvinciaDABean" class="frgp.utn.edu.ar.daoImpl.ProvinciaDaoImpl" 
+		scope="singleton"> 
+		<property name="sessionFactory" ref="sessionFactoryBean"></property> 
+	</bean>
+	
+	<!--||| CREO EL SERVICIO PARA ESTADO CLIENTE ||| -->
+	<bean id="EstadoClienteServiceBean" class="frgp.utn.edu.ar.servicioImpl.EstadoClienteServicioImpl">
+		<property name="dataAccess" ref="EstadoClienteDABean"></property>
+	</bean>
+	<!-- ESTADO CLIENTE DAO  -->
+	<bean id="EstadoClienteDABean" class="frgp.utn.edu.ar.daoImpl.EstadoClienteDaoImpl" 
 		scope="singleton"> 
 		<property name="sessionFactory" ref="sessionFactoryBean"></property> 
 	</bean>
@@ -90,16 +123,16 @@
 				<value>frgp.utn.edu.ar.dominio.Articulo</value>
 				<value>frgp.utn.edu.ar.dominio.Marca</value>
 				<value>frgp.utn.edu.ar.dominio.Tipo_Articulo</value>
-				<value>frgp.utn.edu.ar.dominio.Localidad</value>
-				<value>frgp.utn.edu.ar.dominio.Provincia</value>
+				<value>frgp.utn.edu.ar.dominio.Persona</value>	
 				<value>frgp.utn.edu.ar.dominio.Cliente</value>
 				<value>frgp.utn.edu.ar.dominio.Estado_Cli</value>
+				<value>frgp.utn.edu.ar.dominio.Localidad</value>
+				<value>frgp.utn.edu.ar.dominio.Provincia</value>
 				<value>frgp.utn.edu.ar.dominio.Usuario</value>
 				<value>frgp.utn.edu.ar.dominio.Tipo_Usuario</value>
 				<value>frgp.utn.edu.ar.dominio.Estado_User</value>
 				<value>frgp.utn.edu.ar.dominio.Stock</value>
 				<value>frgp.utn.edu.ar.dominio.Venta</value>
-				<value>frgp.utn.edu.ar.dominio.Persona</value>	
 				<value>frgp.utn.edu.ar.dominio.Detalle_venta</value>		
 			</list>
 		</property>

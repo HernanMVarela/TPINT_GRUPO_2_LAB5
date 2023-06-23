@@ -3,7 +3,6 @@
 <html>
 <head>
 <%@ include file="../common/Header.jspf" %>
-<%@ include file="../common/NavigatorVendedor.jspf" %>
 
 <script type="text/javascript">
 $(document).ready( function () {
@@ -12,6 +11,7 @@ $(document).ready( function () {
 </script>
 </head>    
 <body>
+<%@ include file="../common/NavigatorVendedor.jspf" %>
 
 <div class="container-fluid">
 	<div class="p-5 bg-light text-dark border rounded-3" style="width: 100%">
