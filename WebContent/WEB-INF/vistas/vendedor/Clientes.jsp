@@ -3,12 +3,38 @@
 <html>
 <head>
 <%@ include file="../common/Header.jspf" %>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 $(document).ready( function () {
     $('#tabla_clientes').DataTable();
 } );
+function abrirModificarModal(dni, nombre, apellido, direccion, sexo, localidad, fecha, email, telefono) {
+
+	$('#IDModif').val(ID);
+    $('#DNIModif').val(DNI);
+    $('#nombreModif').val(nombre);
+    $('#apellidoModif').val(apellido);
+    $('#direccionModif').val(direccion);
+    $('#sexoModif').val(sexo);
+    $('#localidadModif').val(localidad);
+    $('#fechaModif').val(fecha);
+    $('#correoModif').val(email);
+    $('#telefonoModif').val(telefono);
+
+  }
+
+  function abrirEliminarModal(dni, nombre, apellido, email, telefono) {
+
+    $('#idEliminar').val(ID);
+    $('#dniEliminar').val(DNI);
+    $('#nombreEliminar').val(nombre);
+    $('#apellidoEliminar').val(apellido);
+    $('#correoEliminar').val(email);
+    $('#telefonoEliminar').val(telefono);
+  }
+
 </script>
+
 </head>    
 <body>
 <%@ include file="../common/NavigatorVendedor.jspf" %>
@@ -30,65 +56,68 @@ $(document).ready( function () {
 		  <div class="row mx-2 d-flex flex-wrap align-middle justify-content-evenly">
 			  	<div class="col-md-auto table-responsive w-100">
 			  		<table id="tabla_clientes" class="table table-hover text-center">
-			  		<thead>
-						<tr>
-							<th class="text-center" scope="col"> DNI </th>
-							<th class="text-center" scope="col"> Nombre </th>
-							<th class="text-center" scope="col"> Apellido </th>
-							<th class="text-center" scope="col"> Sexo </th>
-							<th class="text-center" scope="col"> Fecha de Nacimiento </th>
-							<th class="text-center" scope="col"> Dirección </th>
-							<th class="text-center" scope="col"> Localidad </th>
-							<th class="text-center" scope="col"> Correo </th>
-							<th class="text-center" scope="col"> Telefono </th>
-							<th ></th>
-							<th></th>						
-						</tr>
-					</thead>
-					<tbody>
-						<%for (int x=0; x<5; x++){%>
-							<tr>
-								<td>
-									<%= (x+382676334) %>
-								</td>
-								<td> 
-									<%= "N_Cliente_" + x %>
-								</td> 
-								<td>
-									<%= "A_Cliente_" + x %>
-								</td> 
-								<td> 
-									<%= "X" %>
-								</td>
-								<td> 
-									<%= x + "/" + x + "/" + x %>
-								</td>
-								<td> 
-									<%= "Dir_Cliente_" + x%> 
-								</td>
-								<td> 
-									<%= "Loc_Cliente_" + x%> 
-								</td>
-								<td> 
-									<%= "Cor_Cliente_" + x%> 
-								</td>
-								<td> 
-									<%= "Tel_Cliente_" + x%> 
-								</td>
-								<td> 
-									<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modifyClientModal">
-								  		MODIFICAR
-									</button>
-								</td>
-								<td> 
-									<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteClientModal">
-								  		ELIMINAR
-									</button>
-								</td>
-							</tr>
-						<%}%>  					
-					</tbody>
-					</table>
+                      <thead>
+                        <tr>
+                       	  <th class="text-center" scope="col"> ID </th>
+                          <th class="text-center" scope="col"> DNI </th>
+                          <th class="text-center" scope="col"> Nombre </th>
+                          <th class="text-center" scope="col"> Apellido </th>
+                          <th class="text-center" scope="col"> Dirección </th>
+                          <th class="text-center" scope="col"> Sexo </th>
+                          <th class="text-center" scope="col"> Provincia </th>
+                          <th class="text-center" scope="col"> Nacionalidad </th>
+                          <th class="text-center" scope="col"> Fecha de nacimiento </th>
+                          <th class="text-center" scope="col"> Email </th>
+                          <th class="text-center" scope="col"> Telefono </th>
+                          <th></th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <c:forEach items="${listaClientes}" var="item">
+                          <c:if test="${item.estado.ID == 1}">                        
+                          <tr>
+                            <td>${item.ID} </td>
+                            <td>${item.DNI} </td>
+                            <td>${item.nombre}</td>
+                            <td>${item.apellido}</td>
+                            <td>${item.direccion}</td>
+                            <td>${item.sexo}</td>
+                            <td>${item.localidad.provincia.getNombre()}</td>
+                            <td>${item.fecha_nac}</td>
+                            <td>${item.correo}</td>
+                            <td>${item.telefono}</td>
+                            <td>
+                              <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                data-bs-target="#modifyClientModal" 
+                                onclick="abrirModificarModal('${item.ID}',
+                               								 '${item.DNI}',
+                                                             '${item.nombre}',
+                                                             '${item.apellido}',
+                                                             '${item.direccion}',
+                                                             '${item.sexo}',
+                                                             '${item.localidad}'
+                                                             '${item.fecha_nac}'
+                                                             '${item.correo}'
+                                                             '${item.telefono}'">
+                                MODIFICAR
+                              </button>
+                            </td>
+                            <td>
+                              <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#deleteClientModal" onclick="abrirEliminarModal('${item.ID}',
+                               																	'${item.DNI}',
+                                                                                              	'${item.nombre}',
+                                                                                              	'${item.apellido}',
+                                                                                              	'${item.correo}',
+                                                                                              	'${item.telefono}')">
+                                ELIMINAR
+                              </button>
+                            </td>
+                          </c:if>
+                        </c:forEach>
+                      </tbody>
+                    </table>
 			  	</div> 
 		  	</div>		
 		</form>
@@ -136,9 +165,9 @@ $(document).ready( function () {
            <div class="form-group col-md-4">
                <label style="float: left">Sexo</label>
 		       <select class="form-select">
-		           <option value="administrador">MASCULINO</option>
-		           <option value="vendedor">FEMENINO</option>
-		           <option value="contador">OTRO</option>
+		           <option value="M">MASCULINO</option>
+		           <option value="F">FEMENINO</option>
+		           <option value="N/C">OTRO</option>
 		       </select>
            </div>           
        </div>
@@ -203,30 +232,34 @@ $(document).ready( function () {
        <div class="row align-items-md-stretch">
      	   <div class="form-group col-md-4">
                <label style="float: left">Apellido</label>
-               <input name="apellido" class="form-control" placeholder="Ingrese apellido" required>
+               <input name="apeNuevo" class="form-control" placeholder="Ingrese apellido" required>
            </div>
            <div class="form-group col-md-4">
                <label style="float: left">Nombre</label>
-               <input name="nombre" class="form-control" placeholder="Ingrese nombre" required>
+               <input name="nomNuevo" class="form-control" placeholder="Ingrese nombre" required>
            </div>
            <div class="form-group col-md-4">
                <label style="float: left">Sexo</label>
-		       <select name="sexo" class="form-select">
-		           <option value="administrador">MASCULINO</option>
-		           <option value="vendedor">FEMENINO</option>
-		           <option value="contador">OTRO</option>
+		       <select name="sexoNuevo" class="form-select">
+		           <option value="M">MASCULINO</option>
+		           <option value="F">FEMENINO</option>
+		           <option value="N/C">OTRO</option>
 		       </select>
            </div>           
        </div>
        
        <div class="row align-items-md-stretch mt-1">
-           <div class="form-group col-md-9">
+           <div class="form-group col-md-4">
                <label style="float: left">DNI</label>
-               <input name="DNI" class="form-control" type="number" placeholder="Ingrese DNI" required min="1" max="99999999" >
+               <input name="DNINuevo" class="form-control" type="number" placeholder="Ingrese DNI" required min="1" max="99999999" >
            </div>
            <div class="form-group col-md-3">
                <label style="float: left">Fecha de Nacimiento</label>
-               <input name="date" class="form-control" type="date" name="date" required>
+               <input name="fechaNuevo" class="form-control" type="date" name="date" required>
+           </div>
+           <div class="form-group col-md-5">
+               <label style="float: left">Direccion</label>
+               <input name="direcNuevo" class="form-control" placeholder="Ingrese direccion" required>
            </div>
        </div>
 
@@ -234,12 +267,20 @@ $(document).ready( function () {
        
         <div class="row align-items-md-stretch">
      	   <div class="form-group col-md-6">
-               <label style="float: left">Direccion</label>
-               <input name="dir" class="form-control" placeholder="Ingrese direccion" required>
+               <label style="float: left">Provincia</label>
+               <select class="form-select" id="provinciaNuevo" name="provinciaNuevo">
+			   	<c:forEach items="${listaProvincias}" var="Provincia">
+			       <option id="${Provincia.ID}" value="${Provincia.ID}">${Provincia.nombre}</option>
+			   	</c:forEach>
+			   </select>
            </div>
            <div class="form-group col-md-6">
                <label style="float: left">Localidad</label>
-               <input name="loc" class="form-control" placeholder="Ingrese localidad" required>
+               <select class="form-select" id="localidadNuevo" name="localidadNuevo">
+			   	<c:forEach items="${listaLocalidades}" var="Localidad">
+			       <option id="${Localidad.ID}" value="${Localidad.ID}">${Localidad.nombre}</option>
+			   	</c:forEach>
+			   </select>
            </div>                   
        </div>
        
@@ -248,11 +289,11 @@ $(document).ready( function () {
         <div class="row align-items-md-stretch">
      	   <div class="form-group col-md-6">
                <label style="float: left">Correo Electronico</label>
-               <input name="cor" class="form-control" type="email" placeholder="Ingrese correo electronico" required>
+               <input name="corNuevo" class="form-control" type="email" placeholder="Ingrese correo electronico" required>
            </div>
            <div class="form-group col-md-6">
                <label style="float: left">Numero de Telefono</label>
-               <input name="tel" class="form-control" type="number" placeholder="Ingrese numero de telefono" required>
+               <input name="telNuevo" class="form-control" type="number" placeholder="Ingrese numero de telefono" required>
            </div>                   
        </div>
         

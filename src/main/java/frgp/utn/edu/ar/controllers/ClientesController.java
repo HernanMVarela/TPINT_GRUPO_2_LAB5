@@ -67,18 +67,19 @@ public class ClientesController {
 	
 	//Ingreso de Cliente | "/alta_cliente.html"
 	@RequestMapping(value ="/alta_cliente.html" , method= { RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView validarCliente(String nombre, String apellido, String sexo, String DNI, Date date, String dir, String loc, String cor, String tel){
+	public ModelAndView validarCliente(String nomNuevo, String apeNuevo, String sexoNuevo, String DNINuevo, Date fechaNuevo,
+									   String direcNuevo, int localidadNuevo, String corNuevo, String telNuevo){
 		ModelAndView MV = new ModelAndView();
 		
-		cliente.setDNI(DNI);
-		cliente.setNombre(nombre);
-		cliente.setApellido(apellido);
-		cliente.setSexo(sexo);
-		cliente.setCorreo(cor);
-		cliente.setDireccion(dir);
-		cliente.setFecha_nac(date);
-		cliente.setLocalidad(serviceLocalidad.obtenerUnRegistro(1));
-		cliente.setTelefono(tel);
+		cliente.setDNI(DNINuevo);
+		cliente.setNombre(nomNuevo);
+		cliente.setApellido(apeNuevo);
+		cliente.setSexo(sexoNuevo);
+		cliente.setCorreo(corNuevo);
+		cliente.setDireccion(direcNuevo);
+		cliente.setFecha_nac(fechaNuevo);
+		cliente.setLocalidad(serviceLocalidad.obtenerUnRegistro(localidadNuevo));
+		cliente.setTelefono(telNuevo);
 		cliente.setEstado(serviceEstadoCliente.obtenerUnRegistro(1));
 
 		String Message = "";
@@ -116,6 +117,8 @@ public class ClientesController {
 	private ModelAndView cargadorDeListasClientes(ModelAndView MV) 
 	{
 		MV.addObject("listaClientes",this.serviceCliente.obtenerClientes());
+		MV.addObject("listaLocalidades",this.serviceLocalidad.obtenerLocalidades());
+		MV.addObject("listaProvincias",this.serviceProvincia.obtenerProvincias());
 		return MV;
 	}
 	

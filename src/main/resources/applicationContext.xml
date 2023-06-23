@@ -22,7 +22,14 @@
 	
 	<!-- |||| ENTIDADES |||| -->
 	<bean id="ClienteEstandar" class="frgp.utn.edu.ar.dominio.Cliente">
+		<property name="localidad" ref="LocalidadEstandar"></property>
+		<property name="estado" ref="EstadoClienteEstandar"></property>
 	</bean>
+	<bean id="LocalidadEstandar" class="frgp.utn.edu.ar.dominio.Localidad">
+		<property name="provincia" ref="ProvinciaEstandar"></property>
+	</bean>
+	<bean id="ProvinciaEstandar" class="frgp.utn.edu.ar.dominio.Provincia"></bean>
+	<bean id="EstadoClienteEstandar" class="frgp.utn.edu.ar.dominio.Estado_Cli"></bean>
 	
 		<!-- CREO EL SERVICIO PARA Cliente -->
 	<bean id="ClienteServiceBean" class="frgp.utn.edu.ar.servicioImpl.ClienteServicioImpl">
