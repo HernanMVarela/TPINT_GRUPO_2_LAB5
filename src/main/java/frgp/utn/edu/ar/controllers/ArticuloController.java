@@ -1,7 +1,5 @@
 package frgp.utn.edu.ar.controllers;
 
-import java.sql.Date;
-
 import javax.servlet.ServletConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -10,23 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.bind.annotation.PathVariable;
-
 import frgp.utn.edu.ar.dominio.Articulo;
-import frgp.utn.edu.ar.dominio.Cliente;
-import frgp.utn.edu.ar.dominio.Estado_Cli;
-import frgp.utn.edu.ar.dominio.Localidad;
-import frgp.utn.edu.ar.dominio.Marca;
-import frgp.utn.edu.ar.dominio.Stock;
-import frgp.utn.edu.ar.dominio.Tipo_Articulo;
 import frgp.utn.edu.ar.servicio.ArticuloServicio;
-import frgp.utn.edu.ar.servicio.ClienteServicio;
 import frgp.utn.edu.ar.servicio.MarcaServicio;
-import frgp.utn.edu.ar.servicio.StockServicio;
 import frgp.utn.edu.ar.servicio.TipoArticuloServicio;
 
 @Controller
-public class VendedorController {
+public class ArticuloController {
 
 	@Autowired
 	public  ArticuloServicio serviceArticulo;
@@ -34,8 +22,11 @@ public class VendedorController {
 	public  TipoArticuloServicio serviceTipoArticulo;
 	@Autowired
 	public  MarcaServicio serviceMarca;
+	
 	@Autowired
-	public  StockServicio serviceStock;
+	public ModelAndView MV;
+	@Autowired
+	public Articulo articulo;
 	
 	// NO TOCAR - Servlets
 	public void init(ServletConfig config) {
@@ -45,15 +36,15 @@ public class VendedorController {
 		this.serviceArticulo = (ArticuloServicio) ctx.getBean("ArticuloServiceBean");
 		this.serviceTipoArticulo = (TipoArticuloServicio) ctx.getBean("TipoArticuloServiceBean");
 		this.serviceMarca = (MarcaServicio) ctx.getBean("MarcaServiceBean");
-		this.serviceStock = (StockServicio) ctx.getBean("StockServiceBean");
+		
+		this.MV = (ModelAndView) ctx.getBean("ModelAndViewBean");
+		this.articulo = (Articulo) ctx.getBean("ArticuloEstandar");
 	}
 	
 	//HOME VENDEDOR | vendedor.html"
 	@RequestMapping("vendedor.html")
 	public ModelAndView eventoRedireccionarHomeVendedor()
-	{
-		ModelAndView MV = new ModelAndView();
-		
+	{		
 		MV.setViewName("vendedor/HomeVendedor");
 		return MV;
 	}
@@ -62,7 +53,6 @@ public class VendedorController {
 	@RequestMapping("articulos.html")
 	public ModelAndView eventoRedireccionarArticulos()
 	{
-		ModelAndView MV = new ModelAndView();
 		MV = cargadorDeListasArticulos(MV);
 		MV.setViewName("vendedor/Articulos");
 		return MV;
@@ -71,19 +61,18 @@ public class VendedorController {
 	// ALTA DE NUEVO ARTICULO | "/altaArticulo.html"
 	@RequestMapping(value ="/alta_articulo.html" , method= { RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView validarArticulo(String nombre, int marca, int tipo, String precio_venta, String descripcion){
-		ModelAndView MV = new ModelAndView();
 		System.out.println("LLEGA A ALTA ARTICULO");
-		Articulo x = new Articulo();
-		x.setNombre(nombre);
-		x.setPrecio_venta(Float.parseFloat(precio_venta));
-		x.setMarca(serviceMarca.obtenerUnRegistro(marca));
-		x.setTipo(serviceTipoArticulo.obtenerUnRegistro(tipo));
-		x.setDescripcion(descripcion);
-		x.setEstado(true);
+		
+		articulo.setNombre(nombre);
+		articulo.setPrecio_venta(Float.parseFloat(precio_venta));
+		articulo.setMarca(serviceMarca.obtenerUnRegistro(marca));
+		articulo.setTipo(serviceTipoArticulo.obtenerUnRegistro(tipo));
+		articulo.setDescripcion(descripcion);
+		articulo.setEstado(true);
 
 		String Message = "";
 		try{
-			Message = asignarMensajeArticulos(serviceArticulo.insertarArticulo(x));
+			Message = asignarMensajeArticulos(serviceArticulo.insertarArticulo(articulo));
 			
 			MV.addObject("Mensaje", Message);
 			MV = cargadorDeListasArticulos(MV);
@@ -104,21 +93,19 @@ public class VendedorController {
 	
 	// MODIFICAR ARTICULO | "/modificar_articulo.html"
 	@RequestMapping(value ="/modificar_articulo.html" , method= { RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView modificarArticulo(String nombre, int marca, int tipo, String precio_venta, String descripcion){
-		ModelAndView MV = new ModelAndView();
+	public ModelAndView modificarArticulo(String nombre, int marca, int tipo, String precio_venta, String descripcion){	
 		
-		Articulo x = new Articulo();
-		x.setNombre(nombre);
-		x.setPrecio_venta(Float.parseFloat(precio_venta));
-		x.setMarca(serviceMarca.obtenerUnRegistro(marca));
-		x.setTipo(serviceTipoArticulo.obtenerUnRegistro(tipo));
-		x.setDescripcion(descripcion);
-		x.setEstado(true);
+		articulo.setNombre(nombre);
+		articulo.setPrecio_venta(Float.parseFloat(precio_venta));
+		articulo.setMarca(serviceMarca.obtenerUnRegistro(marca));
+		articulo.setTipo(serviceTipoArticulo.obtenerUnRegistro(tipo));
+		articulo.setDescripcion(descripcion);
+		articulo.setEstado(true);
 		
 		String Message="";
 		
 		try{
-			Message = asignarMensajeArticulos(serviceArticulo.actualizarArticulo(x));
+			Message = asignarMensajeArticulos(serviceArticulo.actualizarArticulo(articulo));
 			MV.addObject("Mensaje", Message);
 			MV = cargadorDeListasArticulos(MV);
 			MV.setViewName("vendedor/Articulos"); 
@@ -137,21 +124,19 @@ public class VendedorController {
 	// ELIMINAR ARTICULO | "/eliminar_articulo.html"
 	@RequestMapping(value ="/eliminar_articulo.html" , method= { RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView eliminarArticulo(String nombreEliminar, int marcaEliminar, int tipoEliminar, String precio_ventaEliminar, String descripcionEliminar){
-		ModelAndView MV = new ModelAndView();
-		
-		Articulo x = new Articulo();
-		x.setNombre(nombreEliminar);
-		x.setPrecio_venta(Float.parseFloat(precio_ventaEliminar));
-		x.setMarca(serviceMarca.obtenerUnRegistro(marcaEliminar));
-		x.setTipo(serviceTipoArticulo.obtenerUnRegistro(tipoEliminar));
-		x.setDescripcion(descripcionEliminar);
-		x.setEstado(false);
+
+		articulo.setNombre(nombreEliminar);
+		articulo.setPrecio_venta(Float.parseFloat(precio_ventaEliminar));
+		articulo.setMarca(serviceMarca.obtenerUnRegistro(marcaEliminar));
+		articulo.setTipo(serviceTipoArticulo.obtenerUnRegistro(tipoEliminar));
+		articulo.setDescripcion(descripcionEliminar);
+		articulo.setEstado(false);
 		
 		String Message="";
 		
 		try{
 			
-			Message = asignarMensajeArticulos(serviceArticulo.actualizarArticulo(x));
+			Message = asignarMensajeArticulos(serviceArticulo.actualizarArticulo(articulo));
 			MV.addObject("Mensaje", Message);
 			MV = cargadorDeListasArticulos(MV);
 			MV.setViewName("vendedor/Articulos"); 
@@ -167,52 +152,10 @@ public class VendedorController {
 		}	
 	}
 	
-	// Stock | "stock.html"
-	@RequestMapping("stock.html")
-	public ModelAndView eventoRedireccionarStock()
-	{
-		ModelAndView MV = new ModelAndView();
-		MV = cargadorDeListasStocks(MV);
-		MV.setViewName("vendedor/Stock");
-		return MV;
-	}
-	
-	// Ingreso de Stock | "/ingreso_stock.html"
-		@RequestMapping(value ="/ingreso_stock.html" , method= { RequestMethod.GET, RequestMethod.POST})
-		public ModelAndView validarStock(String art, Date date, String cantidad, String precio_compra){
-			ModelAndView MV = new ModelAndView();
-			
-			Stock x = new Stock();
-			x.setArticulo(serviceArticulo.obtenerUnRegistro(art));
-			x.setCantidad(Integer.parseInt(cantidad));
-			x.setPreciocompra(Float.parseFloat(precio_compra));
-			x.setFechaingreso(date);
-			
-			String Message = "";
-			try{
-				Message = asignarMensajeStocks(serviceStock.ingresarStock(x));
-				MV.addObject("Mensaje", Message);
-				MV = cargadorDeListasStocks(MV);
-				MV.setViewName("vendedor/Stock"); 
-				return MV;
-			}
-			catch(Exception e)
-			{
-				/// REEMPLAZAR POR DIRECCIONAMIENTO A PAGINA DE ERROR
-				Message = e.toString();
-				System.out.println(e.toString());
-				MV.addObject("Mensaje", Message);
-				MV.setViewName("Error"); 
-				return MV;
-			}
-		}
-	
 	// Clientes | "ventas.html"
 	@RequestMapping("ventas.html")
 	public ModelAndView eventoRedireccionarVentas()
 	{
-		ModelAndView MV = new ModelAndView();
-		
 		MV.setViewName("vendedor/Ventas");
 		return MV;
 	}	
@@ -249,32 +192,11 @@ public class VendedorController {
 		return "ERROR";
 	}
 	
-	private String asignarMensajeStocks(String error) {
-		if (error.equals("AGREGADO")) {
-			return "Stock agregado";
-		}
-		if (error.equals("NO AGREGADO")) {
-			return "Stock no agregado";
-		}
-		if (error.equals("ERROR")) {
-			return "ERROR";
-		}
-		return "ERROR";
-	}
-	
 	private ModelAndView cargadorDeListasArticulos(ModelAndView MV) 
 	{
 		MV.addObject("listaArticulos",this.serviceArticulo.obtenerArticulos());
 		MV.addObject("listaTipoArticulos",this.serviceTipoArticulo.obtenerTiposDeArticulo());
 		MV.addObject("listaMarcas",this.serviceMarca.obtenerMarcas());
-		MV.addObject("listaStock",this.serviceStock.obtenerStock());
-		return MV;
-	}
-	
-	private ModelAndView cargadorDeListasStocks(ModelAndView MV) 
-	{
-		MV.addObject("listaArticulos",this.serviceArticulo.obtenerArticulos());
-		MV.addObject("listaStocks",this.serviceStock.obtenerStock());
 		return MV;
 	}
 	

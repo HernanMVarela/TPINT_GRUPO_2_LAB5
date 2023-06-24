@@ -7,9 +7,7 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import frgp.utn.edu.ar.dao.EstadoClienteDao;
 import frgp.utn.edu.ar.dao.EstadoUsuarioDao;
-import frgp.utn.edu.ar.dominio.Estado_Cli;
 import frgp.utn.edu.ar.dominio.Estado_User;
 
 public class EstadoUsuarioDaoImpl implements EstadoUsuarioDao {

@@ -2,11 +2,8 @@ package frgp.utn.edu.ar.servicioImpl;
 
 import java.util.ArrayList;
 
-import frgp.utn.edu.ar.dao.EstadoClienteDao;
 import frgp.utn.edu.ar.dao.EstadoUsuarioDao;
-import frgp.utn.edu.ar.dominio.Estado_Cli;
 import frgp.utn.edu.ar.dominio.Estado_User;
-import frgp.utn.edu.ar.servicio.EstadoClienteServicio;
 import frgp.utn.edu.ar.servicio.EstadoUsuarioServicio;
 
 public class EstadoUsuarioServicioImpl implements EstadoUsuarioServicio {

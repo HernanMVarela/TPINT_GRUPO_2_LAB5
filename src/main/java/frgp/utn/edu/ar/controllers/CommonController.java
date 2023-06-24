@@ -5,19 +5,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.bind.annotation.PathVariable;
-
-import frgp.utn.edu.ar.dominio.Articulo;
-import frgp.utn.edu.ar.dominio.Marca;
-import frgp.utn.edu.ar.dominio.Tipo_Articulo;
-import frgp.utn.edu.ar.servicio.ArticuloServicio;
 
 @Controller
 public class CommonController {
 
+	@Autowired
+	private ModelAndView MV;
+	
+	public void init(ServletConfig config) {
+		ApplicationContext ctx = WebApplicationContextUtils
+				.getRequiredWebApplicationContext(config.getServletContext());
+		this.MV = (ModelAndView) ctx.getBean("ModelAndViewBean");
+	}
+	
 	// "/common/header"
     @RequestMapping("/common/header.html")
     public String showHeader() {
@@ -60,7 +62,6 @@ public class CommonController {
 	// Logout | "Logout.html"
     @RequestMapping("Logout.html")
     public ModelAndView getLogout() {
-    	ModelAndView MV = new ModelAndView();
 		MV.setViewName("Home"); 
 		return MV;
     }
@@ -68,7 +69,6 @@ public class CommonController {
     // Error | "error.html"
     @RequestMapping("error.html")
     public ModelAndView error() {
-    	ModelAndView MV = new ModelAndView();
 		MV.setViewName("Error"); 
 		return MV;
     }

@@ -2,11 +2,8 @@ package frgp.utn.edu.ar.servicioImpl;
 
 import java.util.ArrayList;
 
-import frgp.utn.edu.ar.dao.TipoArticuloDao;
 import frgp.utn.edu.ar.dao.TipoUsuarioDao;
-import frgp.utn.edu.ar.dominio.Tipo_Articulo;
 import frgp.utn.edu.ar.dominio.Tipo_Usuario;
-import frgp.utn.edu.ar.servicio.TipoArticuloServicio;
 import frgp.utn.edu.ar.servicio.TipoUsuarioServicio;
 
 public class TipoUsuarioServicioImpl implements TipoUsuarioServicio {

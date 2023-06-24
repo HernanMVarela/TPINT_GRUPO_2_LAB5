@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import frgp.utn.edu.ar.dao.ArticuloDao;
 import frgp.utn.edu.ar.dominio.Articulo;
-import frgp.utn.edu.ar.dominio.Usuario;
 import frgp.utn.edu.ar.servicio.ArticuloServicio;
 
 public class ArticuloServicioImpl implements ArticuloServicio{

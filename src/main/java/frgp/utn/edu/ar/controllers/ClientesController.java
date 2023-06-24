@@ -30,6 +30,10 @@ public class ClientesController {
 	
 	@Autowired
 	public Cliente cliente;
+	
+	@Autowired
+	public ModelAndView MV;
+
 
 	// NO TOCAR - Servlets
 	public void init(ServletConfig config) {
@@ -41,13 +45,13 @@ public class ClientesController {
 		this.serviceCliente = (ClienteServicio) ctx.getBean("ClienteServiceBean");
 		this.serviceEstadoCliente = (EstadoClienteServicio) ctx.getBean("EstadoClienteServiceBean");
 		this.cliente = (Cliente) ctx.getBean("ClienteEstandar");
+		this.MV = (ModelAndView) ctx.getBean("ModelAndViewBean");
 	}	
 		
 	// Clientes | "clientes.html"
 	@RequestMapping("clientes.html")
 	public ModelAndView eventoRedireccionarClientes()
 	{
-		ModelAndView MV = new ModelAndView();
 		MV = cargadorDeListasClientes(MV);
 		MV.setViewName("vendedor/Clientes");
 		return MV;
@@ -57,7 +61,6 @@ public class ClientesController {
 	@RequestMapping(value ="/alta_cliente.html" , method= { RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView validarCliente(String nomNuevo, String apeNuevo, String sexoNuevo, String DNINuevo, Date fechaNuevo,
 									   String direcNuevo, int localidadNuevo, String corNuevo, String telNuevo){
-		ModelAndView MV = new ModelAndView();
 		
 		cliente.setDNI(DNINuevo);
 		cliente.setNombre(nomNuevo);
@@ -94,8 +97,7 @@ public class ClientesController {
 	public ModelAndView modificarCliente(
 		int IDModif,Date fechaModif,String DNIModif,String nombreModif,
 		String apellidoModif,String sexoModif,String correoModif, String direccionModif,
-		String telefonoModif){
-		ModelAndView MV = new ModelAndView();		
+		String telefonoModif){		
 		
 		cliente.setID(IDModif);
 		cliente.setDNI(DNIModif);
@@ -131,8 +133,7 @@ public class ClientesController {
 	
 		//Modificar Cliente | "/eliminar_cliente.html"
 	@RequestMapping(value ="/eliminar_cliente.html" , method= { RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView eliminarCliente(int IDModif){
-		ModelAndView MV = new ModelAndView();		
+	public ModelAndView eliminarCliente(int IDModif){		
 		
 		cliente = serviceCliente.obtenerUnRegistro(IDModif);
 		cliente.setEstado(serviceEstadoCliente.obtenerUnRegistro(2));

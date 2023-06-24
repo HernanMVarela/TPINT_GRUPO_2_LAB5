@@ -7,11 +7,7 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import frgp.utn.edu.ar.dao.ArticuloDao;
-import frgp.utn.edu.ar.dao.ClienteDao;
 import frgp.utn.edu.ar.dao.UsuarioDao;
-import frgp.utn.edu.ar.dominio.Articulo;
-import frgp.utn.edu.ar.dominio.Cliente;
 import frgp.utn.edu.ar.dominio.Usuario;
 
 public class UsuarioDaoImpl implements UsuarioDao {

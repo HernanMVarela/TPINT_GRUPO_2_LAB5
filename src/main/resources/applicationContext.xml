@@ -21,6 +21,18 @@
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	
 	<!-- |||| ENTIDADES |||| -->
+	<bean id="ModelAndViewBean" class="org.springframework.web.servlet.ModelAndView">
+	</bean>
+	
+	<bean id="StockEstandar" class="frgp.utn.edu.ar.dominio.Stock">
+		<property name="articulo" ref="ArticuloEstandar"></property>
+	</bean>
+
+	<bean id="ArticuloEstandar" class="frgp.utn.edu.ar.dominio.Articulo">
+		<property name="marca" ref="MarcaEstandar"></property>
+		<property name="tipo" ref="TipoArticuloEstandar"></property>
+	</bean>
+	
 	<bean id="ClienteEstandar" class="frgp.utn.edu.ar.dominio.Cliente">
 		<property name="localidad" ref="LocalidadEstandar"></property>
 		<property name="estado" ref="EstadoClienteEstandar"></property>
@@ -37,6 +49,8 @@
 	<bean id="ProvinciaEstandar" class="frgp.utn.edu.ar.dominio.Provincia"></bean>
 	<bean id="EstadoClienteEstandar" class="frgp.utn.edu.ar.dominio.Estado_Cli"></bean>
 	<bean id="EstadoUsuarioEstandar" class="frgp.utn.edu.ar.dominio.Estado_User"></bean>
+	<bean id="MarcaEstandar" class="frgp.utn.edu.ar.dominio.Marca"></bean>
+	<bean id="TipoArticuloEstandar" class="frgp.utn.edu.ar.dominio.Tipo_Articulo"></bean>
 		
 	<!-- CREO EL SERVICIO PARA Cliente -->
 	<bean id="ClienteServiceBean" class="frgp.utn.edu.ar.servicioImpl.ClienteServicioImpl">

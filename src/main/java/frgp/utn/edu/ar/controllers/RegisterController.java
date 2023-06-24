@@ -34,6 +34,9 @@ public class RegisterController {
 	
 	@Autowired
 	public Usuario usuario;
+	
+	@Autowired
+	public ModelAndView MV;
 
 	// NO TOCAR - Servlets
 	public void init(ServletConfig config) {
@@ -45,14 +48,15 @@ public class RegisterController {
 		this.serviceUsuario = (UsuarioServicio) ctx.getBean("UsuarioServiceBean");
 		this.serviceTipoUsuario = (TipoUsuarioServicio) ctx.getBean("TipoUsuarioServiceBean");
 		this.serviceEstadoUsuario = (EstadoUsuarioServicio) ctx.getBean("EstadoUsuarioServiceBean");
+		
 		this.usuario = (Usuario) ctx.getBean("UsuarioEstandar");
+		this.MV = (ModelAndView) ctx.getBean("ModelAndViewBean");
 	}	
 
 	// ALTA USER | "alta-usuario.html"
 	@RequestMapping("registro-usuario.html")
 	public ModelAndView eventoRedireccionarAltaUsuario()
 	{
-		ModelAndView MV = new ModelAndView();
 		MV = cargadorDeListasUsuarios(MV);
 		MV.setViewName("registro/RegistroUsuario");
 		return MV;
@@ -72,22 +76,6 @@ public class RegisterController {
 									   String user,
 									   String pass,
 									   int rol){
-		
-		ModelAndView MV = new ModelAndView();
-		
-		System.out.println(nombre);
-		System.out.println(apellido);
-		System.out.println(dni);
-		System.out.println(sexo);
-		System.out.println(direccion);
-		System.out.println(localidad);
-		System.out.println(correo);
-		System.out.println(telefono);
-		System.out.println(fechaNacimiento);
-		System.out.println(user);
-		System.out.println(pass);
-		System.out.println(rol);
-
 		
 		usuario.setNombre(nombre);
 		usuario.setApellido(apellido);

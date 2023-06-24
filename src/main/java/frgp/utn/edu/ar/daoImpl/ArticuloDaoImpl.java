@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import frgp.utn.edu.ar.dao.ArticuloDao;
 import frgp.utn.edu.ar.dominio.Articulo;
-import frgp.utn.edu.ar.dominio.Usuario;
 
 public class ArticuloDaoImpl implements ArticuloDao {
 
