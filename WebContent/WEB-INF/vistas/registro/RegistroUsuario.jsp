@@ -19,118 +19,118 @@
 							<div class="row align-items-md-stretch">
 
 								<div class="col-md-8">
-							    <form id="alta_usuario.html" method="post">
-									<div class="row align-items-md-stretch">
-										<div class="form-group col-md-6">
-											<label style="float: left">Nombre</label> 
-											<input class="form-control" name="nombre" placeholder="Ingrese nombre" required>
+									<form id="alta_usuario.html" method="post">
+										<div class="row align-items-md-stretch">
+											<div class="form-group col-md-6">
+												<label style="float: left">Nombre</label> 
+												<input class="form-control" name="nombre" placeholder="Ingrese nombre" required>
+											</div>
+											<div class="form-group col-md-6">
+												<label style="float: left">Apellido</label>
+												<input class="form-control" name="apellido" placeholder="Ingrese apellido" required>
+											</div>
 										</div>
-										<div class="form-group col-md-6">
-											<label style="float: left">Apellido</label>
-											<input class="form-control" name="apellido" placeholder="Ingrese apellido" required>
-										</div>
-									</div>
 
-									<br>
-
-									<div class="row align-items-md-stretch">
-										<div class="form-group col-md-4">
-											<label style="float: left">DNI</label> 
-											<input class="form-control" type="number" name="dni" placeholder="Ingrese DNI" required min="1" max="99999999" >
-										</div>
-										<div class="form-group col-md-3">
-							               <label style="float: left">Fecha de Nacimiento</label>
-							               <input class="form-control" type="date" name="date" name="fechaNacimiento" required>
-							           	</div>										
-										<div class="form-group col-md-5">
-							               <label style="float: left">Sexo</label>
-									       <select name="sexo" class="form-select">
-									           <option value="M">MASCULINO</option>
-									           <option value="F">FEMENINO</option>
-									           <option value="N/C">OTRO</option>
-									       </select>
-							            </div>  
-									</div>
-									
-									<br>
-									
-									<div class="row align-items-md-stretch">
-										<div class="form-group col-md-4">
-							               <label style="float: left">Direccion</label>
-							               <input name="direccion" class="form-control" placeholder="Ingrese direccion" required>
-							            </div>
-							            <div class="form-group col-md-4">
-							               <label style="float: left">Provincia</label>
-							               <select class="form-select" id="provinciaNuevo" name="provinciaNuevo">
-										   	<c:forEach items="${listaProvincias}" var="Provincia">
-										       <option id="${Provincia.ID}" value="${Provincia.ID}">${Provincia.nombre}</option>
-										   	</c:forEach>
-										   </select>
-							            </div>
-							            <div class="form-group col-md-4">
-							               <label style="float: left">Localidad</label>
-							               <select class="form-select" id="localidadNuevo" name="localidad">
-										   	<c:forEach items="${listaLocalidades}" var="Localidad">
-										       <option id="${Localidad.ID}" value="${Localidad.ID}">${Localidad.nombre}</option>
-										   	</c:forEach>
-										   </select>
-							           	</div> 
-									</div>
-									
-									<br>
-									
-									<div class="row align-items-md-stretch">
-							     	   <div class="form-group col-md-6">
-							               <label style="float: left">Correo Electronico</label>
-							               <input class="form-control" type="email" name="correo" placeholder="Ingrese correo electronico" required>
-							           </div>
-							           <div class="form-group col-md-6">
-							               <label style="float: left">Numero de Telefono</label>
-							               <input class="form-control" type="number" name="telefono" placeholder="Ingrese numero de telefono" required>
-							           </div>                   
-							       	</div>
-
-									<hr>
-
-									<div class="form-group col-md-8">
-										<label style="float: left">Usuario</label> 
-										<input class="form-control" name="user" placeholder="Ingrese usuario" required> 
-										
 										<br>
 
-										<label style="float: left">Contraseña</label>
-										<input class="form-control" type="password" name="pass" placeholder="Ingrese contraseña" required min="6"> 
+										<div class="row align-items-md-stretch">
+											<div class="form-group col-md-4">
+												<label style="float: left">DNI</label> 
+												<input class="form-control" type="number" name="dni" placeholder="Ingrese DNI" required min="1" max="99999999" >
+											</div>
+											<div class="form-group col-md-3">
+											<label style="float: left">Fecha de Nacimiento</label>
+											<input class="form-control" type="date" name="fechaNacimiento" required>
+											</div>										
+											<div class="form-group col-md-5">
+											<label style="float: left">Sexo</label>
+											<select name="sexo" class="form-select">
+												<option value="M">MASCULINO</option>
+												<option value="F">FEMENINO</option>
+												<option value="N/C">OTRO</option>
+											</select>
+											</div>  
+										</div>
 										
-										<br> 
+										<br>
 										
-										<label style="float: left">Repita la contraseña</label> 
-										<input class="form-control" type="password" placeholder="Re-Ingrese su contraseña" required min="6">
-									</div>
+										<div class="row align-items-md-stretch">
+											<div class="form-group col-md-4">
+											<label style="float: left">Direccion</label>
+											<input name="direccion" class="form-control" placeholder="Ingrese direccion" required>
+											</div>
+											<div class="form-group col-md-4">
+											<label style="float: left">Provincia</label>
+											<select class="form-select" id="provinciaNuevo" name="provinciaNuevo">
+												<c:forEach items="${listaProvincias}" var="Provincia">
+												<option id="${Provincia.ID}" value="${Provincia.ID}">${Provincia.nombre}</option>
+												</c:forEach>
+											</select>
+											</div>
+											<div class="form-group col-md-4">
+											<label style="float: left">Localidad</label>
+											<select class="form-select" id="localidad" name="localidad">
+												<c:forEach items="${listaLocalidades}" var="Localidad">
+												<option id="${Localidad.ID}" value="${Localidad.ID}">${Localidad.nombre}</option>
+												</c:forEach>
+											</select>
+											</div> 
+										</div>
+										
+										<br>
+										
+										<div class="row align-items-md-stretch">
+										<div class="form-group col-md-6">
+											<label style="float: left">Correo Electronico</label>
+											<input class="form-control" type="email" name="correo" placeholder="Ingrese correo electronico" required>
+										</div>
+										<div class="form-group col-md-6">
+											<label style="float: left">Numero de Telefono</label>
+											<input class="form-control" type="number" name="telefono" placeholder="Ingrese numero de telefono" required>
+										</div>                   
+										</div>
 
-									<hr>
+										<hr>
 
-									<label style="float: left">Seleccione rol</label> <select
-										class="form-select">
-										<option value="2">VENDEDOR</option>
-										<option value="3">CONTADOR</option>
-									</select>
+										<div class="form-group col-md-8">
+											<label style="float: left">Usuario</label> 
+											<input class="form-control" name="user" placeholder="Ingrese usuario" required> 
+											
+											<br>
 
-									<hr>
+											<label style="float: left">Contraseña</label>
+											<input class="form-control" type="password" name="pass" placeholder="Ingrese contraseña" required min="6"> 
+											
+											<br> 
+											
+											<label style="float: left">Repita la contraseña</label> 
+											<input class="form-control" type="password" placeholder="Re-Ingrese su contraseña" required min="6">
+										</div>
 
-									<div class="d-flex justify-content-center">
-										<input type="submit" class="btn btn-success mr-1" value="REGISTRARSE" name="btnRedirigir" formaction="home.html">
-									</div>
-							    </form>
+										<hr>
+
+										<label style="float: left">Seleccione rol</label>
+											<select class="form-select" name="rol">
+												<option value=2>VENDEDOR</option>
+												<option value=3>CONTADOR</option>
+											</select>
+
+										<hr>
+
+										<div class="d-flex justify-content-center">
+											<input type="submit" class="btn btn-primary" name="btnAceptar" value="Aceptar">      
+										</div>
+									</form>
 								</div>
 
 								<div class="col-md-4" style="text-align: center;">
-							    <form id="volverForm" method="post">								
-									<img class="img-responsive p-3" style="width: 50%;" src="<c:url value="/assets/register.png"/>"/>
-									<h1>¡Oye!</h1>
-									<p>¿Ya tienes una cuenta? Haz click en el botón de abajo
-										para iniciar sesión.</p>
-									<input type="submit" class="btn btn-success mr-1" value="INICIAR SESION" name="btnRedirigir" formaction="home.html">
-								</form>
+									<form id="volverForm" method="post">								
+										<img class="img-responsive p-3" style="width: 50%;" src="<c:url value="/assets/register.png"/>"/>
+										<h1>ï¿½Oye!</h1>
+										<p>ï¿½Ya tienes una cuenta? Haz click en el botï¿½n de abajo
+											para iniciar sesiï¿½n.</p>
+										<input type="submit" class="btn btn-success mr-1" value="INICIAR SESION" name="btnRedirigir" formaction="home.html">
+									</form>
 								</div>
 							</div>
 						</div>

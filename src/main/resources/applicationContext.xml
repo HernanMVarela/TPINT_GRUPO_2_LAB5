@@ -54,7 +54,7 @@
 		<property name="dataAccess" ref="UsuarioDABean"></property>
 	</bean>
 	<!-- EL SERVICIO NECESITA EL DAO  -->
-	<bean id="usuarioDABean" class="frgp.utn.edu.ar.daoImpl.UsuarioDaoImpl" 
+	<bean id="UsuarioDABean" class="frgp.utn.edu.ar.daoImpl.UsuarioDaoImpl" 
 		scope="singleton"> 
 		<property name="sessionFactory" ref="sessionFactoryBean"></property> 
 	</bean>

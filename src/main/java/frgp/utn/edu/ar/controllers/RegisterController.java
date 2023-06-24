@@ -15,6 +15,7 @@ import frgp.utn.edu.ar.dominio.Usuario;
 import frgp.utn.edu.ar.servicio.EstadoUsuarioServicio;
 import frgp.utn.edu.ar.servicio.LocalidadServicio;
 import frgp.utn.edu.ar.servicio.ProvinciaServicio;
+import frgp.utn.edu.ar.servicio.TipoUsuarioServicio;
 import frgp.utn.edu.ar.servicio.UsuarioServicio;
 
 @Controller
@@ -24,6 +25,8 @@ public class RegisterController {
 	public ProvinciaServicio serviceProvincia;
 	@Autowired
 	public LocalidadServicio serviceLocalidad;
+	@Autowired
+	public TipoUsuarioServicio serviceTipoUsuario;
 	@Autowired
 	public EstadoUsuarioServicio serviceEstadoUsuario;
 	@Autowired
@@ -40,6 +43,7 @@ public class RegisterController {
 		this.serviceProvincia = (ProvinciaServicio) ctx.getBean("ProvinciaServiceBean");
 		this.serviceLocalidad = (LocalidadServicio) ctx.getBean("LocalidadServiceBean");
 		this.serviceUsuario = (UsuarioServicio) ctx.getBean("UsuarioServiceBean");
+		this.serviceTipoUsuario = (TipoUsuarioServicio) ctx.getBean("TipoUsuarioServiceBean");
 		this.serviceEstadoUsuario = (EstadoUsuarioServicio) ctx.getBean("EstadoUsuarioServiceBean");
 		this.usuario = (Usuario) ctx.getBean("UsuarioEstandar");
 	}	
@@ -66,9 +70,24 @@ public class RegisterController {
 									   String telefono, 
 									   Date fechaNacimiento,
 									   String user,
-									   String pass){
+									   String pass,
+									   int rol){
 		
 		ModelAndView MV = new ModelAndView();
+		
+		System.out.println(nombre);
+		System.out.println(apellido);
+		System.out.println(dni);
+		System.out.println(sexo);
+		System.out.println(direccion);
+		System.out.println(localidad);
+		System.out.println(correo);
+		System.out.println(telefono);
+		System.out.println(fechaNacimiento);
+		System.out.println(user);
+		System.out.println(pass);
+		System.out.println(rol);
+
 		
 		usuario.setNombre(nombre);
 		usuario.setApellido(apellido);
@@ -80,12 +99,16 @@ public class RegisterController {
 		usuario.setTelefono(telefono);
 		usuario.setFecha_nac(fechaNacimiento);
 		usuario.setNombreU(user);
-		usuario.setPassU(pass);		
+		usuario.setPassU(pass);	
+		usuario.setTipo(serviceTipoUsuario.obtenerUnRegistro(rol));
 		usuario.setEstado(serviceEstadoUsuario.obtenerUnRegistro(1));
+		
+		System.out.println(usuario);
+
 
 		String Message = "";
 		try{
-			Message = asignarMensajeCliente(serviceUsuario.insertarUsuario(usuario));
+			Message = asignarMensajeUsuario(serviceUsuario.insertarUsuario(usuario));
 			MV.addObject("Mensaje", Message);
 			MV = cargadorDeListasUsuarios(MV);
 			MV.setViewName("Home"); 
@@ -101,7 +124,7 @@ public class RegisterController {
 		}
 	}
 	
-	private String asignarMensajeCliente(String error) {
+	private String asignarMensajeUsuario(String error) {
 		if (error.equals("AGREGADO")) {
 			return "Usuario Agregado";
 		}
