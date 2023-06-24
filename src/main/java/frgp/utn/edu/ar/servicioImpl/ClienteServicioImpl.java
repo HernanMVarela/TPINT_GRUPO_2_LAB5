@@ -49,8 +49,12 @@ public class ClienteServicioImpl implements ClienteServicio{
 
 	@Override
 	public String actualizarCliente(Cliente modificar) {
+			if (dataAccess.actualizarCliente(modificar)) {
+				return "MODIFICADO";
+			}else {
+				return "NO MODIFICADO";
+			}
 		
-		return "MODIFICADO";
 	}
 
 }

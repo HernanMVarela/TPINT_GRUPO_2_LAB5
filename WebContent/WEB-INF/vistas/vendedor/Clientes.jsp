@@ -8,18 +8,18 @@
 $(document).ready( function () {
     $('#tabla_clientes').DataTable();
 } );
-function abrirModificarModal(dni, nombre, apellido, direccion, sexo, localidad, fecha, email, telefono) {
-
-	$('#IDModif').val(ID);
-    $('#DNIModif').val(DNI);
-    $('#nombreModif').val(nombre);
-    $('#apellidoModif').val(apellido);
-    $('#direccionModif').val(direccion);
-    $('#sexoModif').val(sexo);
-    $('#localidadModif').val(localidad);
-    $('#fechaModif').val(fecha);
-    $('#correoModif').val(email);
-    $('#telefonoModif').val(telefono);
+function abrirModificarModal(id,dni, nombre, apellido, direccion, sexo, localidad, fecha, email, telefono) {
+console.log(id)
+	 $('#IDModif').val(id);
+   $('#DNIModif').val(dni);
+   $('#nombreModif').val(nombre);
+   $('#apellidoModif').val(apellido);
+   $('#direccionModif').val(direccion);
+   $('#sexoModif').val(sexo);
+   $('#localidadModif').val(localidad);
+   $('#fechaModif').val(fecha);
+   $('#correoModif').val(email);
+   $('#telefonoModif').val(telefono);
 
   }
 
@@ -62,7 +62,7 @@ function abrirModificarModal(dni, nombre, apellido, direccion, sexo, localidad, 
                           <th class="text-center" scope="col"> DNI </th>
                           <th class="text-center" scope="col"> Nombre </th>
                           <th class="text-center" scope="col"> Apellido </th>
-                          <th class="text-center" scope="col"> Dirección </th>
+                          <th class="text-center" scope="col"> Direcciï¿½n </th>
                           <th class="text-center" scope="col"> Sexo </th>
                           <th class="text-center" scope="col"> Provincia </th>
                           <th class="text-center" scope="col"> Nacionalidad </th>
@@ -91,15 +91,15 @@ function abrirModificarModal(dni, nombre, apellido, direccion, sexo, localidad, 
                               <button type="button" class="btn btn-success" data-bs-toggle="modal"
                                 data-bs-target="#modifyClientModal" 
                                 onclick="abrirModificarModal('${item.ID}',
-                               								 '${item.DNI}',
+                               								               '${item.DNI}',
                                                              '${item.nombre}',
                                                              '${item.apellido}',
                                                              '${item.direccion}',
                                                              '${item.sexo}',
-                                                             '${item.localidad}'
-                                                             '${item.fecha_nac}'
-                                                             '${item.correo}'
-                                                             '${item.telefono}'">
+                                                             '${item.localidad}',
+                                                             '${item.fecha_nac}',
+                                                             '${item.correo}',
+                                                             '${item.telefono}')">
                                 MODIFICAR
                               </button>
                             </td>
@@ -133,7 +133,7 @@ function abrirModificarModal(dni, nombre, apellido, direccion, sexo, localidad, 
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ¿DESEA ELIMINAR EL CLIENTE SELECCIONADO?
+        ï¿½DESEA ELIMINAR EL CLIENTE SELECCIONADO?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">CANCELAR</button>
@@ -154,17 +154,21 @@ function abrirModificarModal(dni, nombre, apellido, direccion, sexo, localidad, 
       </div>
       <div class="modal-body">
        <div class="row align-items-md-stretch">
+        <div class="form-group col-md-4">
+          <label style="float: left">ID</label>
+          <input readonly  id="IDModif" name="IDModif" class="form-control"  required>
+      </div>
      	   <div class="form-group col-md-4">
                <label style="float: left">Apellido</label>
-               <input class="form-control" placeholder="Ingrese apellido" required>
+               <input  id="apellidoModif" name="apellidoModif"  class="form-control" placeholder="Ingrese apellido" required>
            </div>
            <div class="form-group col-md-4">
-               <label style="float: left">Nombre</label>
-               <input class="form-control" placeholder="Ingrese nombre" required>
+               <label style="float: left">Nombres</label>
+               <input id="nombreModif" name="nombreModif" class="form-control" placeholder="Ingrese nombre" required>
            </div>
            <div class="form-group col-md-4">
                <label style="float: left">Sexo</label>
-		       <select class="form-select">
+		       <select id="sexoModif" name="sexoModif" class="form-select">
 		           <option value="M">MASCULINO</option>
 		           <option value="F">FEMENINO</option>
 		           <option value="N/C">OTRO</option>
@@ -174,12 +178,12 @@ function abrirModificarModal(dni, nombre, apellido, direccion, sexo, localidad, 
        
        <div class="row align-items-md-stretch mt-1">
            <div class="form-group col-md-9">
-               <label style="float: left">DNI</label>     
-               <input class="form-control" type="number" placeholder="Ingrese DNI" required min="1" max="99999999" >
+               <label  style="float: left">DNI</label>     
+               <input id="DNIModif" name="DNIModif" class="form-control" type="number" placeholder="Ingrese DNI" required min="1" max="99999999" >
            </div>
            <div class="form-group col-md-3">
                <label style="float: left">Fecha de Nacimiento</label>
-               <input class="form-control" type="date" name="date" required>
+               <input id="fechaModif" name="fechaModif" class="form-control" type="date" name="date" required>
            </div>
        </div>
 
@@ -188,12 +192,15 @@ function abrirModificarModal(dni, nombre, apellido, direccion, sexo, localidad, 
         <div class="row align-items-md-stretch">
      	   <div class="form-group col-md-6">
                <label style="float: left">Direccion</label>
-               <input class="form-control" placeholder="Ingrese direccion" required>
+               <input  id="direccionModif" name="direccionModif" class="form-control" placeholder="Ingrese direccion" required>
            </div>
            <div class="form-group col-md-6">
                <label style="float: left">Localidad</label>
-               <input class="form-control" placeholder="Ingrese localidad" required>
-           </div>                   
+               <input id="localidadModif" name="localidadModif" class="form-control" placeholder="Ingrese localidad" required>
+           </div>      
+           
+           
+           
        </div>
        
        <hr>
@@ -201,11 +208,11 @@ function abrirModificarModal(dni, nombre, apellido, direccion, sexo, localidad, 
         <div class="row align-items-md-stretch">
      	   <div class="form-group col-md-6">
                <label style="float: left">Correo Electronico</label>
-               <input class="form-control" type="email" placeholder="Ingrese correo electronico" required>
+               <input id="correoModif" name="correoModif" class="form-control" type="email" placeholder="Ingrese correo electronico" required>
            </div>
            <div class="form-group col-md-6">
                <label style="float: left">Numero de Telefono</label>
-               <input class="form-control" type="number" placeholder="Ingrese numero de telefono" required>
+               <input id="telefonoModif" name="telefonoModif" class="form-control" type="number" placeholder="Ingrese numero de telefono" required>
            </div>                   
        </div>
         

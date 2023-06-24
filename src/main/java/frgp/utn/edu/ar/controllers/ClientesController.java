@@ -100,6 +100,47 @@ public class ClientesController {
 			return MV;
 		}
 	}
+
+		//Modificar Cliente | "/modificar_cliente.html"
+	@RequestMapping(value ="/modificar_cliente.html" , method= { RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView modificarCliente(
+		int IDModif,Date fechaModif,String DNIModif,String nombreModif,
+		String apellidoModif,String sexoModif,String correoModif, String direccionModif,
+		String telefonoModif){
+		ModelAndView MV = new ModelAndView();
+		
+		
+		cliente.setID(IDModif);
+		cliente.setDNI(DNIModif);
+		cliente.setNombre(nombreModif);
+		cliente.setApellido(apellidoModif);
+		cliente.setSexo(sexoModif);
+		cliente.setCorreo(correoModif);
+		cliente.setDireccion(direccionModif);
+		cliente.setFecha_nac(fechaModif);
+		cliente.setLocalidad(serviceLocalidad.obtenerUnRegistro(18));
+		cliente.setTelefono(telefonoModif);
+		cliente.setEstado(serviceEstadoCliente.obtenerUnRegistro(1));
+
+		String Message = "";	
+		
+		try{
+			Message = asignarMensajeCliente(serviceCliente.actualizarCliente(cliente));
+			MV.addObject("Mensaje", Message);
+			MV = cargadorDeListasClientes(MV);
+			MV.setViewName("vendedor/Clientes"); 
+			return MV;
+		}
+		catch(Exception e)
+		{
+			/// REEMPLAZAR POR DIRECCIONAMIENTO A PAGINA DE ERROR
+			Message = e.toString();
+			System.out.println(e.toString());
+			MV.addObject("Mensaje", Message);
+			MV.setViewName("Error"); 
+			return MV;
+		}
+	}
 	
 	private String asignarMensajeCliente(String error) {
 		if (error.equals("AGREGADO")) {
