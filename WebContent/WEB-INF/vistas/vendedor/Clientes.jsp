@@ -62,11 +62,11 @@ console.log(id)
                           <th class="text-center" scope="col"> DNI </th>
                           <th class="text-center" scope="col"> Nombre </th>
                           <th class="text-center" scope="col"> Apellido </th>
-                          <th class="text-center" scope="col"> Direcciï¿½n </th>
+                          <th class="text-center" scope="col"> Dirección </th>
                           <th class="text-center" scope="col"> Sexo </th>
                           <th class="text-center" scope="col"> Provincia </th>
                           <th class="text-center" scope="col"> Nacionalidad </th>
-                          <th class="text-center" scope="col"> Fecha de nacimiento </th>
+                          <th class="text-center" scope="col"> Fecha de Nacimiento </th>
                           <th class="text-center" scope="col"> Email </th>
                           <th class="text-center" scope="col"> Telefono </th>
                           <th></th>
@@ -138,7 +138,7 @@ console.log(id)
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ï¿½DESEA ELIMINAR EL CLIENTE SELECCIONADO?
+        ¿DESEA ELIMINAR EL CLIENTE SELECCIONADO?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">CANCELAR</button>
@@ -280,22 +280,45 @@ console.log(id)
         <div class="row align-items-md-stretch">
      	   <div class="form-group col-md-6">
                <label style="float: left">Provincia</label>
-               <select class="form-select" id="provinciaNuevo" name="provinciaNuevo">
+               <select class="form-select" id="provinciaNuevo" name="provinciaNuevo" onchange="actualizarLocalidades()">
 			   	<c:forEach items="${listaProvincias}" var="Provincia">
 			       <option id="${Provincia.ID}" value="${Provincia.ID}">${Provincia.nombre}</option>
 			   	</c:forEach>
 			   </select>
            </div>
+           <script type="text/javascript"> var provinciaSelect = document.getElementById('provinciaNuevo');</script>
            <div class="form-group col-md-6">
                <label style="float: left">Localidad</label>
                <select class="form-select" id="localidadNuevo" name="localidadNuevo">
-			   	<c:forEach items="${listaLocalidades}" var="Localidad">
-			       <option id="${Localidad.ID}" value="${Localidad.ID}">${Localidad.nombre}</option>
+			   	<c:forEach items="${listaLocalidades}" var="localidad">
+			        <c:if test="${localidad.getProvincia().getID() == listaProvincias[0].ID}">
+			       		<option id="${localidad.ID}" value="${localidad.ID}">${localidad.nombre}</option>
+					</c:if>
 			   	</c:forEach>
 			   </select>
            </div>                   
        </div>
-       
+<script type="text/javascript">
+    function actualizarLocalidades() {
+        // Obtiene la Información
+        var provinciaSelect = document.getElementById('provinciaNuevo');
+        var localidadSelect = document.getElementById('localidadNuevo');
+        var provinciaId = provinciaSelect.value;
+        // Borra Todo
+        localidadSelect.innerHTML = '';
+        // Revisa Todo
+        <c:forEach items="${listaLocalidades}" var="Localidad">
+            if (${Localidad.getProvincia().getID()} == provinciaId) {
+                var option = document.createElement('option');
+                option.id = "${Localidad.ID}";
+                option.value = "${Localidad.ID}";
+                option.text = "${Localidad.nombre}";
+             	// Los añade si coinciden
+                localidadSelect.appendChild(option);
+            }
+        </c:forEach>
+    }
+</script>
        <hr>
        
         <div class="row align-items-md-stretch">
