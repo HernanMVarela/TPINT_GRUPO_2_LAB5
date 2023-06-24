@@ -12,7 +12,7 @@ public interface ClienteServicio {
 
 	public String insertarCliente(Cliente nuevo);
 
-	public void eliminarCliente(int ID) ;
+	public String eliminarCliente(Cliente eliminar) ;
 
 	public String actualizarCliente(Cliente modificar);
 

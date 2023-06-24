@@ -10,23 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.bind.annotation.PathVariable;
-
-import frgp.utn.edu.ar.dominio.Articulo;
 import frgp.utn.edu.ar.dominio.Cliente;
-import frgp.utn.edu.ar.dominio.Estado_Cli;
-import frgp.utn.edu.ar.dominio.Localidad;
-import frgp.utn.edu.ar.dominio.Marca;
-import frgp.utn.edu.ar.dominio.Stock;
-import frgp.utn.edu.ar.dominio.Tipo_Articulo;
-import frgp.utn.edu.ar.servicio.ArticuloServicio;
 import frgp.utn.edu.ar.servicio.ClienteServicio;
 import frgp.utn.edu.ar.servicio.EstadoClienteServicio;
 import frgp.utn.edu.ar.servicio.LocalidadServicio;
-import frgp.utn.edu.ar.servicio.MarcaServicio;
 import frgp.utn.edu.ar.servicio.ProvinciaServicio;
-import frgp.utn.edu.ar.servicio.StockServicio;
-import frgp.utn.edu.ar.servicio.TipoArticuloServicio;
 
 @Controller
 public class ClientesController {
@@ -141,12 +129,64 @@ public class ClientesController {
 		}
 	}
 	
+		//Modificar Cliente | "/eliminar_cliente.html"
+	@RequestMapping(value ="/eliminar_cliente.html" , method= { RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView eliminarCliente(int IDModif){
+		ModelAndView MV = new ModelAndView();		
+		
+		cliente = serviceCliente.obtenerUnRegistro(IDModif);
+		cliente.setEstado(serviceEstadoCliente.obtenerUnRegistro(2));
+	
+		String Message = "";	
+		
+		try{
+			Message = asignarMensajeCliente(serviceCliente.eliminarCliente(cliente));
+			MV.addObject("Mensaje", Message);
+			MV = cargadorDeListasClientes(MV);
+			MV.setViewName("vendedor/Clientes"); 
+			return MV;
+		}
+		catch(Exception e)
+		{
+			/// REEMPLAZAR POR DIRECCIONAMIENTO A PAGINA DE ERROR
+			Message = e.toString();
+			System.out.println(e.toString());
+			MV.addObject("Mensaje", Message);
+			MV.setViewName("Error"); 
+			return MV;
+		}
+	}
+	
 	private String asignarMensajeCliente(String error) {
 		if (error.equals("AGREGADO")) {
 			return "Cliente Agregado";
 		}
 		if (error.equals("NO AGREGADO")) {
 			return "Cliente no agregado";
+		}
+		if (error.equals("ERROR")) {
+			return "ERROR";
+		}
+		if (error.equals("EXISTE")) {
+			return "Cliente ya exise";
+		}
+		if (error.equals("REACTIVADO")) {
+			return "Cliente Reactivado";
+		}
+		if (error.equals("ELIMINACION PREVIA")) {
+			return "El cliente ya estaba eliminado";
+		}
+		if (error.equals("ELIMINADO")) {
+			return "Cliente eliminado";
+		}
+		if (error.equals("NO ELIMINADO")) {
+			return "Cliente no eliminado";
+		}
+		if (error.equals("MODIFICADO")) {
+			return "Cliente no modificado";
+		}
+		if (error.equals("NO MODIFICADO")) {
+			return "Cliente no modificado";
 		}
 		if (error.equals("ERROR")) {
 			return "ERROR";

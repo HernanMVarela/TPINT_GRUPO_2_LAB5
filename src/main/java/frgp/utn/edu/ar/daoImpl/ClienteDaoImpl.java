@@ -40,8 +40,20 @@ public class ClienteDaoImpl implements ClienteDao {
 	
 	@Override
 	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
+	public Cliente obtenerClientePorDNI(String DNI) {
+		return (Cliente)this.hibernateTemplate.find("FROM Cliente c where c.DNI LIKE ?", DNI).get(0);
+	}
+	
+	@Override
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
 	public boolean existeCliente(int ID) {
 		return this.hibernateTemplate.get(Cliente.class, ID) != null;
+	}
+	
+	@Override
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
+	public boolean existeCliente(String DNI) {
+		return this.hibernateTemplate.find("FROM Cliente c where c.DNI LIKE ?", DNI) != null;
 	}
 
 	@Override
@@ -49,6 +61,7 @@ public class ClienteDaoImpl implements ClienteDao {
 	public ArrayList<Cliente> obtenerClientes() {
 		return (ArrayList<Cliente>) this.hibernateTemplate.loadAll(Cliente.class);
 	}
+	
 
 	@Override
 	@Transactional(propagation=Propagation.REQUIRES_NEW)
@@ -57,7 +70,6 @@ public class ClienteDaoImpl implements ClienteDao {
 		art.setID(ID);
 		this.hibernateTemplate.delete(art);
 	}
-
 	@Override
 	@Transactional(propagation=Propagation.REQUIRED)
 	public boolean actualizarCliente(Cliente modificar) {

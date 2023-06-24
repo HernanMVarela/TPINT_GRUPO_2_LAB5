@@ -19,7 +19,7 @@
                                 <div class="row align-items-md-stretch">
 
                                     <div class="col-md-6">
-							    	<form id="altaForm" method="post">
+							    	<form action="alta_usuario.html" method="post">
 										<div class="row align-items-md-stretch">
 											<div class="form-group col-md-6">
 												<label style="float: left">Nombre</label> 
@@ -69,7 +69,7 @@
 										<hr>
 	
 										<div class="d-flex justify-content-center">
-											<input type="submit" class="btn btn-success mr-1" value="REGISTRARSE" name="btnRedirigir" formaction="home.html">
+											<input type="submit" class="btn btn-success mr-1" value="REGISTRARSE" name="btnRedirigir">
 										</div>
 								    </form>
 									</div>

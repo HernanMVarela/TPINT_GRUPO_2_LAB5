@@ -121,6 +121,11 @@ console.log(id)
 			  	</div> 
 		  	</div>		
 		</form>
+		<div class="row align-items-md-stretch">
+            <div class="d-flex justify-content-center" style="text-align: center;">
+               	<h3 class="w-auto">${Mensaje}</h3>	
+            </div>
+        </div>
 	</div>	
 </div>
 
@@ -160,11 +165,11 @@ console.log(id)
       </div>
      	   <div class="form-group col-md-4">
                <label style="float: left">Apellido</label>
-               <input  id="apellidoModif" name="apellidoModif"  class="form-control" placeholder="Ingrese apellido" required>
+               <input  id="apellidoModif" name="apellidoModif"  class="form-control" placeholder="Ingrese apellido" readonly required>
            </div>
            <div class="form-group col-md-4">
                <label style="float: left">Nombres</label>
-               <input id="nombreModif" name="nombreModif" class="form-control" placeholder="Ingrese nombre" required>
+               <input id="nombreModif" name="nombreModif" class="form-control" placeholder="Ingrese nombre" readonly required>
            </div>
            <div class="form-group col-md-4">
                <label style="float: left">Sexo</label>
@@ -179,11 +184,11 @@ console.log(id)
        <div class="row align-items-md-stretch mt-1">
            <div class="form-group col-md-9">
                <label  style="float: left">DNI</label>     
-               <input id="DNIModif" name="DNIModif" class="form-control" type="number" placeholder="Ingrese DNI" required min="1" max="99999999" >
+               <input id="DNIModif" name="DNIModif" class="form-control" type="number" placeholder="Ingrese DNI" readonly required min="1" max="99999999" >
            </div>
            <div class="form-group col-md-3">
                <label style="float: left">Fecha de Nacimiento</label>
-               <input id="fechaModif" name="fechaModif" class="form-control" type="date" name="date" required>
+               <input id="fechaModif" name="fechaModif" class="form-control" type="date" name="date" readonly required>
            </div>
        </div>
 

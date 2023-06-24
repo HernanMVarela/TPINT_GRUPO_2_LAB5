@@ -13,8 +13,14 @@ public interface ClienteDao {
 	//Obtiene una articulo por nombre
 	public Cliente obtenerClientePorID(int ID);
 	
+	//Obtiene una articulo por nombre
+	public Cliente obtenerClientePorDNI(String DNI);
+	
 	//Verifica si existe el articulo
 	public boolean existeCliente(int ID);
+	
+	//Verifica si existe el articulo
+	public boolean existeCliente(String DNI);
 
 	//Obtiene todos los articulo
 	public ArrayList<Cliente> obtenerClientes();
