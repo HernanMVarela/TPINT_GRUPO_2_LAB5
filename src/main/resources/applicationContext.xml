@@ -37,8 +37,7 @@
 	<bean id="ProvinciaEstandar" class="frgp.utn.edu.ar.dominio.Provincia"></bean>
 	<bean id="EstadoClienteEstandar" class="frgp.utn.edu.ar.dominio.Estado_Cli"></bean>
 	<bean id="EstadoUsuarioEstandar" class="frgp.utn.edu.ar.dominio.Estado_User"></bean>
-	
-	
+		
 	<!-- CREO EL SERVICIO PARA Cliente -->
 	<bean id="ClienteServiceBean" class="frgp.utn.edu.ar.servicioImpl.ClienteServicioImpl">
 		<property name="dataAccess" ref="ClienteDABean"></property>

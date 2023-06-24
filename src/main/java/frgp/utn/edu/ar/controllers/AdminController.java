@@ -11,19 +11,37 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import frgp.utn.edu.ar.dominio.Articulo;
+import frgp.utn.edu.ar.dominio.Cliente;
 import frgp.utn.edu.ar.dominio.Marca;
 import frgp.utn.edu.ar.dominio.Tipo_Articulo;
 import frgp.utn.edu.ar.servicio.ArticuloServicio;
+import frgp.utn.edu.ar.servicio.ClienteServicio;
+import frgp.utn.edu.ar.servicio.EstadoClienteServicio;
+import frgp.utn.edu.ar.servicio.LocalidadServicio;
+import frgp.utn.edu.ar.servicio.ProvinciaServicio;
 
 @Controller
 public class AdminController {
 
+	@Autowired
+	public ProvinciaServicio serviceProvincia;
+	@Autowired
+	public LocalidadServicio serviceLocalidad;
+	
+	public void init(ServletConfig config) {
+		ApplicationContext ctx = WebApplicationContextUtils
+				.getRequiredWebApplicationContext(config.getServletContext());
+		
+		this.serviceProvincia = (ProvinciaServicio) ctx.getBean("ProvinciaServiceBean");
+		this.serviceLocalidad = (LocalidadServicio) ctx.getBean("LocalidadServiceBean");
+	}	
+	
 	// HOME ADMIN | "admin.html"
 	@RequestMapping("admin.html")
 	public ModelAndView eventoRedireccionarHomeAdmin()
 	{
 		ModelAndView MV = new ModelAndView();
-		
+		MV = cargadorDeListasAdmin(MV);
 		MV.setViewName("admin/HomeAdmin");
 		return MV;
 	}
@@ -33,7 +51,7 @@ public class AdminController {
 	public ModelAndView eventoRedireccionarAltaUsuario()
 	{
 		ModelAndView MV = new ModelAndView();
-		
+		MV = cargadorDeListasAdmin(MV);
 		MV.setViewName("admin/AltaUsuario");
 		return MV;
 	}
@@ -43,8 +61,15 @@ public class AdminController {
 	public ModelAndView eventoRedireccionarListarUsuarios()
 	{
 		ModelAndView MV = new ModelAndView();
-		
+		MV = cargadorDeListasAdmin(MV);
 		MV.setViewName("admin/Reportes");
+		return MV;
+	}
+	
+	private ModelAndView cargadorDeListasAdmin(ModelAndView MV) 
+	{
+		MV.addObject("listaLocalidades",this.serviceLocalidad.obtenerLocalidades());
+		MV.addObject("listaProvincias",this.serviceProvincia.obtenerProvincias());
 		return MV;
 	}
 }

@@ -39,7 +39,50 @@
 												<input class="form-control" type="number" placeholder="Ingrese DNI" required min="1" max="99999999" >
 											</div>
 										</div>
-	
+										 <hr>
+       
+        <div class="row align-items-md-stretch">
+     	   <div class="form-group col-md-6">
+               <label style="float: left">Provincia</label>
+               <select class="form-select" id="provinciaNuevo" name="provinciaNuevo" onchange="actualizarLocalidades()">
+			   	<c:forEach items="${listaProvincias}" var="Provincia">
+			       <option id="${Provincia.ID}" value="${Provincia.ID}">${Provincia.nombre}</option>
+			   	</c:forEach>
+			   </select>
+           </div>
+           <script type="text/javascript"> var provinciaSelect = document.getElementById('provinciaNuevo');</script>
+           <div class="form-group col-md-6">
+               <label style="float: left">Localidad</label>
+               <select class="form-select" id="localidadNuevo" name="localidadNuevo">
+			   	<c:forEach items="${listaLocalidades}" var="localidad">
+			        <c:if test="${localidad.getProvincia().getID() == listaProvincias[0].ID}">
+			       		<option id="${localidad.ID}" value="${localidad.ID}">${localidad.nombre}</option>
+					</c:if>
+			   	</c:forEach>
+			   </select>
+           </div>                   
+       </div>
+<script type="text/javascript">
+    function actualizarLocalidades() {
+        // Obtiene la Información
+        var provinciaSelect = document.getElementById('provinciaNuevo');
+        var localidadSelect = document.getElementById('localidadNuevo');
+        var provinciaId = provinciaSelect.value;
+        // Borra Todo
+        localidadSelect.innerHTML = '';
+        // Revisa Todo
+        <c:forEach items="${listaLocalidades}" var="Localidad">
+            if (${Localidad.getProvincia().getID()} == provinciaId) {
+                var option = document.createElement('option');
+                option.id = "${Localidad.ID}";
+                option.value = "${Localidad.ID}";
+                option.text = "${Localidad.nombre}";
+             	// Los añade si coinciden
+                localidadSelect.appendChild(option);
+            }
+        </c:forEach>
+    }
+</script>
 										<hr>
 	
 										<div class="form-group col-md-8">
@@ -78,6 +121,7 @@
                                     	<img class="img-responsive p-3" style="width: 80%;" src="<c:url value="/assets/userLogo.png"/>"/>
 
                                     </div>
+
                                 </div>
 
                             </div>
