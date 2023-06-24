@@ -50,7 +50,4 @@ public class Cliente extends Persona implements Serializable {
 	public void setEstado(Estado_Cli estado) {
 		this.estado = estado;
 	}
-
-
-
 }

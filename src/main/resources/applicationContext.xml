@@ -25,13 +25,21 @@
 		<property name="localidad" ref="LocalidadEstandar"></property>
 		<property name="estado" ref="EstadoClienteEstandar"></property>
 	</bean>
+	
+	<bean id="UsuarioEstandar" class="frgp.utn.edu.ar.dominio.Usuario">
+		<property name="localidad" ref="LocalidadEstandar"></property>
+		<property name="estado" ref="EstadoUsuarioEstandar"></property>
+	</bean>
+	
 	<bean id="LocalidadEstandar" class="frgp.utn.edu.ar.dominio.Localidad">
 		<property name="provincia" ref="ProvinciaEstandar"></property>
 	</bean>
 	<bean id="ProvinciaEstandar" class="frgp.utn.edu.ar.dominio.Provincia"></bean>
 	<bean id="EstadoClienteEstandar" class="frgp.utn.edu.ar.dominio.Estado_Cli"></bean>
+	<bean id="EstadoUsuarioEstandar" class="frgp.utn.edu.ar.dominio.Estado_User"></bean>
 	
-		<!-- CREO EL SERVICIO PARA Cliente -->
+	
+	<!-- CREO EL SERVICIO PARA Cliente -->
 	<bean id="ClienteServiceBean" class="frgp.utn.edu.ar.servicioImpl.ClienteServicioImpl">
 		<property name="dataAccess" ref="ClienteDABean"></property>
 	</bean>
@@ -40,6 +48,17 @@
 		scope="singleton"> 
 		<property name="sessionFactory" ref="sessionFactoryBean"></property> 
 	</bean>
+	
+	<!-- CREO EL SERVICIO PARA Usuario -->
+	<bean id="UsuarioServiceBean" class="frgp.utn.edu.ar.servicioImpl.UsuarioServicioImpl">
+		<property name="dataAccess" ref="UsuarioDABean"></property>
+	</bean>
+	<!-- EL SERVICIO NECESITA EL DAO  -->
+	<bean id="usuarioDABean" class="frgp.utn.edu.ar.daoImpl.UsuarioDaoImpl" 
+		scope="singleton"> 
+		<property name="sessionFactory" ref="sessionFactoryBean"></property> 
+	</bean>
+	
 		<!--||| CREO EL SERVICIO PARA LOCALIDAD |||-->
 	<bean id="LocalidadServiceBean" class="frgp.utn.edu.ar.servicioImpl.LocalidadServicioImpl">
 		<property name="dataAccess" ref="LocalidadDABean"></property>
@@ -70,6 +89,16 @@
 		<property name="sessionFactory" ref="sessionFactoryBean"></property> 
 	</bean>
 	
+	<!--||| CREO EL SERVICIO PARA ESTADO USUARIO ||| -->
+	<bean id="EstadoUsuarioServiceBean" class="frgp.utn.edu.ar.servicioImpl.EstadoUsuarioServicioImpl">
+		<property name="dataAccess" ref="EstadoUsuarioDABean"></property>
+	</bean>
+	<!-- ESTADO USUARIO DAO  -->
+	<bean id="EstadoUsuarioDABean" class="frgp.utn.edu.ar.daoImpl.EstadoUsuarioDaoImpl" 
+		scope="singleton"> 
+		<property name="sessionFactory" ref="sessionFactoryBean"></property> 
+	</bean>
+	
 	<!-- CREO EL SERVICIO PARA Articulo -->
 	<bean id="ArticuloServiceBean" class="frgp.utn.edu.ar.servicioImpl.ArticuloServicioImpl">
 		<property name="dataAccess" ref="ArticuloDABean"></property>
@@ -86,6 +115,16 @@
 	</bean>
 	<!-- EL SERVICIO NECESITA EL DAO  -->
 	<bean id="TipoArticuloDABean" class="frgp.utn.edu.ar.daoImpl.TipoArticuloDaoImpl" 
+		scope="singleton"> 
+		<property name="sessionFactory" ref="sessionFactoryBean"></property> 
+	</bean>
+	
+	<!-- CREO EL SERVICIO PARA Tipo_Usuario -->
+	<bean id="TipoUsuarioServiceBean" class="frgp.utn.edu.ar.servicioImpl.TipoUsuarioServicioImpl">
+		<property name="dataAccess" ref="TipoUsuarioDABean"></property>
+	</bean>
+	<!-- EL SERVICIO NECESITA EL DAO  -->
+	<bean id="TipoUsuarioDABean" class="frgp.utn.edu.ar.daoImpl.TipoUsuarioDaoImpl" 
 		scope="singleton"> 
 		<property name="sessionFactory" ref="sessionFactoryBean"></property> 
 	</bean>

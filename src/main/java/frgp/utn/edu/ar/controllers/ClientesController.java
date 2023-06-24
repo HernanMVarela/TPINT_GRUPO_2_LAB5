@@ -107,8 +107,7 @@ public class ClientesController {
 		int IDModif,Date fechaModif,String DNIModif,String nombreModif,
 		String apellidoModif,String sexoModif,String correoModif, String direccionModif,
 		String telefonoModif){
-		ModelAndView MV = new ModelAndView();
-		
+		ModelAndView MV = new ModelAndView();		
 		
 		cliente.setID(IDModif);
 		cliente.setDNI(DNIModif);

@@ -29,6 +29,9 @@ public class Usuario extends Persona implements Serializable {
 	@Column(name="PASSWORD", nullable = true)
 	private String passU;
 	
+	@ManyToOne(cascade= {CascadeType.ALL})
+	@JoinColumn(name="ID_ESTADOUSER",nullable = false)
+	private Estado_User estado;
 
 	@ManyToOne(cascade= {CascadeType.ALL})
 	@JoinColumn(name="ID_TIPOUSER",nullable = false)
@@ -36,9 +39,10 @@ public class Usuario extends Persona implements Serializable {
 	
 	public Usuario() {}
 	
-	public Usuario(String user, String pass, Persona persona, Tipo_Usuario tipo) {
+	public Usuario(String user, String pass, Persona persona, Estado_User estado, Tipo_Usuario tipo) {
 		this.nombreU=user;
 		this.passU=pass;
+		this.estado=estado;
 		this.tipo=tipo;
 	}
 
@@ -71,8 +75,13 @@ public class Usuario extends Persona implements Serializable {
 	public void setPassU(String passU) {
 		this.passU = passU;
 	}
-
-
+	
+	public Estado_User getEstado() {
+		return estado;
+	}
+	public void setEstado(Estado_User estado) {
+		this.estado = estado;
+	}
 
 	public Tipo_Usuario getTipo() {
 		return tipo;

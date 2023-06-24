@@ -18,38 +18,88 @@
 							<hr>
 							<div class="row align-items-md-stretch">
 
-								<div class="col-md-6">
-							    <form id="altaForm" method="post">
+								<div class="col-md-8">
+							    <form id="alta_usuario.html" method="post">
 									<div class="row align-items-md-stretch">
 										<div class="form-group col-md-6">
 											<label style="float: left">Nombre</label> 
-											<input class="form-control" placeholder="Ingrese nombre" required>
+											<input class="form-control" name="nombre" placeholder="Ingrese nombre" required>
 										</div>
 										<div class="form-group col-md-6">
 											<label style="float: left">Apellido</label>
-											<input class="form-control" placeholder="Ingrese apellido" required>
+											<input class="form-control" name="apellido" placeholder="Ingrese apellido" required>
 										</div>
 									</div>
 
 									<br>
 
 									<div class="row align-items-md-stretch">
-										<div class="form-group col-md-9">
+										<div class="form-group col-md-4">
 											<label style="float: left">DNI</label> 
-											<input class="form-control" type="number" placeholder="Ingrese DNI" required min="1" max="99999999" >
+											<input class="form-control" type="number" name="dni" placeholder="Ingrese DNI" required min="1" max="99999999" >
 										</div>
+										<div class="form-group col-md-3">
+							               <label style="float: left">Fecha de Nacimiento</label>
+							               <input class="form-control" type="date" name="date" name="fechaNacimiento" required>
+							           	</div>										
+										<div class="form-group col-md-5">
+							               <label style="float: left">Sexo</label>
+									       <select name="sexo" class="form-select">
+									           <option value="M">MASCULINO</option>
+									           <option value="F">FEMENINO</option>
+									           <option value="N/C">OTRO</option>
+									       </select>
+							            </div>  
 									</div>
+									
+									<br>
+									
+									<div class="row align-items-md-stretch">
+										<div class="form-group col-md-4">
+							               <label style="float: left">Direccion</label>
+							               <input name="direccion" class="form-control" placeholder="Ingrese direccion" required>
+							            </div>
+							            <div class="form-group col-md-4">
+							               <label style="float: left">Provincia</label>
+							               <select class="form-select" id="provinciaNuevo" name="provinciaNuevo">
+										   	<c:forEach items="${listaProvincias}" var="Provincia">
+										       <option id="${Provincia.ID}" value="${Provincia.ID}">${Provincia.nombre}</option>
+										   	</c:forEach>
+										   </select>
+							            </div>
+							            <div class="form-group col-md-4">
+							               <label style="float: left">Localidad</label>
+							               <select class="form-select" id="localidadNuevo" name="localidad">
+										   	<c:forEach items="${listaLocalidades}" var="Localidad">
+										       <option id="${Localidad.ID}" value="${Localidad.ID}">${Localidad.nombre}</option>
+										   	</c:forEach>
+										   </select>
+							           	</div> 
+									</div>
+									
+									<br>
+									
+									<div class="row align-items-md-stretch">
+							     	   <div class="form-group col-md-6">
+							               <label style="float: left">Correo Electronico</label>
+							               <input class="form-control" type="email" name="correo" placeholder="Ingrese correo electronico" required>
+							           </div>
+							           <div class="form-group col-md-6">
+							               <label style="float: left">Numero de Telefono</label>
+							               <input class="form-control" type="number" name="telefono" placeholder="Ingrese numero de telefono" required>
+							           </div>                   
+							       	</div>
 
 									<hr>
 
 									<div class="form-group col-md-8">
 										<label style="float: left">Usuario</label> 
-										<input class="form-control" placeholder="Ingrese usuario" required> 
+										<input class="form-control" name="user" placeholder="Ingrese usuario" required> 
 										
 										<br>
 
 										<label style="float: left">Contraseña</label>
-										<input class="form-control" type="password" placeholder="Ingrese contraseña" required min="6"> 
+										<input class="form-control" type="password" name="pass" placeholder="Ingrese contraseña" required min="6"> 
 										
 										<br> 
 										
@@ -61,8 +111,8 @@
 
 									<label style="float: left">Seleccione rol</label> <select
 										class="form-select">
-										<option value="vendedor">VENDEDOR</option>
-										<option value="contador">CONTADOR</option>
+										<option value="2">VENDEDOR</option>
+										<option value="3">CONTADOR</option>
 									</select>
 
 									<hr>
@@ -73,7 +123,7 @@
 							    </form>
 								</div>
 
-								<div class="col-md-6" style="text-align: center;">
+								<div class="col-md-4" style="text-align: center;">
 							    <form id="volverForm" method="post">								
 									<img class="img-responsive p-3" style="width: 50%;" src="<c:url value="/assets/register.png"/>"/>
 									<h1>¡Oye!</h1>
