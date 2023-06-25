@@ -7,10 +7,13 @@
 </head>
 
 <body>
-	<div class="container-fluid">		
-			<div class="container">
-				<div class="p-2 mb-2 bg-light border rounded-3 mt-2 d-flex justify-content-center" style="width: 100%" >
-					<img class="img-fluid" src="<c:url value="/assets/error.png"/>"/>					
+	<div class="container-fluid">
+		<div class="container">
+			<div class="p-2 mb-2 bg-light border rounded-3 mt-2 d-flex justify-content-center" style="width: 100%">
+				<img class="img-fluid" src="<c:url value="/assets/error.png"/>" />
+			</div>
+			<div class="p-2 mb-2 bg-light border rounded-3 mt-2 d-flex justify-content-center" style="width: 100%">
+				<input type="text" cols="200" rows="20" style="width:800px; height:500px;"  name="error" id="error" value="${Mensaje}" />
 			</div>
 		</div>
 	</div>

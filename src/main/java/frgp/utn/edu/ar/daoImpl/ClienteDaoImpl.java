@@ -1,6 +1,7 @@
 package frgp.utn.edu.ar.daoImpl;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate4.HibernateTemplate;
@@ -38,7 +39,13 @@ public class ClienteDaoImpl implements ClienteDao {
 	@Override
 	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
 	public Cliente obtenerClientePorDNI(String DNI) {
-		return (Cliente)this.hibernateTemplate.find("FROM Cliente c where c.DNI LIKE ?", DNI).get(0);
+	    String query = "FROM Cliente c where c.DNI LIKE :dni";
+	    @SuppressWarnings("unchecked")
+		List<Cliente> resultados = (List<Cliente>) this.hibernateTemplate.findByNamedParam(query, "dni", DNI);
+	    if (!resultados.isEmpty()) {
+	        return resultados.get(0);
+	    }
+	    return null;
 	}
 	
 	@Override
@@ -50,7 +57,9 @@ public class ClienteDaoImpl implements ClienteDao {
 	@Override
 	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
 	public boolean existeCliente(String DNI) {
-		return this.hibernateTemplate.find("FROM Cliente c where c.DNI LIKE ?", DNI) != null;
+	    @SuppressWarnings("unchecked")
+		List<Cliente> resultados = (List<Cliente>) this.hibernateTemplate.find("FROM Cliente c where c.DNI LIKE ?", DNI);
+	    return !resultados.isEmpty();
 	}
 
 	@Override

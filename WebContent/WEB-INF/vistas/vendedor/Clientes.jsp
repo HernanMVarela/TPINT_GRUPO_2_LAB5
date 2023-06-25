@@ -10,7 +10,7 @@ $(document).ready( function () {
 } );
 function abrirModificarModal(id,dni, nombre, apellido, direccion, sexo, localidad, fecha, email, telefono) {
 console.log(id)
-	 $('#IDModif').val(id);
+   $('#IDModif').val(id);
    $('#DNIModif').val(dni);
    $('#nombreModif').val(nombre);
    $('#apellidoModif').val(apellido);
@@ -308,7 +308,7 @@ console.log(id)
         localidadSelect.innerHTML = '';
         // Revisa Todo
         <c:forEach items="${listaLocalidades}" var="Localidad">
-            if (${Localidad.getProvincia().getID()} == provinciaId) {
+            if ({Localidad.getProvincia().getID()} == provinciaId) {
                 var option = document.createElement('option');
                 option.id = "${Localidad.ID}";
                 option.value = "${Localidad.ID}";
