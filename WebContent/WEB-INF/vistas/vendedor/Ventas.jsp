@@ -43,31 +43,28 @@
 						</tr>
 					</thead>
 					<tbody>
-						<%for (int x=0; x<5; x++){%>
-							<tr>
-							<td>
-								<%="13/06/2023" %>
-							</td>
-							<td> 
-								<%= "40839274" + x %>
-							</td> 
-							<td> 
-								<%= "2" + x %>
-							</td> 
-							<td> 
-								<%= "$200" + x %>
-							</td>							
-							<td> 
-								<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#detailSaleModal">
-			                      DETALLE
-			                    </button>
-							</td>
-							<td> 
-								<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteSaleModal">
-			                      ANULAR VENTA
-			                    </button>
-							</td>
-						<%}%>  					
+            
+            <c:forEach items="${listaVentas}" var="item">
+                                             
+                          <tr>
+                            <td>${item.num_venta} </td>
+                            <td>${item.fecha} </td>
+                            <td>${item.cliente.ID} </td>
+                            <td> </td>
+                            
+                            <td> 
+                              <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#detailSaleModal">
+                                          DETALLE
+                                        </button>
+                            </td>
+                            <td> 
+                              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteSaleModal">
+                                          ANULAR VENTA
+                                        </button>
+                            </td>
+                            
+                          </tr>
+                        </c:forEach>
 					   </tbody>
                     </table>
                   </div>
@@ -94,47 +91,71 @@
                       <input id="fechaNuevo" name="fechaNuevo" class="form-control" type="date" name="date" required>
                     </div>
 
-                    <div style="float: left; padding-left: 20px;">
-                      <label style="float: left">Cliente</label><br />
-                      <div style="display: flex; ">
-                        <input style="width: 200px;" class="form-control" placeholder="Ingrese nombre" required>
-                        <button type="button" class="btn btn-danger m-1" data-bs-dismiss="modal">Buscar</button>
-                       </div>
+                    <div  style="padding-left: 20px;" class="form-group col-md-4">
+                      <label style="float: left">Cliente</label>
+                      <select id="cliente" name="cliente" class="form-select">
+                        <c:forEach items="${listaClientes}" var="item">
+                          <c:if test="${item.estado.ID == 1}">     
+                             <option value="${item.ID}">${item.ID} - ${item.nombre},${item.apellido}</option>
+                          </c:if>
+                      </c:forEach>
+                      </select>
                     </div>
                   </div>
 
 
-                  <div style="padding-bottom: 20px;" class="form-group col-md-6">
-                    <label style="float: left">Monto total</label>
-                    <input id="precio_compra" type="number" name="precio_compra" class="form-control" required min="1">
-                  </div>
+                  
                   <hr />
 
                   <div style="padding-bottom: 20px ; display: flex;">
                     <div class="form-group col-md-4">
                       <label style="float: left">Articulo</label>
-                      <select class="form-select">
-                        <option value="administrador">Articulo1</option>
-                        <option value="administrador">Articulo2</option>
-                        <option value="administrador">Articulo3</option>
+                      <select class="form-select" name="articulo" id="articulo" class="form-select" onchange="actualizarPrecio(this.value)">
+                        <c:forEach items="${listaArticulos}" var="item">
+                            <option id="${item.nombre}" value="${item.nombre}">${item.nombre} - ${item.marca.nombre}</option>
+                          </c:forEach>
                       </select>
                     </div>
 
                     <div style="float: left; padding-left: 20px; width: 100px;">
                       <label style="float: left">Cantidad</label>
-                      <input id="" type="number" name="precio_compra" class="form-control" required min="1">
+                      <input id="cantidad" type="number" name="cantidad" class="form-control" required min="1">
                     </div>
 
                     <div style="float: left; padding-left: 20px;">
                       <label style="float: left">Precio</label>
-                      <input id="" type="number" name="precio_compra" class="form-control" required min="1">
+                      <input id="precio_venta" name="precio_venta" type="number"  class="form-control" required min="1" readonly>
                     </div>
+
+                    <script>
+                      var listaArticulos = [
+                        <c:forEach items="${listaArticulos}" var="item" varStatus="status">
+                          {
+                            nombre: '${item.nombre}',
+                            marca: '${item.marca.nombre}',
+                            precio: ${item.precio_venta}
+                          }<c:if test="${!status.last}">,</c:if>
+                        </c:forEach>
+                      ];
+                    
+                      function actualizarPrecio(articulo) {         
+                        
+                        var articuloEncontrado = listaArticulos.find(function(item) {
+                               return item.nombre === articulo;
+                           });
+                           $('#precio_venta').val(articuloEncontrado?.precio);
+                      }
+                    </script>
 
                   </div>
                   <br />
 
                   <button type="button" class="btn btn-success" data-bs-dismiss="modal">Agregar articulo</button>
 
+                </div>
+                <div style="padding-bottom: 20px;" class="form-group col-md-6">
+                  <label style="float: left">Monto total</label>
+                  <input id="precio_compra" type="number" name="precio_compra" class="form-control" readonly>
                 </div>
 
               </div>

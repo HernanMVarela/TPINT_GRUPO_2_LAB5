@@ -1,7 +1,8 @@
 package frgp.utn.edu.ar.controllers;
 
 import java.sql.Date;
-
+import java.util.List;
+import java.util.ArrayList;
 import javax.servlet.ServletConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.ModelAndView;
 import frgp.utn.edu.ar.dominio.Cliente;
+import frgp.utn.edu.ar.dominio.Detalle_venta;
 import frgp.utn.edu.ar.dominio.Venta;
 import frgp.utn.edu.ar.servicio.ArticuloServicio;
 import frgp.utn.edu.ar.servicio.ClienteServicio;
@@ -65,18 +67,23 @@ public class VentasController {
 	
 	//Ingreso de venta | "/alta_venta.html"
 	@RequestMapping(value ="/ingreso_venta.html" , method= { RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView validarVenta(Date fechaNuevo){
+	public ModelAndView validarVenta(Date fechaNuevo,int cliente,String articulo,int cantidad){
 		
+		 Detalle_venta detalle = new Detalle_venta(serviceArticulo.obtenerUnRegistro(articulo),cantidad);
+		 List<Detalle_venta> detalleLista = new ArrayList<>();
+		 detalleLista.add(detalle);
+		 
 		 venta.setFecha(fechaNuevo);
-		 venta.setCliente(serviceCliente.obtenerUnRegistro(3));
+		 venta.setCliente(serviceCliente.obtenerUnRegistro(cliente));
+		 venta.setDetalle(detalleLista);
 	
        System.out.println(venta);
 		String Message = "";
 		try{
 			 Message = asignarMensajeVenta(serviceVenta.insertarVenta(venta));
 			MV.addObject("Mensaje", Message);
-			// MV = cargadorDeListasVentas(MV);
-			// MV.setViewName("vendedor/Ventas"); 
+			MV = cargadorDeListasVentas(MV);
+			MV.setViewName("vendedor/Ventas"); 
 			return MV;
 		}
 		catch(Exception e)
@@ -133,8 +140,8 @@ public class VentasController {
 	private ModelAndView cargadorDeListasVentas(ModelAndView MV) 
 	{
 		MV.addObject("listaVentas",this.serviceVenta.obtenerVentas());
-		MV.addObject("listaLocalidades",this.serviceArticulo.obtenerArticulos());
-		MV.addObject("listaProvincias",this.serviceCliente.obtenerClientes());
+		MV.addObject("listaClientes",this.serviceCliente.obtenerClientes());
+		MV.addObject("listaArticulos",this.serviceArticulo.obtenerArticulos());
 		return MV;
 	}
 	
