@@ -107,61 +107,131 @@
                   
                   <hr />
 
-                  <div style="padding-bottom: 20px ; display: flex;">
+                  <button type="button" class="btn btn-success" onclick="agregarArticulo()">Agregar articulo</button>
+
+                  <div style="padding-bottom: 20px ; display: flex;" id="articulos-container">
                     <div class="form-group col-md-4">
                       <label style="float: left">Articulo</label>
-                      <select class="form-select" name="articulo" id="articulo" class="form-select" onchange="actualizarPrecio(this.value)">
+                      <select class="form-select" name="articulo" id="articulo" class="form-select" required onchange="actualizarPrecio(this)">
+                        <option value="" selected disabled hidden>Seleccione un articulo</option>
                         <c:forEach items="${listaArticulos}" var="item">
-                            <option id="${item.nombre}" value="${item.nombre}">${item.nombre} - ${item.marca.nombre}</option>
-                          </c:forEach>
+                          <option id="${item.nombre}" value="${item.nombre}">${item.nombre} - ${item.marca.nombre}</option>
+                        </c:forEach>
                       </select>
                     </div>
 
                     <div style="float: left; padding-left: 20px; width: 100px;">
                       <label style="float: left">Cantidad</label>
-                      <input id="cantidad" type="number" name="cantidad" class="form-control" required min="1">
+                      <input type="number" name="cantidad" class="form-control" required min="1">
                     </div>
 
                     <div style="float: left; padding-left: 20px;">
                       <label style="float: left">Precio</label>
-                      <input id="precio_venta" name="precio_venta" type="number"  class="form-control" required min="1" readonly>
+                      <input name="precio_venta" type="number" class="form-control" required min="1" readonly>
                     </div>
 
-                    <script>
-                      var listaArticulos = [
-                        <c:forEach items="${listaArticulos}" var="item" varStatus="status">
-                          {
-                            nombre: '${item.nombre}',
-                            marca: '${item.marca.nombre}',
-                            precio: ${item.precio_venta}
-                          }<c:if test="${!status.last}">,</c:if>
-                        </c:forEach>
-                      ];
-                    
-                      function actualizarPrecio(articulo) {         
-                        
-                        var articuloEncontrado = listaArticulos.find(function(item) {
-                               return item.nombre === articulo;
-                           });
-                           $('#precio_venta').val(articuloEncontrado?.precio);
-                      }
-                    </script>
-
+                    <div style="float: left; padding-left: 20px; padding-top: 20px; place-self: center;">
+                      <button type="button" class="btn btn-danger" onclick="eliminarArticulo(this)">Eliminar</button>
+                    </div>
                   </div>
-                  <br />
 
-                  <button type="button" class="btn btn-success" data-bs-dismiss="modal">Agregar articulo</button>
+                  <script>
+                    var articulosContainer = document.getElementById("articulos-container");
+                    var listaArticulos = [
+                      <c:forEach items="${listaArticulos}" var="item" varStatus="status">
+                        {
+                          nombre: '${item.nombre}',
+                          marca: '${item.marca.nombre}',
+                          precio: ${item.precio_venta}
+                        }<c:if test="${!status.last}">,</c:if>
+                      </c:forEach>
+                    ];
+                    var itemCounter = 1;
 
-                </div>
-                <div style="padding-bottom: 20px;" class="form-group col-md-6">
-                  <label style="float: left">Monto total</label>
-                  <input id="precio_compra" type="number" name="precio_compra" class="form-control" readonly>
-                </div>
+                    function agregarArticulo() {
+                      var nuevoArticulo = articulosContainer.cloneNode(true);
+                      var selectElement = nuevoArticulo.querySelector(`select[name='articulo']`);
+                      var cantidadInput = nuevoArticulo.querySelector(`input[name='cantidad']`);
+                      var precioInput = nuevoArticulo.querySelector(`input[name='precio_venta']`);
+                      var eliminarButton = nuevoArticulo.querySelector("button");
 
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">CANCELAR</button>
-         		<input type="submit" class="btn btn-primary" name="btnAceptar" value="Aceptar">
+                      // Asignar ID único a los elementos de artículo
+                      console.log("agregar")
+                      selectElement.setAttribute("id", `articulo${itemCounter}`);
+                      cantidadInput.setAttribute("id", `cantidad${itemCounter}`);
+                      precioInput.setAttribute("id", `precio_venta${itemCounter}`);
+
+                      selectElement.selectedIndex = 0;
+                      cantidadInput.value = "";
+                      precioInput.value = "";
+                      eliminarButton.style.display = "inline-block";
+
+                      articulosContainer.parentElement.appendChild(nuevoArticulo);
+                      itemCounter++;
+                    }
+
+                    function eliminarArticulo(button) {
+                      if (itemCounter > 1) {
+                        var fila = button.parentNode.parentNode;
+                        fila.parentNode.removeChild(fila);
+                        itemCounter--;
+                      }
+                    }
+
+                    function actualizarPrecio(selectElement) {
+                      var articulo = selectElement.value;
+                      var precioInput = selectElement.parentElement.nextElementSibling.nextElementSibling.querySelector("input[name='precio_venta']");
+
+                      var articuloEncontrado = listaArticulos.find(function (item) {
+                        return item.nombre === articulo;
+                      });
+
+                      precioInput.value = articuloEncontrado ? articuloEncontrado.precio : "";
+                    }
+
+                    function enviarFormulario() {
+  var contenedores = document.querySelectorAll("#articulos-container");
+
+  var articulos = [];
+
+  contenedores.forEach(function (contenedor) {
+    var selectElement = contenedor.querySelector("select[name='articulo']");
+    var cantidadInput = contenedor.querySelector("input[name='cantidad']");
+    var precioInput = contenedor.querySelector("input[name='precio_venta']");
+
+    var articulo = {
+      nombre: selectElement.value,
+      cantidad: cantidadInput.value,
+      precio: precioInput.value
+    };
+
+    articulos.push(articulo);
+  });
+
+  var articulosInput = document.getElementById("articulosLista");
+  articulosInput.value = JSON.stringify(articulos);
+
+  console.log("articulosInput",articulosInput);
+
+}
+                  </script>
+
+
+
+
+                      </div>
+                      <div style="padding-bottom: 20px;" class="form-group col-md-6">
+                        <label style="float: left">Monto total</label>
+                        <input id="precio_compra" type="number" name="precio_compra" class="form-control" readonly>
+                      </div>
+
+                    </div>
+                    <button type="button" class="btn btn-danger" onclick="enviarFormulario()" >Cerrar carrito</button>
+                    <input  id="articulosLista" name="articulosLista" class="form-control" required min="1">
+
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">CANCELAR</button>
+                    <input type="submit" class="btn btn-primary" name="btnAceptar" value="Aceptar">
               </div>
             </form>
             </div>
