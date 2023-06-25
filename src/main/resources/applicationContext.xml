@@ -140,6 +140,16 @@
 		scope="singleton"> 
 		<property name="sessionFactory" ref="sessionFactoryBean"></property> 
 	</bean>
+
+		<!-- CREO EL SERVICIO PARA Detalle_venta -->
+	<bean id="Detalle_ventaServiceBean" class="frgp.utn.edu.ar.servicioImpl.Detalle_ventaServicioImpl">
+		<property name="dataAccess" ref="Detalle_ventaDABean"></property>
+	</bean>
+	<!-- EL SERVICIO NECESITA EL DAO  -->
+	<bean id="Detalle_ventaDABean" class="frgp.utn.edu.ar.daoImpl.Detalle_ventaDaoImpl" 
+		scope="singleton"> 
+		<property name="sessionFactory" ref="sessionFactoryBean"></property> 
+	</bean>
 	
 	<!-- CREO EL SERVICIO PARA Tipo_Articulo -->
 	<bean id="TipoArticuloServiceBean" class="frgp.utn.edu.ar.servicioImpl.TipoArticuloServicioImpl">

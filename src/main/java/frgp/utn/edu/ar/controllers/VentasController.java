@@ -17,6 +17,7 @@ import frgp.utn.edu.ar.dominio.Detalle_venta;
 import frgp.utn.edu.ar.dominio.Venta;
 import frgp.utn.edu.ar.servicio.ArticuloServicio;
 import frgp.utn.edu.ar.servicio.ClienteServicio;
+import frgp.utn.edu.ar.servicio.Detalle_ventaServicio;
 import frgp.utn.edu.ar.servicio.EstadoClienteServicio;
 import frgp.utn.edu.ar.servicio.LocalidadServicio;
 import frgp.utn.edu.ar.servicio.ProvinciaServicio;
@@ -33,6 +34,9 @@ public class VentasController {
 	
 	@Autowired
 	public ArticuloServicio serviceArticulo;
+	
+	@Autowired
+	public Detalle_ventaServicio serviceDetalle_venta;
 	
 	@Autowired
 	public Venta venta;
@@ -52,6 +56,7 @@ public class VentasController {
 		this.serviceVenta = (VentaServicio) ctx.getBean("VentaServiceBean");
 		this.serviceCliente = (ClienteServicio) ctx.getBean("ClienteServiceBean");
 		this.serviceArticulo = (ArticuloServicio) ctx.getBean("ArticuloServiceBean");
+		this.serviceDetalle_venta = (Detalle_ventaServicio) ctx.getBean("Detalle_ventaServiceBean");
 		
 		this.MV = (ModelAndView) ctx.getBean("ModelAndViewBean");
 		 this.venta = (Venta) ctx.getBean("VentaEstandar");
