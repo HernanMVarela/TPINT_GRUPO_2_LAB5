@@ -22,7 +22,12 @@
 				option.text = "${Localidad.nombre}";
 				// Los a�ade si coinciden
 				localidadSelect.appendChild(option); }
-			</c:forEach>}
+			</c:forEach>
+		}
+	</script>
+
+	<script type="text/javascript">
+		type="text/javascript"> var provinciaSelect = document.getElementById('provinciaNuevo');
 	</script>
 	
 
@@ -39,7 +44,7 @@
 								<div class="row align-items-md-stretch">
 
 									<div class="col-md-8">
-										<form id="alta_usuario.html" method="post">
+										<form action="alta_usuario.html" id="alta_usuario.html" method="post">
 											<div class="row align-items-md-stretch">
 												<div class="form-group col-md-6">
 													<label style="float: left">Nombre</label>
@@ -88,8 +93,7 @@
 														</c:forEach>
 													</select>
 												</div>
-												<script
-													type="text/javascript"> var provinciaSelect = document.getElementById('provinciaNuevo');</script>
+												
 												<div class="form-group col-md-6">
 													<label style="float: left">Localidad</label>
 													<select class="form-select" id="localidad"	name="localidad">
@@ -110,13 +114,11 @@
 											<div class="row align-items-md-stretch">
 												<div class="form-group col-md-6">
 													<label style="float: left">Correo Electronico</label>
-													<input class="form-control" type="email" name="correo"
-														placeholder="Ingrese correo electronico" required>
+													<input class="form-control" type="email" name="correo" placeholder="Ingrese correo electronico" required>
 												</div>
 												<div class="form-group col-md-6">
 													<label style="float: left">Numero de Telefono</label>
-													<input class="form-control" type="number" name="telefono"
-														placeholder="Ingrese numero de telefono" required>
+													<input class="form-control" type="number" name="telefono" placeholder="Ingrese numero de telefono" required>
 												</div>
 											</div>
 
@@ -124,20 +126,17 @@
 
 											<div class="form-group col-md-8">
 												<label style="float: left">Usuario</label>
-												<input class="form-control" name="user" placeholder="Ingrese usuario"
-													required>
+												<input class="form-control" name="user" placeholder="Ingrese usuario" required>
 
 												<br>
 
 												<label style="float: left">Contraseña</label>
-												<input class="form-control" type="password" name="pass"
-													placeholder="Ingrese contraseña" required min="6">
+												<input class="form-control" type="password" name="pass" placeholder="Ingrese contraseña" required min="6">
 
 												<br>
 
 												<label style="float: left">Repita la contraseña</label>
-												<input class="form-control" type="password"
-													placeholder="Re-Ingrese su contraseña" required min="6">
+												<input class="form-control" type="password" placeholder="Re-Ingrese su contraseña" required min="6">
 											</div>
 
 											<hr>
