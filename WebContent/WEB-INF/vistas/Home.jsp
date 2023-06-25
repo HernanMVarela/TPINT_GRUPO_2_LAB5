@@ -1,3 +1,4 @@
+<%@page import="frgp.utn.edu.ar.dominio.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -8,7 +9,10 @@
 <body>
 <%@ include file="common/NavigatorCommon.jspf" %>
 	<div class="container-fluid">
-			<form id="homeForm" method="post">
+		<% Usuario user = null; %>
+ 		<% user = (Usuario)request.getAttribute("userLogin"); %>
+ 		<% if (user != null){%> Bienvenido <%= user.getNombreU() %> <% }else{%> NO HAY USUARIO LOGUEADO <%}  %>
+			<form action="login.html" method="post">
 				<div class="container">
 					<div class="p-2 mb-2 bg-light border rounded-3" style="width: 100%">
 						<div class="container-fluid py-1">
@@ -27,12 +31,12 @@
 										<div class="row w-auto justify-content-center">
 											<img class="img-responsive p-3" style="width: 30%;" src="<c:url value="/assets/login.png"/>"/>
 
-											<input class="form-control mt-2" placeholder="Ingrese usuario">
+											<input class="form-control mt-2" id="usernameLogin" name="usernameLogin" placeholder="Ingrese usuario">
 									
 
-											<input class="form-control mt-2" type="password"	placeholder="Ingrese contraseña">
+											<input class="form-control mt-2" id="passLogin" name="passLogin" type="password" placeholder="Ingrese contraseña">
 									
-											<input type="submit" class="btn btn-primary mt-2" value="INGRESAR" name="btnRedirigir" formaction="">
+											<input type="submit" class="btn btn-primary mt-2" value="INGRESAR" name="btnRedirigir">
 										</div>
 
 									</div>

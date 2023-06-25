@@ -12,4 +12,5 @@ public interface UsuarioDao {
 	public ArrayList<Usuario> obtenerUsuarios();
 	public void eliminarUsuario(int ID);
 	public boolean actualizarUsuario(Usuario modificar);
+	public Usuario obtenerUsuarioPorUser(String username);
 }

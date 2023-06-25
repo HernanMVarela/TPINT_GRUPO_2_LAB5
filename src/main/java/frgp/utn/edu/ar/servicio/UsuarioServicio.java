@@ -16,4 +16,6 @@ public interface UsuarioServicio {
 
 	public String actualizarUsuario(Usuario modificar);
 
+	public Usuario login(String username, String pass);
+
 }

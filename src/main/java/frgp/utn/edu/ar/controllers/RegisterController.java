@@ -91,9 +91,6 @@ public class RegisterController {
 		usuario.setTipo(serviceTipoUsuario.obtenerUnRegistro(rol));
 		usuario.setEstado(serviceEstadoUsuario.obtenerUnRegistro(1));
 		
-		System.out.println(usuario);
-
-
 		String Message = "";
 		try{
 			Message = asignarMensajeUsuario(serviceUsuario.insertarUsuario(usuario));

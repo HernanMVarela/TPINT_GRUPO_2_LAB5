@@ -47,4 +47,24 @@ public class UsuarioServicioImpl implements UsuarioServicio{
 	public String actualizarUsuario(Usuario modificar) {		
 		return "MODIFICADO";
 	}
+	
+	@Override
+	public Usuario login(String username, String pass) {
+		
+		Usuario user = dataAccess.obtenerUsuarioPorUser(username);
+		
+		if(user == null) {
+			return null;
+		}
+		
+		if(!user.getPassU().equals(pass)) {
+			return null;
+		}
+		
+		if(user.getEstado().getNombre().equals("INACTIVO")) {
+			return null;
+		}
+		
+		return user;
+	}
 }

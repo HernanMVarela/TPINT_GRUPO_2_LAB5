@@ -1,6 +1,7 @@
 package frgp.utn.edu.ar.daoImpl;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate4.HibernateTemplate;
@@ -64,6 +65,18 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		} catch (Exception e) {
 			return false;
 		}
+	}
+
+	@Override
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
+	public Usuario obtenerUsuarioPorUser(String username) {
+		String query = "FROM Usuario u WHERE u.nombreU = :username";
+	    @SuppressWarnings("unchecked")
+		List<Usuario> resultados = (List<Usuario>) this.hibernateTemplate.findByNamedParam(query, "username", username);
+	    if (!resultados.isEmpty()) {
+	        return resultados.get(0);
+	    }
+	    return null;
 	}
 
 

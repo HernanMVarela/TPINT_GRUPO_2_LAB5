@@ -1,11 +1,12 @@
+<%@page import="frgp.utn.edu.ar.dominio.Usuario"%>
 <div class="h-100 p-5 bg-light border rounded-3">
-	<img class="img-thumbnail img-fluid" style="width: 50%;" src="<c:url value="/assets/login.png"/>"/>
-	<hr>
-	<label>APELLIDO:</label>
-	<br>
-	<label>NOMBRE:</label> 
-	<br>	       		       		
-	<label>USUARIO:</label>
-	<br>	       		       		
-	<label>ROL:</label>
-</div>    
+    <img class="img-thumbnail img-fluid" style="width: 50%;" src="<c:url value="/assets/login.png"/>"/>
+    <hr>
+    <label>APELLIDO:<%if (request.getAttribute("userLogin") != null){%> <%=((Usuario)request.getAttribute("userLogin")).getApellido() %> <%}%> </label>
+    <br>
+    <label>NOMBRE:<%if (request.getAttribute("userLogin") != null){%> <%=((Usuario)request.getAttribute("userLogin")).getNombre() %> <%}%></label> 
+    <br>                       
+    <label>USUARIO:<%if (request.getAttribute("userLogin") != null){%> <%=((Usuario)request.getAttribute("userLogin")).getNombreU() %> <%}%></label>
+    <br>                       
+    <label>ROL:<%if (request.getAttribute("userLogin") != null){%> <%=((Usuario)request.getAttribute("userLogin")).getTipo().getNombre() %> <%}%></label>
+</div>
