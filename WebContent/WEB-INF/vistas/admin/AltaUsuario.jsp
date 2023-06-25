@@ -81,6 +81,15 @@
 											</div>
 
 											<br>
+											
+										   <div class="row align-items-md-stretch mt-1">
+									           <div class="form-group col-md-12">
+									               <label style="float: left">Direccion</label>
+									               <input name="direccion" class="form-control" placeholder="Ingrese direccion" required>
+									           </div>
+									       </div>
+									       
+									       <br>
 
 											<div class="row align-items-md-stretch">
 												<div class="form-group col-md-6">
