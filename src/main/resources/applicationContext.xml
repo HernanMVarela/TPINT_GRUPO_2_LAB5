@@ -38,6 +38,10 @@
 		<property name="estado" ref="EstadoClienteEstandar"></property>
 	</bean>
 	
+	<bean id="VentaEstandar" class="frgp.utn.edu.ar.dominio.Venta">
+		<property name="cliente" ref="ClienteEstandar"></property>
+	</bean>
+	
 	<bean id="UsuarioEstandar" class="frgp.utn.edu.ar.dominio.Usuario">
 		<property name="localidad" ref="LocalidadEstandar"></property>
 		<property name="estado" ref="EstadoUsuarioEstandar"></property>
@@ -61,6 +65,17 @@
 		scope="singleton"> 
 		<property name="sessionFactory" ref="sessionFactoryBean"></property> 
 	</bean>
+	
+		<!-- CREO EL SERVICIO PARA Venta -->
+	<bean id="VentaServiceBean" class="frgp.utn.edu.ar.servicioImpl.VentaServicioImpl">
+		<property name="dataAccess" ref="VentaDABean"></property>
+	</bean>
+	<!-- EL SERVICIO NECESITA EL DAO  -->
+	<bean id="VentaDABean" class="frgp.utn.edu.ar.daoImpl.VentaDaoImpl" 
+		scope="singleton"> 
+		<property name="sessionFactory" ref="sessionFactoryBean"></property> 
+	</bean>
+	
 	
 	<!-- CREO EL SERVICIO PARA Usuario -->
 	<bean id="UsuarioServiceBean" class="frgp.utn.edu.ar.servicioImpl.UsuarioServicioImpl">

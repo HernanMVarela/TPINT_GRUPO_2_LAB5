@@ -153,12 +153,12 @@ public class ArticuloController {
 	}
 	
 	// Clientes | "ventas.html"
-	@RequestMapping("ventas.html")
-	public ModelAndView eventoRedireccionarVentas()
-	{
-		MV.setViewName("vendedor/Ventas");
-		return MV;
-	}	
+	// @RequestMapping("ventas.html")
+	// public ModelAndView eventoRedireccionarVentas()
+	// {
+	// 	MV.setViewName("vendedor/Ventas");
+	// 	return MV;
+	// }	
 	
 	/// METODOS COMUNES
 	private String asignarMensajeArticulos(String error) {

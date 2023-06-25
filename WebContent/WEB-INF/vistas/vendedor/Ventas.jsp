@@ -16,7 +16,7 @@
 
       <body>
         <div class="container-fluid">
-            <form action="stock.html" method="post">
+            <form action="ventas.html" method="post">
               <div class="p-5 bg-light border rounded-3" style="width: 100%">
                 <div class="d-flex  align-content-center bd-highlight mb-3">
                   <div class="me-auto p-2 bd-highlight align-self-center">
@@ -34,7 +34,7 @@
                     <table id="tabla_ventas" class="table table-hover text-center">
 			  		<thead>
 						<tr>
-							<th class="text-center" scope="col"> N° de Venta </th>
+							<th class="text-center" scope="col"> Nï¿½ de Venta </th>
 							<th class="text-center" scope="col"> Fecha </th>
 							<th class="text-center" scope="col"> Cliente </th> 
 							<th class="text-center" scope="col"> Monto </th> 
@@ -91,7 +91,7 @@
                   <div style="padding-bottom: 20px; display: flex;">
                     <div>
                       <label style="float: left">Fecha</label>
-                      <input class="form-control" type="date" name="date" required>
+                      <input id="fechaNuevo" name="fechaNuevo" class="form-control" type="date" name="date" required>
                     </div>
 
                     <div style="float: left; padding-left: 20px;">
