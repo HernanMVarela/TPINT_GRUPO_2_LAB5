@@ -62,7 +62,7 @@ console.log(id)
                           <th class="text-center" scope="col"> DNI </th>
                           <th class="text-center" scope="col"> Nombre </th>
                           <th class="text-center" scope="col"> Apellido </th>
-                          <th class="text-center" scope="col"> Dirección </th>
+                          <th class="text-center" scope="col"> DirecciÃ³n </th>
                           <th class="text-center" scope="col"> Sexo </th>
                           <th class="text-center" scope="col"> Provincia </th>
                           <th class="text-center" scope="col"> Nacionalidad </th>
@@ -138,7 +138,7 @@ console.log(id)
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ¿DESEA ELIMINAR EL CLIENTE SELECCIONADO?
+        Â¿DESEA ELIMINAR EL CLIENTE SELECCIONADO?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">CANCELAR</button>
@@ -294,13 +294,13 @@ console.log(id)
 			        <c:if test="${localidad.getProvincia().getID() == listaProvincias[0].ID}">
 			       		<option id="${localidad.ID}" value="${localidad.ID}">${localidad.nombre}</option>
 					</c:if>
-			   	</c:forEach>
+				</c:forEach>
 			   </select>
            </div>                   
        </div>
 <script type="text/javascript">
     function actualizarLocalidades() {
-        // Obtiene la Información
+        // Obtiene la Informaciï¿½n
         var provinciaSelect = document.getElementById('provinciaNuevo');
         var localidadSelect = document.getElementById('localidadNuevo');
         var provinciaId = provinciaSelect.value;
@@ -308,12 +308,12 @@ console.log(id)
         localidadSelect.innerHTML = '';
         // Revisa Todo
         <c:forEach items="${listaLocalidades}" var="Localidad">
-            if ({Localidad.getProvincia().getID()} == provinciaId) {
+            if (${Localidad.getProvincia().getID()} == provinciaId) {
                 var option = document.createElement('option');
                 option.id = "${Localidad.ID}";
                 option.value = "${Localidad.ID}";
                 option.text = "${Localidad.nombre}";
-             	// Los añade si coinciden
+             	// Los aï¿½ade si coinciden
                 localidadSelect.appendChild(option);
             }
         </c:forEach>
