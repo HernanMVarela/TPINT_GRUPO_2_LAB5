@@ -42,24 +42,36 @@ public class HomeController {
 	@RequestMapping("login.html")
 	public ModelAndView login(String usernameLogin, String passLogin){
 		
-		Usuario login = serviceUsuario.login(usernameLogin, passLogin);
+		Usuario userLogin = serviceUsuario.login(usernameLogin, passLogin);
 		
-		if(login == null) {
+		if(userLogin == null) {
 			MV.addObject("userLogin", null);
 			MV.setViewName("Home"); 
 		} else {
-			login.getTipo().setNombre("CONTADOR");;
-			MV.addObject("userLogin", login);
-			if(login.getTipo().getNombre().equals("ADMIN")) {
+			MV.addObject("userLogin", userLogin);
+			if(userLogin.getTipo().getNombre().equals("ADMIN")) {
 				MV.setViewName("admin/HomeAdmin"); 
 			}
-			if(login.getTipo().getNombre().equals("VENDEDOR")) {
+			if(userLogin.getTipo().getNombre().equals("VENDEDOR")) {
 				MV.setViewName("vendedor/HomeVendedor"); 
 			}
-			if(login.getTipo().getNombre().equals("CONTADOR")) {
+			if(userLogin.getTipo().getNombre().equals("CONTADOR")) {
 				MV.setViewName("contador/HomeContador"); 
 			}
 		}
 		return MV;
 	}	
+	
+	//Home | "login.html"
+	@RequestMapping("Logout.html")
+	public ModelAndView logout(){
+		
+		Usuario userLogin = null;
+
+		MV.setViewName("Home"); 
+		MV.addObject("userLogin", userLogin);
+		
+		return MV;
+	}	
+	
 }

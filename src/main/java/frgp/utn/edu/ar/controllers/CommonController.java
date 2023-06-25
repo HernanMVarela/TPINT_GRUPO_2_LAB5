@@ -58,13 +58,6 @@ public class CommonController {
    
         return "common/NavigatorAdmin";
     }
-	
-	// Logout | "Logout.html"
-    @RequestMapping("Logout.html")
-    public ModelAndView getLogout() {
-		MV.setViewName("Home"); 
-		return MV;
-    }
     
     // Error | "error.html"
     @RequestMapping("error.html")

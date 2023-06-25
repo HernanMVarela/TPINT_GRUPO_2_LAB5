@@ -7,7 +7,7 @@
      	<li><a href="reportes.html" class="nav-link px-2 link-dark">Reportes</a></li>
    	</ul> 
    	<form action="Logout.html" method="post">
-		<input type="submit" class="btn btn-outline-danger me-2" value="CERRAR SESION" name="btnRedirigir" formaction="Logout.html">
+		<input type="submit" class="btn btn-outline-danger me-2" value="CERRAR SESION" name="btnRedirigir">
 	</form>
   </div>
 </div>
