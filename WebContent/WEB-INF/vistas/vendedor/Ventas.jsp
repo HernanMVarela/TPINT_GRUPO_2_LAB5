@@ -109,102 +109,124 @@
 
                   <button type="button" class="btn btn-success" onclick="agregarArticulo()">Agregar articulo</button>
 
-                  <div style="padding-bottom: 20px ; display: flex;" id="articulos-container">
-                    <div class="form-group col-md-4">
-                      <label style="float: left">Articulo</label>
-                      <select class="form-select" name="articulo" id="articulo" class="form-select" required onchange="actualizarPrecio(this)">
-                        <option value="" selected disabled hidden>Seleccione un articulo</option>
-                        <c:forEach items="${listaArticulos}" var="item">
-                          <option id="${item.nombre}" value="${item.nombre}">${item.nombre} - ${item.marca.nombre}</option>
-                        </c:forEach>
-                      </select>
-                    </div>
+                  <div id="articulos-container"  style="padding-bottom: 20px; display: flex; flex-wrap: wrap; justify-content: center; " ></div>
 
-                    <div style="float: left; padding-left: 20px; width: 100px;">
-                      <label style="float: left">Cantidad</label>
-                      <input type="number" name="cantidad" class="form-control" required min="1" oninput="calcularMontoTotal()">
-                    </div>
-
-                    <div style="float: left; padding-left: 20px;">
-                      <label style="float: left">Precio</label>
-                      <input name="precio_venta" type="number" class="form-control" required min="1" readonly>
-                    </div>
-
-                    <div style="float: left; padding-left: 20px; padding-top: 20px; place-self: center;">
-                      <button type="button" class="btn btn-danger" onclick="eliminarArticulo(this)">Eliminar</button>
-                    </div>
-                  </div>
 
                   <script>
-                    var articulosContainer = document.getElementById("articulos-container");
-                    var listaArticulos = [
-                      <c:forEach items="${listaArticulos}" var="item" varStatus="status">
-                        {
-                          nombre: '${item.nombre}',
-                          marca: '${item.marca.nombre}',
-                          precio: ${item.precio_venta}
-                        }<c:if test="${!status.last}">,</c:if>
-                      </c:forEach>
-                    ];
-                    var itemCounter = 1;
+                          var articulosContainer = document.getElementById("articulos-container");
+                          var listaArticulos = [
+                            <c:forEach items="${listaArticulos}" var="item" varStatus="status">
+                              {
+                                nombre: '${item.nombre}',
+                                marca: '${item.marca.nombre}',
+                                precio: ${item.precio_venta}
+                              }<c:if test="${!status.last}">,</c:if>
+                            </c:forEach>
+                          ];
+                          var itemCounter = 1;
 
-                    function agregarArticulo() {
-                      var nuevoArticulo = articulosContainer.cloneNode(true);
-                      var selectElement = nuevoArticulo.querySelector(`select[name='articulo']`);
-                      var cantidadInput = nuevoArticulo.querySelector(`input[name='cantidad']`);
-                      var precioInput = nuevoArticulo.querySelector(`input[name='precio_venta']`);
-                      var eliminarButton = nuevoArticulo.querySelector("button");
+                          function agregarArticulo() {
+                            var nuevoArticulo = document.createElement("div");
+                            nuevoArticulo.classList.add("form-group", "col-md-10", "row", "pt-5");
 
-                      // Asignar ID único a los elementos de artículo
-                      console.log("agregar")
-                      selectElement.setAttribute("id", `articulo${itemCounter}`);
-                      cantidadInput.setAttribute("id", `cantidad${itemCounter}`);
-                      precioInput.setAttribute("id", `precio_venta${itemCounter}`);
+                            var selectElement = document.createElement("select");
+                            selectElement.classList.add("form-select");
+                            selectElement.setAttribute("name", "articulo");
+                            selectElement.setAttribute("id", `articulo${itemCounter}`);
+                            selectElement.setAttribute("required", true);
+                            selectElement.setAttribute("onchange", "actualizarPrecio(this)");
 
-                      selectElement.selectedIndex = 0;
-                      cantidadInput.value = "";
-                      precioInput.value = "";
-                      eliminarButton.style.display = "inline-block";
+                            var defaultOption = document.createElement("option");
+                            defaultOption.setAttribute("value", "");
+                            defaultOption.setAttribute("selected", true);
+                            defaultOption.setAttribute("disabled", true);
+                            defaultOption.setAttribute("hidden", true);
+                            defaultOption.textContent = "Seleccione un articulo";
+                            selectElement.appendChild(defaultOption);
 
-                      articulosContainer.parentElement.appendChild(nuevoArticulo);
-                      itemCounter++;
-                    }
+                            listaArticulos.forEach(function (articulo) {
+                              var option = document.createElement("option");
+                              option.setAttribute("id", articulo.nombre);
+                              option.setAttribute("value", articulo.nombre);
+                              option.textContent = articulo.nombre + " - " + articulo.marca;
+                              selectElement.appendChild(option);
+                            });
 
-                    function eliminarArticulo(button) {
-                      if (itemCounter > 1) {
-                        var fila = button.parentNode.parentNode;
-                        fila.parentNode.removeChild(fila);
-                        itemCounter--;
-                      }
-                    }
+                            nuevoArticulo.appendChild(selectElement);
 
-                    function actualizarPrecio(selectElement) {
-                      var articulo = selectElement.value;
-                      var precioInput = selectElement.parentElement.nextElementSibling.nextElementSibling.querySelector("input[name='precio_venta']");
+                            var cantidadInput = document.createElement("input");
+                            cantidadInput.setAttribute("type", "number");
+                            cantidadInput.setAttribute("name", "cantidad");
+                            cantidadInput.classList.add("form-control");
+                            cantidadInput.setAttribute("required", true);
+                            cantidadInput.setAttribute("min", "1");
+                            cantidadInput.setAttribute("id", `cantidad${itemCounter}`);
+                            cantidadInput.setAttribute("oninput", "calcularMontoTotal()");
 
-                      var articuloEncontrado = listaArticulos.find(function (item) {
-                        return item.nombre === articulo;
-                      });
+                            nuevoArticulo.appendChild(cantidadInput);
 
-                      precioInput.value = articuloEncontrado ? articuloEncontrado.precio : "";
-                      calcularMontoTotal();
-                    }
+                            var precioInput = document.createElement("input");
+                            precioInput.setAttribute("name", "precio_venta");
+                            precioInput.setAttribute("type", "number");
+                            precioInput.classList.add("form-control");
+                            precioInput.setAttribute("required", true);
+                            precioInput.setAttribute("min", "1");
+                            precioInput.setAttribute("readonly", true);
+                            precioInput.setAttribute("id", `precio_venta${itemCounter}`);
+
+                            nuevoArticulo.appendChild(precioInput);
+
+                            var eliminarButton = document.createElement("button");
+                            eliminarButton.setAttribute("type", "button");
+                            eliminarButton.classList.add("btn", "btn-danger");
+                            eliminarButton.textContent = "Eliminar";
+                            eliminarButton.setAttribute("onclick", "eliminarArticulo(this)");
+
+                            nuevoArticulo.appendChild(eliminarButton);
+
+                            articulosContainer.appendChild(nuevoArticulo);
+                            itemCounter++;
+                          }
+
+                          function eliminarArticulo(button) {
+                            if (itemCounter > 1) {
+                              var fila = button.parentNode;
+                              fila.parentNode.removeChild(fila);
+                              itemCounter--;
+                            }
+                          }
+
+                          function actualizarPrecio(selectElement) {
+                          var selectedOption = selectElement.options[selectElement.selectedIndex];
+                          var precioInput = selectElement.parentNode.querySelector('input[name="precio_venta"]');
+                          
+                          if (selectedOption && precioInput) {
+                            var articulo = listaArticulos.find(function (articulo) {
+                              return articulo.nombre === selectedOption.value;
+                            });
+                          
+                            if (articulo) {
+                              precioInput.value = articulo.precio.toString();
+                              calcularMontoTotal();
+                            }
+                          }
+                        }
 
                     function enviarFormulario() {
-  var contenedores = document.querySelectorAll("#articulos-container");
+                    var contenedores = document.querySelectorAll("#articulos-container");
 
-  var articulos = [];
+                    var articulos = [];
 
-  contenedores.forEach(function (contenedor) {
-    var selectElement = contenedor.querySelector("select[name='articulo']");
-    var cantidadInput = contenedor.querySelector("input[name='cantidad']");
-    var precioInput = contenedor.querySelector("input[name='precio_venta']");
+                    contenedores.forEach(function (contenedor) {
+                      var selectElement = contenedor.querySelector("select[name='articulo']");
+                      var cantidadInput = contenedor.querySelector("input[name='cantidad']");
+                      var precioInput = contenedor.querySelector("input[name='precio_venta']");
 
-    var articulo = {
-      nombre: selectElement.value,
-      cantidad: cantidadInput.value,
-      precio: precioInput.value
-    };
+                      var articulo = {
+                        nombre: selectElement.value,
+                        cantidad: cantidadInput.value,
+                        precio: precioInput.value
+                      };
 
 
 
@@ -223,6 +245,11 @@ function cerrarCarrito() {
     var fechaInput = document.querySelector("input[name='fechaNuevo']");
     var camposIncompletos = false;
 
+    if ( contenedores[0]?.children?.length === 0)
+    {
+      alert("Necesita cargar al menos un articulo para guardar el carrito.");
+    }
+
     contenedores.forEach(function (contenedor) {
       var selectElement = contenedor.querySelector("select[name='articulo']");
       var cantidadInput = contenedor.querySelector("input[name='cantidad']");
@@ -237,7 +264,7 @@ function cerrarCarrito() {
     }
 
     if (camposIncompletos) {
-      alert("Por favor, complete todos los campos antes de cerrar el carrito.");
+      alert("Por favor, complete todos los campos antes de guardar el carrito.");
     } else {
       enviarFormulario();
     }
@@ -254,24 +281,24 @@ function cerrarCarrito() {
                       </div>
 
                       <script>
-                         function calcularMontoTotal() {
-                            var contenedores = document.querySelectorAll("#articulos-container");
-                            var montoTotal = 0;
+                          function calcularMontoTotal() {
+                            var filas = document.querySelectorAll("#articulos-container .form-group");
 
-                            contenedores.forEach(function (contenedor) {
-                              var cantidadInput = contenedor.querySelector("input[name='cantidad']");
-                              var precioInput = contenedor.querySelector("input[name='precio_venta']");
+                            var total = 0;
+                            filas.forEach(function (fila) {
+                              var cantidad = parseInt(fila.querySelector('input[name="cantidad"]').value);
+                              var precio = parseFloat(fila.querySelector('input[name="precio_venta"]').value);
+                              var subtotal = cantidad * precio;
 
-                              var cantidad = parseInt(cantidadInput.value);
-                              var precio = parseFloat(precioInput.value);
-
-                              if (!isNaN(cantidad) && !isNaN(precio)) {
-                                montoTotal += cantidad * precio;
+                              if (!isNaN(subtotal)) {
+                                total += subtotal;
                               }
                             });
 
-                            var precioCompraInput = document.getElementById("precio_compra");
-                            precioCompraInput.value = montoTotal.toFixed(2);
+                            var montoTotalInput = document.getElementById("precio_compra");
+                            if (montoTotalInput) {
+                              montoTotalInput.value = total.toFixed(2);
+                            }
                           }
                       </script>
 
