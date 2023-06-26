@@ -18,27 +18,22 @@
 <body>
  <div class="container-fluid">
  <% Usuario user = null; %>
- <% user =  (Usuario)request.getAttribute("userLogin"); %>
+ 			<% user =  (Usuario)request.getAttribute("userLogin"); %>
+ 			
+ 			<% if(user == null) {%> 
+	        <div class="col-md-9" >
+				<%@ include file="../common/ErrorLogin.jspf" %>
+	       </div> 
+	       <%} else { 
+	    	   if (user.getTipo().getNombre().equals("VENDEDOR")){ %>
+	    		   <%@ include file="../common/ErrorPermisos.jspf" %>
+	    	    <%} else {%>
  <div class="row align-items-md-stretch">
         <div class="col-md-3 ">
        		<%@ include file="../common/UserData.jspf" %>        
         </div>
-       <div class="col-md-9" <% if(user != null) {%>hidden="hidden"<%}%>>
-       		 <div class="p-5 bg-light border rounded-3" style="width: 100%">
-                <div class="d-flex flex-column align-content-center bd-highlight mb-3">
-                  <div class="d-flex justify-content-center flex-row p-2 bd-highlight">
-                 	 <h1>NO HAS INICIADO SESIÓN</h1>
-                  </div>
-                  <div class="p-2 flex-row bd-highlight align-self-center">
-	                  <form action="home.html" method="post">
-	                  		<input type="submit" class="btn btn-outline-warning me-2" value="VOLVER A HOME" name="btnRedirigir">
-	                  </form>
-                  </div>
-                  
-               </div>
-       		</div>
-       </div> 
-       <div class="col-md-9" <% if(user != null) {if(!user.getTipo().getNombre().equals("CONTADOR")){%>hidden="hidden"<%}}if (user==null) {%>hidden="hidden"<%}%>>
+
+       <div class="col-md-9">
         	<form action="ventas.html" method="post">
               <div class="p-5 bg-light border rounded-3" style="width: 100%">
                 <div class="d-flex  align-content-center bd-highlight mb-3">
@@ -102,6 +97,7 @@
             </form>
     </div>
    </div>
+    <% }}%>
  </div>
             
 </body>

@@ -23,11 +23,11 @@ public class Venta implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="NOMBRE")
+	@Column(name="NUM_VENTA")
 	private int num_venta;
 
 	@OneToMany(cascade= {CascadeType.ALL})
-	@JoinColumn(name = "ID_VENTA", referencedColumnName = "NOMBRE")
+	@JoinColumn(name = "ID_VENTA", referencedColumnName = "NUM_VENTA")
 	private List<Detalle_venta> detalle;
 	
 	@Column(name="FECHA", nullable = true)

@@ -1,3 +1,4 @@
+<%@page import="frgp.utn.edu.ar.dominio.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 	<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 	<html>
@@ -24,6 +25,16 @@
 	</head>
 <body>
 <div class="container-fluid">
+	<% Usuario user = null; %>
+			<% user =  (Usuario)request.getAttribute("userLogin"); %>			
+			<% if(user == null) {%> 
+        <div class="col-md-9" >
+			<%@ include file="../common/ErrorLogin.jspf" %>
+       </div> 
+       <%} else { 
+    	   if (user.getTipo().getNombre().equals("VENDEDOR") || user.getTipo().getNombre().equals("CONTADOR")){ %>
+    		   <%@ include file="../common/ErrorPermisos.jspf" %>
+    	    <%} else {%>
 	<div class="row align-items-md-stretch">
         <div class="col-md-3 ">
         	<%@ include file="../common/UserData.jspf" %>       
@@ -66,8 +77,9 @@
                   </tbody>
               </table>
           </div>
-    </div>
-	
+      </div>
+	</div>
+	<% }} %>
 </div>
 
 </body>
@@ -79,7 +91,7 @@
               <div class="modal-content">
                 <form action="eliminar_usuario.html" method="post">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">¿DESEA ELIMINAR EL SIGUIENTE USUARIO?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">ï¿½DESEA ELIMINAR EL SIGUIENTE USUARIO?</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">                  

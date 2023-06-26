@@ -77,7 +77,7 @@
         <div class="modal fade" id="addSaleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg">
             <div class="modal-content">
-              <form action="ingreso_venta.html" method="post">            
+              <form action="ingreso_venta.html" method="post" id="ventaForm">            
               <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">AGREGAR VENTA</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -122,7 +122,7 @@
 
                     <div style="float: left; padding-left: 20px; width: 100px;">
                       <label style="float: left">Cantidad</label>
-                      <input type="number" name="cantidad" class="form-control" required min="1">
+                      <input type="number" name="cantidad" class="form-control" required min="1" oninput="calcularMontoTotal()">
                     </div>
 
                     <div style="float: left; padding-left: 20px;">
@@ -187,6 +187,7 @@
                       });
 
                       precioInput.value = articuloEncontrado ? articuloEncontrado.precio : "";
+                      calcularMontoTotal();
                     }
 
                     function enviarFormulario() {
@@ -205,15 +206,42 @@
       precio: precioInput.value
     };
 
+
+
     articulos.push(articulo);
   });
 
   var articulosInput = document.getElementById("articulosLista");
   articulosInput.value = JSON.stringify(articulos);
 
-  console.log("articulosInput",articulosInput);
+  document.getElementById("ventaForm").submit();
 
 }
+
+function cerrarCarrito() {
+    var contenedores = document.querySelectorAll("#articulos-container");
+    var fechaInput = document.querySelector("input[name='fechaNuevo']");
+    var camposIncompletos = false;
+
+    contenedores.forEach(function (contenedor) {
+      var selectElement = contenedor.querySelector("select[name='articulo']");
+      var cantidadInput = contenedor.querySelector("input[name='cantidad']");
+     
+
+      if (selectElement.value === "" || cantidadInput.value === "") {
+        camposIncompletos = true;
+      }
+    });
+    if (fechaInput.value === "") {
+      camposIncompletos = true;
+    }
+
+    if (camposIncompletos) {
+      alert("Por favor, complete todos los campos antes de cerrar el carrito.");
+    } else {
+      enviarFormulario();
+    }
+  }
                   </script>
 
 
@@ -225,13 +253,36 @@
                         <input id="precio_compra" type="number" name="precio_compra" class="form-control" readonly>
                       </div>
 
+                      <script>
+                         function calcularMontoTotal() {
+                            var contenedores = document.querySelectorAll("#articulos-container");
+                            var montoTotal = 0;
+
+                            contenedores.forEach(function (contenedor) {
+                              var cantidadInput = contenedor.querySelector("input[name='cantidad']");
+                              var precioInput = contenedor.querySelector("input[name='precio_venta']");
+
+                              var cantidad = parseInt(cantidadInput.value);
+                              var precio = parseFloat(precioInput.value);
+
+                              if (!isNaN(cantidad) && !isNaN(precio)) {
+                                montoTotal += cantidad * precio;
+                              }
+                            });
+
+                            var precioCompraInput = document.getElementById("precio_compra");
+                            precioCompraInput.value = montoTotal.toFixed(2);
+                          }
+                      </script>
+
                     </div>
-                    <button type="button" class="btn btn-danger" onclick="enviarFormulario()" >Cerrar carrito</button>
-                    <input  id="articulosLista" name="articulosLista" class="form-control" required min="1">
+                   
+                    <input   id="articulosLista" type="hidden" name="articulosLista" class="form-control" required min="1">
 
                     <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">CANCELAR</button>
-                    <input type="submit" class="btn btn-primary" name="btnAceptar" value="Aceptar">
+                    <button type="button" class="btn btn-success" onclick="cerrarCarrito()" >Guardar venta</button>
+                    <input style="display: none;" type="submit" class="btn btn-primary" name="btnAceptar" value="Aceptar">
               </div>
             </form>
             </div>
