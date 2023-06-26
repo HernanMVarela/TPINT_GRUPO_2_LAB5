@@ -11,6 +11,13 @@
               $(document).ready(function () {
                 $('#tabla_ventas').DataTable();
               });
+
+              function abrirDetalleModal(detalle, total, cliente) {
+            	    document.getElementById("detalleVenta").textContent = detalle;
+            	    document.getElementById("totalVenta").textContent = total;
+            	    document.getElementById("nombreCliente").textContent = cliente;
+            	}
+
             </script>
       </head>
 
@@ -44,23 +51,29 @@
 					</thead>
 					<tbody>
             
-            <c:forEach items="${listaVentas}" var="item">
+           			 <c:forEach items="${listaVentas}" var="item">
                                              
                           <tr>
                             <td>${item.num_venta} </td>
                             <td>${item.fecha} </td>
-                            <td>${item.cliente.ID} </td>
+                            <td>${item.cliente.nombre} ${item.cliente.apellido}</td>
+                            <td>$ ${item.totalMonto()}</td>
                             <td> </td>
                             
                             <td> 
-                              <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#detailSaleModal">
-                                          DETALLE
-                                        </button>
+							<button type="button" class="btn btn-success" data-bs-toggle="modal" 
+						        data-bs-target="#detailSaleModal" onclick="abrirDetalleModal(
+						        '${item.generarDetalleString()}',
+						        '${item.totalMonto()},
+						        '${item.cliente.nombre}')">
+						        DETALLE
+						    </button>
+
                             </td>
                             <td> 
                               <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteSaleModal">
-                                          ANULAR VENTA
-                                        </button>
+	                               ANULAR VENTA
+	                             </button>
                             </td>
                             
                           </tr>
@@ -73,6 +86,29 @@
             </form>
           </div>
 
+
+       <!-- Modal DETALLE VENTA -->
+        <div class="modal fade" id="detailSaleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">DETALLE VENTA</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+           <div class="modal-body">
+			    <h5 class="modal-title" id="exampleModalLabel">DETALLE VENTA</h5>
+			    <div id="detalleVenta"></div>
+			    <hr>
+			    <label>TOTAL: <span id="totalVenta"></span></label>
+			    <br>
+			    <label>Cliente: <span id="nombreCliente"></span></label>
+			</div>
+
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
       <!-- Modal AGREGAR VENTA -->
         <div class="modal fade" id="addSaleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg">
@@ -335,48 +371,6 @@ function cerrarCarrito() {
           </div>
         </div>
         
-        <!-- Modal DETALLE VENTA -->
-        <div class="modal fade" id="detailSaleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-          aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">DETALLE VENTA</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                 <table id="tabla_ventas" class="table table-hover text-center">
-			  		<thead>
-						<tr>
-							<th class="text-center" scope="col"> PRODUCTO </th>
-							<th class="text-center" scope="col"> PRECIO U. </th>
-							<th class="text-center" scope="col"> CANTIDAD </th> 
-							<th class="text-center" scope="col"> SUBTOTAL </th> 
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>COCA COLA</td>
-							<td>$ 500</td>
-							<td>2</td>
-							<td>$ 1000</td>
-						</tr>
-						<tr>
-							<td>FERNET</td>
-							<td>$ 1500</td>
-							<td>1</td>
-							<td>$ 1500</td>
-						</tr>
-					</tbody>
-				</table>
-				<hr>
-				<label>TOTAL: $2500</label>							
-              </div>
-              <div class="modal-footer">               
-              </div>
-            </div>
-          </div>
-        </div>
 
         <!-- Modal ELIMINAR VENTA -->
         <div class="modal fade" id="deleteSaleModal" tabindex="-1" aria-labelledby="exampleModalLabel"

@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,7 +27,7 @@ public class Venta implements Serializable {
 	@Column(name="NUM_VENTA")
 	private int num_venta;
 
-	@OneToMany(cascade= {CascadeType.ALL})
+	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_VENTA", referencedColumnName = "NUM_VENTA")
 	private List<Detalle_venta> detalle;
 	
@@ -49,6 +50,29 @@ public class Venta implements Serializable {
 		return "Venta [num_venta=" + num_venta + ", detalle=" + detalle + ", fecha=" + fecha + ", cliente=" + cliente
 				+ "]";
 	}
+	
+	public String generarDetalleString() {
+	    StringBuilder detalleString = new StringBuilder();
+	    for (Detalle_venta detalle : detalle) {
+	        String producto = detalle.getArticulo().getNombre();
+	        double precioUnitario = detalle.getArticulo().getPrecio_venta();
+	        int cantidad = detalle.getCantidad();
+	        double subtotal = detalle.getImporte();
+	        
+	        String fila = String.format("PRODUCTO: %s | PRECIO U.: %.2f | CANTIDAD: %d | SUBTOTAL: %.2f", producto, precioUnitario, cantidad, subtotal);
+	        detalleString.append(fila).append("\n");
+	    }
+	    return detalleString.toString();
+	}
+	
+	public float totalMonto() {
+		float monto = 0;
+		for (Detalle_venta detalle_venta : detalle) {
+			monto += detalle_venta.getImporte();
+		}
+		return monto;
+	}
+	
 	public int getNum_venta() {
 		return num_venta;
 	}

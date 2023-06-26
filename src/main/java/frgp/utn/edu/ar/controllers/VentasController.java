@@ -1,5 +1,7 @@
 package frgp.utn.edu.ar.controllers;
 import java.sql.Date;
+import java.util.List;
+
 import javax.servlet.ServletConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -50,7 +52,7 @@ public class VentasController {
 		this.serviceVenta = (VentaServicio) ctx.getBean("VentaServiceBean");
 		this.serviceCliente = (ClienteServicio) ctx.getBean("ClienteServiceBean");
 		this.serviceArticulo = (ArticuloServicio) ctx.getBean("ArticuloServiceBean");
-			this.serviceStock = (StockServicio) ctx.getBean("StockServiceBean");
+		this.serviceStock = (StockServicio) ctx.getBean("StockServiceBean");
 		
 		this.MV = (ModelAndView) ctx.getBean("ModelAndViewBean");
 		this.venta = (Venta) ctx.getBean("VentaEstandar");
@@ -180,6 +182,10 @@ public class VentasController {
 	
 	private ModelAndView cargadorDeListasVentas(ModelAndView MV) 
 	{
+		List<Venta> lista = this.serviceVenta.obtenerVentas();
+		for (Venta venta : lista) {
+			System.out.println(venta.generarDetalleString());
+		}
 		MV.addObject("listaVentas",this.serviceVenta.obtenerVentas());
 		MV.addObject("listaClientes",this.serviceCliente.obtenerClientes());
 		MV.addObject("listaArticulos",this.serviceArticulo.obtenerArticulos());
