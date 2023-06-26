@@ -33,7 +33,7 @@ public class ReportesController {
 		
 		this.serviceUsuario = (UsuarioServicio) ctx.getBean("UsuarioServiceBean");
 		this.serviceDetalleVenta = (Detalle_ventaServicio) ctx.getBean("Detalle_ventaServiceBean");
-		this.serviceArticulo = (ArticuloServicio) ctx.getBean("ArticuloEstandar");
+		this.serviceArticulo = (ArticuloServicio) ctx.getBean("ArticuloServiceBean");
 		
 		this.MV = (ModelAndView) ctx.getBean("ModelAndViewBean");
 	}	
