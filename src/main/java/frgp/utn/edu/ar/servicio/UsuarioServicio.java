@@ -12,7 +12,7 @@ public interface UsuarioServicio {
 
 	public String insertarUsuario(Usuario nuevo);
 
-	public void eliminarUsuario(int ID) ;
+	public String eliminarUsuario(Usuario eliminar);
 
 	public String actualizarUsuario(Usuario modificar);
 

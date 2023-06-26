@@ -23,10 +23,10 @@ console.log(id)
 
   }
 
-  function abrirEliminarModal(dni, nombre, apellido, email, telefono) {
+  function abrirEliminarModal(id, dni, nombre, apellido, email, telefono) {
 
-    $('#idEliminar').val(ID);
-    $('#dniEliminar').val(DNI);
+    $('#idEliminar').val(id);
+    $('#dniEliminar').val(dni);
     $('#nombreEliminar').val(nombre);
     $('#apellidoEliminar').val(apellido);
     $('#correoEliminar').val(email);
@@ -91,7 +91,7 @@ console.log(id)
                               <button type="button" class="btn btn-success" data-bs-toggle="modal"
                                 data-bs-target="#modifyClientModal" 
                                 onclick="abrirModificarModal('${item.ID}',
-                               								               '${item.DNI}',
+               								                 '${item.DNI}',
                                                              '${item.nombre}',
                                                              '${item.apellido}',
                                                              '${item.direccion}',
@@ -120,12 +120,7 @@ console.log(id)
                     </table>
 			  	</div> 
 		  	</div>		
-		</form>
-		<div class="row align-items-md-stretch">
-            <div class="d-flex justify-content-center" style="text-align: center;">
-               	<h3 class="w-auto">${Mensaje}</h3>	
-            </div>
-        </div>
+		</form>		
 	</div>	
 </div>
 
@@ -133,17 +128,56 @@ console.log(id)
 <div class="modal fade" id="deleteClientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
+    <form action="eliminar_cliente.html" method="post">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">ELIMINAR CLIENTE</h5>
+        <h5 class="modal-title" id="exampleModalLabel">¿DESEA ELIMINAR EL SIGUIENTE CLIENTE?</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ¿DESEA ELIMINAR EL CLIENTE SELECCIONADO?
+        <div class="row d-flex align-items-center">
+    	 	  <div class="col-md-4">
+            <label>ID:</label>
+          </div>
+          <div class="col-md-8">
+            <input id="idEliminar" name="idEliminar" class="form-control mt-1" readonly>
+          </div>
+          <div class="col-md-4">
+            <label>NOMBRE:</label>
+          </div>
+          <div class="col-md-8">
+            <input id="nombreEliminar" name="nombreEliminar" class="form-control mt-1" readonly>
+          </div>
+          <div class="col-md-4">  
+            <label>APELLIDO:</label>
+          </div>
+          <div class="col-md-8">		                      
+              <input id="apellidoEliminar" name="apellidoEliminar" class="form-control mt-1" readonly>
+          </div>
+          <div class="col-md-4">
+            <label>DNI:</label>
+          </div>
+          <div class="col-md-8">
+            <input id="dniEliminar" name="dniEliminar" class="form-control mt-1" id="textAreaExample1" readonly>
+          </div>
+          <div class="col-md-4">
+            <label>CORREO:</label>
+          </div>
+          <div class="col-md-8">
+               <input id="correoEliminar" name="correoEliminar" class="form-control mt-1" id="textAreaExample1" readonly>
+          </div>
+          <div class="col-md-4">
+            <label>TELEFONO:</label>
+          </div>
+          <div class="col-md-8">
+               <input id="telefonoEliminar" name="telefonoEliminar" class="form-control mt-1" id="textAreaExample1" readonly>
+          </div>	                                            
+         </div>     
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">CANCELAR</button>
-        <button type="button" class="btn btn-success">CONFIRMAR</button>
+        <input type="submit" class="btn btn-success" name="btnAceptar" value="CONFIRMAR">
       </div>
+     </form>
     </div>
   </div>
 </div>

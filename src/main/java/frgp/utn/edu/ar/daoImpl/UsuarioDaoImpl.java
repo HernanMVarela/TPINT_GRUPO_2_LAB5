@@ -38,8 +38,28 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	
 	@Override
 	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
+	public Usuario obtenerUsuarioPorDNI(String DNI) {
+	    String query = "FROM Usuario u where u.DNI LIKE :dni";
+	    @SuppressWarnings("unchecked")
+		List<Usuario> resultados = (List<Usuario>) this.hibernateTemplate.findByNamedParam(query, "dni", DNI);
+	    if (!resultados.isEmpty()) {
+	        return resultados.get(0);
+	    }
+	    return null;
+	}
+	
+	@Override
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
 	public boolean existeUsuario(int ID) {
 		return this.hibernateTemplate.get(Usuario.class, ID) != null;
+	}
+	
+	@Override
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
+	public boolean existeUsuario(String DNI) {
+	    @SuppressWarnings("unchecked")
+		List<Usuario> resultados = (List<Usuario>) this.hibernateTemplate.find("FROM Usuario u where u.DNI LIKE ?", DNI);
+	    return !resultados.isEmpty();
 	}
 
 	@Override
@@ -78,6 +98,4 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	    }
 	    return null;
 	}
-
-
 }

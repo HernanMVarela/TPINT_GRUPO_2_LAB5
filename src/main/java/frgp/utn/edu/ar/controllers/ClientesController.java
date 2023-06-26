@@ -131,12 +131,12 @@ public class ClientesController {
 		}
 	}
 	
-		//Modificar Cliente | "/eliminar_cliente.html"
+	//Modificar Cliente | "/eliminar_cliente.html"
 	@RequestMapping(value ="/eliminar_cliente.html" , method= { RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView eliminarCliente(int IDModif){		
+	public ModelAndView eliminarCliente(int idEliminar){		
 		
-		cliente = serviceCliente.obtenerUnRegistro(IDModif);
-		cliente.setEstado(serviceEstadoCliente.obtenerUnRegistro(2));
+		cliente = serviceCliente.obtenerUnRegistro(idEliminar);
+		cliente.setEstado(serviceEstadoCliente.obtenerUnRegistro(0));
 	
 		String Message = "";	
 		
