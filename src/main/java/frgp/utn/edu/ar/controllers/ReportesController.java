@@ -5,13 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.ModelAndView;
 
-import frgp.utn.edu.ar.dominio.Usuario;
+import frgp.utn.edu.ar.servicio.ArticuloServicio;
 import frgp.utn.edu.ar.servicio.Detalle_ventaServicio;
-import frgp.utn.edu.ar.servicio.EstadoUsuarioServicio;
 import frgp.utn.edu.ar.servicio.UsuarioServicio;
 
 @Controller
@@ -22,6 +20,9 @@ public class ReportesController {
 	
 	@Autowired
 	private Detalle_ventaServicio serviceDetalleVenta;
+	
+	@Autowired
+	private ArticuloServicio serviceArticulo;
 
 	@Autowired
 	private ModelAndView MV;
@@ -32,7 +33,8 @@ public class ReportesController {
 		
 		this.serviceUsuario = (UsuarioServicio) ctx.getBean("UsuarioServiceBean");
 		this.serviceDetalleVenta = (Detalle_ventaServicio) ctx.getBean("Detalle_ventaServiceBean");
-
+		this.serviceArticulo = (ArticuloServicio) ctx.getBean("ArticuloEstandar");
+		
 		this.MV = (ModelAndView) ctx.getBean("ModelAndViewBean");
 	}	
 	
@@ -49,6 +51,7 @@ public class ReportesController {
 	{
 		MV.addObject("listaRoles",this.serviceUsuario.obtenerUsuariosPorRol());
 		MV.addObject("listaProductos",this.serviceDetalleVenta.obtenerProductosPorCantidad());
+		MV.addObject("listaCategorias",this.serviceArticulo.obtenerCantidadArticulosPorTipo());
 		return MV;
 	}
 }

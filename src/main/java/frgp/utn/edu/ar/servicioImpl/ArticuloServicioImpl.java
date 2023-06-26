@@ -1,6 +1,7 @@
 package frgp.utn.edu.ar.servicioImpl;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import frgp.utn.edu.ar.dao.ArticuloDao;
 import frgp.utn.edu.ar.dominio.Articulo;
@@ -66,6 +67,11 @@ public class ArticuloServicioImpl implements ArticuloServicio{
 				return "NO ELIMINADO";
 			}
 		}
+	}
+	
+	@Override
+	public Map<String, Long> obtenerCantidadArticulosPorTipo() {
+		return dataAccess.obtenerCantidadArticulosPorTipo();
 	}
 
 }

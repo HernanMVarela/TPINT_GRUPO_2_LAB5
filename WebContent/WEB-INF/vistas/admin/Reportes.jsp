@@ -17,7 +17,7 @@
 	          <div class="col-md-4">
 	          <h4>CANTIDAD DE USUARIOS POR ROL</h4>
 	          <hr>
-	          <table id="tabla_empleados" class="table table-hover text-center">
+	          <table id="tabla_roles" class="table table-hover text-center">
 	                  <thead>
 	                      <tr>                         
 	                          <th scope="col">ROL</th>
@@ -35,10 +35,10 @@
 	              </table>
 	           	</div>
 	           	
-	           	<div class="col-md-4">
+	          <div class="col-md-4">
 	          <h5>TOP 5 PRODUCTOS MAS VENDIDOS</h5>
 	          <hr>
-	          <table id="tabla_empleados" class="table table-hover text-center">
+	          <table id="tabla_productos_ventas" class="table table-hover text-center">
 	                  <thead>
 	                      <tr>                         
 	                          <th scope="col">PRODUCTO</th>
@@ -55,6 +55,27 @@
 	                  </tbody>
 	              </table>
 	           	</div>
+	           	
+	           	<div class="col-md-4">
+		          <h5>TOP 5 CaTEGORIAS CON MAS PRODUCTOS</h5>
+		          <hr>
+		          <table id="tabla_categorias" class="table table-hover text-center">
+		                  <thead>
+		                      <tr>                         
+		                          <th scope="col">CATEGORIA</th>
+		                          <th scope="col">CANTIDAD</th>                          
+		                      </tr>
+		                  </thead>
+		                  <tbody>
+		                      <c:forEach var="entry" items="${listaCategorias}">
+		                      <tr>
+		                            <td>${entry.key}</td>
+		                            <td>${entry.value} </td>
+		                      </tr>
+							  </c:forEach>
+		                  </tbody>
+		              </table>
+		           	</div>
       		</div>              
         </div>
       </div>

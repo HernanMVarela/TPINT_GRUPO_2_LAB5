@@ -1,6 +1,9 @@
 package frgp.utn.edu.ar.daoImpl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate4.HibernateTemplate;
@@ -65,6 +68,24 @@ public class ArticuloDaoImpl implements ArticuloDao {
 		} catch (Exception e) {
 			return false;
 		}
+	}
+	
+	@Override
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
+	public Map<String, Long> obtenerCantidadArticulosPorTipo() {
+		String query = "SELECT t.nombre, COUNT(a) " +
+		               "FROM Articulo a " +
+		               "JOIN a.tipo t " +
+		               "GROUP BY t.nombre";		
+		@SuppressWarnings("unchecked")
+		List<Object[]> resultados = (List<Object[]>) this.hibernateTemplate.find(query);
+		List<Object[]> limitedResultados = resultados.subList(0, Math.min(resultados.size(), 5));
+
+		Map<String, Long> map = new HashMap<String, Long>();
+		for (Object[] resultado : limitedResultados) {
+			map.put((String) resultado[0], (Long) resultado[1]);
+		}
+		return map;
 	}
 
 
