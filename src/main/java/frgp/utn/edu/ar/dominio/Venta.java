@@ -38,6 +38,9 @@ public class Venta implements Serializable {
 	@JoinColumn(name="ID", nullable = false)
 	private Cliente cliente;
 	
+	@Column(name="GANANCIA", nullable = true)
+	private float ganancia;
+	
 	public Venta(List<Detalle_venta> detalle, Date fecha, Cliente cliente) {
 		this.detalle=detalle;
 		this.fecha=fecha;
@@ -97,4 +100,11 @@ public class Venta implements Serializable {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
+	public float getGanancia() {
+		return ganancia;
+	}
+	public void setGanancia(float ganancia) {
+		this.ganancia = ganancia;
+	}
+	
 }

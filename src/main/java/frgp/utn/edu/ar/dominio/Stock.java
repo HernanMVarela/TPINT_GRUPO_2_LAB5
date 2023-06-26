@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "STOCKS")
-public class Stock implements Serializable {
+public class Stock implements Serializable, Comparable<Stock> {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -78,6 +78,11 @@ public class Stock implements Serializable {
 	}
 	public void setPreciocompra(float preciocompra) {
 		this.preciocompra = preciocompra;
+	}
+
+	@Override
+	public int compareTo(Stock o) {
+		return (this.fechaingreso.getTime()<o.getFechaingreso().getTime() ? -1 : (this.fechaingreso.getTime()==o.getFechaingreso().getTime() ? 0 : 1));
 	}
 
 }
