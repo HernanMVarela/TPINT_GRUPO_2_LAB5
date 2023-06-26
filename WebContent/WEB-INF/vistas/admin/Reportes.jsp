@@ -9,13 +9,35 @@
  <body>
 <div class="container-fluid">
   <form  id="myForm" method="get">
-    <div class="cuadro_uno justify-content-center">
       <div class="p-5 bg-light border rounded-3" style="width: 100%">
         <div class="row w-auto justify-content-center">
           <h1>REPORTES</h1>
-          <hr>              
+          <hr>
+          <div class="row align-items-md-stretch">
+	          <div class="col-md-4">
+	          <h4>CANTIDAD DE USUARIOS POR ROL</h4>
+	          <hr>
+	          <table id="tabla_empleados" class="table table-hover text-center">
+	                  <thead>
+	                      <tr>                         
+	                          <th scope="col">ROL</th>
+	                          <th scope="col">CANTIDAD</th>                          
+	                      </tr>
+	                  </thead>
+	                  <tbody>
+	                      <c:forEach var="entry" items="${listaRoles}">
+	                      <tr>
+	                            <td>${entry.key}</td>
+	                            <td>${entry.value} </td>
+	                      </tr>
+						  </c:forEach>
+	                  </tbody>
+	              </table>
+	           	</div>
+      		</div>              
         </div>
-      </div>      
+      </div>
+      </form>      
 </div>  
 </body>
 </html>

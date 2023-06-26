@@ -1,7 +1,9 @@
 package frgp.utn.edu.ar.daoImpl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate4.HibernateTemplate;
@@ -97,5 +99,18 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	        return resultados.get(0);
 	    }
 	    return null;
+	}
+
+	@Override
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
+	public Map<String, Long> obtenerUsuariosPorRol() {
+		String query = "SELECT tipo.nombre, COUNT(*) FROM Usuario u JOIN u.tipo tipo GROUP BY tipo.nombre";		
+		@SuppressWarnings("unchecked")
+		List<Object[]> resultados = (List<Object[]>) this.hibernateTemplate.find(query);
+		Map<String, Long> map = new HashMap<String, Long>();
+		for (Object[] resultado : resultados) {
+			map.put((String) resultado[0], (Long) resultado[1]);
+		}
+		return map;
 	}
 }

@@ -1,6 +1,7 @@
 package frgp.utn.edu.ar.servicio;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import frgp.utn.edu.ar.dominio.Usuario;
 
@@ -17,5 +18,7 @@ public interface UsuarioServicio {
 	public String actualizarUsuario(Usuario modificar);
 
 	public Usuario login(String username, String pass);
+
+	Map<String, Long> obtenerUsuariosPorRol();
 
 }

@@ -1,6 +1,7 @@
 package frgp.utn.edu.ar.servicioImpl;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import frgp.utn.edu.ar.dao.EstadoUsuarioDao;
 import frgp.utn.edu.ar.dao.UsuarioDao;
@@ -101,5 +102,10 @@ public class UsuarioServicioImpl implements UsuarioServicio{
 		}
 		
 		return user;
+	}
+	
+	@Override
+	public Map<String, Long> obtenerUsuariosPorRol() {
+		return dataAccess.obtenerUsuariosPorRol();
 	}
 }

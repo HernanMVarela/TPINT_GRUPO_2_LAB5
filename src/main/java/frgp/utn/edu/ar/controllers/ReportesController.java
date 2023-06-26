@@ -31,9 +31,9 @@ public class ReportesController {
 		this.MV = (ModelAndView) ctx.getBean("ModelAndViewBean");
 	}	
 	
-	// LISTA USERS | "reportes.html"
+	// REPORTES | "reportes.html"
 	@RequestMapping("reportes.html")
-	public ModelAndView eventoRedireccionarListarUsuarios()
+	public ModelAndView eventoRedireccionarReportes()
 	{
 		MV = cargadorDeListasReportes(MV);
 		MV.setViewName("admin/Reportes");
@@ -42,7 +42,7 @@ public class ReportesController {
 	
 	private ModelAndView cargadorDeListasReportes(ModelAndView MV) 
 	{
-		MV.addObject("listaUsuarios",this.serviceUsuario.obtenerUsuarios());
+		MV.addObject("listaRoles",this.serviceUsuario.obtenerUsuariosPorRol());
 		return MV;
 	}
 }
