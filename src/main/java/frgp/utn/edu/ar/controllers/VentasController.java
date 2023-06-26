@@ -1,8 +1,5 @@
 package frgp.utn.edu.ar.controllers;
-import java.lang.reflect.Array;
 import java.sql.Date;
-import java.util.List;
-import java.util.ArrayList;
 import javax.servlet.ServletConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -12,54 +9,46 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.ModelAndView;
-import frgp.utn.edu.ar.dominio.Cliente;
 import frgp.utn.edu.ar.dominio.Detalle_venta;
 import frgp.utn.edu.ar.dominio.Venta;
 import frgp.utn.edu.ar.servicio.ArticuloServicio;
 import frgp.utn.edu.ar.servicio.ClienteServicio;
-import frgp.utn.edu.ar.servicio.Detalle_ventaServicio;
-import frgp.utn.edu.ar.servicio.EstadoClienteServicio;
-import frgp.utn.edu.ar.servicio.LocalidadServicio;
-import frgp.utn.edu.ar.servicio.ProvinciaServicio;
 import frgp.utn.edu.ar.servicio.VentaServicio;
 
 @Controller
 public class VentasController {
 	
 	@Autowired
-	public VentaServicio serviceVenta;
+	private VentaServicio serviceVenta;
 
 	@Autowired
-	public ClienteServicio serviceCliente;
+	private ClienteServicio serviceCliente;
 	
 	@Autowired
-	public ArticuloServicio serviceArticulo;
+	private ArticuloServicio serviceArticulo;
 	
 	@Autowired
-	public Detalle_ventaServicio serviceDetalle_venta;
+	private Venta venta;
 	
 	@Autowired
-	public Venta venta;
+	private Detalle_venta detalle;
 	
 	@Autowired
-	public ModelAndView MV;
-
-
-
-
+	private ModelAndView MV;
+	
+	@Autowired
+	private ApplicationContext ctx;
 
 	// NO TOCAR - Servlets
 	public void init(ServletConfig config) {
-		ApplicationContext ctx = WebApplicationContextUtils
-				.getRequiredWebApplicationContext(config.getServletContext());
+		ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(config.getServletContext());
 		
 		this.serviceVenta = (VentaServicio) ctx.getBean("VentaServiceBean");
 		this.serviceCliente = (ClienteServicio) ctx.getBean("ClienteServiceBean");
 		this.serviceArticulo = (ArticuloServicio) ctx.getBean("ArticuloServiceBean");
-		this.serviceDetalle_venta = (Detalle_ventaServicio) ctx.getBean("Detalle_ventaServiceBean");
 		
 		this.MV = (ModelAndView) ctx.getBean("ModelAndViewBean");
-		 this.venta = (Venta) ctx.getBean("VentaEstandar");
+		this.venta = (Venta) ctx.getBean("VentaEstandar");
 	}	
 		
 	// ventas | "ventas.html"
@@ -82,9 +71,6 @@ public class VentasController {
     venta.setFecha(fechaNuevo);
     venta.setCliente(serviceCliente.obtenerUnRegistro(cliente));
 
-    // Crear una lista para almacenar los objetos de detalle
-    List<Detalle_venta> detalleLista = new ArrayList<>();
-
     // Eliminar los corchetes "[" y "]" del String de entrada
     articulosLista = articulosLista.replace("[", "").replace("]", "");
 
@@ -93,6 +79,7 @@ public class VentasController {
 
     // Recorrer cada objeto individual y crear instancias de Detalle_venta
     for (String objeto : objetos) {
+    	detalle = (Detalle_venta)ctx.getBean("DetalleEstandar");
         // Eliminar las llaves "{" y "}" del objeto individual
         objeto = objeto.replace("{", "").replace("}", "");
 
@@ -102,7 +89,7 @@ public class VentasController {
         // Variables para almacenar los valores de nombre, cantidad y precio
         String nombre = null;
         int cantidadObjeto = 0;
-        int precio = 0;
+
 
         // Recorrer los pares de clave-valor y extraer los valores necesarios
         for (String par : pares) {
@@ -113,25 +100,22 @@ public class VentasController {
             // Eliminar las comillas dobles del valor
             clave = clave.replace("\"", "");
 			valor = valor.replace("\"", "");
-			// System.out.println(clave);
-			// System.out.println(valor);
 		
             // Asignar el valor correspondiente según la clave
             if (clave.equals("nombre")) {
                 nombre = valor;
             } else if (clave.equals("cantidad")) {
                 cantidadObjeto = Integer.parseInt(valor);
-            } else if (clave.equals("precio")) {
-                precio = Integer.parseInt(valor);
             }
-			 
         }
 
         // Crear una instancia de Detalle_venta y agregarla a la lista
-         Detalle_venta detalle = new Detalle_venta(serviceArticulo.obtenerUnRegistro(nombre), cantidadObjeto);
-         detalleLista.add(detalle);
+         detalle.setArticulo(serviceArticulo.obtenerUnRegistro(nombre));
+         detalle.setCantidad(cantidadObjeto);
+         detalle.setImporte(cantidad*detalle.getArticulo().getPrecio_venta());
+         venta.getDetalle().add(detalle);
+         
     }
-		venta.setDetalle(detalleLista);
 		String Message = "";
 		try{
 		    Message = asignarMensajeVenta(serviceVenta.insertarVenta(venta));
@@ -152,8 +136,6 @@ public class VentasController {
 		
 	}
 
-	
-	
 	private String asignarMensajeVenta(String error) {
 		if (error.equals("AGREGADO")) {
 			return "Venta Agregado";

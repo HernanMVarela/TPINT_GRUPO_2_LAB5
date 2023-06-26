@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class ContadorController {
 
 	@Autowired
-	public ModelAndView MV;
+	private ModelAndView MV;
 	// HOME CONTADOR | "contador.html"
 	
 	// NO TOCAR - Servlets

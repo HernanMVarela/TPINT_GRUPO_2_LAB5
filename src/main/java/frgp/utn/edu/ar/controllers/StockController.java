@@ -18,14 +18,14 @@ import frgp.utn.edu.ar.servicio.StockServicio;
 public class StockController {
 
 	@Autowired
-	public  ArticuloServicio serviceArticulo;
+	private  ArticuloServicio serviceArticulo;
 	@Autowired
-	public  StockServicio serviceStock;
+	private  StockServicio serviceStock;
 	
 	@Autowired
-	public ModelAndView MV;
+	private ModelAndView MV;
 	@Autowired
-	public Stock stock;
+	private Stock stock;
 	
 	// NO TOCAR - Servlets
 	public void init(ServletConfig config) {

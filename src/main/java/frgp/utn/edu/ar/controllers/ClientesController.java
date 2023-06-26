@@ -20,19 +20,19 @@ import frgp.utn.edu.ar.servicio.ProvinciaServicio;
 public class ClientesController {
 
 	@Autowired
-	public ProvinciaServicio serviceProvincia;
+	private ProvinciaServicio serviceProvincia;
 	@Autowired
-	public LocalidadServicio serviceLocalidad;
+	private LocalidadServicio serviceLocalidad;
 	@Autowired
-	public EstadoClienteServicio serviceEstadoCliente;
+	private EstadoClienteServicio serviceEstadoCliente;
 	@Autowired
-	public ClienteServicio serviceCliente;
+	private ClienteServicio serviceCliente;
 	
 	@Autowired
-	public Cliente cliente;
+	private Cliente cliente;
 	
 	@Autowired
-	public ModelAndView MV;
+	private ModelAndView MV;
 
 
 	// NO TOCAR - Servlets

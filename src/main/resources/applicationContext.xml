@@ -40,7 +40,7 @@
 	
 	<bean id="VentaEstandar" class="frgp.utn.edu.ar.dominio.Venta">
 		<property name="cliente" ref="ClienteEstandar"></property>
-		<property name="detalle" ref="DetalleEstandar"></property>
+		<property name="detalle" ref="DetalleVentaList"></property>
 	</bean>
 	
 	<bean id="UsuarioEstandar" class="frgp.utn.edu.ar.dominio.Usuario">
@@ -55,9 +55,13 @@
 	<bean id="EstadoClienteEstandar" class="frgp.utn.edu.ar.dominio.Estado_Cli"></bean>
 	<bean id="EstadoUsuarioEstandar" class="frgp.utn.edu.ar.dominio.Estado_User"></bean>
 	<bean id="MarcaEstandar" class="frgp.utn.edu.ar.dominio.Marca"></bean>
-	<bean id="DetalleEstandar" class="frgp.utn.edu.ar.dominio.Detalle_venta">
-	<property name="articulo" ref="ArticuloEstandar"></property>
+	
+	<bean id="DetalleVentaList" class="java.util.ArrayList"/>
+	
+	<bean id="DetalleEstandar" class="frgp.utn.edu.ar.dominio.Detalle_venta" scope="prototype">
+		<property name="articulo" ref="ArticuloEstandar"></property>
 	</bean>
+	
 	<bean id="TipoArticuloEstandar" class="frgp.utn.edu.ar.dominio.Tipo_Articulo"></bean>
 		
 	<!-- CREO EL SERVICIO PARA Cliente -->

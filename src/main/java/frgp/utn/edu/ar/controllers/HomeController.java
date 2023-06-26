@@ -16,9 +16,9 @@ import frgp.utn.edu.ar.servicio.UsuarioServicio;
 public class HomeController {
 
 	@Autowired
-	public UsuarioServicio serviceUsuario;
+	private UsuarioServicio serviceUsuario;
 	@Autowired
-	public Usuario usuario;
+	private Usuario userLogin;
 	
 	@Autowired
 	private ModelAndView MV;
@@ -27,7 +27,7 @@ public class HomeController {
 		ApplicationContext ctx = WebApplicationContextUtils
 				.getRequiredWebApplicationContext(config.getServletContext());
 		this.serviceUsuario = (UsuarioServicio) ctx.getBean("UsuarioServiceBean");
-		this.usuario = (Usuario) ctx.getBean("UsuarioEstandar");
+		this.userLogin = (Usuario) ctx.getBean("UsuarioEstandar");
 		this.MV = (ModelAndView) ctx.getBean("ModelAndViewBean");
 	}
 	
@@ -42,7 +42,7 @@ public class HomeController {
 	@RequestMapping("login.html")
 	public ModelAndView login(String usernameLogin, String passLogin){
 		
-		Usuario userLogin = serviceUsuario.login(usernameLogin, passLogin);
+		userLogin = serviceUsuario.login(usernameLogin, passLogin);
 		
 		if(userLogin == null) {
 			MV.addObject("userLogin", null);

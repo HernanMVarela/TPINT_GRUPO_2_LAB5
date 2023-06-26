@@ -22,21 +22,21 @@ import frgp.utn.edu.ar.servicio.UsuarioServicio;
 public class RegisterController {
 	
 	@Autowired
-	public ProvinciaServicio serviceProvincia;
+	private ProvinciaServicio serviceProvincia;
 	@Autowired
-	public LocalidadServicio serviceLocalidad;
+	private LocalidadServicio serviceLocalidad;
 	@Autowired
-	public TipoUsuarioServicio serviceTipoUsuario;
+	private TipoUsuarioServicio serviceTipoUsuario;
 	@Autowired
-	public EstadoUsuarioServicio serviceEstadoUsuario;
+	private EstadoUsuarioServicio serviceEstadoUsuario;
 	@Autowired
-	public UsuarioServicio serviceUsuario;
+	private UsuarioServicio serviceUsuario;
 	
 	@Autowired
-	public Usuario usuario;
+	private Usuario usuario;
 	
 	@Autowired
-	public ModelAndView MV;
+	private ModelAndView MV;
 
 	// NO TOCAR - Servlets
 	public void init(ServletConfig config) {

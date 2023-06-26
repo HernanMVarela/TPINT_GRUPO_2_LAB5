@@ -9,27 +9,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.ModelAndView;
 
-import frgp.utn.edu.ar.dominio.Articulo;
 import frgp.utn.edu.ar.dominio.Usuario;
-import frgp.utn.edu.ar.servicio.ArticuloServicio;
 import frgp.utn.edu.ar.servicio.EstadoUsuarioServicio;
-import frgp.utn.edu.ar.servicio.LocalidadServicio;
-import frgp.utn.edu.ar.servicio.ProvinciaServicio;
 import frgp.utn.edu.ar.servicio.UsuarioServicio;
 
 @Controller
 public class AdminController {
 
 	@Autowired
-	public UsuarioServicio serviceUsuario;
+	private UsuarioServicio serviceUsuario;
 	@Autowired
-	public EstadoUsuarioServicio serviceEstadoUsuario;
+	private EstadoUsuarioServicio serviceEstadoUsuario;
 
 	@Autowired
-	public ModelAndView MV;
+	private ModelAndView MV;
 	
 	@Autowired
-	public Usuario usuario;
+	private Usuario usuario;
 	
 	public void init(ServletConfig config) {
 		ApplicationContext ctx = WebApplicationContextUtils

@@ -17,16 +17,16 @@ import frgp.utn.edu.ar.servicio.TipoArticuloServicio;
 public class ArticuloController {
 
 	@Autowired
-	public  ArticuloServicio serviceArticulo;
+	private  ArticuloServicio serviceArticulo;
 	@Autowired
-	public  TipoArticuloServicio serviceTipoArticulo;
+	private  TipoArticuloServicio serviceTipoArticulo;
 	@Autowired
-	public  MarcaServicio serviceMarca;
+	private  MarcaServicio serviceMarca;
 	
 	@Autowired
-	public ModelAndView MV;
+	private ModelAndView MV;
 	@Autowired
-	public Articulo articulo;
+	private Articulo articulo;
 	
 	// NO TOCAR - Servlets
 	public void init(ServletConfig config) {
