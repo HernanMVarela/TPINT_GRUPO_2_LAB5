@@ -108,9 +108,11 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		@SuppressWarnings("unchecked")
 		List<Object[]> resultados = (List<Object[]>) this.hibernateTemplate.find(query);
 		Map<String, Long> map = new HashMap<String, Long>();
-		for (Object[] resultado : resultados) {
-			map.put((String) resultado[0], (Long) resultado[1]);
-		}
-		return map;
+		int limit = 5;
+	    for (int i = 0; i < Math.min(limit, resultados.size()); i++) {
+	        Object[] resultado = resultados.get(i);
+	        map.put((String) resultado[0], (Long) resultado[1]);
+	    }
+	    return map;
 	}
 }

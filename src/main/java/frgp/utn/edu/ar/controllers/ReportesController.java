@@ -10,6 +10,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.ModelAndView;
 
 import frgp.utn.edu.ar.dominio.Usuario;
+import frgp.utn.edu.ar.servicio.Detalle_ventaServicio;
 import frgp.utn.edu.ar.servicio.EstadoUsuarioServicio;
 import frgp.utn.edu.ar.servicio.UsuarioServicio;
 
@@ -18,6 +19,9 @@ public class ReportesController {
 
 	@Autowired
 	private UsuarioServicio serviceUsuario;
+	
+	@Autowired
+	private Detalle_ventaServicio serviceDetalleVenta;
 
 	@Autowired
 	private ModelAndView MV;
@@ -27,6 +31,7 @@ public class ReportesController {
 				.getRequiredWebApplicationContext(config.getServletContext());
 		
 		this.serviceUsuario = (UsuarioServicio) ctx.getBean("UsuarioServiceBean");
+		this.serviceDetalleVenta = (Detalle_ventaServicio) ctx.getBean("Detalle_ventaServiceBean");
 
 		this.MV = (ModelAndView) ctx.getBean("ModelAndViewBean");
 	}	
@@ -43,6 +48,7 @@ public class ReportesController {
 	private ModelAndView cargadorDeListasReportes(ModelAndView MV) 
 	{
 		MV.addObject("listaRoles",this.serviceUsuario.obtenerUsuariosPorRol());
+		MV.addObject("listaProductos",this.serviceDetalleVenta.obtenerProductosPorCantidad());
 		return MV;
 	}
 }

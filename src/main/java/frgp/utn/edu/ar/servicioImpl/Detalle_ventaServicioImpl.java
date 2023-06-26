@@ -1,6 +1,7 @@
 package frgp.utn.edu.ar.servicioImpl;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import frgp.utn.edu.ar.dao.Detalle_ventaDao;
 import frgp.utn.edu.ar.dominio.Detalle_venta;
@@ -48,6 +49,11 @@ public class Detalle_ventaServicioImpl implements Detalle_ventaServicio{
 				return "NO MODIFICADO";
 			}
 		
+	}
+	
+	@Override
+	public Map<String, Long> obtenerProductosPorCantidad() {
+		return dataAccess.obtenerProductosPorCantidad();
 	}
 
 }

@@ -1,6 +1,7 @@
 package frgp.utn.edu.ar.dao;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import frgp.utn.edu.ar.dominio.Detalle_venta;
 
@@ -24,6 +25,8 @@ public interface Detalle_ventaDao {
 
 	//Actualiza los datos de un Detalle_venta
 	public boolean actualizarDetalle_venta(Detalle_venta modificar);
+
+	Map<String, Long> obtenerProductosPorCantidad();
 	
 
 }
