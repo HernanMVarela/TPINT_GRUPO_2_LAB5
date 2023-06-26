@@ -137,6 +137,7 @@ console.log(id)
 	</div>	
 		</form>		
 	</div>
+    <% }} %>	
 </div>
 
 <!-- Modal ELIMINAR CLIENTE -->
