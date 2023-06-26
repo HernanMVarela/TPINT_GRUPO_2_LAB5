@@ -114,15 +114,21 @@
 
                   <script>
                           var articulosContainer = document.getElementById("articulos-container");
+
                           var listaArticulos = [
-                            <c:forEach items="${listaArticulos}" var="item" varStatus="status">
+                            <c:forEach items="${listaStock}" var="item" varStatus="status">
                               {
-                                nombre: '${item.nombre}',
-                                marca: '${item.marca.nombre}',
-                                precio: ${item.precio_venta}
+                                nombre: '${item.articulo}',
+                                marca: '${item.articulo.marca.nombre}',
+                                precio: ${item.articulo.precio_venta},
+                                stock: '${item.cantidad}',
                               }<c:if test="${!status.last}">,</c:if>
                             </c:forEach>
                           ];
+                          
+                          listaArticulos = listaArticulos.filter(item => item.stock > 0);
+
+
                           var itemCounter = 1;
 
                           function agregarArticulo() {
@@ -148,7 +154,7 @@
                               var option = document.createElement("option");
                               option.setAttribute("id", articulo.nombre);
                               option.setAttribute("value", articulo.nombre);
-                              option.textContent = articulo.nombre + " - " + articulo.marca;
+                               option.textContent = articulo.nombre + " - " + articulo.marca +" - Disponibles: " + articulo.stock + "unidades.";
                               selectElement.appendChild(option);
                             });
 
@@ -162,6 +168,7 @@
                             cantidadInput.setAttribute("min", "1");
                             cantidadInput.setAttribute("id", `cantidad${itemCounter}`);
                             cantidadInput.setAttribute("oninput", "calcularMontoTotal()");
+                            cantidadInput.setAttribute("onchange", "actualizarMaximo(this)");
 
                             nuevoArticulo.appendChild(cantidadInput);
 
@@ -199,6 +206,7 @@
                           function actualizarPrecio(selectElement) {
                           var selectedOption = selectElement.options[selectElement.selectedIndex];
                           var precioInput = selectElement.parentNode.querySelector('input[name="precio_venta"]');
+                          var cantidadInput = selectElement.parentNode.querySelector("input[name='cantidad']");
                           
                           if (selectedOption && precioInput) {
                             var articulo = listaArticulos.find(function (articulo) {
@@ -207,9 +215,20 @@
                           
                             if (articulo) {
                               precioInput.value = articulo.precio.toString();
+                              cantidadInput.value = ""; // Limpiar el valor del campo cantidad
+                              cantidadInput.setAttribute("max", articulo.stock); // Establecer el valor máximo del campo cantidad
                               calcularMontoTotal();
                             }
                           }
+
+                        }
+
+                        function actualizarMaximo(inputElement) {
+                          if (parseInt(inputElement.value) > parseInt(inputElement.max)) {
+                            inputElement.value = inputElement.max; 
+                                         }
+                            calcularMontoTotal();
+                         
                         }
 
                     function enviarFormulario() {
