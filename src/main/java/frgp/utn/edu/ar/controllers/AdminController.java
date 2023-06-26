@@ -45,25 +45,7 @@ public class AdminController {
 		MV = cargadorDeListasAdmin(MV);
 		MV.setViewName("admin/HomeAdmin");
 		return MV;
-	}
-	
-	// ALTA USER | "alta-usuario.html"
-	@RequestMapping("alta-usuario.html")
-	public ModelAndView eventoRedireccionarAltaUsuario()
-	{
-		MV = cargadorDeListasAdmin(MV);
-		MV.setViewName("admin/AltaUsuario");
-		return MV;
-	}
-	
-	// LISTA USERS | "reportes.html"
-	@RequestMapping("reportes.html")
-	public ModelAndView eventoRedireccionarListarUsuarios()
-	{
-		MV = cargadorDeListasAdmin(MV);
-		MV.setViewName("admin/Reportes");
-		return MV;
-	}
+	}	
 	
 	//Eliminar Usuario | "/eliminar_usuario.html"
 	@RequestMapping(value ="/eliminar_usuario.html" , method= { RequestMethod.GET, RequestMethod.POST})
