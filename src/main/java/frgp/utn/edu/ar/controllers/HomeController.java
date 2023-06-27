@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import frgp.utn.edu.ar.dominio.Usuario;
 import frgp.utn.edu.ar.servicio.UsuarioServicio;
+import frgp.utn.edu.ar.servicio.VentaServicio;
 
 @Controller
 public class HomeController {
@@ -21,6 +22,9 @@ public class HomeController {
 	private Usuario userLogin;
 	
 	@Autowired
+	private VentaServicio serviceVenta;
+	
+	@Autowired
 	private ModelAndView MV;
 	
 	public void init(ServletConfig config) {
@@ -28,6 +32,7 @@ public class HomeController {
 				.getRequiredWebApplicationContext(config.getServletContext());
 		this.serviceUsuario = (UsuarioServicio) ctx.getBean("UsuarioServiceBean");
 		this.userLogin = (Usuario) ctx.getBean("UsuarioEstandar");
+		this.serviceVenta = (VentaServicio) ctx.getBean("VentaServiceBean");
 		this.MV = (ModelAndView) ctx.getBean("ModelAndViewBean");
 	}
 	
@@ -50,12 +55,14 @@ public class HomeController {
 		} else {
 			MV.addObject("userLogin", userLogin);
 			if(userLogin.getTipo().getNombre().equals("ADMIN")) {
+				MV = cargadorDeListasAdmin(MV);
 				MV.setViewName("admin/HomeAdmin"); 
 			}
 			if(userLogin.getTipo().getNombre().equals("VENDEDOR")) {
 				MV.setViewName("vendedor/HomeVendedor"); 
 			}
 			if(userLogin.getTipo().getNombre().equals("CONTADOR")) {
+				MV= cargadorDeListasVentas(MV);
 				MV.setViewName("contador/HomeContador"); 
 			}
 		}
@@ -74,4 +81,15 @@ public class HomeController {
 		return MV;
 	}	
 	
+	private ModelAndView cargadorDeListasVentas(ModelAndView MV) {
+
+		MV.addObject("listaContador", this.serviceVenta.obtenerVentas());
+		return MV;
+	}
+	
+	private ModelAndView cargadorDeListasAdmin(ModelAndView MV) 
+	{
+		MV.addObject("listaUsuarios",this.serviceUsuario.obtenerUsuarios());
+		return MV;
+	}
 }

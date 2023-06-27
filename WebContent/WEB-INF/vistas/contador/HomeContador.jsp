@@ -9,7 +9,7 @@
 
 <script type="text/javascript">
             $(document).ready(function () {
-              $('#tabla_ventas').DataTable();
+              $('#tabla_contador').DataTable();
             });
 </script>
 
@@ -68,33 +68,27 @@
 
                 <div class="row mx-2 d-flex flex-wrap align-middle justify-content-evenly">
                   <div class="col-md-auto table-responsive w-100">
-                    <table id="tabla_ventas" class="table table-hover text-center">
-                      <thead>
-                        <tr>
-                         <th class="text-center" scope="col"> Fecha </th>
-						    <th class="text-center" scope="col"> N° venta </th>
-							<th class="text-center" scope="col"> ID Cliente </th>
-							<th class="text-center" scope="col"> Ganancia </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <%for (int x=0; x<5; x++){%>
-							<tr>
-								<td>
-									<%="13/06/2023" %>
-								</td>
-								<td> 
-									<%= "40839274" + x %>
-								</td> 
-								<td>
-									<%= "2" + x %>
-								</td> 
-								<td>
-									<%= "$200" + x %>
-								</td>							
-							</tr>
-						<%}%>  	
-                      </tbody>
+                    <table id="tabla_contador" class="table table-hover text-center">
+			  		<thead>
+						<tr>
+							<th class="text-center" scope="col"> N° de Venta </th>
+							<th class="text-center" scope="col"> Fecha </th>
+							<th class="text-center" scope="col"> Cliente </th> 
+							<th class="text-center" scope="col"> Monto </th> 
+						</tr>
+					</thead>
+					<tbody>
+            
+           			 <c:forEach items="${listaContador}" var="item">
+                                             
+                          <tr>
+                            <td>${item.num_venta} </td>
+                            <td>${item.fecha} </td>
+                            <td  id="cliente_${item.num_venta}" >${item.cliente.nombre} ${item.cliente.apellido}</td>
+                            <td id="total_monto_${item.num_venta}" >$ ${item.totalMonto()}</td>
+                          </tr>
+                        </c:forEach>
+					   </tbody>
                     </table>
                     
                   </div>
