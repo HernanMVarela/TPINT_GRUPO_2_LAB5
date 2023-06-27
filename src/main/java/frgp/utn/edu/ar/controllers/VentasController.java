@@ -172,13 +172,14 @@ public class VentasController {
 		venta = serviceVenta.obtenerUnRegistro(idEliminar);
 		venta.setEstado(serviceEstadoVenta.obtenerUnRegistro(0));
 	
-		String Message = "";	
-		
+		String Message = "";
+
+		System.out.println(venta);
 		try{
-			//Message = asignarMensajeVenta(serviceVenta.eliminarVenta(venta));
+			Message = asignarMensajeVenta(serviceVenta.eliminarVenta(venta));
 			MV.addObject("Mensaje", Message);
 			MV = cargadorDeListasVentas(MV);
-			MV.setViewName("admin/HomeAdmin"); 
+			MV.setViewName("vendedor/Ventas"); 
 			return MV;
 		}
 		catch(Exception e)
