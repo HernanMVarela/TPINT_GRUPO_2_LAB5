@@ -73,10 +73,10 @@ public class ArticuloDaoImpl implements ArticuloDao {
 	@Override
 	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
 	public Map<String, Long> obtenerCantidadArticulosPorTipo() {
-		String query = "SELECT t.nombre, COUNT(a) " +
+		String query = "SELECT t.nombre, COUNT(a)" +
 		               "FROM Articulo a " +
 		               "JOIN a.tipo t " +
-		               "GROUP BY t.nombre";		
+		               "GROUP BY t.nombre";	
 		@SuppressWarnings("unchecked")
 		List<Object[]> resultados = (List<Object[]>) this.hibernateTemplate.find(query);
 		List<Object[]> limitedResultados = resultados.subList(0, Math.min(resultados.size(), 5));

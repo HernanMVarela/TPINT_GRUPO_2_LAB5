@@ -57,7 +57,7 @@
 	           	</div>
 	           	
 	           	<div class="col-md-4">
-		          <h5>TOP 5 CaTEGORIAS CON MAS PRODUCTOS</h5>
+		          <h6>TOP 5 CATEGORIAS CON MAS PRODUCTOS</h5>
 		          <hr>
 		          <table id="tabla_categorias" class="table table-hover text-center">
 		                  <thead>
