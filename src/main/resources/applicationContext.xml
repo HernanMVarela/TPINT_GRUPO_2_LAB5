@@ -54,6 +54,7 @@
 	<bean id="ProvinciaEstandar" class="frgp.utn.edu.ar.dominio.Provincia"></bean>
 	<bean id="EstadoClienteEstandar" class="frgp.utn.edu.ar.dominio.Estado_Cli"></bean>
 	<bean id="EstadoUsuarioEstandar" class="frgp.utn.edu.ar.dominio.Estado_User"></bean>
+	<bean id="EstadoVentaEstandar" class="frgp.utn.edu.ar.dominio.Estado_Venta"></bean>
 	<bean id="MarcaEstandar" class="frgp.utn.edu.ar.dominio.Marca"></bean>
 	
 	<bean id="DetalleVentaList" scope="prototype" class="java.util.ArrayList"/>
@@ -122,6 +123,16 @@
 	</bean>
 	<!-- ESTADO CLIENTE DAO  -->
 	<bean id="EstadoClienteDABean" class="frgp.utn.edu.ar.daoImpl.EstadoClienteDaoImpl" 
+		scope="singleton"> 
+		<property name="sessionFactory" ref="sessionFactoryBean"></property> 
+	</bean>
+	
+	<!--||| CREO EL SERVICIO PARA ESTADO VENTA ||| -->
+	<bean id="EstadoVentaServiceBean" class="frgp.utn.edu.ar.servicioImpl.EstadoVentaServicioImpl">
+		<property name="dataAccess" ref="EstadoVentaDABean"></property>
+	</bean>
+	<!-- ESTADO VENTA DAO  -->
+	<bean id="EstadoVentaDABean" class="frgp.utn.edu.ar.daoImpl.EstadoVentaDaoImpl" 
 		scope="singleton"> 
 		<property name="sessionFactory" ref="sessionFactoryBean"></property> 
 	</bean>

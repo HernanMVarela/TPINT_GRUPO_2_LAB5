@@ -6,38 +6,43 @@
 
       <head>
         <%@ include file="../common/Header.jspf" %>
-          <%@ include file="../common/NavigatorVendedor.jspf" %>
-            <script type="text/javascript">
-              $(document).ready(function () {
-                $('#tabla_ventas').DataTable();
-              });
+        <%@ include file="../common/NavigatorVendedor.jspf" %>
+            
+        <script type="text/javascript">
+          $(document).ready(function () {
+            $('#tabla_ventas').DataTable();
+          });
 
-              function agregarSaltosDeLinea(texto) {
-                  var nuevoTexto = texto.replace(/PRODUCTO:/g, '<br/><br/> PRODUCTO:');
-                  return nuevoTexto;
-                }
+          function agregarSaltosDeLinea(texto) {
+              var nuevoTexto = texto.replace(/PRODUCTO:/g, '<br/><br/> PRODUCTO:');
+              return nuevoTexto;
+            }
 
-              function abrirDetalleModal(numVenta) {
-                
-                  var contenidoVenta = document.getElementById("td_venta_"+numVenta);
-                 var detalleVenta = document.getElementById("detalleVenta");
-                 detalleVenta.innerHTML = agregarSaltosDeLinea( contenidoVenta.innerHTML);
+          function abrirDetalleModal(numVenta) {
+            
+              var contenidoVenta = document.getElementById("td_venta_"+numVenta);
+             var detalleVenta = document.getElementById("detalleVenta");
+             detalleVenta.innerHTML = agregarSaltosDeLinea( contenidoVenta.innerHTML);
 
 
-                 var totalMonto = document.getElementById("total_monto_"+numVenta);
-                 var totalVenta = document.getElementById("totalVenta");
-                 totalVenta.innerHTML = totalMonto.innerHTML;
+             var totalMonto = document.getElementById("total_monto_"+numVenta);
+             var totalVenta = document.getElementById("totalVenta");
+             totalVenta.innerHTML = totalMonto.innerHTML;
 
-                 var clienteTD = document.getElementById("cliente_"+numVenta);
-                 var clienteModal = document.getElementById("nombreCliente");
-                 clienteModal.innerHTML = clienteTD.innerHTML;
-                
-               
+             var clienteTD = document.getElementById("cliente_"+numVenta);
+             var clienteModal = document.getElementById("nombreCliente");
+             clienteModal.innerHTML = clienteTD.innerHTML;    	   
+        	}
+          
+          function abrirEliminarModal(id, fecha, nombre, apellido, monto) {
 
-            	   
-            	}
-
-            </script>
+              $('#idEliminar').val(id);
+              $('#fechaEliminar').val(fecha);
+              $('#nombreEliminar').val(nombre);
+              $('#apellidoEliminar').val(apellido);
+              $('#montoEliminar').val(monto);
+          }
+        </script>
       </head>
 
       <body>
@@ -60,7 +65,7 @@
                     <table id="tabla_ventas" class="table table-hover text-center">
 			  		<thead>
 						<tr>
-							<th class="text-center" scope="col"> Nï¿½ de Venta </th>
+							<th class="text-center" scope="col"> N° de Venta </th>
 							<th class="text-center" scope="col"> Fecha </th>
 							<th class="text-center" scope="col"> Cliente </th> 
 							<th class="text-center" scope="col"> Monto </th> 
@@ -87,7 +92,12 @@
 
                             </td>
                             <td> 
-                              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteSaleModal">
+                              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteSaleModal" 
+                              	onclick="abrirEliminarModal('${item.num_venta}',
+						  								  	'${item.fecha}',
+		                                                  	'${item.cliente.nombre}',
+		                                                  	'${item.cliente.apellido}',
+		                                                  	'${item.totalMonto()}')">
 	                               ANULAR VENTA
 	                             </button>
                             </td>
@@ -101,10 +111,11 @@
               </div>
             </form>
           </div>
+      </body>
 
 
        <!-- Modal DETALLE VENTA -->
-        <div class="modal fade" id="detailSaleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="detailSaleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -392,19 +403,52 @@ function cerrarCarrito() {
           aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
+              <form action="eliminar_venta.html" method="post">            
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">ELIMINAR VENTA</h5>
+                <h5 class="modal-title" id="exampleModalLabel"> DESEA ELIMINAR LA SIGUIENTE VENTA?</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                DESEA ELIMINAR LA VENTA SELECCIONADO?
+                <div class="row d-flex align-items-center">
+           	 	  <div class="col-md-4">
+                    <label>ID:</label>
+                  </div>
+                  <div class="col-md-8">
+                    <input id="idEliminar" name="idEliminar" class="form-control mt-1" readonly>
+                  </div>
+                  <div class="col-md-4">
+                    <label>FECHA:</label>
+                  </div>
+                  <div class="col-md-8">
+                    <input id="fechaEliminar" name="fechaEliminar" class="form-control mt-1" readonly>
+                  </div>
+                  <div class="col-md-4">
+                    <label>NOMBRE:</label>
+                  </div>
+                  <div class="col-md-8">
+                    <input id="nombreEliminar" name="nombreEliminar" class="form-control mt-1" readonly>
+                  </div>
+                  <div class="col-md-4">  
+                    <label>APELLIDO:</label>
+                  </div>
+                  <div class="col-md-8">		                      
+                      <input id="apellidoEliminar" name="apellidoEliminar" class="form-control mt-1" readonly>
+                  </div>
+                  <div class="col-md-4">
+                    <label>MONTO:</label>
+                  </div>
+                  <div class="col-md-8">
+                    <input id="montoEliminar" name="montoEliminar" class="form-control mt-1" id="textAreaExample1" readonly>
+                  </div>                  	                                            
+                </div>                 
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">CANCELAR</button>
-                <button type="button" class="btn btn-success">CONFIRMAR</button>
+                <input type="submit" class="btn btn-primary" name="btnAceptar" value="Aceptar">
               </div>
+             </form>
+              
             </div>
           </div>
         </div>
-      </body>
     </html>

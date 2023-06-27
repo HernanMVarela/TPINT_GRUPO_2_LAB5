@@ -41,11 +41,17 @@ public class Venta implements Serializable {
 	@Column(name="GANANCIA", nullable = true)
 	private float ganancia;
 	
-	public Venta(List<Detalle_venta> detalle, Date fecha, Cliente cliente) {
+	@ManyToOne(cascade= {CascadeType.ALL})
+	@JoinColumn(name="ID_ESTADOVENTA",nullable = false)
+	private Estado_Venta estado;
+	
+	public Venta(List<Detalle_venta> detalle, Date fecha, Cliente cliente, Estado_Venta estado) {
 		this.detalle=detalle;
 		this.fecha=fecha;
 		this.cliente = cliente;
+		this.estado=estado;
 	}
+	
 	public Venta() {}
 	
 	@Override
@@ -105,6 +111,13 @@ public class Venta implements Serializable {
 	}
 	public void setGanancia(float ganancia) {
 		this.ganancia = ganancia;
+	}
+	
+	public Estado_Venta getEstado() {
+		return estado;
+	}
+	public void setEstado(Estado_Venta estado) {
+		this.estado = estado;
 	}
 	
 }

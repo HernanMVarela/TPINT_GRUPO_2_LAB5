@@ -24,6 +24,8 @@ public interface VentaDao {
 
 	//Actualiza los datos de unaVenta
 	public boolean actualizarVenta(Venta modificar);
+
+	public Venta obtenerVentaPorID(int ID);
 	
 
 }

@@ -10,6 +10,7 @@ import frgp.utn.edu.ar.dao.StockDao;
 import frgp.utn.edu.ar.dao.VentaDao;
 import frgp.utn.edu.ar.dominio.Detalle_venta;
 import frgp.utn.edu.ar.dominio.Stock;
+import frgp.utn.edu.ar.dominio.Usuario;
 import frgp.utn.edu.ar.dominio.Venta;
 import frgp.utn.edu.ar.servicio.VentaServicio;
 
@@ -34,6 +35,11 @@ public class VentaServicioImpl implements VentaServicio{
 	@Override
 	public Venta obtenerUnRegistro(String nombre) {
 		return dataAccess.obtenerVentaPorNombre(nombre);
+	}
+	
+	@Override
+	public Venta obtenerUnRegistro(int ID) {
+		return dataAccess.obtenerVentaPorID(ID);
 	}
 
 	@Override
@@ -100,27 +106,35 @@ public class VentaServicioImpl implements VentaServicio{
 	}
 
 	@Override
-	public void eliminarVenta(String nombre) {
-		dataAccess.eliminarVenta(nombre);
+	public String eliminarVenta(Venta eliminar) {
+		Venta aux = dataAccess.obtenerVentaPorID(eliminar.getNum_venta());
+		if(aux != null) {
+			if(aux.getEstado().getNombre().equals("ACTIVO")) {
+				return this.actualizarVenta(eliminar);
+			} else {
+				return "ELIMINACION PREVIA";
+			}
+		} else {
+			return "ERROR";
+		}	
 		
 	}
 
 	@Override
 	public String actualizarVenta(Venta modificar) {
-		// if (modificar.getEstado()) {
-		// 	if (dataAccess.actualizarVenta(modificar)) {
-		// 		return "MODIFICADO";
-		// 	}else {
-		// 		return "NO MODIFICADO";
-		// 	}
-		// } else {
-		// 	if (dataAccess.actualizarVenta(modificar)) {
-		// 		return "ELIMINADO";
-		// 	}else {
-		// 		return "NO ELIMINADO";
-		// 	}
-		// }
-		return "actualizarVenta";
+		if(modificar.getEstado().getNombre().equals("INACTIVO")) {
+			if (dataAccess.actualizarVenta(modificar)) {
+				return "ELIMINADO";
+			}else {
+				return "NO ELIMINADO";
+			}
+		} else {
+			if (dataAccess.actualizarVenta(modificar)) {
+				return "MODIFICADO";
+			}else {
+				return "NO MODIFICADO";
+			}
+		}
 	}
 	public float gananciaEntreFechas (Date fechaInicio, Date fechaFin) {
 		ArrayList<Venta> ListaVentas = dataAccess.obtenerVentas();

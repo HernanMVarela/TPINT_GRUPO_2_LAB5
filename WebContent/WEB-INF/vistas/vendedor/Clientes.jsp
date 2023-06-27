@@ -71,17 +71,15 @@ console.log(id)
 			  		<table id="tabla_clientes" class="table table-hover text-center">
                       <thead>
                         <tr>
-                       	  <th class="text-center" scope="col"> ID </th>
                           <th class="text-center" scope="col"> DNI </th>
                           <th class="text-center" scope="col"> Nombre </th>
                           <th class="text-center" scope="col"> Apellido </th>
-                          <th class="text-center" scope="col"> Dirección </th>
+                          <th class="text-center" scope="col"> Direccion </th>
                           <th class="text-center" scope="col"> Sexo </th>
-                          <th class="text-center" scope="col"> Provincia </th>
-                          <th class="text-center" scope="col"> Nacionalidad </th>
+                          <th class="text-center" scope="col"> Localidad </th>
                           <th class="text-center" scope="col"> Fecha de Nacimiento </th>
                           <th class="text-center" scope="col"> Email </th>
-                          <th class="text-center" scope="col"> Telefono </th>
+                          <th class="text-center" scope="col"> Telefono </th>  
                           <th></th>
                           <th></th>
                         </tr>
@@ -90,13 +88,12 @@ console.log(id)
                         <c:forEach items="${listaClientes}" var="item">
                           <c:if test="${item.estado.ID == 1}">                        
                           <tr>
-                            <td>${item.ID} </td>
                             <td>${item.DNI} </td>
                             <td>${item.nombre}</td>
                             <td>${item.apellido}</td>
                             <td>${item.direccion}</td>
                             <td>${item.sexo}</td>
-                            <td>${item.localidad.provincia.getNombre()}</td>
+                            <td>${item.localidad.getNombre()}</td>
                             <td>${item.fecha_nac}</td>
                             <td>${item.correo}</td>
                             <td>${item.telefono}</td>

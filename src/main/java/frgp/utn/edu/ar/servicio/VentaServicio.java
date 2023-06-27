@@ -13,10 +13,12 @@ public interface VentaServicio {
 
 	public String insertarVenta(Venta nuevo);
 
-	public void eliminarVenta(String nombre) ;
+	public String eliminarVenta(Venta nombre) ;
 
 	public String actualizarVenta(Venta modificar);
 	
 	public float gananciaEntreFechas (Date fechaInicio, Date fechaFin);
+
+	public Venta obtenerUnRegistro(int ID);
 	
 }

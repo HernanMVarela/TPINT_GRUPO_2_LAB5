@@ -75,6 +75,12 @@ public class VentaDaoImpl implements VentaDao {
 			return false;
 		}
 	}
+	
+	@Override
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
+	public Venta obtenerVentaPorID(int ID) {
+		return this.hibernateTemplate.get(Venta.class, ID);
+	}
 
 
 }
