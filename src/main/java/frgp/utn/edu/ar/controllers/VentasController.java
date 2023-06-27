@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.ModelAndView;
 import frgp.utn.edu.ar.dominio.Detalle_venta;
+import frgp.utn.edu.ar.dominio.Stock;
 import frgp.utn.edu.ar.dominio.Venta;
 import frgp.utn.edu.ar.servicio.ArticuloServicio;
 import frgp.utn.edu.ar.servicio.ClienteServicio;
@@ -66,7 +67,7 @@ public class VentasController {
 		MV.setViewName("vendedor/Ventas");
 		return MV;
 	}
-	
+			
 	//Ingreso de venta | "/alta_venta.html"
 	@RequestMapping(value ="/ingreso_venta.html" , method= { RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView validarVenta(@RequestParam("fechaNuevo") Date fechaNuevo,

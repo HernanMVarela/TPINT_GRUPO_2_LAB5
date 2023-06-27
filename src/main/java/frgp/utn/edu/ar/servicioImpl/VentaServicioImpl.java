@@ -1,5 +1,6 @@
 package frgp.utn.edu.ar.servicioImpl;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -115,5 +116,16 @@ public class VentaServicioImpl implements VentaServicio{
 		// }
 		return "actualizarVenta";
 	}
-
+	public float gananciaEntreFechas (Date fechaInicio, Date fechaFin) {
+		ArrayList<Venta> ListaVentas = dataAccess.obtenerVentas();
+		float gananciaTotal = 0;
+	    
+	    for (Venta venta : ListaVentas) {
+	        if (venta.getFecha().after(fechaInicio) && venta.getFecha().before(fechaFin)) {
+	            gananciaTotal += venta.getGanancia();
+	        }
+	    }
+	    
+	    return gananciaTotal;
+	}
 }

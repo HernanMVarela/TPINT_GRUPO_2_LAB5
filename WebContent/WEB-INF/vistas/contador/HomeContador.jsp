@@ -34,7 +34,7 @@
         </div>
 
        <div class="col-md-9">
-        	<form action="ventas.html" method="post">
+        	<form action="HomeContador.html" method="post">
               <div class="p-5 bg-light border rounded-3" style="width: 100%">
                 <div class="d-flex  align-content-center bd-highlight mb-3">
                   <div class="me-auto p-2 bd-highlight align-self-center">
@@ -42,21 +42,25 @@
                   </div>
                   <div class="p-2 bd-highlight align-self-center">
                   	<div class="d-flex align-items-center">
+	                  	
 	                  	<div style="width:200px;padding-right:20px;" >
 			         		 <label style="float: left">Fecha de inicio</label>
-		        		     <input class="form-control" type="date" name="date">
+		        		     <input class="form-control" type="date" name="datei">
 						</div>
 			          
 						<div style="width:200px;">
 							<label style="float: left">Fecha de fin</label>
-							<input class="form-control" type="date" name="date">
+							<input class="form-control" type="date" name="datef">
 						</div>
 						
-	                    <button type="button" class="btn btn-primary m-2">
+	                    <button type="submit" class="btn btn-primary m-2">
 	                      CALCULAR
 	                    </button>
                     </div> 
-                    <h4 class="m-1">GANANCIAS DEL PERIODO: $$$$</h4>                   
+                    <c:if test="${empty gananciaTotal}">
+  						<c:set var="gananciaTotal" value="0" />
+					</c:if>
+                    <h4 class="m-1">GANANCIAS DEL PERIODO: $${gananciaTotal}</h4>               
                   </div>
                 </div>
 
