@@ -1,5 +1,6 @@
 package frgp.utn.edu.ar.controllers;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletConfig;
@@ -86,8 +87,12 @@ public class VentasController {
     String[] objetos = articulosLista.split("\\},\\{");
 
     // Recorrer cada objeto individual y crear instancias de Detalle_venta
+	System.out.println("Objetos: " + objetos.toString());
+	 List<Detalle_venta> detalleLista = new ArrayList<>();
+
     for (String objeto : objetos) {
-    	detalle = (Detalle_venta)ctx.getBean("DetalleEstandar");
+    	
+
         // Eliminar las llaves "{" y "}" del objeto individual
         objeto = objeto.replace("{", "").replace("}", "");
 
@@ -118,18 +123,22 @@ public class VentasController {
         }
 
         // Crear una instancia de Detalle_venta y agregarla a la lista
-         detalle.setArticulo(serviceArticulo.obtenerUnRegistro(nombre));
+         Detalle_venta detalle = new Detalle_venta(serviceArticulo.obtenerUnRegistro(nombre), cantidadObjeto);
          detalle.setCantidad(cantidadObjeto);
          detalle.setImporte(cantidad * detalle.getArticulo().getPrecio_venta());
+		 detalleLista.add(detalle);
 
 		System.out.println("Articulo:"+serviceArticulo.obtenerUnRegistro(nombre));
 		System.out.println("cantidadObjeto:" + cantidadObjeto);
 		System.out.println(cantidad * detalle.getArticulo().getPrecio_venta());
+
+	    System.out.println(detalle);
 		
 
-         venta.getDetalle().add(detalle);
+         
          
     }
+	 venta.setDetalle(detalleLista);
 		String Message = "";
 		System.out.println("VENTA:"+venta.toString());
 
