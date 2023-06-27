@@ -170,7 +170,7 @@ public class VentasController {
 		
 
 		venta = serviceVenta.obtenerUnRegistro(idEliminar);
-		venta.setEstado(serviceEstadoVenta.obtenerUnRegistro(0));
+		venta.setEstado(serviceEstadoVenta.obtenerUnRegistro(2));
 	
 		String Message = "";
 

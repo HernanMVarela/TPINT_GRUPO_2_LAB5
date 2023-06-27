@@ -54,7 +54,7 @@ public class AdminController {
 		System.out.println(idEliminar);
 
 		usuario = serviceUsuario.obtenerUnRegistro(idEliminar);
-		usuario.setEstado(serviceEstadoUsuario.obtenerUnRegistro(0));
+		usuario.setEstado(serviceEstadoUsuario.obtenerUnRegistro(2));
 	
 		String Message = "";	
 		

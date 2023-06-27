@@ -136,7 +136,7 @@ public class ClientesController {
 	public ModelAndView eliminarCliente(int idEliminar){		
 		
 		cliente = serviceCliente.obtenerUnRegistro(idEliminar);
-		cliente.setEstado(serviceEstadoCliente.obtenerUnRegistro(0));
+		cliente.setEstado(serviceEstadoCliente.obtenerUnRegistro(2));
 	
 		String Message = "";	
 		
