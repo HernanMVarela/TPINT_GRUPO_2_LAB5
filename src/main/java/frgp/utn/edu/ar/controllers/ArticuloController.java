@@ -123,19 +123,14 @@ public class ArticuloController {
 	
 	// ELIMINAR ARTICULO | "/eliminar_articulo.html"
 	@RequestMapping(value ="/eliminar_articulo.html" , method= { RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView eliminarArticulo(String nombreEliminar, int marcaEliminar, int tipoEliminar, String precio_ventaEliminar, String descripcionEliminar){
+	public ModelAndView eliminarArticulo(String nombreEliminar){
 
-		articulo.setNombre(nombreEliminar);
-		articulo.setPrecio_venta(Float.parseFloat(precio_ventaEliminar));
-		articulo.setMarca(serviceMarca.obtenerUnRegistro(marcaEliminar));
-		articulo.setTipo(serviceTipoArticulo.obtenerUnRegistro(tipoEliminar));
-		articulo.setDescripcion(descripcionEliminar);
+		articulo = serviceArticulo.obtenerUnRegistro(nombreEliminar);
 		articulo.setEstado(false);
 		
 		String Message="";
 		
 		try{
-			
 			Message = asignarMensajeArticulos(serviceArticulo.actualizarArticulo(articulo));
 			MV.addObject("Mensaje", Message);
 			MV = cargadorDeListasArticulos(MV);

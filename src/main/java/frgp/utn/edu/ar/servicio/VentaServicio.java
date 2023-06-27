@@ -10,8 +10,6 @@ public interface VentaServicio {
 
 	public ArrayList<Venta> obtenerVentas();
 
-	public Venta obtenerUnRegistro(int id);
-
 	public String insertarVenta(Venta nuevo);
 
 	public String eliminarVenta(Venta nombre) ;

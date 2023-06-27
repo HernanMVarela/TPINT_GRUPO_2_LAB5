@@ -49,7 +49,6 @@ public class ArticuloServicioImpl implements ArticuloServicio{
 	@Override
 	public void eliminarArticulo(String nombre) {
 		dataAccess.eliminarArticulo(nombre);
-		
 	}
 
 	@Override
