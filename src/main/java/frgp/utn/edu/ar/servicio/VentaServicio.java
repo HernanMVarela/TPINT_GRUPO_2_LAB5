@@ -19,4 +19,6 @@ public interface VentaServicio {
 	public float gananciaEntreFechas (Date fechaInicio, Date fechaFin);
 
 	public List<Venta> tablaFiltradaFechas(Date fechaInicio, Date fechaFin);
+	
+	public Venta obtenerUnRegistro(int id);
 }
