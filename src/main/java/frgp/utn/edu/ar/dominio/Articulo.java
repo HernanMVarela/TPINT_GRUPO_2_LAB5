@@ -23,11 +23,11 @@ public class Articulo implements Serializable {
 	@Column(name="DESCRIPCION", nullable = true)
 	private String descripcion;
 	
-	@ManyToOne(cascade= {CascadeType.ALL})
+	@ManyToOne(cascade= {CascadeType.MERGE})
 	@JoinColumn(name="ID_MARCA",nullable = false)
 	private Marca marca;
 	
-	@ManyToOne(cascade= {CascadeType.ALL})
+	@ManyToOne(cascade= {CascadeType.MERGE})
 	@JoinColumn(name="ID_TIPOART",nullable = false)
 	private Tipo_Articulo tipo;
 	
