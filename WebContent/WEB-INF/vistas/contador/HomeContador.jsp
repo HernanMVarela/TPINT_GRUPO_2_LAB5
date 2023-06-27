@@ -13,6 +13,25 @@
             });
 </script>
 
+<script type="text/javascript" >
+	function actualizarEstadoBoton(form) {
+		var calcularButton = form.querySelector('button[type="submit"]');
+
+		var fechaInicioInput = form.querySelector('input[name="datei"]');
+		var fechaFinInput = form.querySelector('input[name="datef"]');
+
+		if (fechaInicioInput.value === "" || fechaFinInput.value === "") {
+		  calcularButton.disabled = true;
+		} else {
+		  calcularButton.disabled = false;
+		}
+
+		console.log(calcularButton)
+	  console.log(fechaFinInput)
+	  console.log(fechaInicioInput)
+	  }
+  </script>
+
 </head>
 
 <body>
@@ -34,7 +53,7 @@
         <div class="col-md-3 ">
        		<%@ include file="../common/UserData.jspf" %>        
         </div>
-
+		
        <div class="col-md-9">
         	<form action="HomeContador.html" method="post">
               <div class="p-5 bg-light border rounded-3" style="width: 100%">
@@ -47,15 +66,15 @@
 	                  	
 	                  	<div style="width:200px;padding-right:20px;" >
 			         		 <label style="float: left">Fecha de inicio</label>
-		        		     <input class="form-control" type="date" name="datei">
+		        		     <input onchange="actualizarEstadoBoton(this.form)" class="form-control" type="date" name="datei">
 						</div>
 			          
 						<div style="width:200px;">
 							<label style="float: left">Fecha de fin</label>
-							<input class="form-control" type="date" name="datef">
+							<input onchange="actualizarEstadoBoton(this.form)" class="form-control" type="date" name="datef">
 						</div>
 						
-	                    <button type="submit" class="btn btn-primary m-2">
+	                    <button disabled="true" type="submit" class="btn btn-primary m-2">
 	                      CALCULAR
 	                    </button>
                     </div> 
@@ -71,7 +90,7 @@
                     <table id="tabla_contador" class="table table-hover text-center">
 			  		<thead>
 						<tr>
-							<th class="text-center" scope="col"> N° de Venta </th>
+							<th class="text-center" scope="col"> Nï¿½ de Venta </th>
 							<th class="text-center" scope="col"> Fecha </th>
 							<th class="text-center" scope="col"> Cliente </th> 
 							<th class="text-center" scope="col"> Monto </th> 
