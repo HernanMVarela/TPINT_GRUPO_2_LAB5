@@ -12,10 +12,24 @@
                 $('#tabla_ventas').DataTable();
               });
 
-              function abrirDetalleModal(detalle, total, cliente) {
-            	    document.getElementById("detalleVenta").textContent = detalle;
-            	    document.getElementById("totalVenta").textContent = total;
-            	    document.getElementById("nombreCliente").textContent = cliente;
+              function abrirDetalleModal(numVenta) {
+                
+                  var contenidoVenta = document.getElementById("td_venta_"+numVenta);
+                 var detalleVenta = document.getElementById("detalleVenta");
+                 detalleVenta.innerHTML = contenidoVenta.innerHTML;
+
+
+                 var totalMonto = document.getElementById("total_monto_"+numVenta);
+                 var totalVenta = document.getElementById("totalVenta");
+                 totalVenta.innerHTML = totalMonto.innerHTML;
+
+                 var clienteTD = document.getElementById("cliente_"+numVenta);
+                 var clienteModal = document.getElementById("nombreCliente");
+                 clienteModal.innerHTML = clienteTD.innerHTML;
+                
+               
+
+            	   
             	}
 
             </script>
@@ -56,16 +70,13 @@
                           <tr>
                             <td>${item.num_venta} </td>
                             <td>${item.fecha} </td>
-                            <td>${item.cliente.nombre} ${item.cliente.apellido}</td>
-                            <td>$ ${item.totalMonto()}</td>
-                            <td> </td>
+                            <td  id="cliente_${item.num_venta}" >${item.cliente.nombre} ${item.cliente.apellido}</td>
+                            <td id="total_monto_${item.num_venta}" >$ ${item.totalMonto()}</td>
+                            <td style="display: none;" id="td_venta_${item.num_venta}">${item.generarDetalleString()}</td>
                             
                             <td> 
-							<button type="button" class="btn btn-success" data-bs-toggle="modal" 
-						        data-bs-target="#detailSaleModal" onclick="abrirDetalleModal(
-						        '${item.generarDetalleString()}',
-						        '${item.totalMonto()},
-						        '${item.cliente.nombre}')">
+							<button  value="${item}" type="button" class="btn btn-success" data-bs-toggle="modal" 
+						        data-bs-target="#detailSaleModal" onclick="abrirDetalleModal(${item.num_venta})">
 						        DETALLE
 						    </button>
 
