@@ -8,20 +8,25 @@
 
 <script type="text/javascript">
 function admin() { 
-        document.getElementById("user").value = "admin";
-        document.getElementById("pass").value = "123456";
+	var user = document.getElementById("usernameLogin");
+	var pass = document.getElementById("passLogin");
+	user.value = 'admin';   
+	pass.value = '123456'; 
 }
 
 function vendedor() { 
-    document.getElementById("user").value = vendedor;
-    document.getElementById("pass").value = 123456;
+	var user = document.getElementById("usernameLogin");
+	var pass = document.getElementById("passLogin");
+	user.value = 'vendedor';   
+	pass.value = '123456'
 }
 
 function contador() { 
-    document.getElementById("user").value = contador;
-    document.getElementById("pass").value = 123456;
+	var user = document.getElementById("usernameLogin");
+	var pass = document.getElementById("passLogin");
+	user.value = 'contador';   
+	pass.value = '123456'
 }
-
 </script>
 
 <body>
@@ -55,9 +60,9 @@ function contador() {
 										<div class="row w-auto justify-content-center">
 											<img class="img-responsive p-3" style="width: 30%;" src="<c:url value="/assets/login.png"/>"/>
 
-											<input class="form-control mt-2" id="usernameLogin" name="usernameLogin" placeholder="Ingrese usuario" id="user">									
+											<input class="form-control mt-2" id="usernameLogin" name="usernameLogin" value="" placeholder="Ingrese usuario" >									
 
-											<input class="form-control mt-2" id="passLogin" name="passLogin" type="password" placeholder="Ingrese contraseña" id="pass">
+											<input class="form-control mt-2" id="passLogin" name="passLogin" type="password" value="" placeholder="Ingrese contraseña">
 									
 											<input type="submit" class="btn btn-primary mt-2" value="INGRESAR" name="btnRedirigir">
 										</div>
