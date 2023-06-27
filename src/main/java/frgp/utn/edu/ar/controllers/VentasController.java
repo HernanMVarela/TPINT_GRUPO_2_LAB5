@@ -120,11 +120,19 @@ public class VentasController {
         // Crear una instancia de Detalle_venta y agregarla a la lista
          detalle.setArticulo(serviceArticulo.obtenerUnRegistro(nombre));
          detalle.setCantidad(cantidadObjeto);
-         detalle.setImporte(cantidad*detalle.getArticulo().getPrecio_venta());
+         detalle.setImporte(cantidad * detalle.getArticulo().getPrecio_venta());
+
+		System.out.println("Articulo:"+serviceArticulo.obtenerUnRegistro(nombre));
+		System.out.println("cantidadObjeto:" + cantidadObjeto);
+		System.out.println(cantidad * detalle.getArticulo().getPrecio_venta());
+		
+
          venta.getDetalle().add(detalle);
          
     }
 		String Message = "";
+		System.out.println("VENTA:"+venta.toString());
+
 		try{
 		    Message = asignarMensajeVenta(serviceVenta.insertarVenta(venta));
 			MV.addObject("Mensaje", Message);
@@ -184,9 +192,7 @@ public class VentasController {
 	private ModelAndView cargadorDeListasVentas(ModelAndView MV) 
 	{
 		List<Venta> lista = this.serviceVenta.obtenerVentas();
-		for (Venta venta : lista) {
-			System.out.println(venta.generarDetalleString());
-		}
+
 		MV.addObject("listaVentas",this.serviceVenta.obtenerVentas());
 		MV.addObject("listaClientes",this.serviceCliente.obtenerClientes());
 		MV.addObject("listaArticulos",this.serviceArticulo.obtenerArticulos());

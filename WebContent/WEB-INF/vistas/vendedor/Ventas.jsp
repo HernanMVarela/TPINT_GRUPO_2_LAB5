@@ -185,6 +185,7 @@
 
                           function agregarArticulo() {
                             var nuevoArticulo = document.createElement("div");
+                            nuevoArticulo.setAttribute("id", "nuevo_articulo_item");
                             nuevoArticulo.classList.add("form-group", "col-md-10", "row", "pt-5");
 
                             var selectElement = document.createElement("select");
@@ -284,35 +285,32 @@
                         }
 
                     function enviarFormulario() {
-                    var contenedores = document.querySelectorAll("#articulos-container");
+                      var contenedores = document.querySelectorAll("#nuevo_articulo_item");
 
-                    var articulos = [];
+                              var articulos = [];
 
-                    contenedores.forEach(function (contenedor) {
-                      var selectElement = contenedor.querySelector("select[name='articulo']");
-                      var cantidadInput = contenedor.querySelector("input[name='cantidad']");
-                      var precioInput = contenedor.querySelector("input[name='precio_venta']");
+                              contenedores.forEach(function (contenedor) {
+                                var selectElement = contenedor.querySelector("select[name='articulo']");
+                                var cantidadInput = contenedor.querySelector("input[name='cantidad']");
+                                var precioInput = contenedor.querySelector("input[name='precio_venta']");
 
-                      var articulo = {
-                        nombre: selectElement.value,
-                        cantidad: cantidadInput.value,
-                        precio: precioInput.value
-                      };
+                                var articulo = {
+                                  nombre: selectElement.value,
+                                  cantidad: cantidadInput.value,
+                                  precio: precioInput.value
+                                };
 
+                                articulos.push(articulo);
+                              });
 
-
-    articulos.push(articulo);
-  });
-
-  var articulosInput = document.getElementById("articulosLista");
-  articulosInput.value = JSON.stringify(articulos);
-
-  document.getElementById("ventaForm").submit();
+                              var articulosInput = document.getElementById("articulosLista");
+                              articulosInput.value = JSON.stringify(articulos);
+                              document.getElementById("ventaForm").submit();
 
 }
 
 function cerrarCarrito() {
-    var contenedores = document.querySelectorAll("#articulos-container");
+    var contenedores = document.querySelectorAll("#nuevo_articulo_item");
     var fechaInput = document.querySelector("input[name='fechaNuevo']");
     var camposIncompletos = false;
 
@@ -375,14 +373,15 @@ function cerrarCarrito() {
 
                     </div>
                    
-                    <input   id="articulosLista" type="hidden" name="articulosLista" class="form-control" required min="1">
+                    <input   id="articulosLista" name="articulosLista" class="form-control" required min="1">
 
                     <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">CANCELAR</button>
-                    <button type="button" class="btn btn-success" onclick="cerrarCarrito()" >Guardar venta</button>
+                    
                     <input style="display: none;" type="submit" class="btn btn-primary" name="btnAceptar" value="Aceptar">
               </div>
             </form>
+            <button class="btn btn-success" onclick="cerrarCarrito()" >Guardar venta</button>
             </div>
           </div>
         </div>
