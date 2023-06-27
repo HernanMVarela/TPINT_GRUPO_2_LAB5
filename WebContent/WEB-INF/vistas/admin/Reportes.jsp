@@ -15,7 +15,7 @@
           <hr>
           <div class="row align-items-md-stretch">
 	          <div class="col-md-4">
-	          <h4>CANTIDAD DE USUARIOS POR ROL</h4>
+	          <h6>CANTIDAD DE USUARIOS POR ROL</h6>
 	          <hr>
 	          <table id="tabla_roles" class="table table-hover text-center">
 	                  <thead>
@@ -36,7 +36,7 @@
 	           	</div>
 	           	
 	          <div class="col-md-4">
-	          <h5>TOP 5 PRODUCTOS MAS VENDIDOS</h5>
+	          <h6>TOP 5 PRODUCTOS MAS VENDIDOS</h6>
 	          <hr>
 	          <table id="tabla_productos_ventas" class="table table-hover text-center">
 	                  <thead>
