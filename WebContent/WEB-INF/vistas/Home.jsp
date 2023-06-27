@@ -11,7 +11,13 @@
 	<div class="container-fluid">
 		<% Usuario user = null; %>
  		<% user = (Usuario)request.getAttribute("userLogin"); %>
- 		<% if (user != null){%> Bienvenido <%= user.getNombreU() %> <% }else{%> NO HAY USUARIO LOGUEADO <%}  %>
+ 		
+ 		 <div class="row align-items-md-stretch">
+             <div class="d-flex justify-content-center" style="text-align: center;">
+                	<h3 class="w-auto"><% if (user != null){%> Bienvenido <%= user.getNombreU() %> <% }else{%> NO HAY USUARIO LOGUEADO <%}  %></h3>	
+             </div>
+             </div>
+ 		
 			<form action="login.html" method="post">
 				<div class="container">
 					<div class="p-2 mb-2 bg-light border rounded-3" style="width: 100%">
