@@ -12,11 +12,16 @@
                 $('#tabla_ventas').DataTable();
               });
 
+              function agregarSaltosDeLinea(texto) {
+                  var nuevoTexto = texto.replace(/PRODUCTO:/g, '<br/><br/> PRODUCTO:');
+                  return nuevoTexto;
+                }
+
               function abrirDetalleModal(numVenta) {
                 
                   var contenidoVenta = document.getElementById("td_venta_"+numVenta);
                  var detalleVenta = document.getElementById("detalleVenta");
-                 detalleVenta.innerHTML = contenidoVenta.innerHTML;
+                 detalleVenta.innerHTML = agregarSaltosDeLinea( contenidoVenta.innerHTML);
 
 
                  var totalMonto = document.getElementById("total_monto_"+numVenta);
