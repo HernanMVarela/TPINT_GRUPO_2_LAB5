@@ -9,7 +9,7 @@ public interface VentaServicio {
 
 	public ArrayList<Venta> obtenerVentas();
 
-	public Venta obtenerUnRegistro(String nombre);
+	public Venta obtenerUnRegistro(int id);
 
 	public String insertarVenta(Venta nuevo);
 

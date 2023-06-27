@@ -143,6 +143,7 @@ public class VentasController {
 
 		}
 		venta.setDetalle(detalleLista);
+		venta.setEstado(serviceEstadoVenta.obtenerUnRegistro(1));
 		String Message = "";
 		System.out.println("VENTA:" + venta.toString());
 
@@ -167,7 +168,6 @@ public class VentasController {
 	@RequestMapping(value ="/eliminar_venta.html" , method= { RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView eliminarVenta(int idEliminar){		
 		
-		System.out.println(idEliminar);
 
 		venta = serviceVenta.obtenerUnRegistro(idEliminar);
 		venta.setEstado(serviceEstadoVenta.obtenerUnRegistro(0));
@@ -175,7 +175,7 @@ public class VentasController {
 		String Message = "";	
 		
 		try{
-			Message = asignarMensajeVenta(serviceVenta.eliminarVenta(venta));
+			//Message = asignarMensajeVenta(serviceVenta.eliminarVenta(venta));
 			MV.addObject("Mensaje", Message);
 			MV = cargadorDeListasVentas(MV);
 			MV.setViewName("admin/HomeAdmin"); 

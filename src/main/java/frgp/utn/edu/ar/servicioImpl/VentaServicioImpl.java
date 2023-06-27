@@ -33,18 +33,12 @@ public class VentaServicioImpl implements VentaServicio{
 	}
 
 	@Override
-	public Venta obtenerUnRegistro(String nombre) {
-		return dataAccess.obtenerVentaPorNombre(nombre);
-	}
-	
-	@Override
 	public Venta obtenerUnRegistro(int ID) {
 		return dataAccess.obtenerVentaPorID(ID);
 	}
 
 	@Override
 	public String insertarVenta(Venta nuevo) {
-		
 		List<Detalle_venta> lista = nuevo.getDetalle();		
 		
 		/// VALIDA QUE LA CANTIDAD TOTAL DE STOCK SEA MAYOR A LA VENTA

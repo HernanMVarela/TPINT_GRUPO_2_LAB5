@@ -56,7 +56,7 @@ public class Venta implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Venta [num_venta=" + num_venta + ", detalle=" + detalle + ", fecha=" + fecha + ", cliente=" + cliente
+		return "Venta [num_venta=" + num_venta + ", detalle=" + detalle + ", fecha=" + fecha + ", cliente=" + cliente + ", estadoVenta=" + estado
 				+ "]";
 	}
 	
