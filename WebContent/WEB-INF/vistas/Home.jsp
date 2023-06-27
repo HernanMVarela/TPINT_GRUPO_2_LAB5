@@ -6,6 +6,24 @@
 <%@ include file="common/Header.jspf" %>
 </head>
 
+<script type="text/javascript">
+function admin() { 
+        document.getElementById("user").value = "admin";
+        document.getElementById("pass").value = "123456";
+}
+
+function vendedor() { 
+    document.getElementById("user").value = vendedor;
+    document.getElementById("pass").value = 123456;
+}
+
+function contador() { 
+    document.getElementById("user").value = contador;
+    document.getElementById("pass").value = 123456;
+}
+
+</script>
+
 <body>
 <%@ include file="common/NavigatorCommon.jspf" %>
 	<div class="container-fluid">
@@ -37,10 +55,9 @@
 										<div class="row w-auto justify-content-center">
 											<img class="img-responsive p-3" style="width: 30%;" src="<c:url value="/assets/login.png"/>"/>
 
-											<input class="form-control mt-2" id="usernameLogin" name="usernameLogin" placeholder="Ingrese usuario">
-									
+											<input class="form-control mt-2" id="usernameLogin" name="usernameLogin" placeholder="Ingrese usuario" id="user">									
 
-											<input class="form-control mt-2" id="passLogin" name="passLogin" type="password" placeholder="Ingrese contraseña">
+											<input class="form-control mt-2" id="passLogin" name="passLogin" type="password" placeholder="Ingrese contraseña" id="pass">
 									
 											<input type="submit" class="btn btn-primary mt-2" value="INGRESAR" name="btnRedirigir">
 										</div>
@@ -49,9 +66,9 @@
 
 									<hr>
 									<div class="d-flex col col-12 mh-2 justify-content-center p-2">
-										<input type="submit" class="btn btn-danger m-1" value="Inicio Rapido Administrador" name="btnRedirigir" formaction="admin.html">
-										<input type="submit" class="btn btn-warning m-1" value="Inicio Rapido Vendedor" name="btnRedirigir" formaction="vendedor.html">
-										<input type="submit" class="btn btn-info m-1" value="Inicio Rapido Contador" name="btnRedirigir" formaction="contador.html">
+										<button type="button" onclick="admin()" class="btn btn-danger m-1" value='ADMINISTRADOR'>ADMINISTRADOR</button>
+  										<button type="button" onclick="vendedor()" class="btn btn-warning m-1" value='VENDEDOR'>VENDEDOR</button>
+										<button type="button" onclick="contador()" class="btn btn-info m-1" value='CONTADOR'>CONTADOR</button>									
 									</div>
 								</div>
 							</div>

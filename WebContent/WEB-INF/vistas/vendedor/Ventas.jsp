@@ -89,7 +89,7 @@
 					<tbody>
             
            			 <c:forEach items="${listaVentas}" var="item">
-                                             
+                       <c:if test="${item.estado.ID == 1}">          
                           <tr>
                             <td>${item.num_venta} </td>
                             <td>${item.fecha} </td>
@@ -116,6 +116,7 @@
                             </td>
                             
                           </tr>
+                          </c:if>                          
                         </c:forEach>
 					   </tbody>
                     </table>
