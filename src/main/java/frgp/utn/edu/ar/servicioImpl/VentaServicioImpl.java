@@ -22,6 +22,10 @@ public class VentaServicioImpl implements VentaServicio{
 		this.dataAccess = dataAccess;
 	}
 	
+	public void setDataAccess2(StockDao dataAccess2) {
+		this.dataAccess2 = dataAccess2;
+	}
+	
 	@Override
 	public ArrayList<Venta> obtenerVentas() {
 		return dataAccess.obtenerVentas();
@@ -35,12 +39,13 @@ public class VentaServicioImpl implements VentaServicio{
 	@Override
 	public String insertarVenta(Venta nuevo) {
 		
+		List<Detalle_venta> lista = nuevo.getDetalle();		
 		
 		/// VALIDA QUE LA CANTIDAD TOTAL DE STOCK SEA MAYOR A LA VENTA
-		for (Detalle_venta detalle : nuevo.getDetalle()) {
+		for (Detalle_venta detalle : lista) {
 			List<Stock> listaStock = dataAccess2.obtenerDeArticulo(detalle.getArticulo().getNombre());
 			int cantidad_total = 0;
-			for (Stock stock : listaStock) {				
+			for (Stock stock : listaStock) {	
 				cantidad_total += stock.getCantidad();
 			}
 			
@@ -51,7 +56,7 @@ public class VentaServicioImpl implements VentaServicio{
 		
 		boolean flag = true;
 		
-		for (Detalle_venta detalle : nuevo.getDetalle()) {
+		for (Detalle_venta detalle : lista) {
 			int descontar = detalle.getCantidad();
 			List<Stock> listaStock = dataAccess2.obtenerDeArticulo(detalle.getArticulo().getNombre());
 			
@@ -80,6 +85,7 @@ public class VentaServicioImpl implements VentaServicio{
 						}
 					}
 				}
+
 			}
 		}
 		if (!flag) {

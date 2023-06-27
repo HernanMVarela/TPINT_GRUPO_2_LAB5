@@ -15,6 +15,9 @@ public class ClienteServicioImpl implements ClienteServicio{
 	public void setDataAccess(ClienteDao dataAccess) {
 		this.dataAccess = dataAccess;
 	}
+	public void setDataAccess2(EstadoClienteDao dataAccess2) {
+		this.dataAccess2 = dataAccess2;
+	}
 	
 	@Override
 	public ArrayList<Cliente> obtenerClientes() {

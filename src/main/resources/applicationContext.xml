@@ -56,9 +56,9 @@
 	<bean id="EstadoUsuarioEstandar" class="frgp.utn.edu.ar.dominio.Estado_User"></bean>
 	<bean id="MarcaEstandar" class="frgp.utn.edu.ar.dominio.Marca"></bean>
 	
-	<bean id="DetalleVentaList" class="java.util.ArrayList"/>
+	<bean id="DetalleVentaList" scope="prototype" class="java.util.ArrayList"/>
 	
-	<bean id="DetalleEstandar" class="frgp.utn.edu.ar.dominio.Detalle_venta" scope="prototype">
+	<bean id="DetalleEstandar" class="frgp.utn.edu.ar.dominio.Detalle_venta">
 		<property name="articulo" ref="ArticuloEstandar"></property>
 	</bean>
 	
@@ -77,6 +77,7 @@
 		<!-- CREO EL SERVICIO PARA Venta -->
 	<bean id="VentaServiceBean" class="frgp.utn.edu.ar.servicioImpl.VentaServicioImpl">
 		<property name="dataAccess" ref="VentaDABean"></property>
+		<property name="dataAccess2" ref="StockDABean"></property>
 	</bean>
 	<!-- EL SERVICIO NECESITA EL DAO  -->
 	<bean id="VentaDABean" class="frgp.utn.edu.ar.daoImpl.VentaDaoImpl" 

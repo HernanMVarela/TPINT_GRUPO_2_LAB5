@@ -1,6 +1,7 @@
 package frgp.utn.edu.ar.daoImpl;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate4.HibernateTemplate;
@@ -8,6 +9,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import frgp.utn.edu.ar.dao.VentaDao;
+import frgp.utn.edu.ar.dominio.Detalle_venta;
 import frgp.utn.edu.ar.dominio.Venta;
 
 public class VentaDaoImpl implements VentaDao {
@@ -19,14 +21,21 @@ public class VentaDaoImpl implements VentaDao {
     }
 
 	@Override
-	@Transactional(propagation=Propagation.REQUIRED)
+	@Transactional(propagation = Propagation.REQUIRED)
 	public boolean insertarVenta(Venta nuevo) {
-		try {
-			this.hibernateTemplate.save(nuevo);
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
+	    try {
+	        List<Detalle_venta> detalles = nuevo.getDetalle();
+
+	        // Guardar los detalles explícitamente antes de guardar la venta
+	        for (Detalle_venta detalle : detalles) {
+	            this.hibernateTemplate.save(detalle);
+	        }
+
+	        this.hibernateTemplate.save(nuevo);
+	        return true;
+	    } catch (Exception e) {
+	        return false;
+	    }
 	}
 
 	@Override
