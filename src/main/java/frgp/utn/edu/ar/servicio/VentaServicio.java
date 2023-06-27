@@ -2,6 +2,7 @@ package frgp.utn.edu.ar.servicio;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 import frgp.utn.edu.ar.dominio.Venta;
 
@@ -19,6 +20,5 @@ public interface VentaServicio {
 	
 	public float gananciaEntreFechas (Date fechaInicio, Date fechaFin);
 
-	public Venta obtenerUnRegistro(int ID);
-	
+	public List<Venta> tablaFiltradaFechas(Date fechaInicio, Date fechaFin);
 }

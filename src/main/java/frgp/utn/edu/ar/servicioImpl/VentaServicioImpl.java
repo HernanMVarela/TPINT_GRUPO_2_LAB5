@@ -130,6 +130,8 @@ public class VentaServicioImpl implements VentaServicio{
 			}
 		}
 	}
+	
+	@Override
 	public float gananciaEntreFechas (Date fechaInicio, Date fechaFin) {
 		ArrayList<Venta> ListaVentas = dataAccess.obtenerVentas();
 		float gananciaTotal = 0;
@@ -141,5 +143,19 @@ public class VentaServicioImpl implements VentaServicio{
 	    }
 	    
 	    return gananciaTotal;
+	}
+	
+	@Override
+	public List<Venta> tablaFiltradaFechas(Date fechaInicio, Date fechaFin){
+		
+		List<Venta> lista = dataAccess.obtenerVentas();
+		List<Venta> aux = new ArrayList<Venta>();
+		for (Venta venta : lista) {
+			if(venta.getFecha().getTime()>=fechaInicio.getTime() && venta.getFecha().getTime()<=fechaFin.getTime()) {
+				aux.add(venta);
+			}
+			
+		}
+		return aux;
 	}
 }

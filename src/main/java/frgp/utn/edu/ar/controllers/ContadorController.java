@@ -57,7 +57,12 @@ public class ContadorController {
 		String Message = "";
 		try{
 			float gananciaTotal = serviceVenta.gananciaEntreFechas(datei, datef);
-			MV= cargadorDeListasVentas(MV);
+			if(datei != null && datef != null) {
+				MV.addObject("listaContador", this.serviceVenta.tablaFiltradaFechas(datei, datef));
+			}else {
+				MV= cargadorDeListasVentas(MV);	
+			}
+			
 	        MV.addObject("Mensaje", Message);
 	        MV.addObject("gananciaTotal", gananciaTotal); // Asignar el valor a gananciaTotal
 			MV.setViewName("contador/HomeContador"); 
