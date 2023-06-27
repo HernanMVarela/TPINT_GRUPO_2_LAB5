@@ -1,5 +1,6 @@
 package frgp.utn.edu.ar.servicio;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import frgp.utn.edu.ar.dominio.Venta;
@@ -15,5 +16,7 @@ public interface VentaServicio {
 	public void eliminarVenta(String nombre) ;
 
 	public String actualizarVenta(Venta modificar);
+	
+	public float gananciaEntreFechas (Date fechaInicio, Date fechaFin);
 	
 }
