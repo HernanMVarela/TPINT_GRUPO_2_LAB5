@@ -1,3 +1,4 @@
+<%@page import="frgp.utn.edu.ar.dominio.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -47,6 +48,18 @@
 
       <body>
         <div class="container-fluid">
+             <% Usuario user = null; %>
+ 			<% user =  (Usuario)request.getAttribute("userLogin"); %>
+ 			
+ 			<% if(user == null) {%> 
+	        <div class="col-md-9" >
+				<%@ include file="../common/ErrorLogin.jspf" %>
+	       </div> 
+	       <%} else { 
+	    	   if (user.getTipo().getNombre().equals("CONTADOR")){ %>
+	    		   <%@ include file="../common/ErrorPermisos.jspf" %>
+	    	    <%} else {%>
+	    	    	
             <form action="ventas.html" method="post">
               <div class="p-5 bg-light border rounded-3" style="width: 100%">
                 <div class="d-flex  align-content-center bd-highlight mb-3">
@@ -110,6 +123,7 @@
                 </div>
               </div>
             </form>
+            <% }}%> 
           </div>
       </body>
 

@@ -28,7 +28,7 @@
 </script>
 
 <script type="text/javascript">
-	type="text/javascript"> var provinciaSelect = document.getElementById('provinciaNuevo');
+	<type="text/javascript"> var provinciaSelect = document.getElementById('provinciaNuevo');
 </script>
 
 <body>
@@ -38,8 +38,10 @@
  			<% user =  (Usuario)request.getAttribute("userLogin"); %>
  			
  			<% if(user == null) {%> 
-	        <div class="col-md-9" >
-				<%@ include file="../common/ErrorLogin.jspf" %>
+	        <div class="col-md-12" >
+				<div class="col-md-12" >
+	    		   <%@ include file="../common/ErrorPermisos.jspf" %>
+	    		</div>
 	       </div> 
 	       <%} else { 
 	    	   if (user.getTipo().getNombre().equals("VENDEDOR") || user.getTipo().getNombre().equals("CONTADOR")){ %>

@@ -28,12 +28,14 @@
 	<% Usuario user = null; %>
 			<% user =  (Usuario)request.getAttribute("userLogin"); %>			
 			<% if(user == null) {%> 
-        <div class="col-md-9" >
+        <div class="col-md-12" >
 			<%@ include file="../common/ErrorLogin.jspf" %>
        </div> 
        <%} else { 
     	   if (user.getTipo().getNombre().equals("VENDEDOR") || user.getTipo().getNombre().equals("CONTADOR")){ %>
-    		   <%@ include file="../common/ErrorPermisos.jspf" %>
+    		   <div class="col-md-12" >
+	    		   <%@ include file="../common/ErrorPermisos.jspf" %>
+	    		</div>
     	    <%} else {%>
 	<div class="row align-items-md-stretch">
         <div class="col-md-3 ">

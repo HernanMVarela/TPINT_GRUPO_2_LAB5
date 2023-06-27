@@ -1,7 +1,8 @@
+<%@page import="frgp.utn.edu.ar.dominio.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+   <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
       <html>
       <head>
         <%@ include file="../common/Header.jspf" %>
@@ -14,6 +15,19 @@
       </head>
 <body>
           <div class="container-fluid">
+          <% Usuario user = null; %>
+ 			<% user =  (Usuario)request.getAttribute("userLogin"); %>
+ 			
+ 			<% if(user == null) {%> 
+	        <div class="col-md-12" >
+				<%@ include file="../common/ErrorLogin.jspf" %>
+	       </div> 
+	       <%} else { 
+	    	   if (user.getTipo().getNombre().equals("CONTADOR")){ %>
+	    		  <div class="col-md-12" >
+	    		   <%@ include file="../common/ErrorPermisos.jspf" %>
+	    		</div>
+	    	    <%} else {%>
             <form action="stock.html" method="post">
               <div class="p-5 bg-light border rounded-3" style="width: 100%">
                 <div class="d-flex  align-content-center bd-highlight mb-3">
@@ -37,8 +51,6 @@
                           <th class="text-center" scope="col"> Fecha de ingreso </th>
                           <th class="text-center" scope="col"> Cantidad </th>
                           <th class="text-center" scope="col"> Precio de compra </th>
-                          <th></th>
-                          <th></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -63,6 +75,7 @@
                 	<h3 class="w-auto">${Mensaje}</h3>	
              </div>
              </div>
+             <% }}%>
           </div>
 
 <!-- Modal AGREGAR Stock -->

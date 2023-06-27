@@ -1,3 +1,4 @@
+<%@page import="frgp.utn.edu.ar.dominio.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -8,6 +9,18 @@
 
  <body>
 <div class="container-fluid">
+<% Usuario user = null; %>
+			<% user =  (Usuario)request.getAttribute("userLogin"); %>			
+			<% if(user == null) {%> 
+        <div class="col-md-12" >
+			<%@ include file="../common/ErrorLogin.jspf" %>
+       </div> 
+       <%} else { 
+    	   if (user.getTipo().getNombre().equals("VENDEDOR") || user.getTipo().getNombre().equals("CONTADOR")){ %>
+    		   <div class="col-md-12" >
+	    		   <%@ include file="../common/ErrorPermisos.jspf" %>
+	    		</div>
+    	    <%} else {%>
   <form  id="myForm" method="get">
       <div class="p-5 bg-light border rounded-3" style="width: 100%">
         <div class="row w-auto justify-content-center">
@@ -79,7 +92,9 @@
       		</div>              
         </div>
       </div>
-      </form>      
+      </form>   
+<% }}%>  
 </div>  
+
 </body>
 </html>

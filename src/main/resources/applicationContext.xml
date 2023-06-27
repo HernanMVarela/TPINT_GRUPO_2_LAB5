@@ -237,7 +237,8 @@
 				<value>frgp.utn.edu.ar.dominio.Estado_User</value>
 				<value>frgp.utn.edu.ar.dominio.Stock</value>
 				<value>frgp.utn.edu.ar.dominio.Venta</value>
-				<value>frgp.utn.edu.ar.dominio.Detalle_venta</value>		
+				<value>frgp.utn.edu.ar.dominio.Detalle_venta</value>
+				<value>frgp.utn.edu.ar.dominio.Estado_Venta</value>			
 			</list>
 		</property>
 		<property name="hibernateProperties">

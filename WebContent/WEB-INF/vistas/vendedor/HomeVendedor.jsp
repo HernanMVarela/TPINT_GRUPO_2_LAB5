@@ -8,7 +8,20 @@
 
 <body>
 <div class="container-fluid">
-	<div class="row align-items-md-stretch">
+		<% Usuario user = null; %>
+		<% user =  (Usuario)request.getAttribute("userLogin"); %>
+
+		<% if(user == null) {%>
+		<div class="col-md-12">
+			<%@ include file="../common/ErrorLogin.jspf"%>
+		</div>
+		<%} else { 
+  	   if (user.getTipo().getNombre().equals("CONTADOR")){ %>
+		     <div class="col-md-12" >
+	    		   <%@ include file="../common/ErrorPermisos.jspf" %>
+	    		</div>
+		<%} else {%>
+		<div class="row align-items-md-stretch">
         <div class="col-md-3 ">
        		<%@ include file="../common/UserData.jspf" %>        
         </div>
@@ -21,8 +34,10 @@
         		<input type="submit" class="btn btn-primary" value="STOCK" name="btnRedirigir" formaction="stock.html">
         		<input type="submit" class="btn btn-primary" value="VENTAS" name="btnRedirigir" formaction="ventas.html">          	
           	</form>
+          </div>
         </div>
-    </div>	
+    </div>
+    <% }}%>	
 </div>
 
 </body>
