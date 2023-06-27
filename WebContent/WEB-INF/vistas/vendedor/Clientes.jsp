@@ -6,9 +6,9 @@
 <%@ include file="../common/Header.jspf" %>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-$(document).ready( function () {
+$(document).ready(function () {
     $('#tabla_clientes').DataTable();
-} );
+  });
 function abrirModificarModal(id,dni, nombre, apellido, direccion, sexo, localidad, fecha, email, telefono) {
 console.log(id)
    $('#IDModif').val(id);
@@ -131,9 +131,7 @@ console.log(id)
 			  	</div> 
 		  	</div>		
 		</form>		
-	</div>	
-		</form>		
-	</div>
+	</div>		
     <% }} %>	
 </div>
 
