@@ -61,5 +61,18 @@ public class StockDaoImpl implements StockDao {
 			return false;
 		}
 	}
+	
+	@Override
+	@Transactional(propagation=Propagation.REQUIRED)
+	public Stock obtenerUltimoRegistro(String articulo) {
+		String query = "FROM Stock s WHERE s.articulo.nombre = :ART AND s.cantidad > 0 ORDER BY s.fechaingreso DESC";
+	    @SuppressWarnings("unchecked")
+		List<Stock> resultados = (List<Stock>) this.hibernateTemplate.findByNamedParam(query, "ART", articulo);
+
+	    if (resultados != null && !resultados.isEmpty()) {
+	        return resultados.get(0);
+	    }
+	    return null; // Si no se encontró ningún stock con cantidad > 0 de ese artículo
+	}
 
 }

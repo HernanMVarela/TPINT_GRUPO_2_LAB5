@@ -56,6 +56,8 @@ public class VentaServicioImpl implements VentaServicio{
 		
 		boolean flag = true;
 		
+		float ganancia = 0;
+		
 		for (Detalle_venta detalle : lista) {
 			int descontar = detalle.getCantidad();
 			List<Stock> listaStock = dataAccess2.obtenerDeArticulo(detalle.getArticulo().getNombre());
@@ -71,7 +73,7 @@ public class VentaServicioImpl implements VentaServicio{
 						if(!dataAccess2.modificarStock(aux)) {
 							flag = false;
 						} else {
-							nuevo.setGanancia(nuevo.getGanancia()+((detalle.getArticulo().getPrecio_venta()*descontar)-(aux.getPreciocompra()*descontar))); // ACUMULACION DE GANANCIA
+							ganancia += (detalle.getArticulo().getPrecio_venta()*descontar)-(aux.getPreciocompra()*descontar); // ACUMULACION DE GANANCIA
 							descontar = 0;
 						}
 					} else if (aux.getCantidad()<descontar && descontar != 0) {
@@ -80,14 +82,14 @@ public class VentaServicioImpl implements VentaServicio{
 						if(!dataAccess2.modificarStock(aux)) {
 							flag = false;
 						} else {
-							nuevo.setGanancia(nuevo.getGanancia()+((detalle.getArticulo().getPrecio_venta()*descontar)-(aux.getPreciocompra()*descontar))); // ACUMULACION DE GANANCIA
+							ganancia +=(detalle.getArticulo().getPrecio_venta()*descontar)-(aux.getPreciocompra()*descontar); // ACUMULACION DE GANANCIA
 							descontar -= cant_vendida;
 						}
 					}
 				}
-
 			}
 		}
+		nuevo.setGanancia(ganancia);
 		if (!flag) {
 			return "ERROR";
 		}
@@ -100,34 +102,31 @@ public class VentaServicioImpl implements VentaServicio{
 	}
 
 	@Override
-	public String eliminarVenta(Venta eliminar) {
+	public String eliminarVenta(Venta eliminar, Stock stock) {
 		Venta aux = dataAccess.obtenerVentaPorID(eliminar.getNum_venta());
 		if(aux != null) {
 			if(aux.getEstado().getNombre().equals("ACTIVO")) {
-				return this.actualizarVenta(eliminar);
+				if (dataAccess.actualizarVenta(eliminar)) {
+					if(recuperarVenta(eliminar, stock)) {
+						return "ELIMINADO"; 
+					}	
+				}else {
+					return "NO ELIMINADO";
+				}
 			} else {
 				return "ELIMINACION PREVIA";
 			}
-		} else {
-			return "ERROR";
-		}	
+		}
+			return "ERROR";	
 		
 	}
 
 	@Override
 	public String actualizarVenta(Venta modificar) {
-		if(modificar.getEstado().getNombre().equals("INACTIVO")) {
-			if (dataAccess.actualizarVenta(modificar)) {
-				return "ELIMINADO";
-			}else {
-				return "NO ELIMINADO";
-			}
-		} else {
-			if (dataAccess.actualizarVenta(modificar)) {
-				return "MODIFICADO";
-			}else {
-				return "NO MODIFICADO";
-			}
+		if (dataAccess.actualizarVenta(modificar)) {
+			return "MODIFICADO";
+		}else {
+			return "NO MODIFICADO";
 		}
 	}
 	
@@ -158,4 +157,29 @@ public class VentaServicioImpl implements VentaServicio{
 		}
 		return aux;
 	}
+	
+	
+	private boolean recuperarVenta(Venta venta, Stock stock) {
+		boolean flag = true;
+		Stock aux = stock;
+		for (Detalle_venta detalle : venta.getDetalle()) {
+			stock = dataAccess2.obtenerUltimoRegistro(detalle.getArticulo().getNombre());
+			if(stock != null) {
+				stock.sumarCantidad(detalle.getCantidad());
+				if(!dataAccess2.modificarStock(stock)) {
+					flag = false;
+				} 
+			} else {
+				aux.setArticulo(detalle.getArticulo());
+				aux.setCantidad(detalle.getCantidad());
+				aux.setFechaingreso(venta.getFecha());
+				aux.setPreciocompra((float) ((detalle.getImporte()/detalle.getCantidad())*0.7));
+				if(!dataAccess2.insertarStock(aux)) {
+					flag = false;
+				} 
+			}
+		}
+		return flag;
+	}
+	
 }

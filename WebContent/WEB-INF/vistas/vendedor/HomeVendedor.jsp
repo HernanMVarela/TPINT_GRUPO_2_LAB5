@@ -29,10 +29,20 @@
         <div class="col-md-9 ">
            <div class="h-100 p-5 bg-light border rounded-3">
         	<form  id="home-vendedor.html" method="post">
-        		<input type="submit" class="btn btn-primary" value="CLIENTES" name="btnRedirigir" formaction="clientes.html">
-          		<input type="submit" class="btn btn-primary" value="ARTICULO" name="btnRedirigir" formaction="articulos.html">
-        		<input type="submit" class="btn btn-primary" value="STOCK" name="btnRedirigir" formaction="stock.html">
-        		<input type="submit" class="btn btn-primary" value="VENTAS" name="btnRedirigir" formaction="ventas.html">          	
+        		<div class="d-flex justify-content-center">
+        			<div class="w-25 mx-2">
+        				<input type="submit" class="btn btn-primary w-100" value="CLIENTES" name="btnRedirigir" formaction="clientes.html">
+        			</div>
+        			<div class="w-25 mx-2">
+        				<input type="submit" class="btn btn-primary w-100" value="ARTICULO" name="btnRedirigir" formaction="articulos.html">
+        			</div>
+        			<div class="w-25 mx-2">
+        				<input type="submit" class="btn btn-primary w-100" value="STOCK" name="btnRedirigir" formaction="stock.html">
+        			</div>
+        			<div class="w-25 mx-2">
+        				<input type="submit" class="btn btn-primary w-100" value="VENTAS" name="btnRedirigir" formaction="ventas.html">
+        			</div> 
+        		</div>        	
           	</form>
           </div>
         </div>

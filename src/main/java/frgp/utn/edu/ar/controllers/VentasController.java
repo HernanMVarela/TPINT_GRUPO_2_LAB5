@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.ModelAndView;
 import frgp.utn.edu.ar.dominio.Detalle_venta;
-import frgp.utn.edu.ar.dominio.Estado_Venta;
 import frgp.utn.edu.ar.dominio.Stock;
 import frgp.utn.edu.ar.dominio.Venta;
 import frgp.utn.edu.ar.servicio.ArticuloServicio;
@@ -43,13 +42,10 @@ public class VentasController {
 
 	@Autowired
 	private Venta venta;
-
-	@Autowired
-	private Detalle_venta detalle;
 	
 	@Autowired
-	private Estado_Venta estado;
-
+	private Stock stock;
+	
 	@Autowired
 	private ModelAndView MV;
 
@@ -65,7 +61,7 @@ public class VentasController {
 		this.serviceCliente = (ClienteServicio) ctx.getBean("ClienteServiceBean");
 		this.serviceArticulo = (ArticuloServicio) ctx.getBean("ArticuloServiceBean");
 		this.serviceStock = (StockServicio) ctx.getBean("StockServiceBean");
-
+		this.stock = (Stock) ctx.getBean("StockEstandar");
 		this.MV = (ModelAndView) ctx.getBean("ModelAndViewBean");
 		this.venta = (Venta) ctx.getBean("VentaEstandar");
 	}
@@ -96,7 +92,6 @@ public class VentasController {
 		String[] objetos = articulosLista.split("\\},\\{");
 
 		// Recorrer cada objeto individual y crear instancias de Detalle_venta
-		System.out.println("Objetos: " + objetos.toString());
 		List<Detalle_venta> detalleLista = new ArrayList<>();
 
 		for (String objeto : objetos) {
@@ -135,17 +130,10 @@ public class VentasController {
 			detalle.setImporte(cantidad * detalle.getArticulo().getPrecio_venta());
 			detalleLista.add(detalle);
 
-			System.out.println("Articulo:" + serviceArticulo.obtenerUnRegistro(nombre));
-			System.out.println("cantidadObjeto:" + cantidadObjeto);
-			System.out.println(cantidad * detalle.getArticulo().getPrecio_venta());
-
-			System.out.println(detalle);
-
 		}
 		venta.setDetalle(detalleLista);
 		venta.setEstado(serviceEstadoVenta.obtenerUnRegistro(1));
 		String Message = "";
-		System.out.println("VENTA:" + venta.toString());
 
 		try {
 			Message = asignarMensajeVenta(serviceVenta.insertarVenta(venta));
@@ -171,12 +159,10 @@ public class VentasController {
 
 		venta = serviceVenta.obtenerUnRegistro(idEliminar);
 		venta.setEstado(serviceEstadoVenta.obtenerUnRegistro(2));
-	
 		String Message = "";
 
-		System.out.println(venta);
 		try{
-			Message = asignarMensajeVenta(serviceVenta.eliminarVenta(venta));
+			Message = asignarMensajeVenta(serviceVenta.eliminarVenta(venta, stock));
 			MV.addObject("Mensaje", Message);
 			MV = cargadorDeListasVentas(MV);
 			MV.setViewName("vendedor/Ventas"); 
@@ -231,7 +217,6 @@ public class VentasController {
 	}
 
 	private ModelAndView cargadorDeListasVentas(ModelAndView MV) {
-		List<Venta> lista = this.serviceVenta.obtenerVentas();
 
 		MV.addObject("listaVentas", this.serviceVenta.obtenerVentas());
 		MV.addObject("listaClientes", this.serviceCliente.obtenerClientes());

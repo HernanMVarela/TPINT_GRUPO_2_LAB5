@@ -18,5 +18,8 @@ public interface StockDao {
 				
 		//Busca elementos de stock de X articulo
 				public List<Stock> obtenerDeArticulo(String articulo);
+
+		//Busca el primer stock activo de un artículo
+				public Stock obtenerUltimoRegistro(String articulo);
 		
 }

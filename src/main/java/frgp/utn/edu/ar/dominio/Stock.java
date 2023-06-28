@@ -79,10 +79,22 @@ public class Stock implements Serializable, Comparable<Stock> {
 	public void setPreciocompra(float preciocompra) {
 		this.preciocompra = preciocompra;
 	}
+	
+	public void sumarCantidad(int agregar) {
+		this.cantidad+=agregar;
+	}
 
 	@Override
 	public int compareTo(Stock o) {
-		return (this.fechaingreso.getTime()<o.getFechaingreso().getTime() ? -1 : (this.fechaingreso.getTime()==o.getFechaingreso().getTime() ? 0 : 1));
+		if (this.getFechaingreso().after(o.getFechaingreso())) {
+			return 1;
+		}
+		
+		if (this.getFechaingreso().before(o.getFechaingreso())) {
+			return -1;
+		}
+		
+		return 0;
 	}
 
 }

@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import frgp.utn.edu.ar.dominio.Stock;
 import frgp.utn.edu.ar.dominio.Venta;
 
 public interface VentaServicio {
@@ -12,7 +13,7 @@ public interface VentaServicio {
 
 	public String insertarVenta(Venta nuevo);
 
-	public String eliminarVenta(Venta nombre) ;
+	public String eliminarVenta(Venta nombre, Stock stock) ;
 
 	public String actualizarVenta(Venta modificar);
 	
