@@ -21,5 +21,8 @@ public interface StockDao {
 
 		//Busca el primer stock activo de un artículo
 				public Stock obtenerUltimoRegistro(String articulo);
+
+	    //Devuelve lista sin repetición de articulos
+				public List<Stock> obtenerRegistrosUnicos();
 		
 }

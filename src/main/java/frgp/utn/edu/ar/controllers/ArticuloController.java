@@ -45,6 +45,8 @@ public class ArticuloController {
 	@RequestMapping("vendedor.html")
 	public ModelAndView eventoRedireccionarHomeVendedor()
 	{		
+		String Message = "";
+		MV.addObject("Mensaje", Message);
 		MV.setViewName("vendedor/HomeVendedor");
 		return MV;
 	}
@@ -53,6 +55,8 @@ public class ArticuloController {
 	@RequestMapping("articulos.html")
 	public ModelAndView eventoRedireccionarArticulos()
 	{
+		String Message = "";
+		MV.addObject("Mensaje", Message);
 		MV = cargadorDeListasArticulos(MV);
 		MV.setViewName("vendedor/Articulos");
 		return MV;

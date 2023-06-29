@@ -2,10 +2,13 @@ package frgp.utn.edu.ar.servicioImpl;
 
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Service;
+
 import frgp.utn.edu.ar.dao.EstadoUsuarioDao;
 import frgp.utn.edu.ar.dominio.Estado_User;
 import frgp.utn.edu.ar.servicio.EstadoUsuarioServicio;
 
+@Service
 public class EstadoUsuarioServicioImpl implements EstadoUsuarioServicio {
 
 	private EstadoUsuarioDao dataAccess = null;

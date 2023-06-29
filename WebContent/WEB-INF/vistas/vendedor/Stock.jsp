@@ -71,11 +71,11 @@
               </div>
             </form>
             <div class="row align-items-md-stretch">
-             <div class="d-flex justify-content-center" style="text-align: center;">
-                	<h3 class="w-auto">${Mensaje}</h3>	
-             </div>
-             </div>
-             <% }}%>
+	            <div class="d-flex justify-content-center" style="text-align: center;">
+	                <h3 class="w-auto">${Mensaje}</h3>	
+	            </div>
+            </div>
+            <% }}%>
           </div>
 
 <!-- Modal AGREGAR Stock -->

@@ -1,8 +1,6 @@
 package frgp.utn.edu.ar.controllers;
 
 import java.sql.Date;
-import java.util.List;
-
 import javax.servlet.ServletConfig;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.ModelAndView;
 
-import frgp.utn.edu.ar.dominio.Venta;
 import frgp.utn.edu.ar.servicio.VentaServicio;
 
 @Controller

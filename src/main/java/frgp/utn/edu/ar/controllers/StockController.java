@@ -21,7 +21,8 @@ public class StockController {
 	private  ArticuloServicio serviceArticulo;
 	@Autowired
 	private  StockServicio serviceStock;
-	
+	@Autowired
+	private ApplicationContext ctx;
 	@Autowired
 	private ModelAndView MV;
 	@Autowired
@@ -29,8 +30,7 @@ public class StockController {
 	
 	// NO TOCAR - Servlets
 	public void init(ServletConfig config) {
-		ApplicationContext ctx = WebApplicationContextUtils
-				.getRequiredWebApplicationContext(config.getServletContext());
+		ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(config.getServletContext());
 		
 		this.serviceArticulo = (ArticuloServicio) ctx.getBean("ArticuloServiceBean");
 		this.serviceStock = (StockServicio) ctx.getBean("StockServiceBean");
@@ -44,6 +44,8 @@ public class StockController {
 	@RequestMapping("stock.html")
 	public ModelAndView eventoRedireccionarStock()
 	{
+		String Message = "";
+		MV.addObject("Mensaje", Message);
 		MV = cargadorDeListasStocks(MV);
 		MV.setViewName("vendedor/Stock");
 		return MV;
@@ -53,15 +55,15 @@ public class StockController {
 		@RequestMapping(value ="/ingreso_stock.html" , method= { RequestMethod.GET, RequestMethod.POST})
 		public ModelAndView validarStock(String art, Date date, String cantidad, String precio_compra){
 			
-			Stock x = new Stock();
-			x.setArticulo(serviceArticulo.obtenerUnRegistro(art));
-			x.setCantidad(Integer.parseInt(cantidad));
-			x.setPreciocompra(Float.parseFloat(precio_compra));
-			x.setFechaingreso(date);
+			stock = (Stock) ctx.getBean("StockEstandar");
+			stock.setArticulo(serviceArticulo.obtenerUnRegistro(art));
+			stock.setCantidad(Integer.parseInt(cantidad));
+			stock.setPreciocompra(Float.parseFloat(precio_compra));
+			stock.setFechaingreso(date);
 			
 			String Message = "";
 			try{
-				Message = asignarMensajeStocks(serviceStock.ingresarStock(x));
+				Message = asignarMensajeStocks(serviceStock.ingresarStock(stock));
 				MV.addObject("Mensaje", Message);
 				MV = cargadorDeListasStocks(MV);
 				MV.setViewName("vendedor/Stock"); 

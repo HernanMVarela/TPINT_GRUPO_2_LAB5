@@ -69,5 +69,13 @@ public class Detalle_venta implements Serializable{
 	public void setImporte(float importe) {
 		this.importe = importe;
 	}
+	public void sumarImporte(float agregar) {
+		this.importe += agregar;
+	}
+	
+	
+	public void sumarCantidad(int agregar) {
+		this.cantidad += agregar;
+	}
 	
 }

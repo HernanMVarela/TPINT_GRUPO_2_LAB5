@@ -3,7 +3,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<%@ include file="../common/Header.jspf" %>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function () {
@@ -35,7 +34,7 @@ console.log(id)
   }
 
 </script>
-
+<%@ include file="../common/Header.jspf" %>
 </head>    
 <body>
 <%@ include file="../common/NavigatorVendedor.jspf" %>
@@ -45,17 +44,24 @@ console.log(id)
  			<% user =  (Usuario)request.getAttribute("userLogin"); %>
  			
  			<% if(user == null) {%> 
-	        <div class="col-md-9" >
+	        <div class="col-md-12" >
 				<%@ include file="../common/ErrorLogin.jspf" %>
 	       </div> 
 	       <%} else { 
 	    	   if (user.getTipo().getNombre().equals("CONTADOR")){ %>
+	    	    <div class="col-md-12" >
 	    		   <%@ include file="../common/ErrorPermisos.jspf" %>
+	    		</div>
 	    	    <%} else {%>
 	    	    	
 	<div class="p-5 bg-light text-dark border rounded-3" style="width: 100%">
+		<div class="row align-items-md-stretch">
+         <div class="d-flex justify-content-center" style="text-align: center;">
+             <h3 class="w-auto">${Mensaje}</h3>	
+         </div>
+        </div>	
 		<form action="clientes.html" method="post">
-			<div class="d-flex  align-content-center bd-highlight mb-3">
+			<div class="d-flex align-content-center bd-highlight mb-3">
 				<div class="me-auto p-2 bd-highlight align-self-center">
 					<h1 >CLIENTES</h1>
 				</div>
@@ -73,7 +79,6 @@ console.log(id)
                         <tr>
                           <th class="text-center" scope="col"> DNI </th>
                           <th class="text-center" scope="col"> Nombre </th>
-                          <th class="text-center" scope="col"> Apellido </th>
                           <th class="text-center" scope="col"> Direccion </th>
                           <th class="text-center" scope="col"> Sexo </th>
                           <th class="text-center" scope="col"> Localidad </th>
@@ -89,8 +94,7 @@ console.log(id)
                           <c:if test="${item.estado.ID == 1}">                        
                           <tr>
                             <td>${item.DNI} </td>
-                            <td>${item.nombre}</td>
-                            <td>${item.apellido}</td>
+                            <td>${item.nombre} ${item.apellido}</td>
                             <td>${item.direccion}</td>
                             <td>${item.sexo}</td>
                             <td>${item.localidad.getNombre()}</td>
@@ -130,7 +134,7 @@ console.log(id)
                     </table>
 			  	</div> 
 		  	</div>		
-		</form>		
+		</form>	
 	</div>		
     <% }} %>	
 </div>
@@ -210,11 +214,11 @@ console.log(id)
       </div>
      	   <div class="form-group col-md-4">
                <label style="float: left">Apellido</label>
-               <input  id="apellidoModif" name="apellidoModif"  class="form-control" placeholder="Ingrese apellido" readonly required>
+               <input  id="apellidoModif" name="apellidoModif"  class="form-control" placeholder="Ingrese apellido" readonly required pattern="[A-Za-z]{20}"/>
            </div>
            <div class="form-group col-md-4">
                <label style="float: left">Nombres</label>
-               <input id="nombreModif" name="nombreModif" class="form-control" placeholder="Ingrese nombre" readonly required>
+               <input id="nombreModif" name="nombreModif" class="form-control" placeholder="Ingrese nombre" readonly required pattern="[A-Za-z]{20}"/>
            </div>
            <div class="form-group col-md-4">
                <label style="float: left">Sexo</label>
@@ -229,7 +233,7 @@ console.log(id)
        <div class="row align-items-md-stretch mt-1">
            <div class="form-group col-md-9">
                <label  style="float: left">DNI</label>     
-               <input id="DNIModif" name="DNIModif" class="form-control" type="number" placeholder="Ingrese DNI" readonly required min="1" max="99999999" >
+               <input id="DNIModif" name="DNIModif" class="form-control" type="number" placeholder="Ingrese DNI" readonly required min="10000000" max="99999999" >
            </div>
            <div class="form-group col-md-3">
                <label style="float: left">Fecha de Nacimiento</label>

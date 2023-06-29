@@ -24,11 +24,11 @@
 	<bean id="ModelAndViewBean" class="org.springframework.web.servlet.ModelAndView">
 	</bean>
 	
-	<bean id="StockEstandar" class="frgp.utn.edu.ar.dominio.Stock">
+	<bean id="StockEstandar" scope="prototype" class="frgp.utn.edu.ar.dominio.Stock">
 		<property name="articulo" ref="ArticuloEstandar"></property>
 	</bean>
 
-	<bean id="ArticuloEstandar" class="frgp.utn.edu.ar.dominio.Articulo">
+	<bean id="ArticuloEstandar" scope="prototype" class="frgp.utn.edu.ar.dominio.Articulo">
 		<property name="marca" ref="MarcaEstandar"></property>
 		<property name="tipo" ref="TipoArticuloEstandar"></property>
 	</bean>
@@ -59,7 +59,7 @@
 	
 	<bean id="DetalleVentaList" scope="prototype" class="java.util.ArrayList"/>
 	
-	<bean id="DetalleEstandar" class="frgp.utn.edu.ar.dominio.Detalle_venta">
+	<bean id="DetalleEstandar" scope="prototype" class="frgp.utn.edu.ar.dominio.Detalle_venta">
 		<property name="articulo" ref="ArticuloEstandar"></property>
 	</bean>
 	

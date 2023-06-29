@@ -90,7 +90,7 @@
                     <table id="tabla_contador" class="table table-hover text-center">
 			  		<thead>
 						<tr>
-							<th class="text-center" scope="col"> Nï¿½ de Venta </th>
+							<th class="text-center" scope="col"> N° de Venta </th>
 							<th class="text-center" scope="col"> Fecha </th>
 							<th class="text-center" scope="col"> Cliente </th> 
 							<th class="text-center" scope="col"> Monto </th> 

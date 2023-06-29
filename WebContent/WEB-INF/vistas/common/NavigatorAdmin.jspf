@@ -2,12 +2,13 @@
   <div class="d-flex flex-wrap align-items-left justify-content-left justify-content-md-between py-3 mb-4 border-bottom">
 
    	<ul class="nav col-md-5 mb-2 justify-content-left mb-md-0">
+   		<li><a href="home.html" class="nav-link px-2 link-secondary">Home</a></li>
      	<li><a href="admin.html" class="nav-link px-2 link-secondary">ADMINISTRADOR</a></li>
      	<li><a href="alta-usuario.html" class="nav-link px-2 link-dark">Alta de Usuarios</a></li>
      	<li><a href="reportes.html" class="nav-link px-2 link-dark">Reportes</a></li>
      	<li><a href="contador.html" class="nav-link px-2 link-dark">CONTADOR</a></li>
      	<li><a href="vendedor.html" class="nav-link px-2 link-dark">VENDEDOR</a></li>
-     	<li><a href="home.html" class="nav-link px-2 link-dark">Home</a></li>
+     	
      	
    	</ul> 
    	<form action="Logout.html" method="post">

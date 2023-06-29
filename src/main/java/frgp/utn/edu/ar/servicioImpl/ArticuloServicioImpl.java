@@ -3,10 +3,13 @@ package frgp.utn.edu.ar.servicioImpl;
 import java.util.ArrayList;
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
 import frgp.utn.edu.ar.dao.ArticuloDao;
 import frgp.utn.edu.ar.dominio.Articulo;
 import frgp.utn.edu.ar.servicio.ArticuloServicio;
 
+@Service
 public class ArticuloServicioImpl implements ArticuloServicio{
 
 	private ArticuloDao dataAccess = null;

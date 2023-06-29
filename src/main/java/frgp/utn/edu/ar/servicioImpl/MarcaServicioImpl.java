@@ -2,10 +2,13 @@ package frgp.utn.edu.ar.servicioImpl;
 
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Service;
+
 import frgp.utn.edu.ar.dao.MarcaDao;
 import frgp.utn.edu.ar.dominio.Marca;
 import frgp.utn.edu.ar.servicio.MarcaServicio;
 
+@Service
 public class MarcaServicioImpl implements MarcaServicio {
 	
 	private MarcaDao dataAccess = null;

@@ -10,12 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import frgp.utn.edu.ar.dao.StockDao;
 import frgp.utn.edu.ar.dominio.Stock;
-import frgp.utn.edu.ar.dominio.Usuario;
 
 public class StockDaoImpl implements StockDao {
 
-	private HibernateTemplate hibernateTemplate = null;
-
+	private HibernateTemplate hibernateTemplate = null;	
+	
 	public void setSessionFactory(SessionFactory sessionFactory) {
         this.hibernateTemplate = new HibernateTemplate(sessionFactory);
     }
@@ -73,6 +72,31 @@ public class StockDaoImpl implements StockDao {
 	        return resultados.get(0);
 	    }
 	    return null; // Si no se encontró ningún stock con cantidad > 0 de ese artículo
+	}
+	
+	@Override
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
+	public List<Stock> obtenerRegistrosUnicos() {
+		String query = "SELECT DISTINCT s FROM Stock s JOIN FETCH s.articulo";
+	    @SuppressWarnings("unchecked")
+		List<Stock> resultados = (ArrayList<Stock>) this.hibernateTemplate.find(query);
+	    List<Stock> resultadosUnicos = new ArrayList<Stock>();
+	    
+	    for (Stock stock : resultados) {
+	        boolean flag = false;
+	        for (Stock stock2 : resultadosUnicos) {
+	            if(stock.getArticulo().getNombre().equals(stock2.getArticulo().getNombre())) {
+	                stock2.sumarCantidad(stock.getCantidad());
+	                flag = true;
+	                break;
+	            }
+	        }
+	        if (!flag) {
+	        	resultadosUnicos.add(stock);
+	        }
+	    
+	    }
+	    return resultadosUnicos;
 	}
 
 }

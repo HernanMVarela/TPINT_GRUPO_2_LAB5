@@ -52,6 +52,8 @@ public class ClientesController {
 	@RequestMapping("clientes.html")
 	public ModelAndView eventoRedireccionarClientes()
 	{
+		String Message = "";
+		MV.addObject("Mensaje", Message);
 		MV = cargadorDeListasClientes(MV);
 		MV.setViewName("vendedor/Clientes");
 		return MV;
@@ -184,7 +186,7 @@ public class ClientesController {
 			return "Cliente no eliminado";
 		}
 		if (error.equals("MODIFICADO")) {
-			return "Cliente no modificado";
+			return "Cliente modificado";
 		}
 		if (error.equals("NO MODIFICADO")) {
 			return "Cliente no modificado";

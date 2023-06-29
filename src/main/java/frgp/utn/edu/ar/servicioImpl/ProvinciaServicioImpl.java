@@ -2,10 +2,13 @@ package frgp.utn.edu.ar.servicioImpl;
 
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Service;
+
 import frgp.utn.edu.ar.dao.ProvinciaDao;
 import frgp.utn.edu.ar.dominio.Provincia;
 import frgp.utn.edu.ar.servicio.ProvinciaServicio;
 
+@Service
 public class ProvinciaServicioImpl implements ProvinciaServicio {
 
 	private ProvinciaDao dataAccess = null;

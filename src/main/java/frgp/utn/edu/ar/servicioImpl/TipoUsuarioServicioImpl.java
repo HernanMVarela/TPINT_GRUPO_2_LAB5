@@ -2,10 +2,13 @@ package frgp.utn.edu.ar.servicioImpl;
 
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Service;
+
 import frgp.utn.edu.ar.dao.TipoUsuarioDao;
 import frgp.utn.edu.ar.dominio.Tipo_Usuario;
 import frgp.utn.edu.ar.servicio.TipoUsuarioServicio;
 
+@Service
 public class TipoUsuarioServicioImpl implements TipoUsuarioServicio {
 
 	private TipoUsuarioDao dataAccess = null;

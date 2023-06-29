@@ -1,7 +1,6 @@
 package frgp.utn.edu.ar.controllers;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletConfig;
@@ -45,6 +44,9 @@ public class VentasController {
 	
 	@Autowired
 	private Stock stock;
+	
+	@Autowired
+	private Detalle_venta detalle_venta;
 	
 	@Autowired
 	private ModelAndView MV;
@@ -92,7 +94,9 @@ public class VentasController {
 		String[] objetos = articulosLista.split("\\},\\{");
 
 		// Recorrer cada objeto individual y crear instancias de Detalle_venta
-		List<Detalle_venta> detalleLista = new ArrayList<>();
+		@SuppressWarnings("unchecked")
+		List<Detalle_venta> detalleLista = (List<Detalle_venta>)ctx.getBean("DetalleVentaList");
+		detalleLista.removeAll(detalleLista);
 
 		for (String objeto : objetos) {
 
@@ -125,11 +129,22 @@ public class VentasController {
 			}
 
 			// Crear una instancia de Detalle_venta y agregarla a la lista
-			Detalle_venta detalle = new Detalle_venta(serviceArticulo.obtenerUnRegistro(nombre), cantidadObjeto);
-			detalle.setCantidad(cantidadObjeto);
-			detalle.setImporte(cantidad * detalle.getArticulo().getPrecio_venta());
-			detalleLista.add(detalle);
-
+			this.detalle_venta = (Detalle_venta) ctx.getBean("DetalleEstandar");
+			
+			for (Detalle_venta detalle : detalleLista) {
+				if(detalle.getArticulo().getNombre().equals(nombre)){
+					detalle.sumarCantidad(cantidadObjeto);
+					detalle.sumarImporte(detalle.getArticulo().getPrecio_venta()*cantidadObjeto);
+					detalle_venta = null;
+				}
+			}
+			if(detalle_venta != null) {
+				detalle_venta.setArticulo(serviceArticulo.obtenerUnRegistro(nombre));
+				detalle_venta.setCantidad(cantidadObjeto);
+				detalle_venta.setImporte(cantidad * detalle_venta.getArticulo().getPrecio_venta());
+				detalleLista.add(detalle_venta);
+			}
+			
 		}
 		venta.setDetalle(detalleLista);
 		venta.setEstado(serviceEstadoVenta.obtenerUnRegistro(1));
@@ -204,11 +219,8 @@ public class VentasController {
 		if (error.equals("NO ELIMINADO")) {
 			return "Venta no eliminado";
 		}
-		if (error.equals("MODIFICADO")) {
-			return "Venta no modificado";
-		}
-		if (error.equals("NO MODIFICADO")) {
-			return "Venta no modificado";
+		if (error.equals("VENTA CANCELADA")) {
+			return "No existe stock disponible";
 		}
 		if (error.equals("ERROR")) {
 			return "ERROR";
@@ -221,7 +233,7 @@ public class VentasController {
 		MV.addObject("listaVentas", this.serviceVenta.obtenerVentas());
 		MV.addObject("listaClientes", this.serviceCliente.obtenerClientes());
 		MV.addObject("listaArticulos", this.serviceArticulo.obtenerArticulos());
-		MV.addObject("listaStock", this.serviceStock.obtenerStock());
+		MV.addObject("listaStock", this.serviceStock.obtenerRegistrosUnicos());
 		return MV;
 	}
 

@@ -2,6 +2,7 @@ package frgp.utn.edu.ar.dominio;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -84,6 +85,23 @@ public class Stock implements Serializable, Comparable<Stock> {
 		this.cantidad+=agregar;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+	    if (this == obj) {
+	        return true;
+	    }
+	    if (obj == null || getClass() != obj.getClass()) {
+	        return false;
+	    }
+	    Stock other = (Stock) obj;
+	    return Objects.equals(this.articulo, other.articulo);
+	}
+
+	@Override
+	public int hashCode() {
+	    return Objects.hash(this.articulo);
+	}
+	
 	@Override
 	public int compareTo(Stock o) {
 		if (this.getFechaingreso().after(o.getFechaingreso())) {
