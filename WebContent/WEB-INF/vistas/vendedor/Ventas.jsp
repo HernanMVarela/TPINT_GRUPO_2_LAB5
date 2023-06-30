@@ -61,7 +61,11 @@
 	    		   <%@ include file="../common/ErrorPermisos.jspf" %>
 	    		</div>
 	    	    <%} else {%>
-	    	    	
+	    	<div class="row align-items-md-stretch">
+	            <div class="d-flex justify-content-center" style="text-align: center;">
+	                <h3 class="w-auto">${Mensaje}</h3>	
+	            </div>
+            </div>   	
             <form action="ventas.html" method="post">
               <div class="p-5 bg-light border rounded-3" style="width: 100%">
                 <div class="d-flex  align-content-center bd-highlight mb-3">
@@ -127,11 +131,7 @@
                 </div>
               </div>
             </form>
-            <div class="row align-items-md-stretch">
-	            <div class="d-flex justify-content-center" style="text-align: center;">
-	                <h3 class="w-auto">${Mensaje}</h3>	
-	            </div>
-            </div>
+            
             <% }}%> 
           </div>
       </body>

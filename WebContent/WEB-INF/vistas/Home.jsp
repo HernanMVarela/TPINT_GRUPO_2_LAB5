@@ -46,6 +46,7 @@ function contador() {
 					<div class="p-2 mb-2 bg-light border rounded-3" style="width: 100%">
 						<div class="container-fluid py-1">
 							<div class="row align-items-md-stretch">
+								<% if (user == null){%>
 								<div class="col-md-4" style="text-align: center;">
 									<img class="img-responsive p-3" style="width: 80%;" src="<c:url value="/assets/logo.png"/>"/>
 									<h1>¡Hola!</h1>
@@ -54,17 +55,26 @@ function contador() {
 									</p>
 									<input type="submit" class="btn btn-success mr-1" value="REGISTRARSE" name="btnRedirigir" formaction="registro-usuario.html">
 								</div>
-
+								<% } else {%>
+								<div class="col-md-4 ">
+						       		<%@ include file="common/UserData.jspf" %>        
+						        </div>
+								<% } %>
 								<div class="col-md-8" style="text-align: center;">
 									<div class="d-flex col col-12 mh-2 justify-content-center p-2">
 										<div class="row w-auto justify-content-center">
-											<img class="img-responsive p-3" style="width: 30%;" src="<c:url value="/assets/login.png"/>"/>
+											<img class="img-responsive p-3" style="width: 30%;" src="<c:url value="/assets/LoginHome.png"/>"/>
 
-											<input class="form-control mt-2" id="usernameLogin" name="usernameLogin" value="" placeholder="Ingrese usuario" >									
-
-											<input class="form-control mt-2" id="passLogin" name="passLogin" type="password" value="" placeholder="Ingrese contraseña">
-									
-											<input type="submit" class="btn btn-primary mt-2" value="INGRESAR" name="btnRedirigir">
+											<% if (user == null){%>
+												<input class="form-control mt-2" id="usernameLogin" name="usernameLogin" value="" placeholder="Ingrese usuario" >									
+												<input class="form-control mt-2" id="passLogin" name="passLogin" type="password" value="" placeholder="Ingrese contraseña">
+												<input type="submit" class="btn btn-primary mt-2" value="INGRESAR" name="btnRedirigir">
+											<% } else {%>
+												<input class="form-control mt-2" id="usernameLogin" name="usernameLogin" disabled>									
+												<input class="form-control mt-2" id="passLogin" name="passLogin" type="password" disabled>
+												<input type="submit" class="btn btn-danger mt-2" value="CERRAR SESION" name="btnCerrarSession" formaction="Logout.html">	
+											<% } %>
+											
 										</div>
 
 									</div>
