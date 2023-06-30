@@ -26,9 +26,6 @@
 		  calcularButton.disabled = false;
 		}
 
-		console.log(calcularButton)
-	  console.log(fechaFinInput)
-	  console.log(fechaInicioInput)
 	  }
   </script>
 
@@ -90,10 +87,12 @@
                     <table id="tabla_contador" class="table table-hover text-center">
 			  		<thead>
 						<tr>
-							<th class="text-center" scope="col"> N° de Venta </th>
+							<th class="text-center" scope="col"> Nï¿½ de Venta </th>
 							<th class="text-center" scope="col"> Fecha </th>
 							<th class="text-center" scope="col"> Cliente </th> 
 							<th class="text-center" scope="col"> Monto </th> 
+							<th class="text-center" scope="col">  </th> 
+							<th class="text-center" scope="col">  </th> 
 						</tr>
 					</thead>
 					<tbody>
@@ -105,10 +104,41 @@
                             <td>${item.fecha} </td>
                             <td  id="cliente_${item.num_venta}" >${item.cliente.nombre} ${item.cliente.apellido}</td>
                             <td id="total_monto_${item.num_venta}" >$ ${item.totalMonto()}</td>
+							<td style="display: none;" id="td_venta_${item.num_venta}">${item.generarDetalleString()}</td>
+							<td id="total_monto_${item.num_venta}" >
+
+								<button  value="${item}" type="button" class="btn btn-success" data-bs-toggle="modal" 
+						        data-bs-target="#detailSaleModal" onclick="abrirDetalleModal(${item.num_venta},${item.ganancia})">
+						        DETALLE
+						   		 </button>
+							</td>
                           </tr>
                         </c:forEach>
 					   </tbody>
                     </table>
+					<script>
+						          function abrirDetalleModal(numVenta,ganancia) {
+									            
+										var contenidoVenta = document.getElementById("td_venta_"+numVenta);
+										var detalleVenta = document.getElementById("detalleVenta");
+										detalleVenta.innerHTML = agregarSaltosDeLinea( contenidoVenta.innerHTML);								
+
+										var totalMonto = document.getElementById("total_monto_"+numVenta);
+										var totalVenta = document.getElementById("totalVenta");
+										totalVenta.innerHTML = totalMonto.innerHTML;
+
+										var clienteTD = document.getElementById("cliente_"+numVenta);
+										var clienteModal = document.getElementById("nombreCliente");
+										var gananciaDetalle = document.getElementById("gananciaDetalle");
+										clienteModal.innerHTML = clienteTD.innerHTML;    
+										gananciaDetalle.innerHTML = ganancia;   	   
+										}
+
+										function agregarSaltosDeLinea(texto) {
+										var nuevoTexto = texto.replace(/PRODUCTO:/g, '<br/><br/> PRODUCTO:');
+										return nuevoTexto;
+										}
+					</script>
                     
                   </div>
                 </div>
@@ -118,6 +148,31 @@
    </div>
     <% }}%>
  </div>
+
+        <!-- Modal DETALLE VENTA -->
+<div class="modal fade" id="detailSaleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">DETALLE VENTA</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+           <div class="modal-body">
+			   
+			    <div id="detalleVenta"></div>
+			    <hr>
+			    <label>TOTAL: <span id="totalVenta"></span></label>
+			    <br>
+			    <label>Cliente: <span id="nombreCliente"></span></label>
+				<br>
+				<h3>Ganancia : $<span id="gananciaDetalle"></span></h3>
+			</div>
+
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
             
 </body>
 </html>

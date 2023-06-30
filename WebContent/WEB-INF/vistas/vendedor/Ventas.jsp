@@ -80,7 +80,7 @@
                     <table id="tabla_ventas" class="table table-hover text-center">
 			  		<thead>
 						<tr>
-							<th class="text-center" scope="col"> N° de Venta </th>
+							<th class="text-center" scope="col"> Nï¿½ de Venta </th>
 							<th class="text-center" scope="col"> Fecha </th>
 							<th class="text-center" scope="col"> Cliente </th> 
 							<th class="text-center" scope="col"> Monto </th> 
@@ -146,7 +146,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
            <div class="modal-body">
-			    <h5 class="modal-title" id="exampleModalLabel">DETALLE VENTA</h5>
+			    
 			    <div id="detalleVenta"></div>
 			    <hr>
 			    <label>TOTAL: <span id="totalVenta"></span></label>
