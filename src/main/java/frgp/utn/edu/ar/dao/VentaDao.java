@@ -1,5 +1,6 @@
 package frgp.utn.edu.ar.dao;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import frgp.utn.edu.ar.dominio.Venta;
@@ -18,6 +19,9 @@ public interface VentaDao {
 
 	//Obtiene todos los Venta
 	public ArrayList<Venta> obtenerVentas();
+	
+	//Obtiene todas las Ventas de ciertas fechas
+	public ArrayList<Venta> obtenerVentasEntreFechas(Date fechaInicio, Date fechaFin);
 
 	//Elimina un Venta a aprtir del nombre
 	public void eliminarVenta(String nombre);

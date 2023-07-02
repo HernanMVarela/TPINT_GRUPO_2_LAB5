@@ -1,9 +1,12 @@
 package frgp.utn.edu.ar.daoImpl;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -82,5 +85,12 @@ public class VentaDaoImpl implements VentaDao {
 		return this.hibernateTemplate.get(Venta.class, ID);
 	}
 
-
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	public ArrayList<Venta> obtenerVentasEntreFechas(Date fechaInicio, Date fechaFin) {
+	    Criteria criteria = this.hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(Venta.class);
+	    criteria.add(Restrictions.between("fecha", fechaInicio, fechaFin));
+	    return (ArrayList<Venta>) criteria.list();
+	}
 }

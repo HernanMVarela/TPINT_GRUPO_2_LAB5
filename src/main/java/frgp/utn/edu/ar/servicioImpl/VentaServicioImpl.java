@@ -162,15 +162,11 @@ public class VentaServicioImpl implements VentaServicio{
 	
 	@Override
 	public float gananciaEntreFechas (Date fechaInicio, Date fechaFin) {
-		ArrayList<Venta> ListaVentas = dataAccess.obtenerVentas();
+		ArrayList<Venta> ListaVentas = dataAccess.obtenerVentasEntreFechas(fechaInicio,fechaFin);
 		float gananciaTotal = 0;
-	    
 	    for (Venta venta : ListaVentas) {
-	        if (venta.getFecha().after(fechaInicio) && venta.getFecha().before(fechaFin)) {
 	            gananciaTotal += venta.getGanancia();
-	        }
 	    }
-	    
 	    return gananciaTotal;
 	}
 	
