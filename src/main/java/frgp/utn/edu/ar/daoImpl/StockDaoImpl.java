@@ -75,6 +75,19 @@ public class StockDaoImpl implements StockDao {
 	}
 	
 	@Override
+	@Transactional(propagation=Propagation.REQUIRED)
+	public Stock obtenerUltimoRegistroVacio(String articulo) {
+		String query = "FROM Stock s WHERE s.articulo.nombre = :ART AND s.cantidad = 0 ORDER BY s.fechaingreso ASC";
+	    @SuppressWarnings("unchecked")
+		List<Stock> resultados = (List<Stock>) this.hibernateTemplate.findByNamedParam(query, "ART", articulo);
+
+	    if (resultados != null && !resultados.isEmpty()) {
+	        return resultados.get(0);
+	    }
+	    return null; // Si no se encontró ningún stock con cantidad > 0 de ese artículo
+	}
+	
+	@Override
 	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
 	public List<Stock> obtenerRegistrosUnicos() {
 		String query = "SELECT DISTINCT s FROM Stock s JOIN FETCH s.articulo";

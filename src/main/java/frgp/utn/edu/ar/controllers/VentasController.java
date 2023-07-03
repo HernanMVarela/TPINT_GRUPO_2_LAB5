@@ -196,10 +196,10 @@ public class VentasController {
 
 	private String asignarMensajeVenta(String error) {
 		if (error.equals("AGREGADO")) {
-			return "Venta Agregado";
+			return "Venta agregada";
 		}
 		if (error.equals("NO AGREGADO")) {
-			return "Venta no agregado";
+			return "Venta no agregada";
 		}
 		if (error.equals("ERROR")) {
 			return "ERROR";
@@ -208,16 +208,16 @@ public class VentasController {
 			return "Venta ya exise";
 		}
 		if (error.equals("REACTIVADO")) {
-			return "Venta Reactivado";
+			return "Venta Reactivada";
 		}
 		if (error.equals("ELIMINACION PREVIA")) {
-			return "El venta ya estaba eliminado";
+			return "La venta ya estaba eliminada";
 		}
 		if (error.equals("ELIMINADO")) {
-			return "Venta eliminado";
+			return "Venta eliminada";
 		}
 		if (error.equals("NO ELIMINADO")) {
-			return "Venta no eliminado";
+			return "Venta no eliminada";
 		}
 		if (error.equals("VENTA CANCELADA")) {
 			return "No existe stock disponible";

@@ -53,7 +53,9 @@ console.log(id)
 	    		   <%@ include file="../common/ErrorPermisos.jspf" %>
 	    		</div>
 	    	    <%} else {%>
-	    	    	
+	<div class="d-flex justify-content-start" style="text-align: center;">
+       	<h3 class="w-auto"><% if (user != null){%> Usuario activo: <%= user.getNombreU() %> <% }else{%> NO HAY USUARIO LOGUEADO <%}  %></h3>	
+    </div>  
 	<div class="p-5 bg-light text-dark border rounded-3" style="width: 100%">
 		<div class="row align-items-md-stretch">
          <div class="d-flex justify-content-center" style="text-align: center;">

@@ -199,14 +199,21 @@ public class VentaServicioImpl implements VentaServicio{
 					flag = false;
 				} 
 			} else {
-				/// SI NO EXISTE EL STOCK, CREA UNO NUEVO CON UN PRECIO DE COMPRA DEL 70% DEL VALOR DE VENTA
-				aux.setArticulo(detalle.getArticulo());
-				aux.setCantidad(detalle.getCantidad());
-				aux.setFechaingreso(venta.getFecha());
-				aux.setPreciocompra((float) ((detalle.getImporte()/detalle.getCantidad())*0.7));
+				/// SE CARGA EL REGISTRO DE STOCK MÁS RECIENTE CON CANTIDAD = 0
+				stock = dataAccess2.obtenerUltimoRegistroVacio(detalle.getArticulo().getNombre());
+				if(stock != null) {
+					stock.setCantidad(detalle.getCantidad());
+					aux = stock;
+				} else {
+					/// SI NO EXISTE EL STOCK, CREA UNO NUEVO CON UN PRECIO DE COMPRA DEL 70% DEL VALOR DE VENTA
+					aux.setArticulo(detalle.getArticulo());
+					aux.setCantidad(detalle.getCantidad());
+					aux.setFechaingreso(venta.getFecha());
+					aux.setPreciocompra((float) ((detalle.getImporte()/detalle.getCantidad())*0.7)); 
+				}
 				if(!dataAccess2.insertarStock(aux)) {
 					flag = false;
-				} 
+				}
 			}
 		}
 		return flag;

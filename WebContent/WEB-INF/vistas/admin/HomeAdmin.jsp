@@ -45,6 +45,11 @@
         <div class="col-md-9 text-center">
             <div class="h-100 p-5 bg-light border rounded-3">
 				<h1>PLANTILLA DE EMPLEADOS</h1>
+				<div class="row align-items-md-stretch">
+		            <div class="d-flex justify-content-center" style="text-align: center;">
+		                <h3 class="w-auto">${Mensaje}</h3>	
+		            </div>
+	           </div>
           		<hr>
               	<table id="tabla_empleados" class="table table-hover text-center">
                   <thead>

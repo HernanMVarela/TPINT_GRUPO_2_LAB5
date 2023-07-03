@@ -63,7 +63,7 @@ function contador() {
 								<div class="col-md-8" style="text-align: center;">
 									<div class="d-flex col col-12 mh-2 justify-content-center p-2">
 										<div class="row w-auto justify-content-center">
-											<img class="img-responsive p-3" style="width: 30%;" src="<c:url value="/assets/LoginHome.png"/>"/>
+											<img class="img-responsive p-2" style="width: 90%;" src="<c:url value="/assets/banner.jpg"/>"/>
 
 											<% if (user == null){%>
 												<input class="form-control mt-2" id="usernameLogin" name="usernameLogin" value="" placeholder="Ingrese usuario" >									

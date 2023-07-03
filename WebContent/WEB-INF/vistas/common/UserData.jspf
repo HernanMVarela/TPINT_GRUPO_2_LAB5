@@ -1,6 +1,6 @@
 <%@page import="frgp.utn.edu.ar.dominio.Usuario"%>
 <div class="h-100 p-5 bg-light border rounded-3">
-    <img class="img-thumbnail img-fluid" style="width: 50%;" src="<c:url value="/assets/login.png"/>"/>
+    <img class="img-thumbnail img-fluid" style="width: 100%;" src="<c:url value="/assets/login.png"/>"/>
     <hr>
     <label>APELLIDO:<%if (request.getAttribute("userLogin") != null){%> <%=((Usuario)request.getAttribute("userLogin")).getApellido() %> <%}%> </label>
     <br>

@@ -28,8 +28,16 @@
 	    		   <%@ include file="../common/ErrorPermisos.jspf" %>
 	    		</div>
 	    	    <%} else {%>
+	    	<div class="d-flex justify-content-start" style="text-align: center;">
+               	<h3 class="w-auto"><% if (user != null){%> Usuario activo: <%= user.getNombreU() %> <% }else{%> NO HAY USUARIO LOGUEADO <%}  %></h3>	
+            </div>  
             <form action="stock.html" method="post">
               <div class="p-5 bg-light border rounded-3" style="width: 100%">
+              <div class="row align-items-md-stretch">
+	            <div class="d-flex justify-content-center" style="text-align: center;">
+	                <h3 class="w-auto">${Mensaje}</h3>	
+	            </div>
+	           </div>
                 <div class="d-flex  align-content-center bd-highlight mb-3">
                   <div class="me-auto p-2 bd-highlight align-self-center">
                     <h1>STOCK</h1>
@@ -70,11 +78,6 @@
                 </div>
               </div>
             </form>
-            <div class="row align-items-md-stretch">
-	            <div class="d-flex justify-content-center" style="text-align: center;">
-	                <h3 class="w-auto">${Mensaje}</h3>	
-	            </div>
-            </div>
             <% }}%>
           </div>
 
