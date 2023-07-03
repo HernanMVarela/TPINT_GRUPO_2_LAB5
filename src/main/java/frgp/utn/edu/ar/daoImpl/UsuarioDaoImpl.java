@@ -58,9 +58,9 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	
 	@Override
 	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
-	public boolean existeUsuario(String DNI) {
+	public boolean existeUsuario(String user) {
 	    @SuppressWarnings("unchecked")
-		List<Usuario> resultados = (List<Usuario>) this.hibernateTemplate.find("FROM Usuario u where u.DNI LIKE ?", DNI);
+		List<Usuario> resultados = (List<Usuario>) this.hibernateTemplate.find("FROM Usuario u where u.nombreU LIKE ?", user);
 	    return !resultados.isEmpty();
 	}
 

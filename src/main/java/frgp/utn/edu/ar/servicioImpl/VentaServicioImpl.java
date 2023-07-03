@@ -172,16 +172,7 @@ public class VentaServicioImpl implements VentaServicio{
 	
 	@Override
 	public List<Venta> tablaFiltradaFechas(Date fechaInicio, Date fechaFin){
-		
-		List<Venta> lista = dataAccess.obtenerVentas();
-		List<Venta> aux = new ArrayList<Venta>();
-		for (Venta venta : lista) {
-			if(venta.getFecha().getTime()>=fechaInicio.getTime() && venta.getFecha().getTime()<=fechaFin.getTime()) {
-				aux.add(venta);
-			}
-			
-		}
-		return aux;
+		return dataAccess.obtenerVentasEntreFechas(fechaInicio,fechaFin);
 	}
 	
 	private boolean recuperarVenta(Venta venta, Stock stock) {

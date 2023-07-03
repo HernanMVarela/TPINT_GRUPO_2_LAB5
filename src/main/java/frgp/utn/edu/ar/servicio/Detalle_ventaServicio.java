@@ -17,6 +17,6 @@ public interface Detalle_ventaServicio {
 
 	public String actualizarDetalle_venta(Detalle_venta modificar);
 
-	Map<String, Long> obtenerProductosPorCantidad();
+	public Map<String, Long> obtenerProductosPorCantidad();
 	
 }

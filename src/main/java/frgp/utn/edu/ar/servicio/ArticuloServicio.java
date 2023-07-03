@@ -17,6 +17,6 @@ public interface ArticuloServicio {
 
 	public String actualizarArticulo(Articulo modificar);
 
-	Map<String, Long> obtenerCantidadArticulosPorTipo();
+	public Map<String, Long> obtenerCantidadArticulosPorTipo();
 	
 }

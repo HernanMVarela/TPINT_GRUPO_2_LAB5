@@ -46,6 +46,7 @@
 	<bean id="UsuarioEstandar" class="frgp.utn.edu.ar.dominio.Usuario">
 		<property name="localidad" ref="LocalidadEstandar"></property>
 		<property name="estado" ref="EstadoUsuarioEstandar"></property>
+		<property name="tipo" ref="TipoUsuarioEstandar"></property>
 	</bean>
 	
 	<bean id="LocalidadEstandar" class="frgp.utn.edu.ar.dominio.Localidad">
@@ -54,6 +55,7 @@
 	<bean id="ProvinciaEstandar" class="frgp.utn.edu.ar.dominio.Provincia"></bean>
 	<bean id="EstadoClienteEstandar" class="frgp.utn.edu.ar.dominio.Estado_Cli"></bean>
 	<bean id="EstadoUsuarioEstandar" class="frgp.utn.edu.ar.dominio.Estado_User"></bean>
+	<bean id="TipoUsuarioEstandar" class="frgp.utn.edu.ar.dominio.Tipo_Usuario"></bean>
 	<bean id="EstadoVentaEstandar" class="frgp.utn.edu.ar.dominio.Estado_Venta"></bean>
 	<bean id="MarcaEstandar" class="frgp.utn.edu.ar.dominio.Marca"></bean>
 	

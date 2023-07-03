@@ -19,6 +19,6 @@ public interface UsuarioServicio {
 
 	public Usuario login(String username, String pass);
 
-	Map<String, Long> obtenerUsuariosPorRol();
+	public Map<String, Long> obtenerUsuariosPorRol();
 
 }
