@@ -91,6 +91,7 @@ public class VentaDaoImpl implements VentaDao {
 	public ArrayList<Venta> obtenerVentasEntreFechas(Date fechaInicio, Date fechaFin) {
 	    Criteria criteria = this.hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(Venta.class);
 	    criteria.add(Restrictions.between("fecha", fechaInicio, fechaFin));
+	    criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 	    return (ArrayList<Venta>) criteria.list();
 	}
 }
