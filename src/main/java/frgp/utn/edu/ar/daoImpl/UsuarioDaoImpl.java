@@ -104,7 +104,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	@Override
 	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
 	public Map<String, Long> obtenerUsuariosPorRol() {
-		String query = "SELECT tipo.nombre, COUNT(*) FROM Usuario u JOIN u.tipo tipo GROUP BY tipo.nombre";		
+		String query = "SELECT tipo.nombre, COUNT(*) FROM Usuario u JOIN u.tipo tipo JOIN u.estado estado WHERE estado.nombre = 'ACTIVO' GROUP BY tipo.nombre";		
 		@SuppressWarnings("unchecked")
 		List<Object[]> resultados = (List<Object[]>) this.hibernateTemplate.find(query);
 		Map<String, Long> map = new HashMap<String, Long>();

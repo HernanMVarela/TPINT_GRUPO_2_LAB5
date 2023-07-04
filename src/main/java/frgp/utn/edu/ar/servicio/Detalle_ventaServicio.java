@@ -1,5 +1,6 @@
 package frgp.utn.edu.ar.servicio;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -17,6 +18,6 @@ public interface Detalle_ventaServicio {
 
 	public String actualizarDetalle_venta(Detalle_venta modificar);
 
-	public Map<String, Long> obtenerProductosPorCantidad();
+	public Map<String, Long> obtenerProductosPorCantidad(Date start, Date end);
 	
 }

@@ -1,5 +1,6 @@
 package frgp.utn.edu.ar.servicioImpl;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -55,8 +56,8 @@ public class Detalle_ventaServicioImpl implements Detalle_ventaServicio{
 	}
 	
 	@Override
-	public Map<String, Long> obtenerProductosPorCantidad() {
-		return dataAccess.obtenerProductosPorCantidad();
+	public Map<String, Long> obtenerProductosPorCantidad(Date start, Date end) {
+		return dataAccess.obtenerProductosPorCantidad(start, end);
 	}
 
 }

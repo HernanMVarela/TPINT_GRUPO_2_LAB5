@@ -1,5 +1,6 @@
 package frgp.utn.edu.ar.daoImpl;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -71,21 +72,27 @@ public class Detalle_ventaDaoImpl implements Detalle_ventaDao {
 	}
 	
 	@Override
-	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
-	public Map<String, Long> obtenerProductosPorCantidad() {
-		String query = "SELECT dv.articulo.nombre, SUM(dv.cantidad) AS totalAmount "
-		           + "FROM Detalle_venta dv "
-		           + "GROUP BY dv.articulo.nombre "
-		           + "ORDER BY totalAmount DESC ";		
-		@SuppressWarnings("unchecked")
-		List<Object[]> resultados = (List<Object[]>) this.hibernateTemplate.find(query);
-		List<Object[]> limitedResultados = resultados.subList(0, Math.min(resultados.size(), 5));
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	public Map<String, Long> obtenerProductosPorCantidad(Date startDate, Date endDate) {
+	    String query = "SELECT dv.articulo.nombre, SUM(dv.cantidad) AS totalAmount "
+	                 + "FROM Venta v "
+	                 + "JOIN v.detalle dv "
+	                 + "WHERE dv.articulo.estado = true "
+	                 + "AND v.fecha BETWEEN :startDate AND :endDate "
+	                 + "GROUP BY dv.articulo.nombre "
+	                 + "ORDER BY totalAmount DESC";
 
-		Map<String, Long> map = new HashMap<String, Long>();
-		for (Object[] resultado : limitedResultados) {
-			map.put((String) resultado[0], (Long) resultado[1]);
-		}
-		return map;
+	    @SuppressWarnings("unchecked")
+	    List<Object[]> resultados = (List<Object[]>) this.hibernateTemplate
+	            .findByNamedParam(query, new String[]{"startDate", "endDate"}, new Object[]{startDate, endDate});
+
+	    List<Object[]> limitedResultados = resultados.subList(0, Math.min(resultados.size(), 5));
+
+	    Map<String, Long> map = new HashMap<>();
+	    for (Object[] resultado : limitedResultados) {
+	        map.put((String) resultado[0], (Long) resultado[1]);
+	    }
+	    return map;
 	}
 
 
