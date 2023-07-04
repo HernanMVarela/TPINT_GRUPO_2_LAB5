@@ -3,13 +3,14 @@ package frgp.utn.edu.ar.servicioImpl;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import frgp.utn.edu.ar.dao.ArticuloDao;
 import frgp.utn.edu.ar.dao.StockDao;
 import frgp.utn.edu.ar.dao.VentaDao;
+import frgp.utn.edu.ar.dominio.Articulo;
 import frgp.utn.edu.ar.dominio.Detalle_venta;
 import frgp.utn.edu.ar.dominio.Stock;
 import frgp.utn.edu.ar.dominio.Venta;
@@ -20,6 +21,7 @@ public class VentaServicioImpl implements VentaServicio{
 
 	private VentaDao dataAccess = null;
 	private StockDao dataAccess2 = null;
+	private ArticuloDao dataAccess3 = null;
 
 	public void setDataAccess(VentaDao dataAccess) {
 		this.dataAccess = dataAccess;
@@ -27,6 +29,10 @@ public class VentaServicioImpl implements VentaServicio{
 	
 	public void setDataAccess2(StockDao dataAccess2) {
 		this.dataAccess2 = dataAccess2;
+	}
+	
+	public void setDataAccess3(ArticuloDao dataAccess3) {
+		this.dataAccess3 = dataAccess3;
 	}
 	
 	@Override
@@ -77,36 +83,35 @@ public class VentaServicioImpl implements VentaServicio{
 			
 			/// SE ITERA ENTRE LOS STOCKS DISPONIBLES PARA ESE ARTICULO
 			for (Stock stock : listaStock) {
-				/// FILTRA REGISTROS CON STOCK 0
-				if(stock.getCantidad()==0) {
-					break;
-				}
-					
-				/// PREGUNTA SI LA CANTIDAD VENIDA ES MENOR AL STOCK ACTUAL Y NO ES 0
-				if(stock.getCantidad()>=descontar && descontar != 0) {
-					
-					/// MODIFICA EL STOCK ACTUAL RESTANDO LA CANTIDAD VENDIDA
-					stock.setCantidad(stock.getCantidad()-descontar);
-					if(!dataAccess2.modificarStock(stock)) {
-						flag = false;
-					} else {
-						/// SI LOGRA GUARDAR EL CAMBIO DE STOCK, CALCULA LA GANANCIA Y SE ACUMULA EN LA VARIABLE AUXILIAR
-						ganancia += (detalle.getArticulo().getPrecio_venta()*descontar)-(stock.getPreciocompra()*descontar); // ACUMULACION DE GANANCIA
-						descontar = 0;
-					}
-					
-				/// LA CANTIDAD VENDIDA SUPERA AL STOCK ACTUAL
-				} else if (stock.getCantidad()<descontar && descontar != 0) {
-					/// OBTIENE LA CANTIDAD TOTAL DEL STOCK ACTUAL
-					int cant_vendida = stock.getCantidad();
-					/// SE PONE EN 0 EL STOCK ACTUAL
-					stock.setCantidad(0);
-					if(!dataAccess2.modificarStock(stock)) {
-						flag = false;
-					} else {
-						/// SI LOGRA GUARDAR EL CAMBIO, CALCULA GANANCIA Y RESTA DE LA CANTIDAD TOTAL VENDIDA, LO QUE YA SE VENDIÓ DEL STOCK ACTUAL
-						ganancia +=(detalle.getArticulo().getPrecio_venta()*descontar)-(stock.getPreciocompra()*descontar); // ACUMULACION DE GANANCIA
-						descontar -= cant_vendida;
+					/// FILTRA REGISTROS CON STOCK 0
+				if(stock.getCantidad()!=0) {
+						
+					/// PREGUNTA SI LA CANTIDAD VENIDA ES MENOR AL STOCK ACTUAL Y NO ES 0
+					if(stock.getCantidad()>=descontar && descontar != 0) {
+						
+						/// MODIFICA EL STOCK ACTUAL RESTANDO LA CANTIDAD VENDIDA
+						stock.setCantidad(stock.getCantidad()-descontar);
+						if(!dataAccess2.modificarStock(stock)) {
+							flag = false;
+						} else {
+							/// SI LOGRA GUARDAR EL CAMBIO DE STOCK, CALCULA LA GANANCIA Y SE ACUMULA EN LA VARIABLE AUXILIAR
+							ganancia += (detalle.getArticulo().getPrecio_venta()*descontar)-(stock.getPreciocompra()*descontar); // ACUMULACION DE GANANCIA
+							descontar = 0;
+						}
+						
+					/// LA CANTIDAD VENDIDA SUPERA AL STOCK ACTUAL
+					} else if (stock.getCantidad()<descontar && descontar != 0) {
+						/// OBTIENE LA CANTIDAD TOTAL DEL STOCK ACTUAL
+						int cant_vendida = stock.getCantidad();
+						/// SE PONE EN 0 EL STOCK ACTUAL
+						stock.setCantidad(0);
+						if(!dataAccess2.modificarStock(stock)) {
+							flag = false;
+						} else {
+							/// SI LOGRA GUARDAR EL CAMBIO, CALCULA GANANCIA Y RESTA DE LA CANTIDAD TOTAL VENDIDA, LO QUE YA SE VENDIÓ DEL STOCK ACTUAL
+							ganancia +=(detalle.getArticulo().getPrecio_venta()*descontar)-(stock.getPreciocompra()*descontar); // ACUMULACION DE GANANCIA
+							descontar -= cant_vendida;
+						}
 					}
 				}
 			}
@@ -190,6 +195,12 @@ public class VentaServicioImpl implements VentaServicio{
 					flag = false;
 				} 
 			} else {
+				/// CARGA EL ARTICULO DEL DETALLE
+				Articulo arti_aux = detalle.getArticulo();
+				/// PISA ESTADO EN TRUE
+				arti_aux.setEstado(true);
+				/// ACTUALIZA EL ARTICULO CON EL NUEVO ESTADO
+				dataAccess3.actualizarArticulo(arti_aux);
 				/// SE CARGA EL REGISTRO DE STOCK MÁS RECIENTE CON CANTIDAD = 0
 				stock = dataAccess2.obtenerUltimoRegistroVacio(detalle.getArticulo().getNombre());
 				if(stock != null) {

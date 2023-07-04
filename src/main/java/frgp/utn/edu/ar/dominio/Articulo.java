@@ -34,7 +34,7 @@ public class Articulo implements Serializable {
 	@Column(name="PRECIO_VENTA", nullable = true)
 	private float precio_venta;
 	
-	private Boolean estado;
+	private boolean estado;
 	
 	public Articulo(){}
 	

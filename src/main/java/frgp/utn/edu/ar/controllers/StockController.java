@@ -95,10 +95,9 @@ public class StockController {
 		return "ERROR";
 	}
 	
-	
 	private ModelAndView cargadorDeListasStocks(ModelAndView MV) 
 	{
-		MV.addObject("listaArticulos",this.serviceArticulo.obtenerArticulos());
+		MV.addObject("listaArticulos",this.serviceArticulo.obtenerArticulosActivos());
 		MV.addObject("listaStocks",this.serviceStock.obtenerStock());
 		return MV;
 	}

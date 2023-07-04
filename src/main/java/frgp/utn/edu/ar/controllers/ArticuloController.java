@@ -65,7 +65,6 @@ public class ArticuloController {
 	// ALTA DE NUEVO ARTICULO | "/altaArticulo.html"
 	@RequestMapping(value ="/alta_articulo.html" , method= { RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView validarArticulo(String nombre, int marca, int tipo, String precio_venta, String descripcion){
-		System.out.println("LLEGA A ALTA ARTICULO");
 		
 		articulo.setNombre(nombre);
 		articulo.setPrecio_venta(Float.parseFloat(precio_venta));
@@ -187,6 +186,9 @@ public class ArticuloController {
 		}
 		if (error.equals("ERROR")) {
 			return "REDIRECCIONAR A ERROR";
+		}
+		if (error.equals("HAY STOCK")) {
+			return "No se pudo eliminar, hay stock disponible";
 		}
 		return "ERROR";
 	}

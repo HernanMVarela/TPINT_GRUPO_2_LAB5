@@ -16,5 +16,5 @@ public interface UsuarioDao {
 	public void eliminarUsuario(int ID);
 	public boolean actualizarUsuario(Usuario modificar);
 	public Usuario obtenerUsuarioPorUser(String username);
-	Map<String, Long> obtenerUsuariosPorRol();
+	public Map<String, Long> obtenerUsuariosPorRol();
 }

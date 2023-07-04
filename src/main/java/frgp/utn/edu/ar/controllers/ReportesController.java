@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.ModelAndView;
 
-import frgp.utn.edu.ar.servicio.ArticuloServicio;
 import frgp.utn.edu.ar.servicio.Detalle_ventaServicio;
 import frgp.utn.edu.ar.servicio.UsuarioServicio;
 
@@ -24,9 +23,6 @@ public class ReportesController {
 	
 	@Autowired
 	private Detalle_ventaServicio serviceDetalleVenta;
-	
-	@Autowired
-	private ArticuloServicio serviceArticulo;
 
 	@Autowired
 	private ModelAndView MV;
@@ -36,8 +32,7 @@ public class ReportesController {
 				.getRequiredWebApplicationContext(config.getServletContext());
 		
 		this.serviceUsuario = (UsuarioServicio) ctx.getBean("UsuarioServiceBean");
-		this.serviceDetalleVenta = (Detalle_ventaServicio) ctx.getBean("Detalle_ventaServiceBean");
-		this.serviceArticulo = (ArticuloServicio) ctx.getBean("ArticuloServiceBean");
+		this.serviceDetalleVenta = (Detalle_ventaServicio) ctx.getBean("Detalle_ventaServiceBean");;
 		
 		this.MV = (ModelAndView) ctx.getBean("ModelAndViewBean");
 	}	

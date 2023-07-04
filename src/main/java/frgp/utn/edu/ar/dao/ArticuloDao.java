@@ -1,6 +1,7 @@
 package frgp.utn.edu.ar.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import frgp.utn.edu.ar.dominio.Articulo;
@@ -26,7 +27,9 @@ public interface ArticuloDao {
 	//Actualiza los datos de unaarticulo
 	public boolean actualizarArticulo(Articulo modificar);
 
-	Map<String, Long> obtenerCantidadArticulosPorTipo();
+	public Map<String, Long> obtenerCantidadArticulosPorTipo();
+
+	public List<Articulo> obtenerArticulosActivos();
 	
 
 }

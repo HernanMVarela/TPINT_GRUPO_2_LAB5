@@ -25,6 +25,8 @@ public interface StockDao {
 	    //Devuelve lista sin repetición de articulos
 				public List<Stock> obtenerRegistrosUnicos();
 
-				Stock obtenerUltimoRegistroVacio(String articulo);
+				public Stock obtenerUltimoRegistroVacio(String articulo);
+
+				public boolean existeStockDeArticulo(String articulo);
 		
 }

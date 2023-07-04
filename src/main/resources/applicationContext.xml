@@ -81,6 +81,7 @@
 	<bean id="VentaServiceBean" class="frgp.utn.edu.ar.servicioImpl.VentaServicioImpl">
 		<property name="dataAccess" ref="VentaDABean"></property>
 		<property name="dataAccess2" ref="StockDABean"></property>
+		<property name="dataAccess3" ref="ArticuloDABean"></property>
 	</bean>
 	<!-- EL SERVICIO NECESITA EL DAO  -->
 	<bean id="VentaDABean" class="frgp.utn.edu.ar.daoImpl.VentaDaoImpl" 
@@ -152,6 +153,7 @@
 	<!-- CREO EL SERVICIO PARA Articulo -->
 	<bean id="ArticuloServiceBean" class="frgp.utn.edu.ar.servicioImpl.ArticuloServicioImpl">
 		<property name="dataAccess" ref="ArticuloDABean"></property>
+		<property name="dataAccess2" ref="StockDABean"></property>
 	</bean>
 	<!-- EL SERVICIO NECESITA EL DAO  -->
 	<bean id="ArticuloDABean" class="frgp.utn.edu.ar.daoImpl.ArticuloDaoImpl" 

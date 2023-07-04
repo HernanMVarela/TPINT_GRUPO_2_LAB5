@@ -49,6 +49,15 @@ public class StockDaoImpl implements StockDao {
 		List<Stock> resultados = (ArrayList<Stock>) this.hibernateTemplate.findByNamedParam(query, "ART", articulo);
 		return resultados;
 	}
+	
+	@Override
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
+	public boolean existeStockDeArticulo(String articulo) {
+		String query = "FROM Stock s WHERE s.articulo.nombre LIKE :ART and s.cantidad>0";
+		@SuppressWarnings("unchecked")
+		List<Stock> resultados = (ArrayList<Stock>) this.hibernateTemplate.findByNamedParam(query, "ART", articulo);
+		return resultados.isEmpty();
+	}
 
 	@Override
 	@Transactional(propagation=Propagation.REQUIRED)

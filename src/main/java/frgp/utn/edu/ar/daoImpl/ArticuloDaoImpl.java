@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,6 +50,15 @@ public class ArticuloDaoImpl implements ArticuloDao {
 	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
 	public ArrayList<Articulo> obtenerArticulos() {
 		return (ArrayList<Articulo>) this.hibernateTemplate.loadAll(Articulo.class);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
+	public List<Articulo> obtenerArticulosActivos() {
+		Criteria criteria = this.hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(Articulo.class);
+	    criteria.add(Restrictions.eq("estado", true));
+	    return (List<Articulo>) criteria.list();
 	}
 
 	

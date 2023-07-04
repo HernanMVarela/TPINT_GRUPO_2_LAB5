@@ -1,13 +1,13 @@
 package frgp.utn.edu.ar.servicio;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import frgp.utn.edu.ar.dominio.Articulo;
 
 public interface ArticuloServicio {
 
-	public ArrayList<Articulo> obtenerArticulos();
+	public List<Articulo> obtenerArticulos();
 
 	public Articulo obtenerUnRegistro(String nombre);
 
@@ -18,5 +18,7 @@ public interface ArticuloServicio {
 	public String actualizarArticulo(Articulo modificar);
 
 	public Map<String, Long> obtenerCantidadArticulosPorTipo();
+
+	public List<Articulo> obtenerArticulosActivos();
 	
 }

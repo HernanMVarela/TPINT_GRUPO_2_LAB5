@@ -1,11 +1,12 @@
 package frgp.utn.edu.ar.servicioImpl;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
 import frgp.utn.edu.ar.dao.ArticuloDao;
+import frgp.utn.edu.ar.dao.StockDao;
 import frgp.utn.edu.ar.dominio.Articulo;
 import frgp.utn.edu.ar.servicio.ArticuloServicio;
 
@@ -13,15 +14,27 @@ import frgp.utn.edu.ar.servicio.ArticuloServicio;
 public class ArticuloServicioImpl implements ArticuloServicio{
 
 	private ArticuloDao dataAccess = null;
+	
+	private StockDao dataAccess2 = null;
 
 	public void setDataAccess(ArticuloDao dataAccess) {
 		this.dataAccess = dataAccess;
 	}
 	
+	public void setDataAccess2(StockDao dataAccess2) {
+		this.dataAccess2 = dataAccess2;
+	}
+	
 	@Override
-	public ArrayList<Articulo> obtenerArticulos() {
+	public List<Articulo> obtenerArticulos() {
 		return dataAccess.obtenerArticulos();
 	}
+	
+	@Override
+	public List<Articulo> obtenerArticulosActivos() {
+		return dataAccess.obtenerArticulosActivos();
+	}
+
 
 	@Override
 	public Articulo obtenerUnRegistro(String nombre) {
@@ -63,10 +76,14 @@ public class ArticuloServicioImpl implements ArticuloServicio{
 				return "NO MODIFICADO";
 			}
 		} else {
-			if (dataAccess.actualizarArticulo(modificar)) {
-				return "ELIMINADO";
-			}else {
-				return "NO ELIMINADO";
+			if(dataAccess2.existeStockDeArticulo(modificar.getNombre())) {
+				if (dataAccess.actualizarArticulo(modificar)) {
+					return "ELIMINADO";
+				}else {
+					return "NO ELIMINADO";
+				}
+			} else {
+				return "HAY STOCK";
 			}
 		}
 	}
