@@ -52,8 +52,7 @@ public class ClientesController {
 	@RequestMapping("clientes.html")
 	public ModelAndView eventoRedireccionarClientes()
 	{
-		String Message = "";
-		MV.addObject("Mensaje", Message);
+		MV.addObject("Mensaje", "");
 		MV = cargadorDeListasClientes(MV);
 		MV.setViewName("vendedor/Clientes");
 		return MV;

@@ -42,6 +42,7 @@ public class AdminController {
 	@RequestMapping("admin.html")
 	public ModelAndView eventoRedireccionarHomeAdmin()
 	{
+		MV.addObject("Mensaje", "");
 		MV = cargadorDeListasAdmin(MV);
 		MV.setViewName("admin/HomeAdmin");
 		return MV;
@@ -50,8 +51,6 @@ public class AdminController {
 	//Eliminar Usuario | "/eliminar_usuario.html"
 	@RequestMapping(value ="/eliminar_usuario.html" , method= { RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView eliminarCliente(int idEliminar){		
-		
-		System.out.println(idEliminar);
 
 		usuario = serviceUsuario.obtenerUnRegistro(idEliminar);
 		usuario.setEstado(serviceEstadoUsuario.obtenerUnRegistro(2));

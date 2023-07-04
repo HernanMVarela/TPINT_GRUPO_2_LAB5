@@ -45,8 +45,7 @@ public class ArticuloController {
 	@RequestMapping("vendedor.html")
 	public ModelAndView eventoRedireccionarHomeVendedor()
 	{		
-		String Message = "";
-		MV.addObject("Mensaje", Message);
+		MV.addObject("Mensaje", "");
 		MV.setViewName("vendedor/HomeVendedor");
 		return MV;
 	}
@@ -149,14 +148,6 @@ public class ArticuloController {
 			return MV;
 		}	
 	}
-	
-	// Clientes | "ventas.html"
-	// @RequestMapping("ventas.html")
-	// public ModelAndView eventoRedireccionarVentas()
-	// {
-	// 	MV.setViewName("vendedor/Ventas");
-	// 	return MV;
-	// }	
 	
 	/// METODOS COMUNES
 	private String asignarMensajeArticulos(String error) {

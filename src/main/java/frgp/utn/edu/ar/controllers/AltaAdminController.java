@@ -35,6 +35,7 @@ public class AltaAdminController {
 	@RequestMapping("alta-usuario.html")
 	public ModelAndView eventoRedireccionarAltaUsuario()
 	{
+		MV.addObject("Mensaje", "");
 		MV = cargadorDeListasRegistros(MV);
 		MV.setViewName("admin/AltaUsuario");
 		return MV;

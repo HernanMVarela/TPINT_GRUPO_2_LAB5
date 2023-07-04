@@ -44,8 +44,7 @@ public class StockController {
 	@RequestMapping("stock.html")
 	public ModelAndView eventoRedireccionarStock()
 	{
-		String Message = "";
-		MV.addObject("Mensaje", Message);
+		MV.addObject("Mensaje", "");
 		MV = cargadorDeListasStocks(MV);
 		MV.setViewName("vendedor/Stock");
 		return MV;
@@ -88,6 +87,9 @@ public class StockController {
 		}
 		if (error.equals("NO AGREGADO")) {
 			return "Stock no agregado";
+		}
+		if (error.equals("PRECIO")) {
+			return "El precio de compra excede al de venta";
 		}
 		if (error.equals("ERROR")) {
 			return "ERROR";

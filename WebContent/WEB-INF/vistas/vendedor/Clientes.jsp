@@ -264,11 +264,11 @@ console.log(id)
         <div class="row align-items-md-stretch">
      	   <div class="form-group col-md-6">
                <label style="float: left">Correo Electronico</label>
-               <input id="correoModif" name="correoModif" class="form-control" type="email" placeholder="Ingrese correo electronico" required>
+               <input id="correoModif" name="correoModif" class="form-control" type="email" placeholder="Ingrese correo electronico" required/>
            </div>
            <div class="form-group col-md-6">
                <label style="float: left">Numero de Telefono</label>
-               <input id="telefonoModif" name="telefonoModif" class="form-control" type="number" placeholder="Ingrese numero de telefono" required>
+               <input id="telefonoModif" name="telefonoModif" class="form-control" type="number" placeholder="Ingrese numero de telefono" required/>
            </div>                   
        </div>
         
@@ -295,11 +295,11 @@ console.log(id)
        <div class="row align-items-md-stretch">
      	   <div class="form-group col-md-4">
                <label style="float: left">Apellido</label>
-               <input name="apeNuevo" class="form-control" placeholder="Ingrese apellido" required>
+               <input name="apeNuevo" class="form-control" placeholder="Ingrese apellido" required pattern="[A-Za-z]{20}"/>
            </div>
            <div class="form-group col-md-4">
                <label style="float: left">Nombre</label>
-               <input name="nomNuevo" class="form-control" placeholder="Ingrese nombre" required>
+               <input name="nomNuevo" class="form-control" placeholder="Ingrese nombre" required pattern="[A-Za-z]{20}"/>
            </div>
            <div class="form-group col-md-4">
                <label style="float: left">Sexo</label>
@@ -314,7 +314,7 @@ console.log(id)
        <div class="row align-items-md-stretch mt-1">
            <div class="form-group col-md-4">
                <label style="float: left">DNI</label>
-               <input name="DNINuevo" class="form-control" type="number" placeholder="Ingrese DNI" required min="1" max="99999999" >
+               <input name="DNINuevo" class="form-control" type="number" placeholder="Ingrese DNI" required min="10000000" max="99999999" >
            </div>
            <div class="form-group col-md-3">
                <label style="float: left">Fecha de Nacimiento</label>

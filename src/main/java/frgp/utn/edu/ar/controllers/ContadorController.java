@@ -34,6 +34,7 @@ public class ContadorController {
 	@RequestMapping("contador.html")
 	public ModelAndView eventoRedireccionarHomeContador()
 	{
+		MV.addObject("Mensaje", "");
 		MV= cargadorDeListasVentas(MV);
 		MV.setViewName("contador/HomeContador");
 		return MV;

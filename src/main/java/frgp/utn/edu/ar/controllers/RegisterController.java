@@ -57,6 +57,7 @@ public class RegisterController {
 	@RequestMapping("registro-usuario.html")
 	public ModelAndView eventoRedireccionarAltaUsuario()
 	{
+		MV.addObject("Mensaje", "");
 		MV = cargadorDeListasUsuarios(MV);
 		MV.setViewName("registro/RegistroUsuario");
 		return MV;

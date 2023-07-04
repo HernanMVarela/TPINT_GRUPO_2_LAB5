@@ -33,6 +33,9 @@ public class StockServicioImpl implements StockServicio{
 	@Override
 	public String ingresarStock(Stock nuevo) 
 	{
+		if(nuevo.getPreciocompra()>=nuevo.getArticulo().getPrecio_venta()) {
+			return "PRECIO";
+		}
 		if (dataAccess.insertarStock(nuevo)) 
 		{
 			return "AGREGADO";

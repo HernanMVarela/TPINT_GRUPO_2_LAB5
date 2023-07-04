@@ -71,6 +71,7 @@ public class VentasController {
 	// ventas | "ventas.html"
 	@RequestMapping("ventas.html")
 	public ModelAndView eventoRedireccionarVentas() {
+		MV.addObject("Mensaje", "");
 		MV = cargadorDeListasVentas(MV);
 		MV.setViewName("vendedor/Ventas");
 		return MV;
