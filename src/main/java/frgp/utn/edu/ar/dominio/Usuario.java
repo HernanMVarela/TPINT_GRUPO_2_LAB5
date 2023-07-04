@@ -23,7 +23,7 @@ public class Usuario extends Persona implements Serializable {
 	@Column(name="ID")
 	private int id;
 	
-	@Column(name="USERNAME", nullable = true)
+	@Column(name="USERNAME", nullable = true, unique = true)
 	private String nombreU;
 	
 	@Column(name="PASSWORD", nullable = true)

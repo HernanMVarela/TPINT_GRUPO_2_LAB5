@@ -14,7 +14,7 @@ public class Persona implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="DNI")
+	@Column(name="DNI", nullable = false, unique = true)
 	private String DNI;
 	
 	@Column(name="NOMBRE", nullable = false)
@@ -30,7 +30,7 @@ public class Persona implements Serializable {
 	@ManyToOne(cascade= {CascadeType.ALL})
 	@JoinColumn(name="ID_LOCALIDAD", nullable = false)
 	private Localidad localidad;
-	@Column(name="CORREO", nullable = false)
+	@Column(name="CORREO", nullable = false, unique = true)
 	private String correo;
 	@Column(name="TELEFONO", nullable = false)
 	private String telefono;
