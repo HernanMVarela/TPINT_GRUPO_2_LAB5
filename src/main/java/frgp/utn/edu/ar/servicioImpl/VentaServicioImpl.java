@@ -109,7 +109,7 @@ public class VentaServicioImpl implements VentaServicio{
 							flag = false;
 						} else {
 							/// SI LOGRA GUARDAR EL CAMBIO, CALCULA GANANCIA Y RESTA DE LA CANTIDAD TOTAL VENDIDA, LO QUE YA SE VENDIÓ DEL STOCK ACTUAL
-							ganancia +=(detalle.getArticulo().getPrecio_venta()*descontar)-(stock.getPreciocompra()*descontar); // ACUMULACION DE GANANCIA
+							ganancia +=(detalle.getArticulo().getPrecio_venta()*cant_vendida)-(stock.getPreciocompra()*cant_vendida); // ACUMULACION DE GANANCIA
 							descontar -= cant_vendida;
 						}
 					}
